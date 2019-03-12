@@ -32,7 +32,7 @@ public class MyStepdefs {
             Thread.sleep(1000);
             open("https://qaatlas.arachnenetwork.com");
             Thread.sleep(3000);
-            $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible,3000);
+            $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible,10000);
             $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).waitUntil(visible,10000);
             Thread.sleep(300);
             $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).click();
@@ -162,7 +162,6 @@ public class MyStepdefs {
         $(xpath("//*[@class='app__menu']/a[3]")).shouldHave(text("Search"));
         Thread.sleep(1000);
         $(xpath("//*[@class='app__menu']/a[3]/span")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
     }
 
     @When("^click to Data Sources menu as user$")
