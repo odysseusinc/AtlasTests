@@ -1,3 +1,4 @@
+@unauthorized
 Feature: Check permissions without login
 
     Scenario:  Homepage check

@@ -1,3 +1,4 @@
+@login
 Feature: Check login page
 
 
