@@ -97,8 +97,8 @@ public class LoginStepsDefs {
     @Then("^check authorise user as QA$")
     public void checkAuthoriseUserAs(String arg0) throws Throwable {
 
-        $(By.xpath("//*[@id=\"wrapperMainWindowContainer\"]/user-bar/div/div/div/div[2]/a/strong")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id=\"wrapperMainWindowContainer\"]/user-bar/div/div/div/div[2]/a/strong")).shouldHave(text(arg0));
+        $(By.xpath("//*[@id='wrapperMainWindowContainer']/user-bar/div/div/div/div[2]/a/strong")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@id='wrapperMainWindowContainer']/user-bar/div/div/div/div[2]/a/strong")).shouldHave(text(arg0));
     }
 
 
