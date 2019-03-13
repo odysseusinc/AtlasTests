@@ -10,9 +10,8 @@ import java.util.Properties;
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = {"pretty", "html:target/cucumber-reports" },
                  glue = {"odysseusAT"}
-//                , tags = {"@devv"}
+                , tags = {"@dev"}
                 )
 
 public class RunCucumberTest {
-
     }

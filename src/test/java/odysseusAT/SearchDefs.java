@@ -28,7 +28,7 @@ public class SearchDefs {
 
     @Then("^can see search result table$")
     public void canSeeSearchResultTable() {
-        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']")).waitUntil(visible,15000);
+        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']")).waitUntil(visible,25000);
         $(By.xpath("//*[@class='fa fa-shopping-cart']")).shouldBe(visible);
         $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[2]")).shouldHave(text("Id"));
         $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[3]")).shouldHave(text("Code"));
@@ -108,7 +108,7 @@ public class SearchDefs {
     public void clickToCSVButton() throws Exception {
         $(By.xpath("//*[@class='dt-button buttons-csv buttons-html5']")).click();
         Thread.sleep(2000);
-        Assert.assertTrue(isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), "ATLAS Search.csv"));
+
 
     }
 
@@ -125,5 +125,57 @@ public class SearchDefs {
         }
 
         return flag;
+    }
+
+    @Then("^file download$")
+    public void fileDownload() throws Exception {
+        Assert.assertTrue(isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), "ATLAS Search.csv"));
+    }
+
+    @When("^click to first link in list$")
+    public void clickToFirstLinkInList() {
+        $(By.xpath("//*[@id='DataTables_Table_19']/tbody/tr[1]/td[4]/a")).click();
+    }
+
+
+
+    @Then("^open page with first of four tabs for \"([^\"]*)\"$")
+    public void openPageWithFourTabsFor(String arg0) throws Throwable {
+        $(By.xpath("//*[@id='currentComponent']/div[1]/span[2]")).waitUntil(visible,5000);
+        $(By.xpath("//*[@id='currentComponent']/div[1]/span[2]")).shouldHave(text(arg0));
+        $(By.xpath("//*[@class='nav nav-tabs']/li/a")).shouldHave(text("Details"));
+        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[1]/td[1]")).shouldHave(text("Concept Name"));
+        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[2]/td[1]")).shouldHave(text("Domain Id"));
+        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[3]/td[1]")).shouldHave(text("Concept Class Id"));
+        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[4]/td[1]")).shouldHave(text("Vocabulary Id"));
+        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[5]/td[1]")).shouldHave(text("Concept Id"));
+        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[6]/td[1]")).shouldHave(text("Concept Code"));
+        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[7]/td[1]")).shouldHave(text("Invalid Reason"));
+        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[8]/td[1]")).shouldHave(text("Standard Concept"));
+
+    }
+
+    @Then("^check second of four tabs$")
+    public void checkSecondOfFourTabs() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li[2]/a")).shouldHave(text("Related Concepts"));
+        $(By.xpath("//*[@class='nav nav-tabs']/li[2]/a")).click();
+        $(By.xpath("//*[@id='DataTables_Table_4']/tbody/tr[1]/td[4]/a")).waitUntil(visible,5000);
+    }
+
+    @Then("^check third of four tabs$")
+    public void checkThirdOfFourTabs() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li[3]/a")).shouldHave(text("Hierarchy"));
+        $(By.xpath("//*[@class='nav nav-tabs']/li[3]/a")).click();
+        $(By.xpath("//*[@id='wrapperParents']/div[1]")).waitUntil(visible,4000);
+        $(By.xpath("//*[@id='wrapperParents']/div[1]")).shouldHave(text("Parents"));
+    }
+
+    @Then("^check fourth of four tabs$")
+    public void checkFourthOfFourTabs() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li[4]/a")).shouldHave(text("Record Counts"));
+        $(By.xpath("//*[@class='nav nav-tabs']/li[4]/a")).click();
+        $(By.xpath("//*[@class='panel-heading'")).waitUntil(visible,10000);
+        $(By.xpath("//*[@class='panel-heading'")).shouldHave(text("Record Counts across Sources"));
+
     }
 }

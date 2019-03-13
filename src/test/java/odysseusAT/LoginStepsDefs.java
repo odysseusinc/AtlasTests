@@ -1,5 +1,6 @@
 package odysseusAT;
 
+import com.codeborne.selenide.Configuration;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -27,6 +28,8 @@ public class LoginStepsDefs {
 
     @Before
     public void closeOnFail() {
+        System.setProperty("webdriver.chrome.driver", "src/chromedriver.exe");
+        Configuration.browser = "chrome";
         try {
             closeBrowser();
         } catch (Exception e) {

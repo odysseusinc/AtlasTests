@@ -31,7 +31,6 @@ Feature: Search in Vocabularies
     When enter in filtering search area "SULFINPYRAZONE"
     Then can see search result only with "SULFINPYRAZONE"
 
-  @dev
   Scenario: Downloading CSV in Search
     When login to ATLAS as QA
     When click to Search menu
@@ -40,6 +39,20 @@ Feature: Search in Vocabularies
     Then can see search result table
     When enter in filtering search area "SULFINPYRAZONE"
     When click to CSV button
+    Then file download
+
+  @dev
+  Scenario: Open the concept and check content of tabs
+    When login to ATLAS as QA
+    When click to Search menu
+    When enter in search panel "aspirin"
+    When search activated
+    Then can see search result table
+    When click to first link in list
+    Then open page with first of four tabs for "aspirin"
+    Then check second of four tabs
+    Then check third of four tabs
+    Then check fourth of four tabs
 
 
 
