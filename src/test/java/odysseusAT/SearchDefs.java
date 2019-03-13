@@ -134,7 +134,8 @@ public class SearchDefs {
 
     @When("^click to first link in list$")
     public void clickToFirstLinkInList() {
-        $(By.xpath("//*[@id='DataTables_Table_19']/tbody/tr[1]/td[4]/a")).click();
+        $(By.xpath("//*[@class='odd']/td[4]/a")).click();
+
     }
 
 
@@ -159,14 +160,14 @@ public class SearchDefs {
     public void checkSecondOfFourTabs() {
         $(By.xpath("//*[@class='nav nav-tabs']/li[2]/a")).shouldHave(text("Related Concepts"));
         $(By.xpath("//*[@class='nav nav-tabs']/li[2]/a")).click();
-        $(By.xpath("//*[@id='DataTables_Table_4']/tbody/tr[1]/td[4]/a")).waitUntil(visible,5000);
+        $(By.xpath("//*[@id='DataTables_Table_4']/tbody/tr[1]/td[4]/a")).waitUntil(visible,15000);
     }
 
     @Then("^check third of four tabs$")
     public void checkThirdOfFourTabs() {
         $(By.xpath("//*[@class='nav nav-tabs']/li[3]/a")).shouldHave(text("Hierarchy"));
         $(By.xpath("//*[@class='nav nav-tabs']/li[3]/a")).click();
-        $(By.xpath("//*[@id='wrapperParents']/div[1]")).waitUntil(visible,4000);
+        $(By.xpath("//*[@id='wrapperParents']/div[1]")).waitUntil(visible,14000);
         $(By.xpath("//*[@id='wrapperParents']/div[1]")).shouldHave(text("Parents"));
     }
 
@@ -174,8 +175,8 @@ public class SearchDefs {
     public void checkFourthOfFourTabs() {
         $(By.xpath("//*[@class='nav nav-tabs']/li[4]/a")).shouldHave(text("Record Counts"));
         $(By.xpath("//*[@class='nav nav-tabs']/li[4]/a")).click();
-        $(By.xpath("//*[@class='panel-heading'")).waitUntil(visible,10000);
-        $(By.xpath("//*[@class='panel-heading'")).shouldHave(text("Record Counts across Sources"));
+        $(By.xpath("//*[@class='panel-heading']")).waitUntil(visible,20000);
+        $(By.xpath("//*[@class='panel-heading']")).shouldHave(text("Record Counts across Sources"));
 
     }
 }
