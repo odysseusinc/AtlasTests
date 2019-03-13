@@ -118,8 +118,8 @@ Feature: Check Data Sources reports
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Observation"
-    When click to element in prevalence in table
     Then can see Observation windows
+    When click to element in prevalence in table
     Then can see tables in Observation for cell
 
   @impala
@@ -259,8 +259,8 @@ Feature: Check Data Sources reports
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Observation"
-    When click to element in prevalence in table
     Then can see Observation windows
+    When click to element in prevalence in table
     Then can see tables in Observation for cell
 
   @netezza
@@ -399,8 +399,8 @@ Feature: Check Data Sources reports
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Observation"
-    When click to element in prevalence in table
     Then can see Observation windows
+    When click to element in prevalence in table
     Then can see tables in Observation for cell
 
   @ovh02
@@ -540,8 +540,8 @@ Feature: Check Data Sources reports
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Observation"
-    When click to element in prevalence in table
     Then can see Observation windows
+    When click to element in prevalence in table
     Then can see tables in Observation for cell
 
   @SynPUF110KCost
@@ -680,8 +680,8 @@ Feature: Check Data Sources reports
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Observation"
-    When click to element in prevalence in table
     Then can see Observation windows
+    When click to element in prevalence in table
     Then can see tables in Observation for cell
 
   @SynPUF110Kcdm
@@ -708,7 +708,7 @@ Feature: Check Data Sources reports
   #############################################################################################################
 
   @synPUF23m
-  Scenario: SynPUF 110k CDM5.3 Source & Dashboard
+  Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Dashboard
     When login to ATLAS as QA
     When click to Data Sources menu as user
     When Data Source Page opened
@@ -820,8 +820,8 @@ Feature: Check Data Sources reports
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Observation"
-    When click to element in prevalence in table
     Then can see Observation windows
+    When click to element in prevalence in table
     Then can see tables in Observation for cell
 
   @synPUF23m
@@ -960,8 +960,8 @@ Feature: Check Data Sources reports
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Observation"
-    When click to element in prevalence in table
     Then can see Observation windows
+    When click to element in prevalence in table
     Then can see tables in Observation for cell
 
   @synPUF2mcdm
@@ -1101,8 +1101,8 @@ Feature: Check Data Sources reports
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Observation"
-    When click to element in prevalence in table
     Then can see Observation windows
+    When click to element in prevalence in table
     Then can see tables in Observation for cell
 
   @oracle110k
