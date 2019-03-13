@@ -17,6 +17,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class SearchDefs {
     @When("^enter in search panel \"([^\"]*)\"$")
     public void enterInSearchPanel(String arg0) throws Throwable {
+        $(By.xpath("//*[@placeholder='Type your search here']")).waitUntil(visible,3000);
         $(By.xpath("//*[@placeholder='Type your search here']")).setValue(arg0);
     }
 

@@ -1,8 +1,9 @@
+@search
 Feature: Search in Vocabularies
 
   Scenario: Search something
     When login to ATLAS as QA
-    When click to Search menu
+    When click to Search menu as QA
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -12,7 +13,7 @@ Feature: Search in Vocabularies
 
   Scenario: Sort values by ID
     When login to ATLAS as QA
-    When click to Search menu
+    When click to Search menu as QA
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -24,7 +25,7 @@ Feature: Search in Vocabularies
 
   Scenario: Filtering in Search
     When login to ATLAS as QA
-    When click to Search menu
+    When click to Search menu as QA
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -33,7 +34,7 @@ Feature: Search in Vocabularies
 
   Scenario: Downloading CSV in Search
     When login to ATLAS as QA
-    When click to Search menu
+    When click to Search menu as QA
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -41,10 +42,9 @@ Feature: Search in Vocabularies
     When click to CSV button
     Then file download
 
-  @dev
   Scenario: Open the concept and check content of tabs
     When login to ATLAS as QA
-    When click to Search menu
+    When click to Search menu as QA
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table

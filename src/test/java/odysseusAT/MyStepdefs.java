@@ -162,6 +162,7 @@ public class MyStepdefs {
         $(xpath("//*[@class='app__menu']/a[3]")).shouldHave(text("Search"));
         Thread.sleep(1000);
         $(xpath("//*[@class='app__menu']/a[3]/span")).click();
+        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
     }
 
     @When("^click to Data Sources menu as user$")
@@ -184,5 +185,19 @@ public class MyStepdefs {
         Thread.sleep(1000);
         $(xpath("//*[@class='app__menu']/a[7]/span")).click();
         $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
+    }
+
+    @When("^click to Search menu as QA$")
+    public void clickToSearchMenuAsQA() throws InterruptedException {
+        $(xpath("//*[@class='app__menu']/a[3]")).shouldHave(text("Search"));
+        Thread.sleep(1000);
+        $(xpath("//*[@class='app__menu']/a[3]/span")).click();
+    }
+
+    @When("^click to Concept Sets menu as QA$")
+    public void clickToConceptSetsMenuAsQA() throws InterruptedException {
+        $(xpath("//*[@class='app__menu']/a[4]")).shouldHave(text("Concept Sets"));
+        Thread.sleep(1000);
+        $(xpath("//*[@class='app__menu']/a[4]/span")).click();
     }
 }
