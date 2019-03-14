@@ -41,7 +41,7 @@ Feature: Search in Vocabularies
     When enter in filtering search area "SULFINPYRAZONE"
     When click to CSV button
     Then file download
-@dev
+
   Scenario: Open the concept and check content of tabs
     When login to ATLAS as QA
     When click to Search menu as QA

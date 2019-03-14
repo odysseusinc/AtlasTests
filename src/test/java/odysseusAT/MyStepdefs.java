@@ -197,7 +197,9 @@ public class MyStepdefs {
     @When("^click to Concept Sets menu as QA$")
     public void clickToConceptSetsMenuAsQA() throws InterruptedException {
         $(xpath("//*[@class='app__menu']/a[4]")).shouldHave(text("Concept Sets"));
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         $(xpath("//*[@class='app__menu']/a[4]/span")).click();
     }
+
+
 }
