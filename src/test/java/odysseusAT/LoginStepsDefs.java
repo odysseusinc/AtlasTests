@@ -57,8 +57,8 @@ public class LoginStepsDefs {
 
     @Then("^see message \"([^\"]*)\"$")
     public void seeMessage(String errorLogin) {
-        $(By.xpath("//*[@class='paddedWrapper']/div/div/div/div[3]/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@class='paddedWrapper']/div/div/div/div[3]/span")).shouldHave(text(errorLogin));
+        $(By.xpath("//*[@data-bind='text: errorMsg']")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@data-bind='text: errorMsg']")).shouldHave(text(errorLogin));
 
     }
 
@@ -90,15 +90,15 @@ public class LoginStepsDefs {
     @Then("^close login window$")
     public void closeLoginWindow() throws InterruptedException {
         Thread.sleep(1000);
-        $(By.xpath("//*[@id='wrapperMainWindowContainer']/user-bar/atlas-modal[1]/div/div/div/div[1]/button")).click();
+        $(By.xpath("//*[@class='close']")).click();
         Thread.sleep(1000);
     }
 
     @Then("^check authorise user as QA$")
     public void checkAuthoriseUserAs(String arg0) throws Throwable {
 
-        $(By.xpath("//*[@id='wrapperMainWindowContainer']/user-bar/div/div/div/div[2]/a/strong")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='wrapperMainWindowContainer']/user-bar/div/div/div/div[2]/a/strong")).shouldHave(text(arg0));
+        $(By.xpath("//*[@data-bind='text: authLogin']")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@data-bind='text: authLogin']")).shouldHave(text(arg0));
     }
 
 
@@ -122,7 +122,3 @@ public class LoginStepsDefs {
         closeLoginWindow();
     }
 }
-
-//*[@id="myModal"]/div/div/div[2]/welcome/div/div/div/div[1]/div[3]/span
-//*[@id="myModal"]/div/div/div[2]/welcome/div/div/div/div[1]/form/div[2]/button
-//*[@id="myModal"]/div/div/div[2]/welcome/div/div/div/div[2]/div

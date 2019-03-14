@@ -146,14 +146,14 @@ public class SearchDefs {
         $(By.xpath("//*[@id='currentComponent']/div[1]/span[2]")).waitUntil(visible,5000);
         $(By.xpath("//*[@id='currentComponent']/div[1]/span[2]")).shouldHave(text(arg0));
         $(By.xpath("//*[@class='nav nav-tabs']/li/a")).shouldHave(text("Details"));
-        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[1]/td[1]")).shouldHave(text("Concept Name"));
-        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[2]/td[1]")).shouldHave(text("Domain Id"));
-        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[3]/td[1]")).shouldHave(text("Concept Class Id"));
-        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[4]/td[1]")).shouldHave(text("Vocabulary Id"));
-        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[5]/td[1]")).shouldHave(text("Concept Id"));
-        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[6]/td[1]")).shouldHave(text("Concept Code"));
-        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[7]/td[1]")).shouldHave(text("Invalid Reason"));
-        $(By.xpath("//*[@id='wrapperConceptDetails']/table/tbody/tr[8]/td[1]")).shouldHave(text("Standard Concept"));
+        $(By.xpath("//*[@data-bind='with: $root.currentConcept']/tbody/tr[1]/td[1]")).shouldHave(text("Concept Name"));
+        $(By.xpath("//*[@data-bind='with: $root.currentConcept']/tbody/tr[2]/td[1]")).shouldHave(text("Domain Id"));
+        $(By.xpath("//*[@data-bind='with: $root.currentConcept']/tbody/tr[3]/td[1]")).shouldHave(text("Concept Class Id"));
+        $(By.xpath("//*[@data-bind='with: $root.currentConcept']/tbody/tr[4]/td[1]")).shouldHave(text("Vocabulary Id"));
+        $(By.xpath("//*[@data-bind='with: $root.currentConcept']/tbody/tr[5]/td[1]")).shouldHave(text("Concept Id"));
+        $(By.xpath("//*[@data-bind='with: $root.currentConcept']/tbody/tr[6]/td[1]")).shouldHave(text("Concept Code"));
+        $(By.xpath("//*[@data-bind='with: $root.currentConcept']/tbody/tr[7]/td[1]")).shouldHave(text("Invalid Reason"));
+        $(By.xpath("//*[@data-bind='with: $root.currentConcept']/tbody/tr[8]/td[1]")).shouldHave(text("Standard Concept"));
 
     }
 
@@ -176,7 +176,7 @@ public class SearchDefs {
     public void checkFourthOfFourTabs() {
         $(By.xpath("//*[@class='nav nav-tabs']/li[4]/a")).shouldHave(text("Record Counts"));
         $(By.xpath("//*[@class='nav nav-tabs']/li[4]/a")).click();
-        $(By.xpath("//*[@class='panel-heading']")).waitUntil(visible,20000);
+        $(By.xpath("//*[@class='panel-heading']")).waitUntil(visible,120000);
         $(By.xpath("//*[@class='panel-heading']")).shouldHave(text("Record Counts across Sources"));
 
     }

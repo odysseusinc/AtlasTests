@@ -61,13 +61,13 @@ public class MyStepdefs {
 
     @Then("^check unauthorized user$")
     public void checkUnauthorizedUser() {
-        $(xpath("//*[@id='wrapperMainWindowContainer']/user-bar/div/div/div/div[1]/a")).shouldHave(text("Sign In"));
+        $(xpath("//*[@data-bind='click: function () { $component.signInOpened(true) }']")).shouldHave(text("Sign In"));
     }
 
     @Then("^can see message \"([^\"]*)\"$")
     public void canSeeMessage(String warningAboutUnauthorized) throws Throwable {
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated/div")).waitUntil(visible,5000);
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated/div")).shouldHave(text(warningAboutUnauthorized));
+        $(xpath("//*[@class='white-page flexed']")).waitUntil(visible,5000);
+        $(xpath("//*[@class='white-page flexed']")).shouldHave(text(warningAboutUnauthorized));
 
 
     }
