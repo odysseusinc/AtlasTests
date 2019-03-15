@@ -31,15 +31,15 @@ public class SearchDefs {
     public void canSeeSearchResultTable() {
         $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']")).waitUntil(visible,25000);
         $(By.xpath("//*[@class='fa fa-shopping-cart']")).shouldBe(visible);
-        $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[2]")).shouldHave(text("Id"));
-        $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[3]")).shouldHave(text("Code"));
-        $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[4]")).shouldHave(text("Name"));
-        $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[5]")).shouldHave(text("Class"));
+        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[2]")).shouldHave(text("Id"));
+        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[3]")).shouldHave(text("Code"));
+        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[4]")).shouldHave(text("Name"));
+        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[5]")).shouldHave(text("Class"));
 //        $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[6]")).shouldHave(text("Standard Concept Caption"));
-        $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[6]")).shouldHave(text("RC"));
-        $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[7]")).shouldHave(text("DRC"));
-        $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[8]")).shouldHave(text("Domain"));
-        $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[9]")).shouldHave(text("Vocabulary"));
+        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[6]")).shouldHave(text("RC"));
+        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[7]")).shouldHave(text("DRC"));
+        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[8]")).shouldHave(text("Domain"));
+        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[9]")).shouldHave(text("Vocabulary"));
         //check paganation
         $(By.xpath("//*[@data-dt-idx='2']")).shouldBe(text("2"));
 
@@ -115,7 +115,7 @@ public class SearchDefs {
 
 
 
-    public boolean isFileDownloaded(String downloadPath, String fileName) {
+    public static boolean isFileDownloaded(String downloadPath, String fileName) {
         boolean flag = false;
         File dir = new File(downloadPath);
         File[] dir_contents = dir.listFiles();
@@ -179,5 +179,9 @@ public class SearchDefs {
         $(By.xpath("//*[@class='panel-heading']")).waitUntil(visible,120000);
         $(By.xpath("//*[@class='panel-heading']")).shouldHave(text("Record Counts across Sources"));
 
+    }
+
+    @Then("^can see search result table after conceptSet$")
+    public void canSeeSearchResultTableAfterConceptSet() {
     }
 }
