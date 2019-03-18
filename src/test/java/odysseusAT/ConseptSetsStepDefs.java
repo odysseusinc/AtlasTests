@@ -48,7 +48,7 @@ public class ConseptSetsStepDefs {
     public void enterRandomNameOfConceptSetAndSaveIt() throws InterruptedException {
         generatedString = RandomStringUtils.randomAlphanumeric(10);
         $(By.xpath("//*[@id='txtConceptSetName']")).clear();
-        $(By.xpath("//*[@id='txtConceptSetName']")).setValue("Test_"+generatedString);
+        $(By.xpath("//*[@id='txtConceptSetName']")).setValue("Test_" + generatedString);
         $(By.xpath("//*[@class='fa fa-save']")).click();
         Thread.sleep(10000);
     }
@@ -84,7 +84,7 @@ public class ConseptSetsStepDefs {
 
     @When("^click to shop cart items first$")
     public void clickToShopCartItemsFirst() {
-        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[1]/i")).waitUntil(visible,10000);
+        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[1]/i")).waitUntil(visible, 10000);
         $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[1]/i")).click();
         $(By.xpath("//*[@class='fa fa-shopping-cart selected']")).waitUntil(visible, 1000);
 //        $(By.xpath("//*[@id='DataTables_Table_4']/tbody/tr[2]/td[1]/i")).click();
@@ -130,7 +130,7 @@ public class ConseptSetsStepDefs {
     public void canSeeTableOfIncludedConcepts() {
         $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).waitUntil(visible, 5000);
         includedConceptsAfter = $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).getText();
-        Assert.assertEquals(includedConceptsAfter,includedConceptsBefore);
+        Assert.assertEquals(includedConceptsAfter, includedConceptsBefore);
     }
 
     @When("^click to Included Source Codes tab$")
@@ -167,25 +167,54 @@ public class ConseptSetsStepDefs {
     }
 
     @When("^click to Export tab in Concept set$")
-    public void clickToExportTabInConceptSet() {
-        $$(".tabs__header span").get(4).shouldHave(text("Export"));
-        $$(".tabs__header span").get(4).click();
+    public void clickToExportTabInConceptSet() throws InterruptedException {
+       $(By.xpath("//*[@class='tabs__header']/span[5]")).shouldHave(text("Export"));
+       Thread.sleep(1000);
+        $(By.xpath("//*[@class='tabs__header']/span[5]")).click();
     }
 
     @Then("^can see Concept Set JSON$")
     public void canSeeConceptSetJSON() {
-        $(By.xpath("//*[@class='heading']")).waitUntil(visible,3000);
+        $(By.xpath("//*[@class='heading']")).waitUntil(visible, 3000);
         $(By.xpath("//*[@class='heading']")).shouldHave(text("Concept Set Expression JSON"));
     }
 
     @When("^click to export button$")
-    public void clickToExportButton() {
+    public void clickToExportButton() throws Exception {
+        $(By.xpath("//*[@class='btn btn-success']")).waitUntil(visible, 4000);
         $(By.xpath("//*[@class='btn btn-success']")).click();
+        Thread.sleep(2000);
+        String str = $(By.xpath("//*[@data-bind='text: title']")).getText();
+        String d = str.substring(str.indexOf("#")+1);
+        String filename = "conceptset-" + d + ".zip";
+        Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), filename));
+
     }
 
     @Then("^csv file download$")
     public void csvFileDownload() throws Exception {
-        Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), "ATLAS Search.csv"));
+        String str = $(By.xpath("//*[@data-bind='text: title']")).getText();
+        String d = str.substring(str.indexOf("#")+1);
+        String filename = "conceptset-" + d + ".zip";
+        Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), filename));
 
+    }
+
+    @When("^press SAVE button$")
+    public void pressSAVEButton() {
+        $(By.xpath("//*[@class='btn btn-success']")).click();
+
+    }
+
+    @When("^click to Compare tab in Concept Set$")
+    public void clickToCompareTabInConceptSet() {
+        $(By.xpath("//*[@class='tabs__header']/span[6]")).shouldHave(text("Compare"));
+        $(By.xpath("//*[@class='tabs__header']/span[6]")).click();
+    }
+
+    @Then("^can see text \"([^\"]*)\"$")
+    public void canSeeText(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='heading']")).waitUntil(visible,3000);
+        $(By.xpath("//*[@class='heading']")).shouldHave(text(arg0));
     }
 }

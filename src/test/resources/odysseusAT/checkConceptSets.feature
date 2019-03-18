@@ -50,7 +50,8 @@ Feature: Check Concept Sets
     When save value of Included Concepts
     When set checkbox in Descendants
     Then can see other value of Included Concepts
-  @dev
+
+
   Scenario: Check Included Concept table
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -105,7 +106,7 @@ Feature: Check Concept Sets
     When click to Explore Evidence
     Then can see explore evidence text
 
-  @pending
+
   Scenario: Check Export tab in Concept set
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -121,15 +122,13 @@ Feature: Check Concept Sets
     When click to shop cart items first
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
+    When press SAVE button
     When click to Export tab in Concept set
     Then can see Concept Set JSON
-    When click to export button
-    # TODO FIX FILENAME
-    Then csv file download
+    Then click to export button
 
 
 
-  @pending
   Scenario: Check compare concepts in Concept Set
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -146,6 +145,7 @@ Feature: Check Concept Sets
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When click to Compare tab in Concept Set
+    Then can see text "Concept Set Comparison"
 
 
   Scenario: Create and add new items in new Concept Set and remove them
