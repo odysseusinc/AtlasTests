@@ -35,16 +35,16 @@ public class DataSourceDefs {
 
     @Then("^can see dashboard$")
     public void canSeeDashboard() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 20000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Dashboard Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 20000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Dashboard Report"));
 
 
     }
 
     @Then("^can see windows in DASHBOARD page$")
     public void canSeeWindowsInDashboard() throws Throwable {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 20000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Dashboard Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 20000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Dashboard Report"));
         $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("CDM Summary"));
         $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Population by Gender"));
         $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Age at First Observation"));
@@ -69,8 +69,8 @@ public class DataSourceDefs {
 
     @Then("^can see windows in SynPufCostUtil Dashboard$")
     public void canSeeWindowsInSynPufCostUtilDashboard() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Dashboard Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Dashboard Report"));
         $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("CDM Summary"));
         $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Population by Gender"));
         $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Age at First Observation"));
@@ -86,8 +86,8 @@ public class DataSourceDefs {
 
     @Then("^can see Data Density windows$")
     public void canSeeDataDensityWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Data Density Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Data Density Report"));
         $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("Total Rows"));
         $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Records Per Person"));
         $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Concepts Per Person"));
@@ -95,8 +95,8 @@ public class DataSourceDefs {
 
     @Then("^can see Person windows$")
     public void canSeePersonWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Person Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Person Report"));
         $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("Year of Birth"));
         $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Gender"));
         $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Race"));
@@ -105,22 +105,22 @@ public class DataSourceDefs {
 
     @Then("^can see Visit windows$")
     public void canSeeVisitWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Visit Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Visit Report"));
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Condition windows$")
     public void canSeeConditionWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Condition Occurrence Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Condition Occurrence Report"));
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Condition Era windows$")
     public void canSeeConditionEraWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Condition Era Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Condition Era Report"));
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
 
         //*[@id="treemap-panel"]/treemap/empty-state/div/span
@@ -130,43 +130,43 @@ public class DataSourceDefs {
 
     @Then("^can see Procedure windows$")
     public void canSeeProcedureWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Procedure Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Procedure Report"));
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Drug windows$")
     public void canSeeDrugWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Drug Exposure Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Drug Exposure Report"));
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Drug Era windows$")
     public void canSeeDrugEraWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Drug Era Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Drug Era Report"));
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Measurement windows$")
     public void canSeeMeasurementWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Measurement Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Measurement Report"));
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Observation windows$")
     public void canSeeObservationWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Observation Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Observation Report"));
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Death windows$")
     public void canSeeDeathWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Death Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Death Report"));
         $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("Death Prevalence by Age, Gender, Year"));
         $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Death Prevalence by Month"));
         $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Death by Type"));
@@ -176,8 +176,8 @@ public class DataSourceDefs {
 
     @Then("^can see Achilles Heel windows$")
     public void canSeeAchillesHeelWindows() {
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@id='report']/div/heading-title/div/span")).shouldHave(text("Achilles Heel Report"));
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Achilles Heel Report"));
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Achilles Heel Results"));
 
     }
@@ -298,5 +298,10 @@ public class DataSourceDefs {
         $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[4]/div[2]/div/div[1]")).shouldHave(text("Qualifier Concept"));
         $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[5]/div/div[1]")).shouldHave(text("Frequency Distribution"));
 
+    }
+
+    @Then("^can see preloader in Data Source$")
+    public void canSeePreloaderInDataSource() {
+        $(By.xpath("//*[@id='currentComponent']/div/loading")).waitUntil(visible,3000);
     }
 }
