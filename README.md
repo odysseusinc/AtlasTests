@@ -12,7 +12,9 @@ downloadpath
 
 e.g.
 login = qa_login
+
 password = qa_password
+
 downloadpath = C:\\downloads     (Directory should be exist)
 
 
