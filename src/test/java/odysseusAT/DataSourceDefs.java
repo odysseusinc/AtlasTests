@@ -80,7 +80,7 @@ public class DataSourceDefs {
 
     @When("^choose Source from Data Source as \"([^\"]*)\"$")
     public void chooseSourceFromDataSourceAs(String arg0) throws InterruptedException {
-        $(By.xpath("//*[@id='currentComponent']/div/div[1]/div[1]/div/select")).selectOption(arg0);
+        $(By.xpath("//*[@class='reportControls pad-5']/div/div/select")).selectOption(arg0);
         Thread.sleep(1000);
     }
 
@@ -184,7 +184,7 @@ public class DataSourceDefs {
 
     @When("^choose Report from Data Source as \"([^\"]*)\"$")
     public void chooseReportFromDataSourceAs(String arg0) throws Throwable {
-        $(By.xpath("//*[@id='currentComponent']/div/div[1]/div[2]/div/select")).selectOption(arg0);
+        $(By.xpath("//*[@class='reportControls pad-5']/div[2]/div/select")).selectOption(arg0);
 
     }
 

@@ -1378,7 +1378,7 @@ Feature: Check Data Sources reports
     Then can see Achilles Heel windows
 
   @qt_ds @qt_synpuf110kcdm5.3
-  Scenario: Quick test SynPUF 110k CDSM5.3
+  Scenario: Quick test SynPUF 110k CDM5.3
     When login to ATLAS as QA
     When click to Data Sources menu as user
     When Data Source Page opened
