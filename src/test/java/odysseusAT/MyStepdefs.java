@@ -202,4 +202,10 @@ public class MyStepdefs {
     }
 
 
+    @When("^click to Cohort Definitions menu as QA$")
+    public void clickToCohortDefinitionsMenuAsQA() throws InterruptedException {
+        $(xpath("//*[@class='app__menu']/a[5]")).shouldHave(text("Cohort Definitions"));
+        Thread.sleep(1000);
+        $(xpath("//*[@class='app__menu']/a[5]/span")).click();
+    }
 }
