@@ -160,4 +160,62 @@ public class CohortDefinitionStepDefs {
     public void canSeeTableOfConceptSetWithConcepts() {
         $(By.xpath("//*[@class='standard']")).shouldHave(text("Aspirin"));
     }
+
+    @When("^click to Close concept set$")
+    public void clickToCloseConceptSet() {
+        $(By.xpath("//*[@class='btn btn-sm btn-primary']")).click();
+    }
+
+    @Then("^table of concept sets close$")
+    public void tableOfConceptSetsClose() {
+        $(By.xpath("//*[@class='standard']")).shouldNotBe(visible);
+    }
+
+    @When("^click to Generation tab$")
+    public void clickToGenerationTab() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li[3]")).click();
+    }
+
+    @Then("^can see Generation page$")
+    public void canSeeGenerationSourcesPage() {
+        $(By.xpath("//*[@class='cohort-generate-sources']/../div")).shouldHave(text("Available CDM Sources"));
+    }
+
+    @When("^click to Reporting tab$")
+    public void clickToReportingTab() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li[4]")).click();
+    }
+
+    @Then("^can see reporting page$")
+    public void canSeeReportingPage() {
+        $(By.xpath("//*[@class='form-control invalid']")).shouldBe(visible);
+    }
+
+    @When("^click to Export tab in Cohort Definitions$")
+    public void clickToExportTabInCohortDefinitions() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li[5]")).click();
+    }
+
+    @Then("^can see Export page$")
+    public void canSeeExportPage() {
+        $(By.xpath("//cohort-expression-viewer/div")).shouldHave(text("Initial Event Cohort"));
+    }
+
+    @When("^click to Messages Tab$")
+    public void clickToMessagesTab() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li[6]")).click();
+    }
+
+    @Then("^can see Messages page$")
+    public void canSeeMessagesPage() throws InterruptedException {
+        Thread.sleep(500);
+        $(By.xpath("//*[@aria-label='Severity: activate to sort column ascending']")).waitUntil(visible,4000);
+        $(By.xpath("//*[@aria-label='Severity: activate to sort column ascending']")).shouldHave(text("Severity"));
+
+    }
+
+    @When("^click to Run diagnostic Button$")
+    public void clickToRunDiagnosticButton() {
+        $(By.xpath("//*[@class='warnings-button-pane pull-right']/button")).click();
+    }
 }
