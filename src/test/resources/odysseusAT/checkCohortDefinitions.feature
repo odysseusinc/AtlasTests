@@ -49,7 +49,6 @@ Feature: Check Cohort Definitions
     Then table of concept sets close
 
 
-
   Scenario: Cohort Definitions tabs
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -80,3 +79,22 @@ Feature: Check Cohort Definitions
     Then can see Messages page
 
 
+  Scenario: inclusion criterias
+    When login to ATLAS as QA
+    When click to Cohort Definitions menu as QA
+    Then can see Cohort Definition page
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When add Inclusion criteria
+    Then can see block with inclusion criterias
+
+#  Scenario: Export Cohort Definitions
+#    When login to ATLAS as QA
+#    When click to Cohort Definitions menu as QA
+#    Then can see Cohort Definition page
+#    When click New Cohort button
+#    Then can see new cohort page creation
+#    When enter name of New Cohort Definition and save it
+#    #TODO next
+#

@@ -218,4 +218,18 @@ public class CohortDefinitionStepDefs {
     public void clickToRunDiagnosticButton() {
         $(By.xpath("//*[@class='warnings-button-pane pull-right']/button")).click();
     }
+
+    @When("^add Inclusion criteria$")
+    public void addInclusionCriteria() {
+        $(By.xpath("//*[@class='inclusion-criteria__block']/div/button")).click();
+        $(By.xpath("//*[@class='inclusion-rule-header']/div/input")).setValue("TEST INCLUSION");
+        $(By.xpath("//*[@class='divtext']")).setValue("TEST INCLUSION DESCRIPTION");
+    }
+
+    @Then("^can see block with inclusion criterias$")
+    public void canSeeBlockWithInclusionCriterias() {
+        $(By.xpath("//*[@class='inclusionRules']/tbody/tr/td[2]/div[1]")).shouldHave(text("TEST INCLUSION"));
+        $(By.xpath("//*[@class='inclusionRules']/tbody/tr/td[2]/div[2]")).shouldHave(text("TEST INCLUSION DESCRIPTION"));
+
+    }
 }

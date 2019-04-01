@@ -208,4 +208,11 @@ public class MyStepdefs {
         Thread.sleep(1000);
         $(xpath("//*[@class='app__menu']/a[5]/span")).click();
     }
+
+    @When("^click to Characterizations menu as QA$")
+    public void clickToCharacterizationsMenuAsQA() throws InterruptedException {
+        $(xpath("//*[@class='app__menu']/a[6]")).shouldHave(text("Characterizations"));
+        Thread.sleep(1000);
+        $(xpath("//*[@class='app__menu']/a[6]")).click();
+    }
 }
