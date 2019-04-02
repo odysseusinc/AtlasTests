@@ -8,8 +8,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
 
 public class CohortDefinitionStepDefs {
 
@@ -231,5 +231,10 @@ public class CohortDefinitionStepDefs {
         $(By.xpath("//*[@class='inclusionRules']/tbody/tr/td[2]/div[1]")).shouldHave(text("TEST INCLUSION"));
         $(By.xpath("//*[@class='inclusionRules']/tbody/tr/td[2]/div[2]")).shouldHave(text("TEST INCLUSION DESCRIPTION"));
 
+    }
+
+    @Then("^can see window with cohort definition$")
+    public void canSeeWindowWithCohortDefinition() {
+        $$(byText("Choose a Cohort definition")).get(0).shouldBe(visible);
     }
 }
