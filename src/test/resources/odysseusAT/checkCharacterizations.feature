@@ -1,7 +1,6 @@
 @characterization
 Feature: Characterization check
 
-
   Scenario: Create new characterization and delete it
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -38,7 +37,7 @@ Feature: Characterization check
     When accept delete feature analyse
     Then cant find feature analyse in the table
 
-
+  @dev
   Scenario: Import definitions, features and tabs
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -52,7 +51,10 @@ Feature: Characterization check
     Then can see cohort definition in characterization list
     When click to Import Feature analyses
     Then can see Feature analyses window
-    #TODO Finish him
+    When click to feature checkbox from Feature analyses
+    When click to Import Feature analyse
+    Then Feature analyse table is visible
+
 
 
 

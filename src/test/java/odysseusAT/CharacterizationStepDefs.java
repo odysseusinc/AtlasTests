@@ -1,5 +1,6 @@
 package odysseusAT;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selectors;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -90,14 +91,14 @@ public class CharacterizationStepDefs {
 
     @When("^click to Import Cohort Definition$")
     public void clickToImportCohortDefinition() {
-        $$(byText("Import")).get(0);
+        $$(byText("Import")).get(0).click();
 
     }
 
     @When("^choose cohort definition from the table in characterization$")
     public void chooseCohortDefinitionFromTheTableInCharacterization() {
-        $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue(characterizationName);
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text(characterizationName));
+        $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue("test");
+        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text("test"));
         $(By.xpath("//table/tbody/tr/td[2]")).click();
 
     }
@@ -108,9 +109,10 @@ public class CharacterizationStepDefs {
     }
 
     @When("^click to Feature Analyses tab$")
-    public void clickToFeatureAnalysesTab() {
+    public void clickToFeatureAnalysesTab() throws InterruptedException {
         $(By.xpath("//*[@class='characterizations-tabbed-grid__toolbar-nav nav nav-tabs']/li[2]/a")).click();
-        $(By.xpath("//*[@class='characterizations-tabbed-grid__new-entity-btn btn btn-primary btn-sm'")).waitUntil(visible, 4000);
+        Thread.sleep(1500);
+        $(By.xpath("//*[@class='characterizations-tabbed-grid__new-entity-btn btn btn-primary btn-sm']")).waitUntil(visible, 4000);
     }
 
     @Then("^can see Feature Analyses table$")
@@ -152,7 +154,8 @@ public class CharacterizationStepDefs {
     }
 
     @Then("^go to feature analyses table by pressing close button$")
-    public void goToFeatureAnalysesTableByPressingCloseButton() {
+    public void goToFeatureAnalysesTableByPressingCloseButton() throws InterruptedException {
+        Thread.sleep(1500);
         $(By.xpath("//*[@class='fa fa-times']")).waitUntil(visible,4000);
         $(By.xpath("//*[@class='fa fa-times']")).click();
 
@@ -171,6 +174,58 @@ public class CharacterizationStepDefs {
 
     @When("^click to our feature analyse$")
     public void clickToOurFeatureAnalyse() {
-        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']")).click();
+        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']/a")).click();
+    }
+
+    @Then("^can see page of our Feature Analyse$")
+    public void canSeePageOfOurFeatureAnalyse() {
+//         $(byText("Feature Analysis #")).waitUntil(visible,4000);
+        $(By.xpath("//*[@data-bind='text: title'][1]")).waitUntil(visible,3000);
+        $(By.xpath("//*[@data-bind='text: title'][1]")).shouldHave(text("Feature Analysis #"));
+    }
+
+
+    @When("^click to delete feature analyse$")
+    public void clickToDeleteFeatureAnalyse() {
+        $(By.xpath("//*[@class='btn btn-danger']")).click();
+    }
+
+    @When("^accept delete feature analyse$")
+    public void acceptDeleteFeatureAnalyse() {
+        switchTo().alert().accept();
+    }
+
+    @Then("^cant find feature analyse in the table$")
+    public void cantFindFeatureAnalyseInTheTable() {
+        $(By.xpath("//*[@type='search']")).setValue(featureName);
+        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']")).shouldNotHave(text(featureName));
+    }
+
+    @When("^click to Import Feature analyses$")
+    public void clickToImportFeatureAnalyses() {
+        $$(byText("Import")).get(1).click();
+    }
+
+    @Then("^can see Feature analyses window$")
+    public void canSeeFeatureAnalysesWindow() {
+        $(By.xpath("//*[@class='atlas-modal__modal-dialog modal-dialog characterization-design__feature-analyses-modal']/div/div[1]/div")).waitUntil(visible, 4000);
+        $(By.xpath("//*[@class='atlas-modal__modal-dialog modal-dialog characterization-design__feature-analyses-modal']/div/div[1]/div")).shouldHave(text("Choose a Feature analyses"));
+    }
+
+    @Then("^Feature analyse table is visible$")
+    public void featureAnalyseTableIsVisible() {
+        $(By.xpath("//*[@class='characterization-design__col-feature-id sorting_asc']")).waitUntil(visible,3000);
+
+    }
+
+    @When("^click to feature checkbox from Feature analyses$")
+    public void clickToFeatureCheckboxFromFeatureAnalyses() {
+        $(By.xpath("//*[@class='fa fa-check'][1]")).click();
+
+    }
+
+    @When("^click to Import Feature analyse$")
+    public void clickToImportFeatureAnalyse() {
+        $(By.xpath("//*[@data-bind=\"css: classes({extra:'btn btn-sm btn-primary'}), click: importFeatures, enable: importEnabled\"]")).click();
     }
 }

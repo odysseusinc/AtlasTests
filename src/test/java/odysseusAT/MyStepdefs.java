@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import cucumber.api.PendingException;
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -17,7 +18,7 @@ import static org.openqa.selenium.By.xpath;
 
 
 public class MyStepdefs {
-    @Before
+    @After
     public void closeOnFail(){
         try {
             closeBrowser();

@@ -221,7 +221,7 @@ public class CohortDefinitionStepDefs {
 
     @When("^add Inclusion criteria$")
     public void addInclusionCriteria() {
-        $(By.xpath("//*[@class='inclusion-criteria__block']/div/button")).click();
+        $$(byText("New inclusion criteria")).get(0).click();
         $(By.xpath("//*[@class='inclusion-rule-header']/div/input")).setValue("TEST INCLUSION");
         $(By.xpath("//*[@class='divtext']")).setValue("TEST INCLUSION DESCRIPTION");
     }
