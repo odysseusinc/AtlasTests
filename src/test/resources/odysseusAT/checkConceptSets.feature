@@ -51,7 +51,6 @@ Feature: Check Concept Sets
     When set checkbox in Descendants
     Then can see other value of Included Concepts
 
-
   Scenario: Check Included Concept table
     When login to ATLAS as QA
     When click to Concept Sets menu as QA

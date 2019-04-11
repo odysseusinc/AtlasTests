@@ -24,7 +24,9 @@ public class ConseptSetsStepDefs {
     private String idValue;
     private String idValueCP;
     private String includedConceptsBefore;
+    private String conceptIdCS;
     private String includedConceptsAfter;
+    private String conceptIdIC;
 
     @Then("^Concept Sets page opens$")
     public void conceptSetsPageOpens() {
@@ -88,7 +90,7 @@ public class ConseptSetsStepDefs {
         $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[1]/i")).click();
         $(By.xpath("//*[@class='fa fa-shopping-cart selected']")).waitUntil(visible, 1000);
 //        $(By.xpath("//*[@id='DataTables_Table_4']/tbody/tr[2]/td[1]/i")).click();
-        idValue = $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).getValue();
+        idValue = $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).getText();
 
     }
 
@@ -99,7 +101,8 @@ public class ConseptSetsStepDefs {
 
     @Then("^can see item in the concept set table$")
     public void canSeeItemInTheConceptSetTable() {
-        idValueCP = $(By.xpath("//table/tbody/tr/td[2]")).getValue();
+        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/./tbody/tr/td[2]")).waitUntil(visible,4000);
+        idValueCP = $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/./tbody/tr/td[2]")).getText();
         Assert.assertEquals(idValue, idValueCP);
     }
 
@@ -129,14 +132,15 @@ public class ConseptSetsStepDefs {
     @Then("^can see table of Included Concepts$")
     public void canSeeTableOfIncludedConcepts() {
         $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).waitUntil(visible, 5000);
-        includedConceptsAfter = $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).getText();
-        Assert.assertEquals(includedConceptsAfter, includedConceptsBefore);
+
+        conceptIdIC = $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/./tbody/tr/td[2]")).getText();
+        Assert.assertEquals(idValueCP, conceptIdIC);
     }
 
     @When("^click to Included Source Codes tab$")
     public void clickToIncludedSourceCodesTab() {
-        $$(".tabs__header span").get(2).shouldHave(text("Included Source Codes"));
-        $$(".tabs__header span").get(2).click();
+        $(By.xpath("//*[@class='tabs__header-title'][2]")).shouldHave(text("Included Source Codes"));
+        $(By.xpath("//*[@class='tabs__header-title'][2]")).click();
     }
 
     @Then("^can see table of Included Source codes$")
@@ -146,8 +150,8 @@ public class ConseptSetsStepDefs {
 
     @When("^click to Explore Evidence$")
     public void clickToExploreEvidence() {
-        $$(".tabs__header span").get(3).shouldHave(text("Explore Evidence"));
-        $$(".tabs__header span").get(3).click();
+        $(By.xpath("//*[@class='tabs__header-title'][3]")).shouldHave(text("Explore Evidence"));
+        $(By.xpath("//*[@class='tabs__header-title'][3]")).click();
     }
 
     @Then("^can see explore evidence text$")

@@ -20,7 +20,6 @@ Feature: Check Cohort Definitions
 
 
   Scenario: Add Initial events to new Cohort
-
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
     Then can see Cohort Definition page
@@ -35,8 +34,10 @@ Feature: Check Cohort Definitions
     Then Import Concept Set window shown
     When enter "71" to Filter of Concept Set from Repository
     #hardcode, fix later
+    When click to Id to sort
     Then can see only one field
     #
+
     When click to chosen concept set from repository
     #hardcode, fix later
     Then can see name of concept set at the button
@@ -63,6 +64,7 @@ Feature: Check Cohort Definitions
     When choose Import Concept Set
     Then Import Concept Set window shown
     When enter "71" to Filter of Concept Set from Repository
+    When click to Id to sort
     Then can see only one field
     When click to chosen concept set from repository
     Then can see name of concept set at the button

@@ -237,4 +237,9 @@ public class CohortDefinitionStepDefs {
     public void canSeeWindowWithCohortDefinition() {
         $$(byText("Choose a Cohort definition")).get(0).shouldBe(visible);
     }
+
+    @When("^click to Id to sort$")
+    public void clickToIdToSort() {
+        $(By.xpath("//*[@aria-label='Id: activate to sort column ascending']")).click();
+    }
 }
