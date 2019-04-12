@@ -216,4 +216,11 @@ public class MyStepdefs {
         Thread.sleep(1000);
         $(xpath("//*[@class='app__menu']/a[6]")).click();
     }
+
+    @When("^click to Cohort Pathways menu as QA$")
+    public void clickToCohortPathwaysMenuAsQA() throws InterruptedException {
+        $(xpath("//*[@class='app__menu']/a[7]")).shouldHave(text("Cohort Pathway"));
+        Thread.sleep(1000);
+        $(xpath("//*[@class='app__menu']/a[7]")).click();
+    }
 }
