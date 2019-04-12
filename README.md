@@ -21,12 +21,46 @@ _downloadpath_ is a directory to save files (Note: directory should be exist)
 _test.mode_ local or remote
 
 _test.browser_
+
+You can run tests in a local browser or remote Selenium Server
+
 - for **local** mode is specifying path to browser driver, like _src/chromedriver.exe_
-- for **remote** mode is specifying URL for Selenium server, like _http://127.0.0.1:4444/wd/hub_ 
+- for **remote** mode is specifying URL for Selenium Server, like _http://127.0.0.1:4444/wd/hub_ 
+(note: instruction for setup and configure Selenoide described in section "Setup and configure Selenoide") 
 
 **Requirements for running test**
 
 I need installed JDK and Apache Maven 
+
+### Setup and configure Selenoide
+
+Selenoide is Selenium Server in docker. 
+
+For remote mode recommended using Selenoide
+ 
+1. Install docker and add user to docker group
+2. Install Configuration Manager (CM)
+
+`curl -s https://aerokube.com/cm/bash | bash`
+
+Put cm to /usr/local/bin
+
+3. Configure of CM
+
+`cm selenoid configure --vnc --browsers chrome --last-versions 1 --tmpfs 128`
+
+Note: see https://aerokube.com/cm/latest/ for more information about configure CM
+
+Pull docker without vnc
+`docker pull selenoid/chrome:73.0`
+
+4. Run CM
+
+`cm selenoid start --vnc`
+
+5. Run Selenoid Interface (optional)
+
+`cm selenoid-ui start`
 
 ### Running test with IntelliJ Idea
 To start you have to install cucumber plugin to IntelliJ Idea: https://plugins.jetbrains.com/plugin/7212-cucumber-for-java
@@ -51,30 +85,3 @@ or
 
 for running tests with tag _@unauthorized_
 
-### Remote mode
-
-For remote mode recommended using Selenoide
- 
-1. Install docker and add user to docker group
-2. Install Configuration Manager (CM)
-
-`curl -s https://aerokube.com/cm/bash | bash`
-
-Put cm to /usr/local/bin
-
-3. Configure of CM
-
-`cm selenoid start --vnc --browsers chrome --last-versions 1 --tmpfs 128`
-
-Note: see https://aerokube.com/cm/latest/ for more information about configure CM
-
-Pull docker without vnc
-`docker pull selenoid/chrome:73.0`
-
-4. Run CM
-
-`cm selenoid start --vnc`
-
-5. Run Selenoid Interface (optional)
-
-`cm selenoid-ui start`
