@@ -5,6 +5,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 
 import java.io.FileInputStream;
@@ -28,13 +29,48 @@ public class LoginStepsDefs {
 
     @Before
     public void closeOnFail() {
-        System.setProperty("webdriver.chrome.driver", "src/chromedriver.exe");
-        Configuration.browser = "chrome";
+        String testmode, browserURL;
         try {
-            closeBrowser();
+            Configuration.timeout = 30000;
+
+            testmode = getDataProperties("test.mode");
+
+            switch(testmode) {
+                case "local":
+                    browserURL = getDataProperties("test.browser");
+                    if (!browserURL.equals("") && !browserURL.isEmpty()) {
+                        System.setProperty("webdriver.chrome.driver", browserURL);
+                    } else {
+                        throw new Exception("Error local browser property");
+                    }
+                    break;
+                case "remote":
+                    Configuration.browser = "chrome";
+                    browserURL = getDataProperties("test.browser");
+                    if (!browserURL.equals("") && !browserURL.isEmpty()) {
+
+                        Configuration.remote = browserURL;
+
+                        // Разрешаем VNC
+                        ChromeOptions capabilities = new ChromeOptions();
+                        capabilities.setCapability("enableVNC", true);
+                    } else {
+                        throw new Exception("Error remote browser property");
+                    }
+                    break;
+                default:
+                    throw new Exception("Error test mode");
+            }
+        } catch (Exception e) {
+            throw new AssertionError("Error settings", e);
+        }
+        /*
+        try {
+            //closeBrowser();
         } catch (Exception e) {
             throw new AssertionError("A clear description of the failure", e);
         }
+        */
     }
 
     @When("^click to LogIn link$")
