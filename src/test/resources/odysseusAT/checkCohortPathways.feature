@@ -11,8 +11,8 @@ Feature: Cohort Pathway check
     Then can see buttons to cohort pathway
     When click to cancel button
     Then can see table with our cohort pathway
-    When enter name of oor pathway in filter
-    Then can see name of new cohost pathway in table
+    When enter name of our pathway in filter
+    Then can see name of new cohort pathway in table
     When click to cohort pathway in table
     Then can see our cohort pathway
     When change name and press save
