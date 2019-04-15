@@ -235,7 +235,7 @@ public class CohortDefinitionStepDefs {
 
     @Then("^can see window with cohort definition$")
     public void canSeeWindowWithCohortDefinition() {
-        $$(byText("Choose a Cohort definition")).get(0).shouldBe(visible);
+        $(byText("Choose a Cohort definition")).shouldBe(visible);
     }
 
     @When("^click to Id to sort$")

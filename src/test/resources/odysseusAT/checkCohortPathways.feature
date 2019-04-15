@@ -1,3 +1,4 @@
+@cohortpathways
 Feature: Cohort Pathway check
 
   Scenario: Create, Edit, copy and delete pathway
@@ -16,9 +17,10 @@ Feature: Cohort Pathway check
     When click to cohort pathway in table
     Then can see our cohort pathway
     When change name and press save
-    Then can see new name of new cohost pathway in table
+    Then can see new name of new cohort pathway in table
     When click to cohort pathway in table
     When click to delete our cohort pathway
+    When accept delete cohort pathway
     Then cant see our cohort pathway in table
 
   Scenario: Choose target cohorts and event cohorts
@@ -34,14 +36,16 @@ Feature: Cohort Pathway check
     When choose cohort definition from the table in target cohort list
     Then can see cohort definition in target cohort list list
     When click to Import Event Cohorts
-    Then can see window with cohort definition
+#    Then can see window with cohort definition
     When choose cohort definition from the table in event cohort list
     Then can see cohort definition in event cohort list list
 
+  @pdev
   Scenario: Executions and Utilities tab
     When login to ATLAS as QA
     When click to Cohort Pathways menu as QA
     Then can see Cohort Pathway page
+    When click to button New Pathway Analysis
     Then can see creation page of New Cohort Pathway
     When enter new name of cohort pathway
     When click to save New Cohort Pathway button
