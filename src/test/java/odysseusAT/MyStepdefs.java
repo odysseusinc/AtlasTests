@@ -42,7 +42,7 @@ public class MyStepdefs extends testDefs {
     public static void openProjectPage() throws InterruptedException {
         try{
             Thread.sleep(1000);
-            open("https://qaatlas.arachnenetwork.com");
+            open(getDataProperties("test.url"));
             Thread.sleep(3000);
             $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible,10000);
             $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).waitUntil(visible,10000);
@@ -52,7 +52,7 @@ public class MyStepdefs extends testDefs {
             openProjectPage();
         }
 
-//        open("https://qaatlas.arachnenetwork.com");
+//        open(getDataProperties("test.url"));
 //        $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible, 60000);
 
 
@@ -60,13 +60,13 @@ public class MyStepdefs extends testDefs {
         //        for (int i = 0; i < 2; i++ ){
 //            String logo =  By.xpath("//*[@id='wrapperLogo']/a").toString()    ;
 //            if (!logo.equals(visible)) {Thread.sleep(10000);
-//            open("https://qaatlas.arachnenetwork.com");}
+//            open(getDataProperties("test.url"));
 //        }
 //        SelenideElement se = $(xpath("//*[@id='wrapperLogo']/a"));
 //        for (int i = 0; i < 2; i++ ) {
 //            if (se.isDisplayed()) {
 //                Thread.sleep(10000);
-//                open("https://qaatlas.arachnenetwork.com");
+//                open(getDataProperties("test.url"));
 //            }
 //        }
     }

@@ -6,6 +6,7 @@ Clone this project to your computer.
 
 Create file **application.properties** in _src_ directory with parameters:
 
+- test.url
 - login
 - password
 - downloadpath
@@ -13,6 +14,7 @@ Create file **application.properties** in _src_ directory with parameters:
 - test.browser 
 - e.g.
 
+_test.url_ address of Atlas
 
 _login_ and _password_ is Atlas account for tests
 
