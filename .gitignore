@@ -1,6 +1,6 @@
+.idea
 *.properties
 *.class
 *.jar
 target
-.idea
 odysseusAT.iml

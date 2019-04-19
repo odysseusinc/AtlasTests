@@ -6,6 +6,7 @@ Clone this project to your computer.
 
 Create file **application.properties** in _src_ directory with parameters:
 
+- test.url
 - login
 - password
 - downloadpath
