@@ -1,6 +1,7 @@
 package odysseusAT;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import cucumber.api.PendingException;
@@ -11,13 +12,23 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 import static org.openqa.selenium.By.xpath;
 
 
-public class MyStepdefs {
+public class MyStepdefs extends testDefs {
+
+    @Before
+    public void chromeDriver() {
+    }
+
     @After
     public void closeOnFail(){
         try {

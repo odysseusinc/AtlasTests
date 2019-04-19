@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.BeforeClass;
 import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 
 import java.io.FileInputStream;
@@ -19,29 +20,11 @@ import static org.openqa.selenium.By.xpath;
 
 import static odysseusAT.MyStepdefs.closeBrowser;
 
-public class LoginStepsDefs {
-
-
-    public static String getDataProperties(String param) throws Exception {
-        Properties props = new Properties();
-        props.load(new InputStreamReader(new FileInputStream("src/application.properties"), "UTF-8"));
-        return props.getProperty(param);
-    }
+public class LoginStepsDefs extends testDefs{
 
     @Before
     public void chromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "src/chromedriver.exe");
-        Configuration.browser = "chrome";
     }
-
-//    @BeforeClass
-//    public void closeOnFail() {
-//        try {
-//            closeBrowser();
-//        } catch (Exception e) {
-//            throw new AssertionError("A clear description of the failure", e);
-//        }
-//    }
 
     @When("^click to LogIn link$")
     public static void clickToLogInLink() throws InterruptedException {

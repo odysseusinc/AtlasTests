@@ -1,5 +1,6 @@
 package odysseusAT;
 
+import cucumber.api.java.Before;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 
@@ -14,12 +15,10 @@ import static com.codeborne.selenide.Selenide.open;
 
 import static org.openqa.selenium.By.xpath;
 
-public class LoginQT {
+public class LoginQT extends testDefs {
 
-    public static String getDataProperties(String param) throws Exception {
-        Properties props = new Properties();
-        props.load(new InputStreamReader(new FileInputStream("src/application.properties"), "UTF-8"));
-        return props.getProperty(param);
+    @Before
+    public void chromeDriver() {
     }
 
     @When("^login to ATLAS as QA QT$")

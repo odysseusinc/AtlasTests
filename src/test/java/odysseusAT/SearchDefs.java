@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class SearchDefs {
+public class SearchDefs  {
     @When("^enter in search panel \"([^\"]*)\"$")
     public void enterInSearchPanel(String arg0) throws Throwable {
         $(By.xpath("//*[@placeholder='Type your search here']")).waitUntil(visible,3000);
