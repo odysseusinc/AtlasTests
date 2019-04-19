@@ -36,7 +36,7 @@ public class LoginQT extends testDefs {
     public static void openProjectPage() throws InterruptedException {
         try{
             Thread.sleep(1000);
-            open("https://qaatlas.arachnenetwork.com");
+            open(getDataProperties("test.url"));
             Thread.sleep(3000);
             $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible,10000);
             $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).waitUntil(visible,10000);
@@ -98,8 +98,8 @@ public class LoginQT extends testDefs {
     }
 
     @When("^just open home page$")
-    public void justOpenHomePage() throws InterruptedException {
-        open("https://qaatlas.arachnenetwork.com");
+    public void justOpenHomePage() throws Exception {
+        open(getDataProperties("test.url"));
         Thread.sleep(3000);
         $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible, 10000);
         $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).waitUntil(visible, 10000);
