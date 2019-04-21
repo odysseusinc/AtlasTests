@@ -40,7 +40,7 @@ Feature: Cohort Pathway check
     When choose cohort definition from the table in event cohort list
     Then can see cohort definition in event cohort list list
 
-  @pdev
+
   Scenario: Executions and Utilities tab
     When login to ATLAS as QA
     When click to Cohort Pathways menu as QA
