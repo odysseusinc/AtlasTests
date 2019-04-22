@@ -49,7 +49,9 @@ Feature: Incident rates check
     When click to result in IR
     When enter "New users of levetiracetam" in filter of cohort
     When click to result in IR
+    #have to check
     When close Cohort window in IR
+    #
     Then can see new rows under Target Cohorts
     When click to Add Outcome Cohort
     When enter "Levetriacetam vs phenytoin outcome cohort" in filter of cohort
@@ -62,4 +64,5 @@ Feature: Incident rates check
     When press Load Concept Set in IR
     When enter "Angioedema or Depression" in filter Concept Set in IR
     When click to result in CS in IR
+    #hardcode
     Then can see chosen concept set in table

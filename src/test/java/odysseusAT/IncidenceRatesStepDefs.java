@@ -1,5 +1,6 @@
 package odysseusAT;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -7,8 +8,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 
 public class IncidenceRatesStepDefs {
     private String generatedString;
@@ -153,5 +153,76 @@ public class IncidenceRatesStepDefs {
     public void canSeeUtilitiesPageInIR() {
         $(By.xpath("//*[@class='nav nav-pills']/li[1]/a")).shouldHave(text("Import"));
         $(By.xpath("//*[@class='nav nav-pills']/li[2]/a")).shouldHave(text("Export"));
+    }
+
+    @When("^click to add Target Cohort$")
+    public void clickToAddTargetCohort() {
+        $("Add Target Cohort").click();
+    }
+
+    @When("^enter \"([^\"]*)\" in filter of cohort$")
+    public void enterInFilterOfCohort(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='dataTables_filter']/label/input")).setValue(arg0);
+
+    }
+
+    @When("^click to result in IR$")
+    public void clickToResultInIR() {
+        $(By.xpath("//*[@class='linkish']")).click();
+    }
+
+    @When("^close Cohort window in IR$")
+    public void closeCohortWindowInIR() {
+        $(By.xpath("//*[@class='modal-body'")).pressEscape();
+    }
+
+
+    @Then("^can see new rows under Target Cohorts$")
+    public void canSeeNewRowsUnderTargetCohorts() {
+        $(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]/span")).shouldHave(text("New users of phenytoin"));
+        $(By.xpath("//table/tbody/tr[2]/td/table/tbody[2]/tr/td[3]/span")).shouldHave(text("New users of levetriacetam"));
+
+    }
+
+    @When("^click to Add Outcome Cohort$")
+    public void clickToAddOutcomeCohort() {
+        $("Add Outcome Cohort").click();
+    }
+
+    @Then("^can see new rows under Outcome Cohort$")
+    public void canSeeNewRowsUnderOutcomeCohort() {
+        $(By.xpath("//table[1]/tbody/tr[2]/td[2]/table/tbody/tr/td[3]/span")).shouldHave(text("Levetriacetam vs phenytoin outcome cohort"));
+    }
+
+    @When("^choose Time at risk starts with value (\\d+)$")
+    public void chooseTimeAtRiskStartsWithValue(int arg0) {
+        $$(By.xpath("//*[@class='numericInputField dropdown ui-autocomplete-input']")).get(0).selectOption(arg0);
+    }
+
+    @When("^choose Time at risk ends with value (\\d+)$")
+    public void chooseTimeAtRiskEndsWithValue(int arg0) {
+        $$(By.xpath("//*[@class='numericInputField dropdown ui-autocomplete-input']")).get(1).selectOption(arg0);
+    }
+
+    @When("^press Load Concept Set in IR$")
+    public void pressLoadConceptSetInIR() {
+        $(By.xpath("//*[@role='tabpanel']/concept-set-builder/button[2]")).waitUntil(visible,2000);
+        $(By.xpath("//*[@role='tabpanel']/concept-set-builder/button[2]")).click();
+    }
+
+    @When("^enter \"([^\"]*)\" in filter Concept Set in IR$")
+    public void enterInFilterConceptSetInIR(String arg0) throws Throwable {
+        $(By.xpath("//*[@id='repositoryConceptSetTable_filter']/label/input")).setValue(arg0);
+    }
+
+    @When("^click to result in CS in IR$")
+    public void clickToResultInCSInIR() {
+        $(By.xpath("//*[@class='repositoryConceptSetItem']/td[2]")).shouldHave(text("Angioedema or Depression"));
+        $(By.xpath("//*[@class='repositoryConceptSetItem']/td[2]")).click();
+    }
+
+    @Then("^can see chosen concept set in table$")
+    public void canSeeChosenConceptSetInTable() {
+        $(By.xpath("//*[@class=' select']/following-sibling::td[3]")).shouldHave(text("Allergic urticaria and/or angioedema"));
     }
 }
