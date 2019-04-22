@@ -118,4 +118,40 @@ public class IncidenceRatesStepDefs {
         $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
         $(By.xpath("//tbody/tr/td[2]")).shouldNotHave(text(newGeneratedString));
     }
+
+    @Then("^can see concept set page in IR$")
+    public void canSeeConceptSetPageInIR() {
+        $(By.xpath("//*[@class='btn btn-primary btn-sm'][2]")).waitUntil(visible,3000);
+        $(By.xpath("//*[@class='btn btn-primary btn-sm'][2]")).shouldHave(text("Load"));
+        $(By.xpath("//*[@class='btn btn-primary btn-sm'][1]")).shouldHave(text("New Concept Set"));
+    }
+
+    @When("^click to Concept Sets tab in IR$")
+    public void clickToConceptSetsTabInIR() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li[2]")).click();
+    }
+
+    @When("^click to Generation tab in IR$")
+    public void clickToGenerationTabInIR() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li[3]")).click();
+    }
+
+    @Then("^can see Generation page in IR$")
+    public void canSeeGenerationPageInIR() {
+        $(By.xpath("//*[@class='select-sources-btn__label']")).waitUntil(visible,3000);
+        $(By.xpath("//*[@class='ir-analysis-results__tbl-th ir-analysis-results__tbl-th--source']")).shouldHave(text("Source Name"));
+    }
+
+
+    @When("^click to Utilities page in IR$")
+    public void clickToUtilitiesPageInIR() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li[4]")).click();
+
+    }
+
+    @Then("^can see Utilities page in IR$")
+    public void canSeeUtilitiesPageInIR() {
+        $(By.xpath("//*[@class='nav nav-pills']/li[1]/a")).shouldHave(text("Import"));
+        $(By.xpath("//*[@class='nav nav-pills']/li[2]/a")).shouldHave(text("Export"));
+    }
 }

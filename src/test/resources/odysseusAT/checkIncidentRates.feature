@@ -1,3 +1,4 @@
+@incidencerates
 Feature: Incident rates check
 
   Scenario: Create IR, save, edit, delete
@@ -24,19 +25,16 @@ Feature: Incident rates check
     When accept delete IR alert
     Then cant find IR in table
 
-
   Scenario: Check tabs in IR
     When login to ATLAS as QA
     When click to Incidence Rates menu as QA
     Then can see Incidence Rates creation page
     When enter name on new Incidence Rates
     When click to save Incidence Rates Button
-    When click to Concept Sets tab
-    Then can see concept set page
-    When click to Concept Sets tab
-    Then can see concept set page
+    When click to Concept Sets tab in IR
+    Then can see concept set page in IR
     When click to Generation tab in IR
-    Then can see Generation pagein IR
+    Then can see Generation page in IR
     When click to Utilities page in IR
     Then can see Utilities page in IR
 
