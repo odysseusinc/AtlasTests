@@ -25,9 +25,12 @@ Feature: Incident rates check
     When accept delete IR alert
     Then cant find IR in table
 
+
   Scenario: Check tabs in IR
     When login to ATLAS as QA
     When click to Incidence Rates menu as QA
+    Then can see Incidence Rates page
+    When click to New Analysis button in Incidence Rates
     Then can see Incidence Rates creation page
     When enter name on new Incidence Rates
     When click to save Incidence Rates Button
@@ -37,10 +40,12 @@ Feature: Incident rates check
     Then can see Generation page in IR
     When click to Utilities page in IR
     Then can see Utilities page in IR
-
+  @devvv
   Scenario: Create IR as Angioedema across levetriacetam new users
     When login to ATLAS as QA
     When click to Incidence Rates menu as QA
+    Then can see Incidence Rates page
+    When click to New Analysis button in Incidence Rates
     Then can see Incidence Rates creation page
     When enter name on new Incidence Rates
     When click to save Incidence Rates Button
@@ -49,9 +54,7 @@ Feature: Incident rates check
     When click to result in IR
     When enter "New users of levetiracetam" in filter of cohort
     When click to result in IR
-    #have to check
     When close Cohort window in IR
-    #
     Then can see new rows under Target Cohorts
     When click to Add Outcome Cohort
     When enter "Levetriacetam vs phenytoin outcome cohort" in filter of cohort

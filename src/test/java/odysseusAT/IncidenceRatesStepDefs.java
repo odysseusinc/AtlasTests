@@ -1,5 +1,6 @@
 package odysseusAT;
 
+import com.codeborne.selenide.Selectors;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -8,6 +9,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class IncidenceRatesStepDefs {
@@ -34,6 +36,7 @@ public class IncidenceRatesStepDefs {
     @When("^enter name on new Incidence Rates$")
     public void enterNameOnNewIncidenceRates() {
         generatedString = RandomStringUtils.randomAlphanumeric(10);
+        generatedString = "Test_"+ generatedString;
         $(By.xpath("//*[@type='text']")).clear();
         $(By.xpath("//*[@type='text']")).setValue(generatedString);
     }
@@ -57,7 +60,8 @@ public class IncidenceRatesStepDefs {
     }
 
     @When("^enter name of our IR in filter$")
-    public void enterNameOfOurIRInFilter() {
+    public void enterNameOfOurIRInFilter() throws InterruptedException {
+        Thread.sleep(1000);
         $(By.xpath("//*[@type='search']")).waitUntil(visible,3000);
         $(By.xpath("//*[@type='search']")).setValue(generatedString);
     }
@@ -68,18 +72,21 @@ public class IncidenceRatesStepDefs {
     }
 
     @When("^click to our incidence rate$")
-    public void clickToOurIncidenceRate() {
-        $(By.xpath("//tbody/tr/td[2]")).click();
+    public void clickToOurIncidenceRate() throws InterruptedException {
+        $(By.xpath("//tbody/tr/td[2]/span")).waitUntil(visible,4000);
+        $(By.xpath("//tbody/tr/td[2]/span")).click();
     }
 
     @Then("^can see our incidence rate$")
-    public void canSeeOurIncidenceRate() {
+    public void canSeeOurIncidenceRate() throws InterruptedException {
+        Thread.sleep(1500);
         $(By.xpath("//*[@data-bind='text: title']")).shouldHave(text("Incidence Rate Analysis #"));
     }
 
     @When("^enter new name of incidence rate$")
     public void enterNewNameOfIncidenceRate() {
         newGeneratedString = RandomStringUtils.randomAlphanumeric(10);
+        newGeneratedString = "Test_"+ newGeneratedString;
         $(By.xpath("//*[@type='text']")).clear();
         $(By.xpath("//*[@type='text']")).setValue(newGeneratedString);
 
@@ -97,8 +104,9 @@ public class IncidenceRatesStepDefs {
     }
 
     @When("^click to new incidence rate$")
-    public void clickToNewIncidenceRate() {
-        $(By.xpath("//tbody/tr/td[2]")).click();
+    public void clickToNewIncidenceRate() throws InterruptedException {
+        Thread.sleep(2000);
+        $(By.xpath("//tbody/tr/td[2]/span")).click();
     }
 
     @When("^click to delete IR button$")
@@ -157,13 +165,15 @@ public class IncidenceRatesStepDefs {
 
     @When("^click to add Target Cohort$")
     public void clickToAddTargetCohort() {
-        $("Add Target Cohort").click();
+//        $("Add Target Cohort").click();
+        $(byText("Add Target Cohort")).click();
     }
 
     @When("^enter \"([^\"]*)\" in filter of cohort$")
     public void enterInFilterOfCohort(String arg0) throws Throwable {
+        Thread.sleep(500);
         $(By.xpath("//*[@class='dataTables_filter']/label/input")).setValue(arg0);
-
+        Thread.sleep(500);
     }
 
     @When("^click to result in IR$")
@@ -173,20 +183,20 @@ public class IncidenceRatesStepDefs {
 
     @When("^close Cohort window in IR$")
     public void closeCohortWindowInIR() {
-        $(By.xpath("//*[@class='modal-body'")).pressEscape();
+        $(By.xpath("//*[@class = 'modal-dialog']/div/div/button")).click();
     }
 
 
     @Then("^can see new rows under Target Cohorts$")
     public void canSeeNewRowsUnderTargetCohorts() {
         $(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]/span")).shouldHave(text("New users of phenytoin"));
-        $(By.xpath("//table/tbody/tr[2]/td/table/tbody[2]/tr/td[3]/span")).shouldHave(text("New users of levetriacetam"));
+        $(By.xpath("//table/tbody/tr[2]/td/table/tbody[2]/tr/td[3]/span")).shouldHave(text("New users of levetiracetam "));
 
     }
 
     @When("^click to Add Outcome Cohort$")
     public void clickToAddOutcomeCohort() {
-        $("Add Outcome Cohort").click();
+        $(byText("Add Outcome Cohort")).click();
     }
 
     @Then("^can see new rows under Outcome Cohort$")
@@ -196,12 +206,12 @@ public class IncidenceRatesStepDefs {
 
     @When("^choose Time at risk starts with value (\\d+)$")
     public void chooseTimeAtRiskStartsWithValue(int arg0) {
-        $$(By.xpath("//*[@class='numericInputField dropdown ui-autocomplete-input']")).get(0).selectOption(arg0);
+        $$(By.xpath("//*[@class='numericInputField dropdown ui-autocomplete-input']")).get(0).setValue("14");
     }
 
     @When("^choose Time at risk ends with value (\\d+)$")
     public void chooseTimeAtRiskEndsWithValue(int arg0) {
-        $$(By.xpath("//*[@class='numericInputField dropdown ui-autocomplete-input']")).get(1).selectOption(arg0);
+        $$(By.xpath("//*[@class='numericInputField dropdown ui-autocomplete-input']")).get(1).setValue("14");
     }
 
     @When("^press Load Concept Set in IR$")
