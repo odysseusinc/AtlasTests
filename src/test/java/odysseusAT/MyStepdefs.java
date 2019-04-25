@@ -241,4 +241,11 @@ public class MyStepdefs extends testDefs {
         Thread.sleep(1000);
         $(xpath("//*[@class='app__menu']/a[8]")).click();
     }
+
+    @When("^click to Profiles menu as QA$")
+    public void clickToProfilesMenuAsQA() throws InterruptedException {
+        $(xpath("//*[@class='app__menu']/a[9]")).shouldHave(text("Profiles"));
+        Thread.sleep(1000);
+        $(xpath("//*[@class='app__menu']/a[9]")).click();
+    }
 }

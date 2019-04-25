@@ -162,7 +162,7 @@ public class SearchDefs  {
     public void checkSecondOfFourTabs() {
         $(By.xpath("//*[@class='nav nav-tabs']/li[2]/a")).shouldHave(text("Related Concepts"));
         $(By.xpath("//*[@class='nav nav-tabs']/li[2]/a")).click();
-        $(By.xpath("//*[@id='DataTables_Table_4']/tbody/tr[1]/td[4]/a")).waitUntil(visible,15000);
+        $(By.xpath("//*[@id='DataTables_Table_4']/tbody/tr[1]/td[4]/a")).waitUntil(visible,35000);
     }
 
     @Then("^check third of four tabs$")
