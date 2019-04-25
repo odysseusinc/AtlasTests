@@ -22,7 +22,6 @@ Feature: Search in Vocabularies
     When click to Id header
     Then second value more then first
 
-
   Scenario: Filtering in Search
     When login to ATLAS as QA
     When click to Search menu as QA
@@ -42,6 +41,7 @@ Feature: Search in Vocabularies
     When click to CSV button
     Then file download
 
+  @devs
   Scenario: Open the concept and check content of tabs
     When login to ATLAS as QA
     When click to Search menu as QA

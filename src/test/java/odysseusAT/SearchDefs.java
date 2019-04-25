@@ -101,7 +101,8 @@ public class SearchDefs  {
 
     @Then("^can see search result only with \"([^\"]*)\"$")
     public void canSeeSearchResultOnlyWith(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='invalid']")).shouldHave(text(arg0));
+        Thread.sleep(1500);
+        $(By.xpath("//*[@class='invalid non-standard']")).shouldHave(text(arg0));
 
     }
 
