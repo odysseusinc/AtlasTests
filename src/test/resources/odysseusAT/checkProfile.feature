@@ -1,3 +1,4 @@
+@profiles
 Feature: check Profile
 
   Scenario: choose profile of Impala
@@ -5,7 +6,7 @@ Feature: check Profile
     When click to Profiles menu as QA
     Then can see Profiles page
     When click to Select a Data Source
-    When choose "Impala" in Profile Source
+    When choose "IMPALA" in Profile Source
     When enter 100 in Profile Id and press Enter
     Then can see overlay
     Then can see table
@@ -15,7 +16,7 @@ Feature: check Profile
     When click to Profiles menu as QA
     Then can see Profiles page
     When click to Select a Data Source
-    When choose "Netezza53" in Profile Source
+    When choose "Netezza CDM5.3" in Profile Source
     When enter 100 in Profile Id and press Enter
     Then can see overlay
     Then can see table
@@ -25,7 +26,7 @@ Feature: check Profile
     When click to Profiles menu as QA
     Then can see Profiles page
     When click to Select a Data Source
-    When choose "OVH02_110K" in Profile Source
+    When choose "OVH02 SynPUF 110k" in Profile Source
     When enter 100 in Profile Id and press Enter
     Then can see overlay
     Then can see table
@@ -36,27 +37,39 @@ Feature: check Profile
     When click to Profiles menu as QA
     Then can see Profiles page
     When click to Select a Data Source
-    When choose "synpuf_110k_cu" in Profile Source
+    When choose "SynPUF 110K Cost&Util" in Profile Source
     When enter 100 in Profile Id and press Enter
     Then can see overlay
     Then can see table
 
+  @aa
   Scenario: choose profile of synpuf_110k_bigquery
     When login to ATLAS as QA
     When click to Profiles menu as QA
     Then can see Profiles page
     When click to Select a Data Source
-    When choose "synpuf_110k_bigquery" in Profile Source
+    When choose "SynPUF 110k (GCP BigQuery)" in Profile Source
     When enter 100 in Profile Id and press Enter
     Then can see overlay
     Then can see table
+
+  Scenario: choose profile of synpuf_110k_cdm53
+    When login to ATLAS as QA
+    When click to Profiles menu as QA
+    Then can see Profiles page
+    When click to Select a Data Source
+    When choose "SynPUF 110k CDM5.3" in Profile Source
+    When enter 100 in Profile Id and press Enter
+    Then can see overlay
+    Then can see table
+
 
   Scenario: choose profile of synpuf_2m_bigquery
     When login to ATLAS as QA
     When click to Profiles menu as QA
     Then can see Profiles page
     When click to Select a Data Source
-    When choose "synpuf_2m_bigquery" in Profile Source
+    When choose "SynPUF 2.3m (GCP BigQuery)" in Profile Source
     When enter 100 in Profile Id and press Enter
     Then can see overlay
     Then can see table
@@ -66,7 +79,7 @@ Feature: check Profile
     When click to Profiles menu as QA
     Then can see Profiles page
     When click to Select a Data Source
-    When choose "SYNPUF_2M" in Profile Source
+    When choose "SynPUF 2M CDM5.3" in Profile Source
     When enter 100 in Profile Id and press Enter
     Then can see overlay
     Then can see table

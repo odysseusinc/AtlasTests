@@ -39,11 +39,11 @@ public class ProfileStepDefs {
 
     @Then("^can see overlay$")
     public void canSeeOverlay() {
-        $(By.xpath("//*[@class='overlay']")).waitUntil(visible,10000);
+        $(By.xpath("//*[@class='overlay']")).waitUntil(visible,60000);
     }
 
     @Then("^can see table$")
     public void canSeeTable() {
-        $(By.xpath("//table/thead/tr/th")).waitUntil(visible,10000);
+        $(By.xpath("//*[@class='sorting'][3]")).waitUntil(visible,10000);
     }
 }
