@@ -71,4 +71,18 @@ Feature: check Estimation
     When click to search result in concept set window
     Then can see concept in negative control outcome
     When click back button to specification tab
-    #devide
+      #devide
+    When press Add Analysis Settings
+    Then can see Analysis Setting page
+    When Enter Study Start and end date
+    When Enter include concept set in baseline covariates in the propensity score model
+    Then can see concept set window
+    When enter "test" in concept set window
+    When click to search result in concept set window
+    Then can see concept in negative control outcome
+    When Enter exclude concept set in baseline covariates in the propensity score model
+    Then can see concept set window
+    When enter "test" in concept set window
+    When click to search result in concept set window
+    Then can see concept in negative control outcome
+
