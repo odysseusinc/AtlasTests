@@ -86,3 +86,6 @@ Feature: check Estimation
     When click to search result in concept set window
     Then can see concept in negative control outcome
 
+
+    #add test to utilites
+
