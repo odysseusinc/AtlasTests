@@ -1,0 +1,189 @@
+package odysseusAT;
+
+import com.codeborne.selenide.Selectors;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
+
+public class EstimationStepDefs {
+
+
+    private String generatedString;
+    private String newGeneratedString;
+
+
+    @Then("^can see Estimation page$")
+    public void canSeeEstimationPage() {
+        $(By.xpath("//table/tbody/tr/td[1]")).waitUntil(visible, 4000);
+    }
+
+    @When("^click to New Population Level Effect Estimation$")
+    public void clickToNewPopulationLevelEffectEstimation() {
+        $(By.xpath("//*[@class='estimation-browser paddedWrapper flexed']/span")).click();
+    }
+
+    @Then("^can see creation page of Estimation$")
+    public void canSeeCreationPageOfEstimation() {
+        $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 3000);
+        $(By.xpath("//*[@data-bind='text: title']")).shouldHave(text("New Population Level Effect Estimation - Comparative Cohort Analysis"));
+
+    }
+
+    @When("^enter new name of Estimation$")
+    public void enterNewNameOfEstimation() {
+        generatedString = RandomStringUtils.randomAlphanumeric(10);
+        generatedString = "Test_" + generatedString;
+        $$(By.xpath("//*[@type='text']")).get(0).clear();
+        $$(By.xpath("//*[@type='text']")).get(0).setValue(generatedString);
+    }
+
+    @When("^click to save New Estimation button$")
+    public void clickToSaveNewEstimationButton() {
+        $(By.xpath("//*[@title='Save']")).waitUntil(visible, 3500);
+        $(By.xpath("//*[@title='Save']")).click();
+    }
+
+    @Then("^can see buttons to Estimation$")
+    public void canSeeButtonsToEstimation() {
+        $(By.xpath("//*[@title='Close']")).waitUntil(visible, 3500);
+        $(By.xpath("//*[@title='Create a copy']")).waitUntil(visible, 3500);
+
+    }
+
+    @Then("^can see table with our Estimation$")
+    public void canSeeTableWithOurEstimation() {
+        $(By.xpath("//table/tbody/tr/td")).waitUntil(visible, 4000);
+    }
+
+    @When("^enter name of our estimation in filter$")
+    public void enterNameOfOurEstimationInFilter() throws InterruptedException {
+        Thread.sleep(1000);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000);
+        $(By.xpath("//*[@type='search']")).setValue(generatedString);
+    }
+
+    @Then("^can see name of new Estimation in table$")
+    public void canSeeNameOfNewEstimationInTable() {
+        $(By.xpath("//tbody/tr/td[2]")).shouldHave(text(generatedString));
+    }
+
+    @When("^click to Estimation in table$")
+    public void clickToEstimationInTable() {
+        $(By.xpath("//tbody/tr/td[2]")).click();
+    }
+
+    @Then("^can see our Estimation$")
+    public void canSeeOurEstimation() {
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible,5000);
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Population Level Effect Estimation - Comparative Cohort Analysis #"));
+    }
+
+    @Then("^can see new name of new Estimation in table$")
+    public void canSeeNewNameOfNewEstimationInTable() {
+        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000);
+        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
+    }
+
+    @When("^change name of Estimation and press save$")
+    public void changeNameOfEstimationAndPressSave() {
+        newGeneratedString = RandomStringUtils.randomAlphanumeric(10);
+        newGeneratedString = "Test_"+ newGeneratedString;
+        $(By.xpath("//*[@type='text']")).clear();
+        $(By.xpath("//*[@type='text']")).setValue(newGeneratedString);
+    }
+
+    @When("^click to delete our Estimation$")
+    public void clickToDeleteOurEstimation() {
+        $(By.xpath("//*[@title='Delete']")).click();
+    }
+
+    @When("^accept delete Estimation$")
+    public void acceptDeleteEstimation() {
+        switchTo().alert().accept();
+    }
+
+    @Then("^cant see our Estimation in table$")
+    public void cantSeeOurEstimationInTable() {
+        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000);
+        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
+        $(By.xpath("//tbody/tr/td[2]")).shouldNotHave(text(newGeneratedString));
+    }
+
+    @When("^click to Comparisons tab$")
+    public void clickToComparisonsTab() {
+        $(By.xpath("//*[@class='pull-left']/ul/li[2])")).click();
+    }
+
+    @Then("^can see comparision page$")
+    public void canSeeComparisionPage() {
+        $(By.xpath("//*[@id='summary']/div/div[3]/div/div/div[1]/text()")).shouldNotHave(visible);
+    }
+
+    @When("^click to Analysis Setting tab$")
+    public void clickToAnalysisSettingTab() {
+        $(By.xpath("//*[@class='pull-left']/ul/li[3])")).click();
+    }
+
+    @Then("^can see Analysis Setting page$")
+    public void canSeeAnalysisSettingPage() {
+        $(By.xpath("//*[@id='summary']/div/div[2]/div/div/div[1]")).shouldNotHave(visible);
+    }
+
+    @When("^click to Evaluation Setting tab$")
+    public void clickToEvaluationSettingTab() {
+        $(By.xpath("//*[@class='pull-left']/ul/li[4])")).click();
+    }
+
+    @Then("^can see Evaluation Setting page$")
+    public void canSeeEvaluationSettingPage() {
+        $(By.xpath("//*[@id='summary']/div/div[2]/div/div/div[1]")).shouldNotHave(visible);
+    }
+
+    @When("^click to Executions tab in Estimation$")
+    public void clickToExecutionsTabInEstimation() {
+        $(byText("Executions")).click();
+    }
+
+    @Then("^can see Execution page in Estimation$")
+    public void canSeeExecutionPageInEstimation() {
+        $(By.xpath("//*[@class='comparative-cohort-analysis-executions__title'")).shouldHave(text("Generations"));
+    }
+
+    @When("^click to Utilities page in Estimation$")
+    public void clickToUtilitiesPageInEstimation() {
+        $(byText("Utilities")).click();
+    }
+
+    @Then("^can see Utilities page in Estimation$")
+    public void canSeeUtilitiesPageInEstimation() {
+        $(byText("Download")).shouldHave(visible);
+        $(byText("Import")).shouldHave(visible);
+        $(byText("Export")).shouldHave(visible);
+    }
+
+    @When("^click to add Comparison$")
+    public void clickToAddComparison() {
+        $$(By.xpath("//*[@class='btn btn-primary btn-sm pull-right'")).get(1).click();
+    }
+
+    @Then("^can see Comparison inputs$")
+    public void canSeeComparisonInputs() {
+        $(By.xpath("//*[@class='editor-heading']")).shouldHave(text("Comparison"));
+    }
+
+    @When("^click to open target cohort button$")
+    public void clickToOpenTargetCohortButton() {
+        $$(By.xpath("//*[@class='fa fa-folder-open']")).get(0).click();
+    }
+
+    @Then("^can see Select Cohort window$")
+    public void canSeeSelectCohortWindow() {
+
+    }
+}

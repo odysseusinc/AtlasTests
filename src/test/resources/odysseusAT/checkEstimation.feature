@@ -15,7 +15,7 @@ Feature: check Estimation
     Then can see name of new Estimation in table
     When click to Estimation in table
     Then can see our Estimation
-    When change name and press save
+    When change name of Estimation and press save
     Then can see new name of new Estimation in table
     When click to Estimation in table
     When click to delete our Estimation
