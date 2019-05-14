@@ -17,6 +17,7 @@ Feature: check Estimation
     When click to Estimation in table
     Then can see our Estimation
     When change name of Estimation and press save
+    When click to cancel button in Estimation
     Then can see new name of new Estimation in table
     When click to Estimation in table
     When click to delete our Estimation

@@ -76,8 +76,9 @@ public class EstimationStepDefs {
     }
 
     @When("^click to Estimation in table$")
-    public void clickToEstimationInTable() {
-        $(By.xpath("//tbody/tr/td[2]")).click();
+    public void clickToEstimationInTable() throws InterruptedException {
+        Thread.sleep(1000);
+        $(By.xpath("//tbody/tr/td[2]/a")).click();
     }
 
     @Then("^can see our Estimation$")
@@ -98,6 +99,7 @@ public class EstimationStepDefs {
         newGeneratedString = "Test_"+ newGeneratedString;
         $(By.xpath("//*[@type='text']")).clear();
         $(By.xpath("//*[@type='text']")).setValue(newGeneratedString);
+        $(By.xpath("//*[@title='Save']")).click();
     }
 
     @When("^click to delete our Estimation$")
@@ -119,17 +121,18 @@ public class EstimationStepDefs {
 
     @When("^click to Comparisons tab$")
     public void clickToComparisonsTab() {
-        $(By.xpath("//*[@class='pull-left']/ul/li[2])")).click();
+        $(By.xpath("//*[@class='pull-left']/ul/li[2]")).click();
     }
 
     @Then("^can see comparision page$")
-    public void canSeeComparisionPage() {
-        $(By.xpath("//*[@id='summary']/div/div[3]/div/div/div[1]/text()")).shouldNotHave(visible);
+    public void canSeeComparisionPage() throws InterruptedException {
+        Thread.sleep(5000);
+        $(By.xpath("//*[@id='summary']/div/div[3]/div/div/div[1]")).shouldNotHave(visible);
     }
 
     @When("^click to Analysis Setting tab$")
     public void clickToAnalysisSettingTab() {
-        $(By.xpath("//*[@class='pull-left']/ul/li[3])")).click();
+        $(By.xpath("//*[@class='pull-left']/ul/li[3]")).click();
     }
 
     @Then("^can see Analysis Setting page$")
@@ -139,7 +142,7 @@ public class EstimationStepDefs {
 
     @When("^click to Evaluation Setting tab$")
     public void clickToEvaluationSettingTab() {
-        $(By.xpath("//*[@class='pull-left']/ul/li[4])")).click();
+        $(By.xpath("//*[@class='pull-left']/ul/li[4]")).click();
     }
 
     @Then("^can see Evaluation Setting page$")
@@ -154,7 +157,7 @@ public class EstimationStepDefs {
 
     @Then("^can see Execution page in Estimation$")
     public void canSeeExecutionPageInEstimation() {
-        $(By.xpath("//*[@class='comparative-cohort-analysis-executions__title'")).shouldHave(text("Generations"));
+        $(By.xpath("//*[@class='comparative-cohort-analysis-executions__title']")).shouldHave(text("Generations"));
     }
 
     @When("^click to Utilities page in Estimation$")
@@ -171,11 +174,12 @@ public class EstimationStepDefs {
 
     @When("^click to add Comparison$")
     public void clickToAddComparison() {
-        $$(By.xpath("//*[@class='btn btn-primary btn-sm pull-right'")).get(1).click();
+        $$(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).get(0).click();
     }
 
     @Then("^can see Comparison inputs$")
     public void canSeeComparisonInputs() {
+        $(By.xpath("//*[@class='editor-heading']")).waitUntil(visible,3000);
         $(By.xpath("//*[@class='editor-heading']")).shouldHave(text("Comparison"));
     }
 
@@ -186,7 +190,7 @@ public class EstimationStepDefs {
 
     @Then("^can see Select Cohort window$")
     public void canSeeSelectCohortWindow() {
-        $(By.xpath("//*[@class='linkish']")).waitUntil(visible,4000);
+        $$(By.xpath("//*[@class='linkish']")).get(1).waitUntil(visible,4000);
 
     }
 
@@ -197,8 +201,8 @@ public class EstimationStepDefs {
 
     @When("^click to result in CR in Cohort Window$")
     public void clickToResultInCRInCohortWindow() {
-        cohortVal = $(By.xpath("//*[@class='linkish']")).getText();
-        $(By.xpath("//*[@class='linkish']")).click();
+        cohortVal = $$(By.xpath("//*[@class='linkish']")).get(1).getText();
+        $$(By.xpath("//*[@class='linkish']")).get(1).click();
     }
 
 
@@ -264,5 +268,10 @@ public class EstimationStepDefs {
     @When("^Enter exclude concept set in baseline covariates in the propensity score model$")
     public void enterExcludeConceptSetInBaselineCovariatesInThePropensityScoreModel() {
         $$(By.xpath("//*[@class='btn btn-primary']")).get(3).click();
+    }
+
+    @When("^click to cancel button in Estimation$")
+    public void clickToCancelButtonInEstimation() {
+        $(By.xpath("//*[@title='Close']")).click();
     }
 }
