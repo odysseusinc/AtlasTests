@@ -1,3 +1,4 @@
+@estimations
 Feature: check Estimation
 
   Scenario: Create, Edit, Delete estimate
@@ -54,13 +55,11 @@ Feature: check Estimation
     Then can see Select Cohort window
     When enter "test" in Filter in Cohort window
     When click to result in CR in Cohort Window
-    Then can see choosed cohort in target input
     When click to open comparator cohort button
     Then can see Select Cohort window
     When enter "test" in Filter in Cohort window
     When click to result in CR in Cohort Window
-    Then can see choosed cohort in comparator input
-    When click to Add Outocome button
+    When click to Add Outcome button
     Then can see Select Cohort window
     When enter "test" in Filter in Cohort window
     When click to result in CR in Cohort Window
@@ -69,7 +68,6 @@ Feature: check Estimation
     Then can see concept set window
     When enter "test" in concept set window
     When click to search result in concept set window
-    Then can see concept in negative control outcome
     When click back button to specification tab
       #devide
     When press Add Analysis Settings
@@ -79,12 +77,11 @@ Feature: check Estimation
     Then can see concept set window
     When enter "test" in concept set window
     When click to search result in concept set window
-    Then can see concept in negative control outcome
     When Enter exclude concept set in baseline covariates in the propensity score model
     Then can see concept set window
     When enter "test" in concept set window
     When click to search result in concept set window
-    Then can see concept in negative control outcome
+
 
 
     #add test to utilites

@@ -1,6 +1,7 @@
 package odysseusAT;
 
 import com.codeborne.selenide.Selectors;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -16,6 +17,7 @@ public class EstimationStepDefs {
 
     private String generatedString;
     private String newGeneratedString;
+    private String cohortVal;
 
 
     @Then("^can see Estimation page$")
@@ -184,6 +186,83 @@ public class EstimationStepDefs {
 
     @Then("^can see Select Cohort window$")
     public void canSeeSelectCohortWindow() {
+        $(By.xpath("//*[@class='linkish']")).waitUntil(visible,4000);
 
+    }
+
+    @When("^enter \"([^\"]*)\" in Filter in Cohort window$")
+    public void enterInFilterInCohortWindow(String arg0) throws Throwable {
+        $$(By.xpath("//*[@type='search']")).get(3).setValue(arg0);
+    }
+
+    @When("^click to result in CR in Cohort Window$")
+    public void clickToResultInCRInCohortWindow() {
+        cohortVal = $(By.xpath("//*[@class='linkish']")).getText();
+        $(By.xpath("//*[@class='linkish']")).click();
+    }
+
+
+    @When("^click to open comparator cohort button$")
+    public void clickToOpenComparatorCohortButton() {
+        $$(By.xpath("//*[@class='fa fa-folder-open']")).get(1).click();
+    }
+
+
+    @Then("^can see choosed cohort in estimation outcome table$")
+    public void canSeeChoosedCohortInEstimationOutcomeTable() {
+        $(By.xpath("//*[@class=' linked-cohort-list__col-cohort-name ']")).shouldHave(text(cohortVal));
+    }
+
+    @When("^click to Add Outcome button$")
+    public void clickToAddOutcomeButton() {
+        $(By.xpath("//*[@class='linked-entity-list__actions']/button")).click();
+    }
+
+    @When("^click to Open Concept window$")
+    public void clickToOpenConceptWindow() {
+        $$(By.xpath("//*[@class='fa fa-folder-open']")).get(2).click();
+    }
+
+    @Then("^can see concept set window$")
+    public void canSeeConceptSetWindow() {
+        $(By.xpath("//*[@class='btn btn-sm btn-primary new-concept-set']")).waitUntil(visible,4000);
+
+    }
+
+    @When("^enter \"([^\"]*)\" in concept set window$")
+    public void enterInConceptSetWindow(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='conceptset-browser-panel']/following-sibling::div/div/div/div[2]/label/input")).setValue(arg0);
+    }
+
+    @When("^click to search result in concept set window$")
+    public void clickToSearchResultInConceptSetWindow() {
+        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).click();
+    }
+
+    @When("^click back button to specification tab$")
+    public void clickBackButtonToSpecificationTab() {
+        $(By.xpath("//*[@class='fa fa-chevron-left fa-lg']")).click();
+    }
+
+    @When("^press Add Analysis Settings$")
+    public void pressAddAnalysisSettings() {
+        $(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).waitUntil(visible,4000);
+        $$(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).get(1).click();
+    }
+
+    @When("^Enter Study Start and end date$")
+    public void enterStudyStartAndEndDate() {
+        $$(By.xpath("//*[@class='form-control dateField hasDatepicker']")).get(0).setValue("2019-01-01");
+        $$(By.xpath("//*[@class='form-control dateField hasDatepicker']")).get(1).setValue("2019-02-02");
+    }
+
+    @When("^Enter include concept set in baseline covariates in the propensity score model$")
+    public void enterIncludeConceptSetInBaselineCovariatesInThePropensityScoreModel() {
+        $$(By.xpath("//*[@class='btn btn-primary']")).get(2).click();
+    }
+
+    @When("^Enter exclude concept set in baseline covariates in the propensity score model$")
+    public void enterExcludeConceptSetInBaselineCovariatesInThePropensityScoreModel() {
+        $$(By.xpath("//*[@class='btn btn-primary']")).get(3).click();
     }
 }
