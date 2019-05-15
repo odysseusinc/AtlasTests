@@ -82,6 +82,7 @@ Feature: check Estimation
     Then can see concept set window
     When enter "test" in concept set window
     When click to search result in concept set window
+    When click to save New Estimation button
 
 
 
