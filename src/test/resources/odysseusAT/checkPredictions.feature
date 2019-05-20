@@ -29,7 +29,7 @@ Feature: Check Prediction
     When click to Prediction menu as QA
     Then can see Prediction page
     When click to New Patient Level Prediction
-    When click to  Prediction Problem Settings tab
+    When click to Prediction Problem Settings tab
     Then can see Prediction Problem Settings page
     When click to Analysis Setting tab in Prediction
     Then can see Analysis Setting page in Prediction
