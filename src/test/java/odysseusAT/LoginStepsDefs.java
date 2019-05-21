@@ -86,8 +86,8 @@ public class LoginStepsDefs extends testDefs{
     @Then("^check authorise user as QA$")
     public static void checkAuthoriseUserAs(String arg0) throws Throwable {
 
-        $(By.xpath("//*[@data-bind='text: authLogin']")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@data-bind='text: authLogin']")).shouldHave(text(arg0));
+        $(By.xpath("//*[@class='paddedWrapper']/div/div/div[2]/div")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@class='paddedWrapper']/div/div/div[2]/div")).shouldHave(text("Logged in as '" + arg0));
     }
 
 

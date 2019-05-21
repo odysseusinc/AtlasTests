@@ -1,3 +1,4 @@
+@predictions
 Feature: Check Prediction
 
   Scenario: Create, Edit, Delete predictions
@@ -24,6 +25,7 @@ Feature: Check Prediction
     When accept delete Prediction alert
     Then cant find Prediction in table
 
+
   Scenario: Check tabs in Prediction
     When login to ATLAS as QA
     When click to Prediction menu as QA
@@ -49,7 +51,7 @@ Feature: Check Prediction
     Then can see Prediction page
     When click to New Patient Level Prediction
     When enter new name of Prediction
-    When click to save New Prediction button
+    When click to save Prediction Button
     Then can see new buttons in Prediction field
     When click to add Target Cohort in Predictions
     Then can see cohort definition window in Predictions
