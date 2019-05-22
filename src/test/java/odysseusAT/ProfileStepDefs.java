@@ -21,7 +21,8 @@ public class ProfileStepDefs {
     }
 
     @When("^click to Select a Data Source$")
-    public void clickToSelectADataSource() {
+    public void clickToSelectADataSource() throws InterruptedException {
+        Thread.sleep(2000);
         $$(By.xpath("//*[@class='input-group-btn']/button")).get(0).click();
 
     }

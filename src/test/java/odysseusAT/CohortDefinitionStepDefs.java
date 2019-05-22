@@ -50,18 +50,19 @@ public class CohortDefinitionStepDefs {
     public void filteredCohortDefinition() throws InterruptedException {
         $(By.xpath("//*[@type='search']")).waitUntil(visible,4000);
         $(By.xpath("//*[@type='search']")).setValue(nameCohort);
+        Thread.sleep(1500);
 
     }
 
     @Then("^Cohort Definition should be found$")
     public void cohortDefinitionShouldBeFound() {
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text(nameCohort));
+        $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text(nameCohort));
 
     }
 
     @When("^click to our Cohort Definition$")
     public void clickToOurCohortDefinition() {
-        $(By.xpath("//table/tbody/tr/td[2]")).click();
+        $(By.xpath("//table/tbody/tr/td[2]/span")).click();
     }
 
     @Then("^can see our Cohort Definition$")
@@ -220,8 +221,9 @@ public class CohortDefinitionStepDefs {
     }
 
     @When("^add Inclusion criteria$")
-    public void addInclusionCriteria() {
-        $$(byText("New inclusion criteria")).get(0).click();
+    public void addInclusionCriteria() throws InterruptedException {
+        Thread.sleep(3000);
+        $$(By.xpath("//*[@class='btn btn-sm btn-success']")).get(1).click();
         $(By.xpath("//*[@class='inclusion-rule-header']/div/input")).setValue("TEST INCLUSION");
         $(By.xpath("//*[@class='divtext']")).setValue("TEST INCLUSION DESCRIPTION");
     }
