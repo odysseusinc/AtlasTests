@@ -15,6 +15,17 @@ Feature: Characterization check
     When accept delete characterization
     Then cant find characterization in the table
 
+  @chun
+  Scenario: Check uniqueness of characterization
+    When login to ATLAS as QA
+    When click to Characterizations menu as QA
+    Then can see Characterization page
+    When click to New characterization button
+    When enter Characterization name and save it
+    When return to Characterization table
+    When click to New characterization button
+    When enter the same Characterization name and save it
+    Then can see alert message about uniqueness
 
   Scenario: Add new feature analyses and delete it
     When login to ATLAS as QA

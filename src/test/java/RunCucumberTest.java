@@ -8,9 +8,9 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"pretty", "html:target/cucumber-reports" },
+@CucumberOptions(plugin = {"json:target/cucumber.json"},
                  glue = {"odysseusAT"}
-//                , tags = {"@configuration"}
+//                , tags = {"@login"}
                 )
 
 public class RunCucumberTest {

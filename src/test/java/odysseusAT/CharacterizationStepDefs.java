@@ -228,4 +228,16 @@ public class CharacterizationStepDefs {
     public void clickToImportFeatureAnalyse() {
         $(By.xpath("//*[@data-bind=\"css: classes({extra:'btn btn-sm btn-primary'}), click: importFeatures, enable: importEnabled\"]")).click();
     }
+
+    @When("^enter the same Characterization name and save it$")
+    public void enterTheSameCharacterizationNameAndSaveIt() {
+        $(By.xpath("//*[@class='input-group']/input")).clear();
+        $(By.xpath("//*[@class='input-group']/input")).setValue(characterizationName);
+        $(By.xpath("//*[@class='fa fa-save']")).click();
+    }
+
+    @Then("^can see alert message about uniqueness$")
+    public void canSeeAlertMessageAboutUniqueness() {
+        switchTo().alert().accept();
+    }
 }

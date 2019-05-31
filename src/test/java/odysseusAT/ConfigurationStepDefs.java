@@ -30,12 +30,12 @@ public class ConfigurationStepDefs {
     @When("^click to check connection button for Impala$")
     public void clickToCheckConnectionButtonForImpala() throws InterruptedException {
         Thread.sleep(2000);
-        $(By.xpath("//table/tbody/tr[1]/td[6]/button")).click();
+        $(By.xpath("//table/tbody/tr[1]/td[9]/button")).click();
     }
 
     @Then("^can see success message in button for Impala$")
     public void canSeeSuccessMessageInButtonForImpala() throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[1]/td[6]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
+        $(By.xpath("//table/tbody/tr[1]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
 //        Assert.assertTrue($(By.xpath("//table/tbody/tr[1]/td[6]/button")).getAttribute("class").contains("btn-success"));
     }
 
