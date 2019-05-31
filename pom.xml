@@ -71,7 +71,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>cucumber-selenide-example</projectName>
+                            <projectName>Atlas Autotest</projectName>
                             <outputDirectory>target/cucumber-html-reports</outputDirectory>
                             <cucumberOutput>target/cucumber.json</cucumberOutput>
                             <parallelTesting>false</parallelTesting>
