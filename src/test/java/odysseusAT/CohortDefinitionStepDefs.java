@@ -1,7 +1,5 @@
 package odysseusAT;
 
-import com.codeborne.selenide.Condition;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -14,6 +12,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class CohortDefinitionStepDefs {
 
     String nameCohort;
+    private String newGeneratedString;
 
     @Then("^can see Cohort Definition page$")
     public void canSeeCohortDefinitionPage() {
@@ -30,7 +29,7 @@ public class CohortDefinitionStepDefs {
 
     @Then("^can see new cohort page creation$")
     public void canSeeNewCohortPageCreation() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible,3000);
+        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible, 3000);
         $(By.xpath("//*[@class='heading-title heading-title--dark']")).shouldHave(text("New Cohort Definition"));
 
     }
@@ -38,7 +37,7 @@ public class CohortDefinitionStepDefs {
     @When("^enter name of New Cohort Definition and save it$")
     public void enterNameOfNewCohortDefinitionAndSaveIt() throws InterruptedException {
         String generatedString = RandomStringUtils.randomAlphanumeric(10);
-        nameCohort = "Test_" + generatedString ;
+        nameCohort = "Test_" + generatedString;
         $(By.xpath("//*[@class='form-control']")).clear();
         $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
         Thread.sleep(300);
@@ -48,7 +47,7 @@ public class CohortDefinitionStepDefs {
 
     @Then("^filtered Cohort Definition$")
     public void filteredCohortDefinition() throws InterruptedException {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible,4000);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 4000);
         $(By.xpath("//*[@type='search']")).setValue(nameCohort);
         Thread.sleep(1500);
 
@@ -68,7 +67,7 @@ public class CohortDefinitionStepDefs {
     @Then("^can see our Cohort Definition$")
     public void canSeeOurCohortDefinition() {
 //        $(By.xpath("//*[@id='cohortTextView']/div")).shouldHave(value(nameCohort));
-        $(By.xpath("//*[@class='panel panel-primary cohort-definition-panel']")).waitUntil(visible,2000);
+        $(By.xpath("//*[@class='panel panel-primary cohort-definition-panel']")).waitUntil(visible, 2000);
 
     }
 
@@ -210,7 +209,7 @@ public class CohortDefinitionStepDefs {
     @Then("^can see Messages page$")
     public void canSeeMessagesPage() throws InterruptedException {
         Thread.sleep(500);
-        $(By.xpath("//*[@aria-label='Severity: activate to sort column ascending']")).waitUntil(visible,4000);
+        $(By.xpath("//*[@aria-label='Severity: activate to sort column ascending']")).waitUntil(visible, 4000);
         $(By.xpath("//*[@aria-label='Severity: activate to sort column ascending']")).shouldHave(text("Severity"));
 
     }
@@ -243,5 +242,41 @@ public class CohortDefinitionStepDefs {
     @When("^click to Id to sort$")
     public void clickToIdToSort() {
         $(By.xpath("//*[@aria-label='Id: activate to sort column ascending']")).click();
+    }
+
+    @When("^enter new name of cohort definition$")
+        public void enterNewNameOfCohortDefinition() throws InterruptedException {
+        String generatedString = RandomStringUtils.randomAlphanumeric(10);
+        newGeneratedString = "Test_" + generatedString;
+        $(By.xpath("//*[@class='form-control']")).clear();
+        $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
+        Thread.sleep(300);
+        
+
+    }
+
+    @When("^save new name of cohort definition$")
+    public void saveNewNameOfCohortDefinition() {
+        $(By.xpath("//*[@class='fa fa-save']")).click();
+    }
+
+    @Then("^filtered new Cohort Definition$")
+    public void filteredNewCohortDefinition() throws InterruptedException {
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 4000);
+        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
+        Thread.sleep(1500);
+    }
+
+    @Then("^new Cohort Definition should be found$")
+    public void newCohortDefinitionShouldBeFound() {
+        $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text(newGeneratedString));
+    }
+
+    @When("^enter the same name of New Cohort Definition and save it$")
+    public void enterTheSameNameOfNewCohortDefinitionAndSaveIt() throws InterruptedException {
+        $(By.xpath("//*[@class='form-control']")).clear();
+        $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
+        Thread.sleep(300);
+        $(By.xpath("//*[@class='fa fa-save']")).click();
     }
 }
