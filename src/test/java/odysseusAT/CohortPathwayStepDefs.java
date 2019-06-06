@@ -177,5 +177,12 @@ public class CohortPathwayStepDefs {
         $(By.xpath("//*[@class = 'pathway-utils__title']")).shouldHave(text("Utilities"));
 
     }
+
+    @When("^enter the same name of cohort pathway$")
+    public void enterTheSameNameOfCohortPathway() throws InterruptedException {
+        Thread.sleep(1500);
+        $(By.xpath("//*[@type='text']")).clear();
+        $(By.xpath("//*[@type='text']")).setValue(namePathway);
+    }
 }
 

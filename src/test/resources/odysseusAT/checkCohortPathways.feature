@@ -23,6 +23,25 @@ Feature: Cohort Pathway check
     When accept delete cohort pathway
     Then cant see our cohort pathway in table
 
+  Scenario:  Check uniqueness of cohort pathway
+    When login to ATLAS as QA
+    When click to Cohort Pathways menu as QA
+    Then can see Cohort Pathway page
+    When click to button New Pathway Analysis
+    Then can see creation page of New Cohort Pathway
+    When enter new name of cohort pathway
+    When click to save New Cohort Pathway button
+    Then can see buttons to cohort pathway
+    When click to cancel button
+    Then can see table with our cohort pathway
+    When enter name of our pathway in filter
+    Then can see name of new cohort pathway in table
+    When click to button New Pathway Analysis
+    Then can see creation page of New Cohort Pathway
+    When enter the same name of cohort pathway
+    When click to save New Cohort Pathway button
+    Then can see alert message about uniqueness
+
   Scenario: Choose target cohorts and event cohorts
     When login to ATLAS as QA
     When click to Cohort Pathways menu as QA

@@ -13,6 +13,14 @@ Feature: Check Concept Sets
     When click to Concept Sets menu as QA
     Then new concept set shown in table
     When click to new concept set row
+    Then can see Concept Set creation form
+    When enter new name of Concept Set
+    Then click to save button in Concept Set
+    Then click to cancel button in Concept Set
+    When enter new concept set name in filter
+    Then can see row with new name of concept set
+    When click to row with new name of concept set
+    Then can see Concept Set creation form
     When click to delete concept set
     When click to Concept Sets menu as QA
     Then new concept set removed from table
