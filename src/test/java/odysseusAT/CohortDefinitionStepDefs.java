@@ -249,7 +249,7 @@ public class CohortDefinitionStepDefs {
         String generatedString = RandomStringUtils.randomAlphanumeric(10);
         newGeneratedString = "Test_" + generatedString;
         $(By.xpath("//*[@class='form-control']")).clear();
-        $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
+        $(By.xpath("//*[@class='input-group']/input")).setValue(newGeneratedString);
         Thread.sleep(300);
         
 
@@ -274,6 +274,7 @@ public class CohortDefinitionStepDefs {
 
     @When("^enter the same name of New Cohort Definition and save it$")
     public void enterTheSameNameOfNewCohortDefinitionAndSaveIt() throws InterruptedException {
+        Thread.sleep(1500);
         $(By.xpath("//*[@class='form-control']")).clear();
         $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
         Thread.sleep(300);

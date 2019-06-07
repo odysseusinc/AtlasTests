@@ -81,7 +81,9 @@ public class ConseptSetsStepDefs {
 
     @Then("^new concept set removed from table$")
     public void newConceptSetRemovedFromTable() {
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).shouldNotHave(text(generatedString));
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000);
+        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
+        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).shouldNotHave(text(newGeneratedString));
     }
 
     @When("^click to shop cart items first$")
@@ -224,20 +226,23 @@ public class ConseptSetsStepDefs {
 
     @When("^enter new name of Concept Set$")
     public void enterNewNameOfConceptSet() throws InterruptedException {
+        Thread.sleep(1000);
         newGeneratedString = RandomStringUtils.randomAlphanumeric(10);
         $(By.xpath("//*[@id='txtConceptSetName']")).clear();
         $(By.xpath("//*[@id='txtConceptSetName']")).setValue("Test_" + newGeneratedString);
-        $(By.xpath("//*[@class='fa fa-save']")).click();
-        Thread.sleep(5000);
+        Thread.sleep(500);
+
     }
 
     @Then("^click to save button in Concept Set$")
-    public void clickToSaveButtonInConceptSet() {
+    public void clickToSaveButtonInConceptSet() throws InterruptedException {
+        Thread.sleep(2000);
         $(By.xpath("//*[@class='btn btn-success']")).click();
     }
 
     @Then("^click to cancel button in Concept Set$")
-    public void clickToCancelButtonInConceptSet() {
+    public void clickToCancelButtonInConceptSet() throws InterruptedException {
+        Thread.sleep(2000);
         $(By.xpath("//*[@class='fa fa-times']")).click();
     }
 
@@ -248,12 +253,24 @@ public class ConseptSetsStepDefs {
     }
 
     @Then("^can see row with new name of concept set$")
-    public void canSeeRowWithNewNameOfConceptSet() {
+    public void canSeeRowWithNewNameOfConceptSet() throws InterruptedException {
+        Thread.sleep(1000);
         $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text(newGeneratedString));
     }
 
     @When("^click to row with new name of concept set$")
     public void clickToRowWithNewNameOfConceptSet() {
         $(By.xpath("//table/tbody/tr/td[2]")).click();
+    }
+
+    @When("^enter name of concept set in filter$")
+    public void enterNameOfConceptSetInFilter() {
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000);
+        $(By.xpath("//*[@type='search']")).setValue(generatedString);
+    }
+
+    @Then("^can see our Concept Set creation form$")
+    public void canSeeOurConceptSetCreationForm() {
+        $(By.xpath("//*[@data-bind='text: title']")).shouldHave(text("Concept Set #"));
     }
 }

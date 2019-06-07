@@ -56,7 +56,8 @@ public class CohortPathwayStepDefs {
     }
 
     @When("^click to cancel button$")
-    public void clickToCancelButton() {
+    public void clickToCancelButton() throws InterruptedException {
+        Thread.sleep(1500);
         $(By.xpath("//*[@class='btn btn-primary']")).click();
     }
 

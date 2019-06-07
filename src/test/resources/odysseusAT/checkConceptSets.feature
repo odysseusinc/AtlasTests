@@ -1,8 +1,8 @@
 @conceptsets
 Feature: Check Concept Sets
 
-
-  Scenario: Create and delete new Concept set
+  @ct1
+  Scenario: Create, edit and delete new Concept set
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
     Then Concept Sets page opens
@@ -10,17 +10,18 @@ Feature: Check Concept Sets
     Then can see Concept Set creation form
     When enter random name of Concept set and save it
     Then show new buttons in Concept Set
-    When click to Concept Sets menu as QA
+    When click to cancel button
+    When enter name of concept set in filter
     Then new concept set shown in table
     When click to new concept set row
-    Then can see Concept Set creation form
+    Then can see our Concept Set creation form
     When enter new name of Concept Set
     Then click to save button in Concept Set
     Then click to cancel button in Concept Set
     When enter new concept set name in filter
     Then can see row with new name of concept set
     When click to row with new name of concept set
-    Then can see Concept Set creation form
+    Then can see our Concept Set creation form
     When click to delete concept set
     When click to Concept Sets menu as QA
     Then new concept set removed from table

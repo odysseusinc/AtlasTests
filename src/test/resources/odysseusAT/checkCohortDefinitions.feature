@@ -1,6 +1,6 @@
 @cohortdefinitions
 Feature: Check Cohort Definitions
-
+  @c1
   Scenario: Create, edit and delete cohort
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -32,7 +32,8 @@ Feature: Check Cohort Definitions
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to Cohort Definitions menu as QA
+    When click to cancel button
+    When click New Cohort button
     When enter the same name of New Cohort Definition and save it
     Then can see alert message about uniqueness
 
