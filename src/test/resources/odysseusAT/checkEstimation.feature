@@ -41,7 +41,7 @@ Feature: check Estimation
     When click to Utilities page in Estimation
     Then can see Utilities page in Estimation
 
-
+  @est
   Scenario: Create full list of Estimation
     When login to ATLAS as QA
     When click to Estimation menu as QA
