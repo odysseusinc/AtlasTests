@@ -66,8 +66,8 @@ public class LoginQT extends testDefs {
 
     public static void checkAuthoriseUserAs(String arg0) throws Throwable {
 
-        $(By.xpath("//*[@data-bind='text: authLogin']")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@data-bind='text: authLogin']")).shouldHave(text(arg0));
+        $(By.xpath("//*[@class='paddedWrapper']/div/div/div/div")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@class='paddedWrapper']/div/div/div/div")).shouldHave(text(arg0));
     }
 
     private void clickTopQAArachne() {
@@ -102,8 +102,8 @@ public class LoginQT extends testDefs {
         open("https://qaatlas.arachnenetwork.com");
         Thread.sleep(3000);
         $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible, 10000);
-        $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).waitUntil(visible, 10000);
-        Thread.sleep(300);
-        $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).click();
+//        $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).waitUntil(visible, 10000);
+//        Thread.sleep(300);
+//        $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).click();
     }
 }

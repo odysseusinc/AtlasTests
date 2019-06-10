@@ -12,6 +12,7 @@ Feature: Quick test Data Source
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
     When just open home page
+    When click to Data Sources menu as user
     When Data Source Page opened
     When choose Report from Data Source as "Data Density"
     Then can see preloader in Data Source
