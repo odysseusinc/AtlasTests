@@ -1,7 +1,6 @@
 @login
 Feature: Check login page
 
-
   Scenario:  Homepage check incorrect credentials
     When open project page
     When click to LogIn link

@@ -1,4 +1,5 @@
-@qt_devv
+#@qt_devv
+  @qds
 Feature: Quick test Data Source
   ##################################################################
     # Quick tests                                                    #
@@ -13,69 +14,6 @@ Feature: Quick test Data Source
     Then can see windows in DASHBOARD page
     When just open home page
     When click to Data Sources menu as user
-    When Data Source Page opened
-    When choose Report from Data Source as "Data Density"
-    Then can see preloader in Data Source
-    Then can see Data Density windows
-    When choose Report from Data Source as "Person"
-    Then can see preloader in Data Source
-    Then can see Person windows
-    When choose Report from Data Source as "Visit"
-    Then can see preloader in Data Source
-    Then can see Visit windows
-    When click to element in prevalence in table
-    Then can see tables in Visit for cell
-    When choose Report from Data Source as "Condition Occurrence"
-    Then can see preloader in Data Source
-    Then can see Condition windows
-    When click to element in prevalence in table
-    Then can see tables in Condition for cell
-    When choose Report from Data Source as "Condition Era"
-    Then can see preloader in Data Source
-    Then can see Condition Era windows
-    When click to element in prevalence in table
-    Then can see tables in Condition era for cell
-    When choose Report from Data Source as "Procedure"
-    Then can see preloader in Data Source
-    Then can see Procedure windows
-    When click to element in prevalence in table
-    Then can see tables in Procedure for cell
-    When choose Report from Data Source as "Drug Exposure"
-    Then can see preloader in Data Source
-    Then can see Drug windows
-    When click to element in prevalence in table
-    Then can see tables in Drugs for cell
-    When choose Report from Data Source as "Drug Era"
-    Then can see preloader in Data Source
-    Then can see Drug Era windows
-    When click to element in prevalence in table
-    Then can see tables in Drugs Era for cell
-    When choose Report from Data Source as "Measurement"
-    Then can see preloader in Data Source
-    Then can see Measurement windows
-    When click to element in prevalence in table
-    Then can see tables in Measurement for cell
-    When choose Report from Data Source as "Observation"
-    Then can see preloader in Data Source
-    Then can see Observation windows
-    When click to element in prevalence in table
-    Then can see tables in Observation for cell
-    When choose Report from Data Source as "Death"
-    Then can see preloader in Data Source
-    Then can see Death windows
-    When choose Report from Data Source as "Achilles Heel"
-    Then can see preloader in Data Source
-    Then can see Achilles Heel windows
-
-
-  @qt_ds @qt_impala
-  Scenario: Quick test impala
-    When login to ATLAS as QA QT
-    When click to Data Sources menu as user
-    When Data Source Page opened
-    When choose Source from Data Source as "IMPALA"
-    When choose Report from Data Source as "Dashboard"
-    Then can see windows in DASHBOARD page
     When Data Source Page opened
     When choose Report from Data Source as "Data Density"
     Then can see preloader in Data Source

@@ -46,7 +46,7 @@ public class LoginStepsDefs extends testDefs{
 
     @Then("^see message \"([^\"]*)\"$")
     public void seeMessage(String errorLogin) {
-        $(By.xpath("//*[@class = 'error text-center']/span")).waitUntil(visible, 60000);
+        $(By.xpath("//*[@class = 'error text-center']/span")).waitUntil(visible, 300000);
         $(By.xpath("//*[@class = 'error text-center']/span")).shouldHave(text(errorLogin));
 
     }

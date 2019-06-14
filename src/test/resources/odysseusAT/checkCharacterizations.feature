@@ -48,7 +48,6 @@ Feature: Characterization check
     When accept delete feature analyse
     Then cant find feature analyse in the table
 
-  @dev
   Scenario: Import definitions, features and tabs
     When login to ATLAS as QA
     When click to Characterizations menu as QA

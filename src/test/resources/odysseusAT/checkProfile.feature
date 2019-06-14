@@ -1,6 +1,7 @@
 @profiles
 Feature: check Profile
 
+  @dev140619
   Scenario: choose profile of Impala
     When login to ATLAS as QA
     When click to Profiles menu as QA
