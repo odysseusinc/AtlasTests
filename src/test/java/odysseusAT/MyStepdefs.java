@@ -42,7 +42,7 @@ public class MyStepdefs extends testDefs {
     public static void openProjectPage() throws InterruptedException {
         try{
             Thread.sleep(1000);
-            open("https://qaatlas.arachnenetwork.com");
+            open("https://qaatlas-ema.arachnenetwork.com");
             Thread.sleep(3000);
             $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible,10000);
             $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).waitUntil(visible,10000);

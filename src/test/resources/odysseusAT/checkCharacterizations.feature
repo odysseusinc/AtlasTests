@@ -27,6 +27,7 @@ Feature: Characterization check
     When enter the same Characterization name and save it
     Then can see alert message about uniqueness
 
+    @2406
   Scenario: Add new feature analyses and delete it
     When login to ATLAS as QA
     When click to Characterizations menu as QA

@@ -98,8 +98,8 @@ public class CharacterizationStepDefs {
     @When("^choose cohort definition from the table in characterization$")
     public void chooseCohortDefinitionFromTheTableInCharacterization() {
         $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue("test");
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text("test"));
-        $(By.xpath("//table/tbody/tr/td[2]")).click();
+        $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text("test"));
+        $(By.xpath("//table/tbody/tr/td[2]/span")).click();
 
     }
 
@@ -137,8 +137,8 @@ public class CharacterizationStepDefs {
 
     @When("^choose Criteria design$")
     public void chooseCriteriaDesign() {
-        $(By.xpath("//*[@class='feature-analysis-view-edit__nav-pill'][2]")).click();
-        $(By.xpath("//*[@class='feature-analysis-view-edit panel-heading']")).waitUntil(visible, 3000);
+        $(By.xpath("//*[@class='feature-analysis-view-edit__type-selector']/ul/li[1]")).click();
+        $(By.xpath("//*[@class='feature-analysis-view-edit__criteria-name form-control']")).waitUntil(visible, 3000);
     }
 
     @When("^enter name of New Feature Analyse$")

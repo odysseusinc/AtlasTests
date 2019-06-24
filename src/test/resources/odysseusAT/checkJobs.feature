@@ -16,7 +16,7 @@ Feature: Check Jobs
     Then can see downloaded file
 
 
-
+  @2406
   Scenario: Search job
     When login to ATLAS as QA
     When click to Jobs menu as QA
@@ -28,7 +28,7 @@ Feature: Check Jobs
     When enter "test" in search filter
     Then can see our result in table
 
-
+  @2406
   Scenario: Feedback page
     When login to ATLAS as QA
     When click to Feedback menu as QA

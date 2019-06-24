@@ -9,6 +9,6 @@ import static com.codeborne.selenide.Selenide.$;
 public class FeedbackStepDefs {
     @Then("^can see Feedback page$")
     public void canSeeFeedbackPage() {
-        $(By.xpath("//*[@class='feedback-text']")).shouldHave(text("For access or questions concerning the Atlas application please contact: support@odussesuinc.com."));
+        $(By.xpath("//*[@class='feedback-text']")).shouldHave(text("For access or questions concerning the Atlas application please contact: "));
     }
 }

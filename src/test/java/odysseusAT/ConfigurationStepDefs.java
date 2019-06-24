@@ -12,8 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.jar.Attributes;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 import static javax.swing.text.html.CSS.getAttribute;
 
 public class ConfigurationStepDefs {
@@ -221,6 +220,7 @@ public class ConfigurationStepDefs {
     @When("^click delete button in role$")
     public void clickDeleteButtonInRole() {
         $(By.xpath("//*[@title='Delete']")).click();
+        switchTo().alert().accept();
     }
 
     @Then("^cant see our role in table$")

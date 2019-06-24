@@ -25,7 +25,7 @@ Feature: Check Prediction
     When accept delete Prediction alert
     Then cant find Prediction in table
 
-
+  @2406
   Scenario: Check tabs in Prediction
     When login to ATLAS as QA
     When click to Prediction menu as QA
@@ -39,8 +39,8 @@ Feature: Check Prediction
     Then can see Execution Setting page in Prediction
     When click to Training Settings tab in Prediction
     Then can see Training Settings page in Prediction
-    When click to Executions tab in Prediction
-    Then can see Execution page in Prediction
+#    When click to Executions tab in Prediction
+#    Then can see Execution page in Prediction
     When click to Utilities page in Prediction
     Then can see Utilities page in Prediction
 

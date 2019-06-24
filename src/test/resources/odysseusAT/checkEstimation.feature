@@ -24,7 +24,7 @@ Feature: check Estimation
     When accept delete Estimation
     Then cant see our Estimation in table
 
-
+  @2406
   Scenario: Check tabs in Estimation
     When login to ATLAS as QA
     When click to Estimation menu as QA
@@ -36,8 +36,8 @@ Feature: check Estimation
     Then can see Analysis Setting page
     When click to Evaluation Setting tab
     Then can see Evaluation Setting page
-    When click to Executions tab in Estimation
-    Then can see Execution page in Estimation
+#    When click to Executions tab in Estimation
+#    Then can see Execution page in Estimation
     When click to Utilities page in Estimation
     Then can see Utilities page in Estimation
 

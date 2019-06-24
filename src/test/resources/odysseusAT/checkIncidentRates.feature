@@ -40,7 +40,9 @@ Feature: Incident rates check
     Then can see Generation page in IR
     When click to Utilities page in IR
     Then can see Utilities page in IR
-  @devvv
+
+
+  @2406
   Scenario: Create IR as Angioedema across levetriacetam new users
     When login to ATLAS as QA
     When click to Incidence Rates menu as QA

@@ -179,7 +179,7 @@ public class PredictionStepDefs {
 
     @When("^click to Utilities page in Prediction$")
     public void clickToUtilitiesPageInPrediction() {
-        $(By.xpath("//*[@class='tabs__header']/span[3]")).click();
+        $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
     }
 
     @Then("^can see Utilities page in Prediction$")

@@ -233,6 +233,6 @@ public class IncidenceRatesStepDefs {
 
     @Then("^can see chosen concept set in table$")
     public void canSeeChosenConceptSetInTable() {
-        $(By.xpath("//*[@class=' select']/following-sibling::td[3]")).shouldHave(text("Allergic urticaria and/or angioedema"));
+        $(By.xpath("//*[@class=' select']/following-sibling::td[3]")).shouldHave(text("angioedema"));
     }
 }

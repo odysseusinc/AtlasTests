@@ -1,6 +1,6 @@
 @cohortdefinitions
 Feature: Check Cohort Definitions
-  @c1
+
   Scenario: Create, edit and delete cohort
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -36,7 +36,7 @@ Feature: Check Cohort Definitions
     When click New Cohort button
     When enter the same name of New Cohort Definition and save it
     Then can see alert message about uniqueness
-
+  @dev_new_t
   Scenario: Add Initial events to new Cohort
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -50,12 +50,11 @@ Feature: Check Cohort Definitions
     When click to Any Condition menu
     When choose Import Concept Set
     Then Import Concept Set window shown
-    When enter "71" to Filter of Concept Set from Repository
-    #hardcode, fix later
     When click to Id to sort
+    When enter "10" to Filter of Concept Set from Repository
+    #hardcode, fix later
     Then can see only one field
     #
-
     When click to chosen concept set from repository
     #hardcode, fix later
     Then can see name of concept set at the button
@@ -67,7 +66,7 @@ Feature: Check Cohort Definitions
     When click to Close concept set
     Then table of concept sets close
 
-
+  @2406
   Scenario: Cohort Definitions tabs
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -81,7 +80,7 @@ Feature: Check Cohort Definitions
     When click to Any Condition menu
     When choose Import Concept Set
     Then Import Concept Set window shown
-    When enter "71" to Filter of Concept Set from Repository
+    When enter "10" to Filter of Concept Set from Repository
     When click to Id to sort
     Then can see only one field
     When click to chosen concept set from repository
@@ -94,9 +93,9 @@ Feature: Check Cohort Definitions
     Then can see reporting page
     When click to Export tab in Cohort Definitions
     Then can see Export page
-    When click to Messages Tab
-    When click to Run diagnostic Button
-    Then can see Messages page
+#    When click to Messages Tab
+#    When click to Run diagnostic Button
+#    Then can see Messages page
 
 
   Scenario: inclusion criterias
