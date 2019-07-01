@@ -14,7 +14,7 @@ import java.util.Properties;
                  glue = {"odysseusAT"}
 //                 , tags = {"@dev_new_t"}
                 , tags = {"not @ds and not @qds"}
-//                    , tags = {"@24061"}
+//                    , tags = {"@2806"}
                 )
 
 public class RunCucumberTest {

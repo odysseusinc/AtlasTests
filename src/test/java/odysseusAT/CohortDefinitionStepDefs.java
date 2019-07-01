@@ -95,16 +95,16 @@ public class CohortDefinitionStepDefs {
         $$(By.xpath("//*[@class='btn btn-primary btn-sm dropdown-toggle']")).get(0).click();
     }
 
-    @When("^press Add Condition Era$")
-    public void pressAddConditionEra() throws InterruptedException {
+    @When("^press Add Condition Occurrence$")
+    public void pressAddConditionOcurrence() throws InterruptedException {
         Thread.sleep(1000);
-        $$(By.xpath("//*[@class='dropdown-menu']/li/a")).get(0).click();
+        $$(By.xpath("//*[@class='dropdown-menu']/li/a")).get(1).click();
     }
 
     @Then("^a condition era block shown$")
     public void aConditionEraBlockShown() throws InterruptedException {
         Thread.sleep(1000);
-        $(By.xpath("//*[@class='criteriaTable'][1]/tbody/tr/td")).shouldHave(text("a condition era of"));
+        $(By.xpath("//*[@class='criteriaTable'][1]/tbody/tr/td")).shouldHave(text("a condition occurrence of"));
     }
 
     @When("^click to Any Condition menu$")
@@ -131,7 +131,7 @@ public class CohortDefinitionStepDefs {
 
     @Then("^can see only one field$")
     public void canSeeOnlyOneField() {
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td")).shouldHave(text("10"));
+        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).shouldHave(text("Angioedema"));
     }
 
     @When("^click to chosen concept set from repository$")
@@ -143,7 +143,7 @@ public class CohortDefinitionStepDefs {
     @Then("^can see name of concept set at the button$")
     public void canSeeNameOfConceptSetAtTheButton() throws InterruptedException {
         Thread.sleep(3500);
-        $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).shouldHave(text("Test"));
+        $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).shouldHave(text("Angioedema"));
     }
 
     @When("^click to Concept Sets tab$")
@@ -154,6 +154,7 @@ public class CohortDefinitionStepDefs {
     @Then("^can see row with name of Concept Set in the table$")
     public void canSeeRowWithNameOfConceptSetInTheTable() {
         $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/tbody/tr/td")).shouldHave(text("0"));
+        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).shouldHave(text("Angioedema"));
 
     }
 
@@ -165,7 +166,7 @@ public class CohortDefinitionStepDefs {
     @Then("^can see table of concept set with concepts$")
     public void canSeeTableOfConceptSetWithConcepts() {
 //        $(By.xpath("//*[@class='standard']")).shouldHave(text("Aspirin"));
-        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/tbody/tr/td[4]")).shouldHave(text("aspirin, ibuprofen"));
+        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/tbody/tr/td[4]")).shouldHave(text("Angioedema"));
     }
 
     @When("^click to Close concept set$")
@@ -286,5 +287,10 @@ public class CohortDefinitionStepDefs {
         $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
         Thread.sleep(300);
         $(By.xpath("//*[@class='fa fa-save']")).click();
+    }
+
+    @Then("^condition occurrence block shown$")
+    public void conditionOccurrenceBlockShown() {
+        $(By.xpath("//*[@class = 'criteriaTable']/tbody/tr/td")).shouldHave(text("a condition occurrence of"));
     }
 }

@@ -174,10 +174,11 @@ public class SearchDefs  {
     }
 
     @Then("^check fourth of four tabs$")
-    public void checkFourthOfFourTabs() {
+    public void checkFourthOfFourTabs() throws InterruptedException {
+        Thread.sleep(2000);
         $(By.xpath("//*[@class='nav nav-tabs']/li[4]/a")).shouldHave(text("Record Counts"));
         $(By.xpath("//*[@class='nav nav-tabs']/li[4]/a")).click();
-        $(By.xpath("//*[@class='panel-heading']")).waitUntil(visible,120000);
+        $(By.xpath("//*[@class='panel-heading']")).waitUntil(visible,180000);
         $(By.xpath("//*[@class='panel-heading']")).shouldHave(text("Record Counts across Sources"));
 
     }

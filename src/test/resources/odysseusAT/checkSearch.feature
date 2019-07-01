@@ -41,7 +41,7 @@ Feature: Search in Vocabularies
     When click to CSV button
     Then file download
 
-  @24061
+  @2806
   Scenario: Open the concept and check content of tabs
     When login to ATLAS as QA
     When click to Search menu as QA
@@ -51,7 +51,7 @@ Feature: Search in Vocabularies
     When click to first link in list
     Then open page with first of four tabs for "aspirin"
     Then check second of four tabs
-    #Have to uinderstand issue
+    #Have to understand issue
 #    Then check third of four tabs
     Then check fourth of four tabs
 

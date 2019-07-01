@@ -36,6 +36,7 @@ Feature: Check Cohort Definitions
     When click New Cohort button
     When enter the same name of New Cohort Definition and save it
     Then can see alert message about uniqueness
+
   @dev_new_t
   Scenario: Add Initial events to new Cohort
     When login to ATLAS as QA
@@ -45,13 +46,13 @@ Feature: Check Cohort Definitions
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
     When press Add Initial Event
-    When press Add Condition Era
-    Then a condition era block shown
+    When press Add Condition Occurrence
+    Then condition occurrence block shown
     When click to Any Condition menu
     When choose Import Concept Set
     Then Import Concept Set window shown
     When click to Id to sort
-    When enter "10" to Filter of Concept Set from Repository
+    When enter "Angioedema" to Filter of Concept Set from Repository
     #hardcode, fix later
     Then can see only one field
     #
@@ -66,7 +67,7 @@ Feature: Check Cohort Definitions
     When click to Close concept set
     Then table of concept sets close
 
-  @2406
+
   Scenario: Cohort Definitions tabs
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -75,12 +76,12 @@ Feature: Check Cohort Definitions
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
     When press Add Initial Event
-    When press Add Condition Era
+    When press Add Condition Occurrence
     Then a condition era block shown
     When click to Any Condition menu
     When choose Import Concept Set
     Then Import Concept Set window shown
-    When enter "10" to Filter of Concept Set from Repository
+    When enter "angioedema" to Filter of Concept Set from Repository
     When click to Id to sort
     Then can see only one field
     When click to chosen concept set from repository

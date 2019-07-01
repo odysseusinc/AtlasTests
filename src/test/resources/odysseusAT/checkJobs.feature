@@ -16,7 +16,6 @@ Feature: Check Jobs
     Then can see downloaded file
 
 
-  @2406
   Scenario: Search job
     When login to ATLAS as QA
     When click to Jobs menu as QA

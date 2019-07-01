@@ -6,8 +6,8 @@ Feature: Check configuration
     When login to ATLAS as QA
     When click to Configuration menu as QA
     Then Configuration page opens
-#    When click to check connection button for Impala
-#    Then can see success message in button for Impala
+    When click to check connection button for Impala
+    Then can see success message in button for Impala
     When click to check connection button for Netezza
     Then can see success message in button for Netezza
     When click to check connection button for OVH02

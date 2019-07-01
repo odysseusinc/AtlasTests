@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byName;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PredictionStepDefs {
@@ -179,7 +180,7 @@ public class PredictionStepDefs {
 
     @When("^click to Utilities page in Prediction$")
     public void clickToUtilitiesPageInPrediction() {
-        $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
+        $(By.xpath("//*[@class='tabs__header']/span[3]")).click();
     }
 
     @Then("^can see Utilities page in Prediction$")
@@ -274,5 +275,16 @@ public class PredictionStepDefs {
     @Then("^can see Row in Population table$")
     public void canSeeRowInPopulationTable() {
         $$(By.xpath("//table/tbody/tr/td[2]")).get(4).shouldHave(text("1d from"));
+    }
+
+    @When("^click to Utilities button in Prediction$")
+    public void clickToUtilitiesButtonInPrediction() {
+        $(By.xpath("//*[@class='tabs__header']/span[3]")).click();
+    }
+
+    @Then("^can see Review and Download table with selected target cohort$")
+    public void canSeeReviewAndDownloadTableWithSelectedTargetCohort() throws InterruptedException {
+        Thread.sleep(3000);
+        $$(By.xpath("//table/tbody/tr/td[3]")).get(2).shouldHave(text("LassoLogisticRegressionSettings"));
     }
 }

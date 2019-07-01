@@ -113,12 +113,12 @@ public class ConfigurationStepDefs {
 
     @When("^click to check connection button for SynPUF Geo$")
     public void clickToCheckConnectionButtonForSynPUFGeo() {
-        $(By.xpath("//table/tbody/tr[9]/td[6]/button")).click();
+        $(By.xpath("//table/tbody/tr[9]/td[9]/button")).click();
     }
 
     @Then("^can see success message in button for SynPUF Geo$")
     public void canSeeSuccessMessageInButtonForSynPUFGeo() throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[9]/td[6]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
+        $(By.xpath("//table/tbody/tr[9]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
     }
 
     @When("^click to check connection button for oracle (\\d+)k$")
