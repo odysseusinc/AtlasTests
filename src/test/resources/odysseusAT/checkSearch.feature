@@ -1,12 +1,15 @@
 @search
 Feature: Search in Vocabularies
 
+  @ss
   Scenario: Search something
     When login to ATLAS as QA
     When click to Search menu as QA
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
+    When double click RC column
+    Then can see not null values at first row in DC or RDC
     When click to Column visibility
     When click to button Standard Concept Caption
     Then Standard Concept Caption should be shown

@@ -52,7 +52,9 @@ Feature: Check Concept Sets
     When click to Search menu as QA
     When enter in search panel "aspirin"
     When search activated
+    # TODO this later
     Then can see search result table after conceptSet
+    #
     When click to shop cart items first
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
@@ -174,5 +176,58 @@ Feature: Check Concept Sets
     When click to shop cart items in concept set table
     Then can see message in Concept Set table "No data available in table"
 
+  #Have to create compare1 and compare2 concept sets with Hydrocarbons and
+  #GFA FIRST AID 75 PERSON METAL CASE - benzalkonium chloride, benzalkonium chloride, lidocaine, bacitracin zinc,neomycin sulfate,polymyxin b sulfate, povidone-iodine,
+  # water, alcohol, aspirin, ibuprofen, acetaminophen, benzocaine, alcohol kit AT COMARE 1
+  #and
+  #GFA FIRST AID 75 PERSON METAL CASE - benzalkonium chloride, benzalkonium chloride, lidocaine, bacitracin zinc,neomycin sulfate,polymyxin b sulfate, povidone-iodine,
+  # water, alcohol, aspirin, ibuprofen, acetaminophen, benzocaine, alcohol kit
+  # and desogestrel and ethinyl estradiol KIT [velivet triphasic regimen] AT COMPARE 2 test concept Sets
+
+  @comp
+  Scenario: Compare 2 concept sets test
+    When login to ATLAS as QA
+    When click to Concept Sets menu as QA
+    Then Concept Sets page opens
+    When enter "toCompare1" of concept set in filter
+    When click concept set result
+    Then can see our concept set page
+    When click to Compare tab in Concept Set
+    When click to select compare set2 button
+    Then can see concept set window
+    When enter "toCompare2" of concept set window in filter
+    Then click to first link in list in concept set window
+    When click to Compare Concept Sets button
+    Then can see compare table
+    Then can see results of comparison
+
+    @opt
+    Scenario: Check Optimization of concept set
+      When login to ATLAS as QA
+      When click to Concept Sets menu as QA
+      Then Concept Sets page opens
+      When click to New Concept Set
+      Then can see Concept Set creation form
+      When enter random name of Concept set and save it
+      Then show new buttons in Concept Set
+      When click to Search menu as QA
+      When enter in search panel "aspirin"
+      When search activated
+      Then can see search result table
+      When click to shop cart items first
+      When return to concept set by the link at the head of table
+      Then can see item in the concept set table
+      When set checkbox in Descendants
+      When click to Search menu as QA
+      When enter in search panel "Acetaminophen 325 MG Oral Tablet by Accurex"
+      When search activated
+#      Then can see search result table
+      When click to shop cart items first
+      When return to concept set by the link at the head of table
+      When click to Optimize button
+      Then can see Concept Set Optimization window
+      When click to Save Options button
+      When choose Overwrite Current Concept Set point
+      Then can see only one concept in table of concept sets
 
 

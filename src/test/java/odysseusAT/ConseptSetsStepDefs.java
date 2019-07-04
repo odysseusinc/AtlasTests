@@ -273,4 +273,78 @@ public class ConseptSetsStepDefs {
     public void canSeeOurConceptSetCreationForm() {
         $(By.xpath("//*[@data-bind='text: title']")).shouldHave(text("Concept Set #"));
     }
+
+    @When("^enter \"([^\"]*)\" of concept set in filter$")
+    public void enterOfConceptSetInFilter(String arg0) throws Throwable {
+        $(By.xpath("//*[@type='search']")).setValue(arg0);
+    }
+
+    @When("^click concept set result$")
+    public void clickConceptSetResult() {
+        $$(By.xpath("//table/tbody/tr/td[2]")).get(0).click();
+    }
+
+    @Then("^can see our concept set page$")
+    public void canSeeOurConceptSetPage() {
+        $$(By.xpath("//table/tbody/tr/td[4]")).get(0).shouldHave(text("Hydrocarbons"));
+
+    }
+
+    @When("^click to select compare set(\\d+) button$")
+    public void clickToSelectCompareSetButton(int arg0) {
+        $$(By.xpath("//*[@class='fa fa-folder-open']")).get(1).click();
+
+    }
+
+    @When("^enter \"([^\"]*)\" of concept set window in filter$")
+    public void enterOfConceptSetWindowInFilter(String arg0) throws Throwable {
+        $$(By.xpath("//*[@type='search']")).get(1).setValue(arg0);
+    }
+
+    @Then("^click to first link in list in concept set window$")
+    public void clickToFirstLinkInListInConceptSetWindow() {
+        $$(By.xpath("//table/tbody/tr/td[2]")).get(2).click();
+    }
+
+    @When("^click to Compare Concept Sets button$")
+    public void clickToCompareConceptSetsButton() {
+        $(By.xpath("//*[@class='btn btn-sm btn-primary']")).click();
+    }
+
+    @Then("^can see compare table$")
+    public void canSeeCompareTable() {
+        $(By.xpath("//*[@class='heading compare-results']/b")).shouldHave(text("Comparison Results"));
+    }
+
+    @Then("^can see results of comparison$")
+    public void canSeeResultsOfComparison() {
+        $$(By.xpath("//table/tbody/tr/td[1]")).get(2).shouldHave(text("Both"));
+        $$(By.xpath("//table/tbody/tr[2]/td[1]")).get(1).shouldHave(text("1 Only"));
+        $(By.xpath("//table/tbody/tr[3]/td[1]")).shouldHave(text("2 Only"));
+    }
+
+    @When("^click to Optimize button$")
+    public void clickToOptimizeButton() {
+        $$(By.xpath("//*[@class='btn btn-primary']")).get(2).click();
+    }
+
+    @Then("^can see Concept Set Optimization window$")
+    public void canSeeConceptSetOptimizationWindow() {
+        $(By.xpath("//*[@class='clearfix']/following-sibling::div[2]")).shouldHave(text("Optimized Concept Set"));
+    }
+
+    @When("^click to Save Options button$")
+    public void clickToSaveOptionsButton() {
+        $(By.xpath("//*[@class='btn btn-sm btn-primary dropdown-toggle']")).click();
+    }
+
+    @When("^choose Overwrite Current Concept Set point$")
+    public void chooseOverwriteCurrentConceptSetPoint() {
+        $(By.xpath("//*[@class='dropdown-item']")).click();
+    }
+
+    @Then("^can see only one concept in table of concept sets$")
+    public void canSeeOnlyOneConceptInTableOfConceptSets() {
+        $(By.xpath("//table/tbody/tr[2]")).shouldNotBe(visible);
+    }
 }

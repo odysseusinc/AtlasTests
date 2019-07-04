@@ -183,7 +183,24 @@ public class SearchDefs  {
 
     }
 
-    @Then("^can see search result table after conceptSet$")
-    public void canSeeSearchResultTableAfterConceptSet() {
+
+
+    @Then("^can see not null values at first row in DC or RDC$")
+    public void canSeeNotNullValuesAtFirstRowInDCOrRDC() {
+        String tempRC, tempDRC;
+        tempRC = $(By.xpath("//table/tbody/tr/td[6]")).getText();
+        tempDRC = $(By.xpath("//table/tbody/tr/td[7]")).getText();
+        tempRC = tempRC.replaceAll(",","");
+        tempDRC = tempDRC.replaceAll(",","");
+        Assert.assertTrue(Integer.parseInt(tempRC) > 0);
+        Assert.assertTrue(Integer.parseInt(tempDRC) > 0);
+    }
+
+    @When("^double click RC column$")
+    public void doubleClickRCColumn() throws InterruptedException {
+        Thread.sleep(1500);
+        $(By.xpath("//*[@class='numeric sorting']")).click();
+        Thread.sleep(1500);
+        $(By.xpath("//*[@class='numeric sorting_asc']")).click();
     }
 }
