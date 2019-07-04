@@ -1,6 +1,5 @@
 @profiles
 Feature: check Profile
-
   Scenario: choose profile of Impala
     When login to ATLAS as QA
     When click to Profiles menu as QA

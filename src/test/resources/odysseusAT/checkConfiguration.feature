@@ -27,7 +27,6 @@ Feature: Check configuration
     When click to check connection button for oracle 110k
     Then can see success message in button for oracle 110k
 
-
   Scenario: Create edit and delete role
     When login to ATLAS as QA
     When click to Configuration menu as QA

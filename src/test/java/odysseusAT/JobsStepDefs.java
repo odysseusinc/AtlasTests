@@ -87,7 +87,7 @@ public class JobsStepDefs {
 
     @Then("^can see our result in table$")
     public void canSeeOurResultInTable() {
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text("test"));
+        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text("Generating "));
     }
 
     @When("^click to free space$")

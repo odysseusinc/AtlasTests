@@ -41,7 +41,7 @@ Feature: Search in Vocabularies
     When click to CSV button
     Then file download
 
-  @2806
+  @0407
   Scenario: Open the concept and check content of tabs
     When login to ATLAS as QA
     When click to Search menu as QA
