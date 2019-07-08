@@ -138,7 +138,6 @@ Feature: Check Concept Sets
     Then click to export button
 
 
-
   Scenario: Check compare concepts in Concept Set
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -201,33 +200,41 @@ Feature: Check Concept Sets
     Then can see compare table
     Then can see results of comparison
 
-    @opt
-    Scenario: Check Optimization of concept set
-      When login to ATLAS as QA
-      When click to Concept Sets menu as QA
-      Then Concept Sets page opens
-      When click to New Concept Set
-      Then can see Concept Set creation form
-      When enter random name of Concept set and save it
-      Then show new buttons in Concept Set
-      When click to Search menu as QA
-      When enter in search panel "aspirin"
-      When search activated
-      Then can see search result table
-      When click to shop cart items first
-      When return to concept set by the link at the head of table
-      Then can see item in the concept set table
-      When set checkbox in Descendants
-      When click to Search menu as QA
-      When enter in search panel "Acetaminophen 325 MG Oral Tablet by Accurex"
-      When search activated
-#      Then can see search result table
-      When click to shop cart items first
-      When return to concept set by the link at the head of table
-      When click to Optimize button
-      Then can see Concept Set Optimization window
-      When click to Save Options button
-      When choose Overwrite Current Concept Set point
-      Then can see only one concept in table of concept sets
+  @opt
+  Scenario: Check Optimization of concept set
+    When login to ATLAS as QA
+    When click to Concept Sets menu as QA
+    Then Concept Sets page opens
+    When click to New Concept Set
+    Then can see Concept Set creation form
+    When enter random name of Concept set and save it
+    Then show new buttons in Concept Set
+    When click to Search menu as QA
+    When enter in search panel "aspirin"
+    When search activated
+    Then can see search result table
+    When click to shop cart items first
+    When return to concept set by the link at the head of table
+    Then can see item in the concept set table
+    When set checkbox in Descendants
+    When click to Search menu as QA
+    When enter in search panel "Acetaminophen 325 MG Oral Tablet by Accurex"
+    When search activated
+    When click to shop cart items first
+    When return to concept set by the link at the head of table
+    When click to Optimize button
+    Then can see Concept Set Optimization window
+    When click to Save Options button
+    When choose Overwrite Current Concept Set point
+    Then can see only one concept in table of concept sets
+  @downl
+  Scenario: Open export mode in the list of concepts and export them
+    When login to ATLAS as QA
+    When click to Concept Sets menu as QA
+    Then Concept Sets page opens
+    When open Export tab
+    When select 3 first elements from list of concepts
+    When click Export Concept set button
+    Then file with archive downloaded
 
 

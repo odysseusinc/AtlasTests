@@ -103,7 +103,7 @@ public class ConseptSetsStepDefs {
 
     @Then("^can see item in the concept set table$")
     public void canSeeItemInTheConceptSetTable() {
-        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/./tbody/tr/td[2]")).waitUntil(visible,4000);
+        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/./tbody/tr/td[2]")).waitUntil(visible, 4000);
         idValueCP = $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/./tbody/tr/td[2]")).getText();
         Assert.assertEquals(idValue, idValueCP);
     }
@@ -174,8 +174,8 @@ public class ConseptSetsStepDefs {
 
     @When("^click to Export tab in Concept set$")
     public void clickToExportTabInConceptSet() throws InterruptedException {
-       $(By.xpath("//*[@class='tabs__header']/span[5]")).shouldHave(text("Export"));
-       Thread.sleep(1000);
+        $(By.xpath("//*[@class='tabs__header']/span[5]")).shouldHave(text("Export"));
+        Thread.sleep(1000);
         $(By.xpath("//*[@class='tabs__header']/span[5]")).click();
     }
 
@@ -191,7 +191,7 @@ public class ConseptSetsStepDefs {
         $(By.xpath("//*[@class='btn btn-success']")).click();
         Thread.sleep(2000);
         String str = $(By.xpath("//*[@data-bind='text: title']")).getText();
-        String d = str.substring(str.indexOf("#")+1);
+        String d = str.substring(str.indexOf("#") + 1);
         String filename = "conceptset-" + d + ".zip";
         Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), filename));
 
@@ -200,7 +200,7 @@ public class ConseptSetsStepDefs {
     @Then("^csv file download$")
     public void csvFileDownload() throws Exception {
         String str = $(By.xpath("//*[@data-bind='text: title']")).getText();
-        String d = str.substring(str.indexOf("#")+1);
+        String d = str.substring(str.indexOf("#") + 1);
         String filename = "conceptset-" + d + ".zip";
         Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), filename));
 
@@ -220,7 +220,7 @@ public class ConseptSetsStepDefs {
 
     @Then("^can see text \"([^\"]*)\"$")
     public void canSeeText(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='heading']")).waitUntil(visible,3000);
+        $(By.xpath("//*[@class='heading']")).waitUntil(visible, 3000);
         $(By.xpath("//*[@class='heading']")).shouldHave(text(arg0));
     }
 
@@ -346,5 +346,34 @@ public class ConseptSetsStepDefs {
     @Then("^can see only one concept in table of concept sets$")
     public void canSeeOnlyOneConceptInTableOfConceptSets() {
         $(By.xpath("//table/tbody/tr[2]")).shouldNotBe(visible);
+    }
+
+    @When("^open Export tab$")
+    public void openExportTab() {
+        $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
+    }
+
+    @When("^select (\\d+) first elements from list of concepts$")
+    public void selectFirstElementsFromListOfConcepts(int arg0) {
+        for (int i = 1; i <= arg0; i++) {
+            $$(By.xpath("//table/tbody/tr[" + i + "]/td[2]")).get(1).click();
+        }
+    }
+
+    @When("^click Export Concept set button$")
+    public void clickExportConceptSetButton() {
+        $$(By.xpath("//*[@class='btn btn-sm btn-primary new-concept-set']")).get(1).click();
+    }
+
+    @Then("^file with archive downloaded$")
+    public void fileWithArchiveDownloaded() throws Exception {
+        String filename = "exportedConceptSets.zip";
+        Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), filename));
+
+    }
+
+    @Then("^can see search result table after conceptSet$")
+    public void canSeeSearchResultTableAfterConceptSet() {
+        $(By.xpath("//table/tbody/tr/td[2]")).shouldBe(visible);
     }
 }
