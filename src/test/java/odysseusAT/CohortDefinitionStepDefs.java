@@ -1,9 +1,12 @@
 package odysseusAT;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -129,10 +132,6 @@ public class CohortDefinitionStepDefs {
         $(By.xpath("//*[@type='search']")).setValue(arg0);
     }
 
-    @Then("^can see only one field$")
-    public void canSeeOnlyOneField() {
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).shouldHave(text("Angioedema"));
-    }
 
     @When("^click to chosen concept set from repository$")
     public void clickToChosenConceptSetFromRepository() throws InterruptedException {
@@ -166,7 +165,7 @@ public class CohortDefinitionStepDefs {
     @Then("^can see table of concept set with concepts$")
     public void canSeeTableOfConceptSetWithConcepts() {
 //        $(By.xpath("//*[@class='standard']")).shouldHave(text("Aspirin"));
-        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/tbody/tr/td[4]")).shouldHave(text("Angioedema"));
+        $$(By.xpath("//table/tbody/tr/td[2]")).get(6).shouldHave(text("Angioedema"));
     }
 
     @When("^click to Close concept set$")
@@ -253,13 +252,13 @@ public class CohortDefinitionStepDefs {
     }
 
     @When("^enter new name of cohort definition$")
-        public void enterNewNameOfCohortDefinition() throws InterruptedException {
+    public void enterNewNameOfCohortDefinition() throws InterruptedException {
         String generatedString = RandomStringUtils.randomAlphanumeric(10);
         newGeneratedString = "Test_" + generatedString;
         $(By.xpath("//*[@class='form-control']")).clear();
         $(By.xpath("//*[@class='input-group']/input")).setValue(newGeneratedString);
         Thread.sleep(300);
-        
+
 
     }
 
@@ -292,5 +291,193 @@ public class CohortDefinitionStepDefs {
     @Then("^condition occurrence block shown$")
     public void conditionOccurrenceBlockShown() {
         $(By.xpath("//*[@class = 'criteriaTable']/tbody/tr/td")).shouldHave(text("a condition occurrence of"));
+    }
+
+    @When("^click to save button in Cohort Definition$")
+    public void clickToSaveButtonInCohortDefinition() {
+        $(By.xpath("//*[@class='fa fa-save']")).click();
+    }
+
+    @When("^click to Id column$")
+    public void clickToIdColumn() {
+        $(By.xpath("//*[@class='id-column sorting']")).waitUntil(visible, 3000);
+        $(By.xpath("//*[@class='id-column sorting']")).click();
+    }
+
+    @Then("^can see that first value less then second$")
+    public void canSeeThatFirstValueLessThenSecond() {
+        String a, b;
+        a = $(By.xpath("//table/tbody/tr/td[1]")).getText();
+        b = $(By.xpath("//table/tbody/tr[2]/td[1]")).getText();
+        Assert.assertTrue(Integer.parseInt(a) < Integer.parseInt(b));
+    }
+
+    @Then("^can see paging$")
+    public void canSeePaging() {
+        $(By.xpath("//*[@class= 'paginate_button ']")).shouldBe(visible);
+    }
+
+    @When("^enter \"([^\"]*)\" in filter in cohort definition$")
+    public void enterInFilterInCohortDefinition(String arg0) throws Throwable {
+        $(By.xpath("//*[@type='search']")).setValue(arg0);
+    }
+
+    @Then("^click to founded result$")
+    public void clickToFoundedResult() {
+        $(By.xpath("//table/tbody/tr/td[2]")).click();
+    }
+
+    @When("^click to JSON tab in Cohort Definitions$")
+    public void clickToJSONTabInCohortDefinitions() {
+        $(By.xpath("//*[@class='nav nav-pills']/li[3]")).click();
+    }
+
+    @When("^click to Copy to clipboard button$")
+    public void clickToCopyToClipboardButton() {
+        $(By.xpath("//*[@id='btnCopyExpressionJSONClipboard']")).click();
+    }
+
+    @When("^clear json input$")
+    public void clearJsonInput() {
+        $(By.xpath("//*[@id='cohortExpressionJSON']")).clear();
+    }
+
+    @When("^past json from clipboard$")
+    public void pastJsonFromClipboard() throws InterruptedException {
+        $(By.xpath("//*[@id='cohortExpressionJSON']")).sendKeys(Keys.CONTROL, "v");
+        Thread.sleep(1000);
+    }
+
+    @When("^click to Reload button$")
+    public void clickToReloadButton() {
+        $(By.xpath("//*[@class='col-md-6'][2]/button")).click();
+    }
+
+    @When("^click to Definition tab$")
+    public void clickToDefinitionTab() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li")).click();
+    }
+
+    @Then("^can see name \"([^\"]*)\" of concept set at the button$")
+    public void canSeeNameOfConceptSetAtTheButton(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).shouldHave(text(arg0));
+    }
+
+    @When("^click to Generate Impala button$")
+    public void clickToGenerateImpalaButton() {
+        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td/span/span/button")).click();
+    }
+
+    @Then("^can see Complete in IMPALA status in (\\d+) seconds$")
+    public void canSeeCompleteStatusInSeconds(int arg0) {
+        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
+    }
+
+    @When("^click to Reporting tab tab$")
+    public void clickToReportingTabTab() {
+        $(By.xpath("//*[@class='nav nav-tabs']/li[4]")).click();
+    }
+
+
+    @When("^select \"([^\"]*)\" source$")
+    public void selectSource(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='form-control invalid']")).click();
+        $(By.xpath("//*[@class='form-control invalid']")).selectOptionByValue(arg0);
+    }
+
+    @When("^click to quick analysis button$")
+    public void clickToQuickAnalysisButton() {
+        $(By.xpath("//*[@class='btn btn-success btn-sm']")).click();
+    }
+
+    @When("^accept an alert about time$")
+    public void acceptAnAlertAboutTime() throws InterruptedException {
+        Thread.sleep(3000);
+        switchTo().alert().accept();
+    }
+
+    @Then("^can see a row with status Started$")
+    public void canSeeARowWithStatusStarted() {
+        $(By.xpath("//*[@class='panel panel-info']/div/table/tbody/tr/td[3]")).waitUntil(text("STARTED"), 10000);
+    }
+
+    @Then("^can see only one field with text \"([^\"]*)\"$")
+    public void canSeeOnlyOneFieldWithText(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).shouldHave(text(arg0));
+    }
+
+    @When("^click to Generate SynPUF (\\d+)K Cost&Util button$")
+    public void clickToGenerateSynPUFKCostUtilButton(int arg0) {
+        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[4]/td/span/span/button")).click();
+    }
+
+    @Then("^can see Complete in SynPUF (\\d+)K Cost&Util status in (\\d+) seconds$")
+    public void canSeeCompleteInSynPUFKCostUtilStatusInSeconds(int arg0, int arg1) throws InterruptedException {
+        Thread.sleep(500);
+        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[4]/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
+
+    }
+
+    @When("^click to utilisation button$")
+    public void clickToUtilisationButton() throws InterruptedException {
+        Thread.sleep(500);
+        $(By.xpath("//*[@class='btn btn-info btn-sm']")).click();
+
+    }
+
+    @Then("^configure of reports to run window opens$")
+    public void configureOfReportsToRunWindowOpens() {
+        $(By.xpath("//*[@class='modal-pick-options__header']")).waitUntil(text("Reports"), 3000);
+    }
+
+    @When("^choose reports and press Run$")
+    public void chooseReportsAndPressRun() {
+        $(By.xpath("//*[@value='rollupUtilizationVisit']")).click();
+        $(By.xpath("//*[@value='rollupUtilizationDrug']")).click();
+        $$(By.xpath("//*[@class='btn btn-info btn-sm']")).get(1).click();
+    }
+
+
+
+    @When("^click to Generate SynPUF (\\d+)k CDM(\\d+)$")
+    public void clickToGenerateSynPUFKCDM(int arg0, int arg1) {
+        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[6]/td/span/span/button")).click();
+    }
+
+    @Then("^can see Complete in SynPUF (\\d+)k CDM(\\d+) status in (\\d+) seconds$")
+    public void canSeeCompleteInSynPUFKCDMStatusInSeconds(int arg0, int arg1, int arg2) {
+        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[6]/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
+
+    }
+
+    @When("^click to Full analysis button$")
+    public void clickToFullAnalysisButton() {
+        $(By.xpath("//*[@class='btn btn-primary btn-sm']")).click();
+    }
+
+    @Then("^can see \"([^\"]*)\" in Initial Event Cohort$")
+    public void canSeeInInitialEventCohort(String arg0){
+        $(By.xpath("//*[@id='cohortTextView']/cohort-expression-viewer/ul/li/div/conceptset-reference/span")).shouldHave(text(arg0));
+    }
+
+    @When("^click to Graphical View$")
+    public void clickToGraphicalView() {
+        $(By.xpath("//*[@class='nav nav-pills']/li[2]")).click();
+
+    }
+
+    @Then("^can see \"([^\"]*)\" in Primary Criteria$")
+    public void canSeeInPrimaryCriteria(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='name col-xs-2']")).shouldHave(text(arg0));
+    }
+
+    @When("^click to SQL tab$")
+    public void clickToSQLTab() {
+        $(By.xpath("//*[@class='nav nav-pills']/li[4]")).click();
+    }
+
+    @Then("^can see sql query$")
+    public void canSeeSqlQuery() {
+        $(By.xpath("//*[@id='cohortSQL']/div/pre")).shouldHave(text("CREATE TABLE"));
     }
 }

@@ -12,8 +12,8 @@ import java.util.Properties;
 //        (plugin = {"json:target/cucumber.json"},
         (plugin = {"pretty"},
                  glue = {"odysseusAT"}
-                 , tags = {"@conceptsets"}
-//                , tags = {"not @qds"}//"not @ds and not @qds"}
+//                 , tags = {"@cohortdefinitions"}
+                , tags = {"not @qds"}//"not @ds and not @qds"}
 //                    , tags = {"@0407"}
                 )
 
