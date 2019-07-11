@@ -2,6 +2,7 @@ package odysseusAT;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selectors;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -103,10 +104,6 @@ public class CharacterizationStepDefs {
 
     }
 
-    @Then("^can see cohort definition in characterization list$")
-    public void canSeeCohortDefinitionInCharacterizationList() {
-        $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible, 2000);
-    }
 
     @When("^click to Feature Analyses tab$")
     public void clickToFeatureAnalysesTab() throws InterruptedException {
@@ -216,17 +213,14 @@ public class CharacterizationStepDefs {
     public void featureAnalyseTableIsVisible() {
         $(By.xpath("//*[@class='characterization-design__col-feature-id sorting_asc']")).waitUntil(visible,3000);
 
-    }
-
-    @When("^click to feature checkbox from Feature analyses$")
-    public void clickToFeatureCheckboxFromFeatureAnalyses() {
-        $(By.xpath("//*[@class='fa fa-check'][1]")).click();
 
     }
+
 
     @When("^click to Import Feature analyse$")
     public void clickToImportFeatureAnalyse() {
-        $(By.xpath("//*[@data-bind=\"css: classes({extra:'btn btn-sm btn-primary'}), click: importFeatures, enable: importEnabled\"]")).click();
+        $(By.xpath("//*[@class='characterization-design__button-panel']/button[1]")).click();
+
     }
 
     @When("^enter the same Characterization name and save it$")
@@ -239,5 +233,44 @@ public class CharacterizationStepDefs {
     @Then("^can see alert message about uniqueness$")
     public void canSeeAlertMessageAboutUniqueness() {
         switchTo().alert().accept();
+    }
+
+    @When("^choose cohort definition \"([^\"]*)\" from the table in characterization$")
+    public void chooseCohortDefinitionFromTheTableInCharacterization(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue(arg0);
+        $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text(arg0));
+        $(By.xpath("//table/tbody/tr/td[2]/span")).click();    }
+
+    @Then("^can see cohort definition in characterization list with text \"([^\"]*)\"$")
+    public void canSeeCohortDefinitionInCharacterizationListWithText(String arg0) throws Throwable {
+        $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible, 2000);
+        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text(arg0));
+    }
+
+    @When("^click to feature checkbox with text \"([^\"]*)\" from Feature analyses$")
+    public void clickToFeatureCheckboxWithTextFromFeatureAnalyses(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='facetedDataTable']/div/div[2]/label/input")).setValue(arg0);
+        $(By.xpath("//*[@class='fa fa-check'][1]")).click();
+    }
+
+    @Then("^can see result of our search \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void canSeeResultOfOurSearchAnd(String arg0, String arg1) throws Throwable {
+        $$(By.xpath("//*[@class=' characterization-design__col-feature-name ']")).get(0).shouldHave(text(arg0));
+        $$(By.xpath("//*[@class=' characterization-design__col-feature-name ']")).get(1).shouldHave(text(arg1));
+    }
+
+    @When("^click to save Chacterization$")
+    public void clickToSaveChacterization() {
+        $(By.xpath("//*[@class='fa fa-save']")).click();
+    }
+
+    @When("^click Remove first Feature Analyse from the table$")
+    public void clickRemoveFirstFeatureAnalyseFromTheTable() {
+        $(By.xpath("//*[@class=' characterization-design__col-feature-remove ']/a")).click();
+    }
+
+    @When("^click to Executions tab in Characterizations$")
+    public void clickToExecutionsTabInCharacterizations() {
+        $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
     }
 }

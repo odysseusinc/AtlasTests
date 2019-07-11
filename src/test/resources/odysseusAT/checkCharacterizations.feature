@@ -59,13 +59,19 @@ Feature: Characterization check
     #Need to check
     When click to Import Cohort Definition
     Then can see window with cohort definition
-    When choose cohort definition from the table in characterization
-    Then can see cohort definition in characterization list
+    When choose cohort definition "New users of ACE inhibitors" from the table in characterization
+    Then can see cohort definition in characterization list with text "New users of ACE inhibitors"
     When click to Import Feature analyses
     Then can see Feature analyses window
-    When click to feature checkbox from Feature analyses
+    When click to feature checkbox with text "Condition Era Long Term" from Feature analyses
+    When click to feature checkbox with text "Condition Era Short Term" from Feature analyses
     When click to Import Feature analyse
     Then Feature analyse table is visible
+    Then can see result of our search "Condition Era Long Term" and "Condition Era Short Term"
+    When click Remove first Feature Analyse from the table
+    When click to save Chacterization
+    When click to Executions tab in Characterizations
+
 
 
 

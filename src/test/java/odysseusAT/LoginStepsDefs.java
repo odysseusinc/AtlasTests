@@ -80,7 +80,7 @@ public class LoginStepsDefs extends testDefs{
     public static void closeLoginWindow() throws InterruptedException {
         Thread.sleep(1000);
         $(By.xpath("//*[@class='close']")).click();
-        Thread.sleep(1000);
+
     }
 
     @Then("^check authorise user as QA$")

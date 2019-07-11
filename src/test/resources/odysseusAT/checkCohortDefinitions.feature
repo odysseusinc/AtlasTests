@@ -166,7 +166,7 @@ Feature: Check Cohort Definitions
     When click to save button in Cohort Definition
     When click to Generation tab
     When click to Generate Impala button
-    Then can see Complete in IMPALA status in 120 seconds
+    Then can see Complete in IMPALA status in 180 seconds
     When click to Reporting tab tab
     When select "IMPALA" source
     When click to quick analysis button

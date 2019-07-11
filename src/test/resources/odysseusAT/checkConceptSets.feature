@@ -227,6 +227,7 @@ Feature: Check Concept Sets
     When click to Save Options button
     When choose Overwrite Current Concept Set point
     Then can see only one concept in table of concept sets
+
   @downl
   Scenario: Open export mode in the list of concepts and export them
     When login to ATLAS as QA
