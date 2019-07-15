@@ -13,8 +13,8 @@ import java.util.Properties;
         (plugin = {"pretty"},
                  glue = {"odysseusAT"}
 //                 , tags = {"@cohortdefinitions"}
-                , tags = {"not @qds"}//"not @ds and not @qds"}
-//                    , tags = {"@0407"}
+//                , tags = {"not @qds"}//"not @ds and not @qds"}
+                    , tags = {"@sub"}
                 )
 
 public class RunCucumberTest {

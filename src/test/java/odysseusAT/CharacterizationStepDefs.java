@@ -251,6 +251,7 @@ public class CharacterizationStepDefs {
     public void clickToFeatureCheckboxWithTextFromFeatureAnalyses(String arg0) throws Throwable {
         $(By.xpath("//*[@class='facetedDataTable']/div/div[2]/label/input")).setValue(arg0);
         $(By.xpath("//*[@class='fa fa-check'][1]")).click();
+        Thread.sleep(1000);
     }
 
     @Then("^can see result of our search \"([^\"]*)\" and \"([^\"]*)\"$")
@@ -272,5 +273,111 @@ public class CharacterizationStepDefs {
     @When("^click to Executions tab in Characterizations$")
     public void clickToExecutionsTabInCharacterizations() {
         $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
+    }
+
+    @When("^click to IMPALA Generate report button$")
+    public void clickToIMPALAGenerateReportButton() {
+        $$(By.xpath("//*[@class='characterization-view-edit-executions__action-text']")).get(0).click();
+    }
+
+    @Then("^Impala generate button has to be with Cancel text$")
+    public void impalaGenerateButtonHasToBeWithCancelText() {
+        $$(By.xpath("//*[@class='btn btn-sm btn-danger']")).get(0).waitUntil(text("Cancel"), 4000);
+    }
+
+    @When("^click to Netezza Generate report button$")
+    public void clickToNetezzaGenerateReportButton() {
+        $$(By.xpath("//*[@class='characterization-view-edit-executions__action-text']")).get(1).click();
+    }
+
+    @Then("^Netezza generate button has to be with Cancel text$")
+    public void netezzaGenerateButtonHasToBeWithCancelText() {
+        $$(By.xpath("//*[@class='btn btn-sm btn-danger']")).get(0).waitUntil(text("Cancel"), 4000);
+    }
+
+    @When("^click to SynPUF(\\d+)k Generate report button$")
+    public void clickToSynPUFKGenerateReportButton(int arg0) {
+        $$(By.xpath("//*[@class='characterization-view-edit-executions__action-text']")).get(5).click();
+    }
+
+    @Then("^SynPUF(\\d+)k generate button has to be with Cancel text$")
+    public void synpufKGenerateButtonHasToBeWithCancelText(int arg0) {
+        $$(By.xpath("//*[@class='btn btn-sm btn-danger']")).get(0).waitUntil(text("Cancel"), 15000);
+    }
+
+    @When("^click to oracle Generate report button$")
+    public void clickToOracleGenerateReportButton() {
+        $$(By.xpath("//*[@class='characterization-view-edit-executions__action-text']")).get(9).click();
+    }
+
+    @Then("^oracle generate button has to be with Cancel text$")
+    public void oracleGenerateButtonHasToBeWithCancelText() {
+        $$(By.xpath("//*[@class='btn btn-sm btn-danger']")).get(0).waitUntil(text("Cancel"), 15000);
+    }
+
+    @When("^click to copy characterization$")
+    public void clickToCopyCharacterization() {
+        $(By.xpath("//*[@class='btn btn-primary'][2]")).click();
+    }
+
+    @When("^enter \"([^\"]*)\" and name of our characterization$")
+    public void enterAndNameOfOurCharacterization(String arg0) throws Throwable {
+        $(By.xpath("//*[@type='search']")).setValue(arg0 + characterizationName);
+    }
+
+    @Then("^can see copy of our characterization$")
+    public void canSeeCopyOfOurCharacterization() {
+        $(By.xpath("//*[@class=' characterizations-list__tbl-col characterizations-list__tbl-col--name ']/a")).shouldHave(text("COPY OF: " + characterizationName));
+
+    }
+
+    @When("^click to Add Subgroup analyses$")
+    public void clickToAddSubgroupAnalyses() {
+        $(By.xpath("//*[@class='characterization-design btn btn-sm btn-primary']")).click();
+    }
+
+    @Then("^can see Stratified input and subgroup table$")
+    public void canSeeStratifiedInputAndSubgroupTable() {
+        $(By.xpath("//*[@class='characterization-design__stratified-by form-control']")).shouldBe(visible);
+    }
+
+    @When("^enter Stratified by text \"([^\"]*)\"$")
+    public void enterStratifiedByText(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='characterization-design__stratified-by form-control']")).setValue(arg0);
+    }
+
+    @When("^click to add criteria to group button$")
+    public void clickToAddCriteriaToGroupButton() {
+        $(By.xpath("//*[@class='drop-down-menu btn btn-primary btn-sm dropdown-toggle']/span[2]")).click();
+
+    }
+
+    @When("^click to Add Demographic point$")
+    public void clickToAddDemographicPoint() {
+        $(By.xpath("//*[@class='drop-down-menu dropdown-menu']/li/a/div[1]")).click();
+    }
+
+    @Then("^can see Add attribute button$")
+    public void canSeeAddAttributeButton() {
+        $(By.xpath("//*[@class='btn btn-primary btn-sm dropdown-toggle']")).shouldBe(visible);
+    }
+
+    @When("^click to New parameter button$")
+    public void clickToNewParameterButton() {
+        $$(By.xpath("//*[@class='linked-entity-list__btn btn btn-primary btn-sm']")).get(2).click();
+    }
+
+    @When("^enter name of parameter \"([^\"]*)\" and value \"([^\"]*)\" and click Submit button$")
+    public void enterNameOfParameterAndValueAndClickSubmitButton(String arg0, String arg1) throws Throwable {
+        $$(By.xpath("//*[@class='form-control']")).get(1).setValue(arg0);
+        $$(By.xpath("//*[@class='form-control']")).get(2).setValue(arg1);
+        $(By.xpath("//*[@class='btn btn-default']")).click();
+    }
+
+    @Then("^can see our parameter \"([^\"]*)\" and value \"([^\"]*)\" in the table$")
+    public void canSeeOurParameterAndValueInTheTable(String arg0, String arg1) throws Throwable {
+        $(By.xpath("//*[@class='characterization-design__col-param-name sorting_1']")).shouldHave(text(arg0));
+        $(By.xpath("//*[@class=' characterization-design__col-param-value ']")).shouldHave(text(arg1));
+
     }
 }
