@@ -12,9 +12,9 @@ import java.util.Properties;
 //        (plugin = {"json:target/cucumber.json"},
         (plugin = {"pretty"},
                  glue = {"odysseusAT"}
-//                 , tags = {"@cohortdefinitions"}
+                 , tags = {"@profiles"}
 //                , tags = {"not @qds"}//"not @ds and not @qds"}
-                    , tags = {"@sub"}
+//                    , tags = {"@exp"}
                 )
 
 public class RunCucumberTest {

@@ -1,7 +1,7 @@
 @incidencerates
 Feature: Incident rates check
 
-  Scenario: Create IR, save, edit, delete
+  Scenario: Create IR, save, edit, create copy, delete
     When login to ATLAS as QA
     When click to Incidence Rates menu as QA
     Then can see Incidence Rates page
@@ -21,6 +21,11 @@ Feature: Incident rates check
     When enter name of new IR in filter
     Then can see new incidence rate in table
     When click to new incidence rate
+    When click to copy button for our IR
+    When click to cancel button in Incidence rates
+    When enter "COPY OF: " and name of our IR
+    Then can see copy of our IR
+    When click to our incidence rate
     When click to delete IR button
     When accept delete IR alert
     Then cant find IR in table
@@ -71,3 +76,20 @@ Feature: Incident rates check
     When click to result in CS in IR
     #hardcode
     Then can see chosen concept set in table
+
+    @expIr
+    Scenario: Import and Export
+      When login to ATLAS as QA
+      When click to Incidence Rates menu as QA
+      Then can see Incidence Rates page
+      When enter "New users of phenytoin" in filter of cohort
+      When click to result in IR
+      When click to Utilities tab
+      When click to Export tab in IR
+      When copy text from export textarea
+      When click to cancel button in Incidence rates
+      When click to New Analysis button in Incidence Rates
+      When click to Utilities tab
+      When past json to IR textarea
+      When click to import ir button
+      Then can see Target cohorts with "Aspirin users" and "Clopidogrel" values

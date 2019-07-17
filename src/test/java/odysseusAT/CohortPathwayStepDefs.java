@@ -2,10 +2,12 @@ package odysseusAT;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -184,6 +186,55 @@ public class CohortPathwayStepDefs {
         Thread.sleep(1500);
         $(By.xpath("//*[@type='text']")).clear();
         $(By.xpath("//*[@type='text']")).setValue(namePathway);
+    }
+
+    @When("^click to save our cohort pathway$")
+    public void clickToSaveOurCohortPathway() {
+        $(By.xpath("//*[@class='fa fa-save']")).click();
+    }
+
+    @When("^click to copy button for our cohort pathway$")
+    public void clickToCopyButtonForOurCohortPathway() {
+        $$(By.xpath("//*[@class='btn btn-primary']")).get(1).click();
+    }
+
+    @When("^enter \"([^\"]*)\" and name of our cohort pathway$")
+    public void enterAndNameOfOurCohortPathway(String arg0) throws Throwable {
+        $(By.xpath("//*[@type='search']")).setValue(arg0 + newNamePathway);
+    }
+
+    @Then("^can see copy of our pathway$")
+    public void canSeeCopyOfOurPathway() {
+        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']/a")).shouldHave(text("COPY OF: " + newNamePathway));
+    }
+
+    @When("^copy text from export textarea$")
+    public void copyTextFromExportTextarea() {
+        $(By.xpath("//*[@class='export__json-box']")).click();
+        $(By.xpath("//*[@class='export__json-box']")).sendKeys(Keys.CONTROL, "a");
+        $(By.xpath("//*[@class='export__json-box']")).sendKeys(Keys.CONTROL, "c");
+    }
+
+    @When("^click to Import cohort pathway$")
+    public void clickToImportCohortPathway() throws InterruptedException {
+        Thread.sleep(1000);
+        $(By.xpath("//*[@class='pathway-utils__nav-pill']")).click();
+    }
+
+    @When("^past json to pathway textarea$")
+    public void pastJsonToPathwayTextarea() {
+        $(By.xpath("//*[@class='import__json-box']")).sendKeys(Keys.CONTROL, "v");
+    }
+
+    @When("^click Import button in Pathways$")
+    public void clickImportButtonInPathways() throws InterruptedException {
+        $(By.xpath("//*[@class='import__import-btn btn btn-default btn-sm']")).click();
+        Thread.sleep(2500);
+    }
+
+    @Then("^can see target cohorts in table like as \"([^\"]*)\"$")
+    public void canSeeTargetCohortsInTableLikeAs(String arg0) throws Throwable {
+        $$(By.xpath("//*[@class=' linked-cohort-list__col-cohort-name linked-cohort-list__col-cohort-name--editable ']/span/span")).get(0).shouldHave(text(arg0));
     }
 }
 

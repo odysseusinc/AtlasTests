@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -123,8 +124,8 @@ public class IncidenceRatesStepDefs {
     @Then("^cant find IR in table$")
     public void cantFindIRInTable() {
         $(By.xpath("//*[@type='search']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
-        $(By.xpath("//tbody/tr/td[2]")).shouldNotHave(text(newGeneratedString));
+        $(By.xpath("//*[@type='search']")).setValue("COPY OF: " + newGeneratedString);
+        $(By.xpath("//tbody/tr/td[2]")).shouldNotBe(text("COPY OF: " + newGeneratedString));
     }
 
     @Then("^can see concept set page in IR$")
@@ -234,5 +235,42 @@ public class IncidenceRatesStepDefs {
     @Then("^can see chosen concept set in table$")
     public void canSeeChosenConceptSetInTable() {
         $(By.xpath("//*[@class=' select']/following-sibling::td[3]")).shouldHave(text("angioedema"));
+    }
+
+    @When("^click to copy button for our IR$")
+    public void clickToCopyButtonForOurIR() {
+        $(By.xpath("//*[@class='fa fa-copy']")).click();
+    }
+
+    @When("^enter \"([^\"]*)\" and name of our IR$")
+    public void enterAndNameOfOurIR(String arg0) throws Throwable {
+        $(By.xpath("//*[@type='search']")).setValue("COPY OF: " + newGeneratedString);
+    }
+
+    @Then("^can see copy of our IR$")
+    public void canSeeCopyOfOurIR() {
+        $(By.xpath("//tbody/tr/td[2]")).shouldHave(text("COPY OF: " + newGeneratedString));
+    }
+
+    @When("^click to Export tab in IR$")
+    public void clickToExportTabInIR() throws InterruptedException {
+        $(By.xpath("//*[@class='nav nav-pills']/li[2]")).click();
+        Thread.sleep(2000);
+    }
+
+    @When("^past json to IR textarea$")
+    public void pastJsonToIRTextarea() {
+        $(By.xpath("//*[@class='import__json-box']")).sendKeys(Keys.CONTROL, "v");
+    }
+
+    @When("^click to import ir button$")
+    public void clickToImportIrButton() {
+        $(By.xpath("//*[@class='import__import-btn btn btn-default btn-sm']")).click();
+    }
+
+    @Then("^can see Target cohorts with \"([^\"]*)\" and \"([^\"]*)\" values$")
+    public void canSeeTargetCohortsWithAndValues(String arg0, String arg1) throws Throwable {
+        $$(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]")).get(0).shouldHave(text(arg0));
+        $$(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]")).get(1).shouldHave(text(arg1));
     }
 }
