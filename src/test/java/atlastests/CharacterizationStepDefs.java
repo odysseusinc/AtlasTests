@@ -48,8 +48,7 @@ public class CharacterizationStepDefs {
 
     @When("^return to Characterization table$")
     public void returnToCharacterizationTable() {
-        $(By.xpath("//*[@class='input-group-btn']/button[2]")).click();
-
+        $$(By.xpath("//*[@class='btn btn-primary']")).get(0).click();
     }
 
     @When("^enter created characterization name in filter$")
@@ -154,7 +153,7 @@ public class CharacterizationStepDefs {
     @Then("^go to feature analyses table by pressing close button$")
     public void goToFeatureAnalysesTableByPressingCloseButton() throws InterruptedException {
         Thread.sleep(1500);
-        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(visible,4000);
+        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(visible, 4000);
         $(By.xpath("//*[@class='fa fa-times']")).click();
 
     }
@@ -178,7 +177,7 @@ public class CharacterizationStepDefs {
     @Then("^can see page of our Feature Analyse$")
     public void canSeePageOfOurFeatureAnalyse() {
 //         $(byText("Feature Analysis #")).waitUntil(visible,4000);
-        $(By.xpath("//*[@data-bind='text: title'][1]")).waitUntil(visible,3000);
+        $(By.xpath("//*[@data-bind='text: title'][1]")).waitUntil(visible, 3000);
         $(By.xpath("//*[@data-bind='text: title'][1]")).shouldHave(text("Feature Analysis #"));
     }
 
@@ -212,7 +211,7 @@ public class CharacterizationStepDefs {
 
     @Then("^Feature analyse table is visible$")
     public void featureAnalyseTableIsVisible() {
-        $(By.xpath("//*[@class='characterization-design__col-feature-id sorting_asc']")).waitUntil(visible,3000);
+        $(By.xpath("//*[@class='characterization-design__col-feature-id sorting_asc']")).waitUntil(visible, 3000);
 
 
     }
@@ -240,7 +239,8 @@ public class CharacterizationStepDefs {
     public void chooseCohortDefinitionFromTheTableInCharacterization(String arg0) throws Throwable {
         $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue(arg0);
         $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text(arg0));
-        $(By.xpath("//table/tbody/tr/td[2]/span")).click();    }
+        $(By.xpath("//table/tbody/tr/td[2]/span")).click();
+    }
 
     @Then("^can see cohort definition in characterization list with text \"([^\"]*)\"$")
     public void canSeeCohortDefinitionInCharacterizationListWithText(String arg0) throws Throwable {
