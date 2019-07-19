@@ -1,4 +1,4 @@
-package odysseusAT;
+package atlastests;
 
 import com.codeborne.selenide.Configuration;
 import cucumber.api.java.Before;

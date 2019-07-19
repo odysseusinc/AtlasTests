@@ -1,4 +1,4 @@
-package odysseusAT;
+package atlastests;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.commands.PressEnter;

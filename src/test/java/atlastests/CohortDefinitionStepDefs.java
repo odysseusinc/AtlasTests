@@ -1,4 +1,4 @@
-package odysseusAT;
+package atlastests;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;

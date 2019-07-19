@@ -11,9 +11,9 @@ import java.util.Properties;
 @CucumberOptions
 //        (plugin = {"json:target/cucumber.json"},
         (plugin = {"pretty"},
-                 glue = {"odysseusAT"}
-//                 , tags = {"@profiles"}
-                , tags = {"not @qds"}//"not @ds and not @qds"}
+                 glue = {"atlastests"}
+                 , tags = {" @chun"}
+//                , tags = {"not @qds"}//"not @ds and not @qds"}
 //                    , tags = {"@exp"}
                 )
 

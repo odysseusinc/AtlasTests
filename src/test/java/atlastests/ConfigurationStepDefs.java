@@ -1,19 +1,12 @@
-package odysseusAT;
+package atlastests;
 
-import com.codeborne.selenide.Condition;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.jar.Attributes;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static javax.swing.text.html.CSS.getAttribute;
 
 public class ConfigurationStepDefs {
     private String generatedString;

@@ -1,4 +1,4 @@
-package odysseusAT;
+package atlastests;
 
 import com.codeborne.selenide.Selectors;
 import cucumber.api.PendingException;

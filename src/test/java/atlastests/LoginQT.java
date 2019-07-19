@@ -1,4 +1,4 @@
-package odysseusAT;
+package atlastests;
 
 import cucumber.api.java.Before;
 import cucumber.api.java.en.When;

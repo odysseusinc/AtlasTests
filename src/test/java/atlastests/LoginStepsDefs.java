@@ -1,4 +1,4 @@
-package odysseusAT;
+package atlastests;
 
 import com.codeborne.selenide.Configuration;
 import cucumber.api.java.Before;
@@ -15,10 +15,10 @@ import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
-import static odysseusAT.MyStepdefs.openProjectPage;
+import static atlastests.MyStepdefs.openProjectPage;
 import static org.openqa.selenium.By.xpath;
 
-import static odysseusAT.MyStepdefs.closeBrowser;
+import static atlastests.MyStepdefs.closeBrowser;
 
 public class LoginStepsDefs extends testDefs{
 

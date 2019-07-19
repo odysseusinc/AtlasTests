@@ -1,7 +1,5 @@
-package odysseusAT;
+package atlastests;
 
-import com.codeborne.selenide.Selectors;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
@@ -11,7 +9,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static odysseusAT.SearchDefs.isFileDownloaded;
+import static atlastests.SearchDefs.isFileDownloaded;
 
 public class JobsStepDefs {
     @Then("^can see Jobs page$")

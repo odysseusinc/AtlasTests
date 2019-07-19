@@ -1,4 +1,4 @@
-package odysseusAT;
+package atlastests;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selectors;
@@ -26,13 +26,14 @@ public class CharacterizationStepDefs {
 
     @Then("^can see Characterization page$")
     public void canSeeCharaterizationPage() {
-        $(By.xpath("//*[@data-bind='text: title']")).shouldHave(text("Cohort Characterizations"));
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Cohort Characterizations"));
     }
 
     @When("^click to New characterization button$")
     public void clickToNewCharacterizationButton() {
-        $(By.xpath("//*[@class='characterizations-tabbed-grid__new-entity-btn btn btn-primary btn-sm']")).click();
-        $(By.xpath("//*[@data-bind='text: title']")).shouldHave(text("New Characterization"));
+//        $(By.xpath("//*[@class='characterizations-tabbed-grid__new-entity-btn btn btn-primary btn-sm']")).click();
+        $(byText("New Characterization")).click();
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("New Characterization"));
 
     }
 
