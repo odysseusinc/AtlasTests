@@ -86,5 +86,16 @@ Feature: check Estimation
 
 
 
-    #add test to utilites
 
+  @estimp
+  Scenario: Import Levetriacetam vs phenytoin in angioedema
+    When login to ATLAS as QA
+    When click to Estimation menu as QA
+    Then can see Estimation page
+    When click to New Population Level Effect Estimation
+    Then can see creation page of Estimation
+    When click to Utilities tab
+    When click to Import tab in Estimation
+    When past body of file "test.json" in Import input
+    When click to Import button in Estimation
+    Then can see "Celecoxib new users (Target Cohort)" in Comparisons table

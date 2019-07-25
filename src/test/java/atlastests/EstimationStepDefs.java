@@ -6,6 +6,16 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -18,6 +28,15 @@ public class EstimationStepDefs {
     private String generatedString;
     private String newGeneratedString;
     private String cohortVal;
+
+
+
+    static String readFile(String path, Charset encoding)
+            throws IOException
+    {
+        byte[] encoded = Files.readAllBytes(Paths.get(path));
+        return new String(encoded, encoding);
+    }
 
 
     @Then("^can see Estimation page$")
@@ -273,5 +292,30 @@ public class EstimationStepDefs {
     @When("^click to cancel button in Estimation$")
     public void clickToCancelButtonInEstimation() {
         $(By.xpath("//*[@title='Close']")).click();
+    }
+
+
+    @When("^click to Import tab in Estimation$")
+    public void clickToImportTabInEstimation() {
+        $$(By.xpath("//*[@class='nav nav-pills']/li[2]")).get(1).click();
+    }
+
+    @When("^past body of file \"([^\"]*)\" in Import input$")
+    public void pastBodyOfFileInImportInput(String arg0) throws Throwable {
+        String myString = readFile("src/test/java/atlastests/json/Celecoxib.json", StandardCharsets.ISO_8859_1);
+        StringSelection stringSelection = new StringSelection(myString);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+        $(By.xpath("//*[@class='import__json-box']")).sendKeys(Keys.CONTROL, "v");
+    }
+
+    @When("^click to Import button in Estimation$")
+    public void clickToImportButtonInEstimation() {
+        $(By.xpath("//*[@class='import__import-btn btn btn-default btn-sm']")).click();
+    }
+
+    @Then("^can see \"([^\"]*)\" in Comparisons table$")
+    public void canSeeInComparisonsTable(String arg0) throws Throwable {
+        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text(arg0));
     }
 }
