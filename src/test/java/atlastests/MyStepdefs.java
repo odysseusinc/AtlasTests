@@ -41,8 +41,9 @@ public class MyStepdefs extends testDefs {
     @When("^open project page$")
     public static void openProjectPage() throws InterruptedException {
         try{
+            Configuration.headless = false;
             Thread.sleep(1000);
-            open("https://qaatlas-ema.arachnenetwork.com");
+            open(getDataProperties("link"));
             Thread.sleep(3000);
             $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible,10000);
             $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).waitUntil(visible,10000);

@@ -316,6 +316,7 @@ public class EstimationStepDefs {
 
     @Then("^can see \"([^\"]*)\" in Comparisons table$")
     public void canSeeInComparisonsTable(String arg0) throws Throwable {
+        $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible,30000);
         $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text(arg0));
     }
 }
