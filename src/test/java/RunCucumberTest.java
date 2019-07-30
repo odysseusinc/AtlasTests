@@ -11,7 +11,6 @@ import java.util.Properties;
 @CucumberOptions
         (plugin = {"pretty", "json:target/cucumber.json"},
                  glue = {"atlastests"}
-//                 , tags = {"@estimp"}
                 , tags = {"not @ds and not @qds"}
 //                    , tags = {"@characterization"}
                 )
