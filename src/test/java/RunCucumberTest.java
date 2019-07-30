@@ -9,13 +9,17 @@ import java.util.Properties;
 
 @RunWith(Cucumber.class)
 @CucumberOptions
-//        (plugin = {"json:target/cucumber.json"},
-        (plugin = {"pretty"},
+        (plugin = {"pretty", "json:target/cucumber.json"},
                  glue = {"atlastests"}
 //                 , tags = {"@estimp"}
-                , tags = {"not @qds"}//"not @ds and not @qds"}
-//                    , tags = {"@exp"}
+                , tags = {"not @ds and not @qds"}
+//                    , tags = {"@characterization"}
                 )
 
 public class RunCucumberTest {
+    public static String getDataProperties(String param) throws Exception {
+        Properties props = new Properties();
+        props.load(new InputStreamReader(new FileInputStream("src/application.properties"), "UTF-8"));
+        return props.getProperty(param);
+    }
     }

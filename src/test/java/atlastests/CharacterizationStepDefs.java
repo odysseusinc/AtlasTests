@@ -1,15 +1,10 @@
 package atlastests;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selectors;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -237,6 +232,7 @@ public class CharacterizationStepDefs {
 
     @When("^choose cohort definition \"([^\"]*)\" from the table in characterization$")
     public void chooseCohortDefinitionFromTheTableInCharacterization(String arg0) throws Throwable {
+        Thread.sleep(1000);
         $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue(arg0);
         $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text(arg0));
         $(By.xpath("//table/tbody/tr/td[2]/span")).click();
