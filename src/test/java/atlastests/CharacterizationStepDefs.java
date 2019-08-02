@@ -1,9 +1,12 @@
 package atlastests;
 
+import com.codeborne.selenide.SelenideElement;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 
 import static com.codeborne.selenide.Condition.text;
@@ -270,6 +273,7 @@ public class CharacterizationStepDefs {
     @When("^click to Executions tab in Characterizations$")
     public void clickToExecutionsTabInCharacterizations() {
         $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
+        $(By.xpath("//*[@class='characterization-view-edit-executions__title']")).waitUntil(text("Execution"), 4000);
     }
 
     @When("^click to IMPALA Generate report button$")
@@ -376,5 +380,15 @@ public class CharacterizationStepDefs {
         $(By.xpath("//*[@class='characterization-design__col-param-name sorting_1']")).shouldHave(text(arg0));
         $(By.xpath("//*[@class=' characterization-design__col-param-value ']")).shouldHave(text(arg1));
 
+    }
+
+    @When("^click to \"([^\"]*)\" Generate report button$")
+    public void clickToGenerateReportButton(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='characterization-view-edit-executions__ds-title'][text()='"+ arg0 + "']/following-sibling::ul/li/button")).click();
+    }
+
+    @Then("^\"([^\"]*)\" generate button has to be with Cancel text$")
+    public void generateButtonHasToBeWithCancelText(String arg0) throws Throwable {
+        $(byText(arg0)).$(By.xpath("//*[@class='btn btn-sm btn-danger']")).waitUntil(text("Cancel"),4000);
     }
 }

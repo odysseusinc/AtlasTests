@@ -41,7 +41,7 @@ public class MyStepdefs extends testDefs {
     @When("^open project page$")
     public static void openProjectPage() throws InterruptedException {
         try{
-            Configuration.headless = false;
+            Configuration.headless = Boolean.parseBoolean(getDataProperties("headless"));
             Thread.sleep(1000);
             open(getDataProperties("link"));
             Thread.sleep(3000);

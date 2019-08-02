@@ -65,7 +65,7 @@ Feature: Characterization check
     When accept delete feature analyse
     Then cant find feature analyse in the table
 
-
+  @0108
   Scenario: Import definitions, features and IMPALA report
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -86,10 +86,13 @@ Feature: Characterization check
     When click Remove first Feature Analyse from the table
     When click to save Chacterization
     When click to Executions tab in Characterizations
-    When click to IMPALA Generate report button
-    Then Impala generate button has to be with Cancel text
+    When click to "IMPALA" Generate report button
+    Then "IMPALA" generate button has to be with Cancel text
 
+#    When click to IMPALA Generate report button
+#    Then Impala generate button has to be with Cancel text
 
+  @0108
   Scenario: Import definitions, features and Netezza report
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -110,10 +113,10 @@ Feature: Characterization check
     When click Remove first Feature Analyse from the table
     When click to save Chacterization
     When click to Executions tab in Characterizations
-    When click to Netezza Generate report button
-    Then Netezza generate button has to be with Cancel text
+    When click to "Netezza CDM5.3" Generate report button
+    Then "Netezza CDM5.3" generate button has to be with Cancel text
 
-  @1107
+  @0108
   Scenario: Import definitions, features and SynPUF 110k CDM5.3 report
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -134,12 +137,12 @@ Feature: Characterization check
     When click Remove first Feature Analyse from the table
     When click to save Chacterization
     When click to Executions tab in Characterizations
-    When click to SynPUF110k Generate report button
-    Then SynPUF110k generate button has to be with Cancel text
+    When click to "SynPUF 110k CDM5.3" Generate report button
+    Then "SynPUF 110k CDM5.3" generate button has to be with Cancel text
 
 
-  @1107
-  Scenario: Import definitions, features and SynPUF 110k CDM5.3 report
+  @0108
+  Scenario: Import definitions, features and oracle-110k report
     When login to ATLAS as QA
     When click to Characterizations menu as QA
     Then can see Characterization page
@@ -159,8 +162,8 @@ Feature: Characterization check
     When click Remove first Feature Analyse from the table
     When click to save Chacterization
     When click to Executions tab in Characterizations
-    When click to oracle Generate report button
-    Then oracle generate button has to be with Cancel text
+    When click to "oracle-110k" Generate report button
+    Then "oracle-110k" generate button has to be with Cancel text
 
     @sub
   Scenario: Create characterization with Subgroup analyses and Feature Analyses

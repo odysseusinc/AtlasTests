@@ -16,9 +16,14 @@ public class testDefs {
     }
 
     @Before
-    public void chromeDriver() {
+    public void chromeDriver() throws Exception {
+
         String testmode, browserURL;
         try {
+
+
+
+
             Configuration.timeout = 30000;
 
             testmode = getDataProperties("test.mode");
