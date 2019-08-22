@@ -7,10 +7,20 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Calendar;
+
+import static atlastests.EstimationStepDefs.readFile;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byName;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PredictionStepDefs {
@@ -31,7 +41,7 @@ public class PredictionStepDefs {
     }
 
     @Then("^can see creation page of Prediction$")
-    public void canSeeCreationPageOfPrediction(){
+    public void canSeeCreationPageOfPrediction() {
         $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible, 4000);
         $(By.xpath("//*[@class='heading-title heading-title--dark']")).shouldHave(text("New Patient Level Prediction"));
         $$(By.xpath("//*[@class='panel-heading']")).get(0).shouldHave(text("Prediction Problem Settings"));
@@ -39,8 +49,12 @@ public class PredictionStepDefs {
 
     @When("^enter name on new Prediction$")
     public void enterNameOnNewPrediction() {
+        Calendar cal = Calendar.getInstance();
+        int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+        String dayOfMonthStr = String.valueOf(dayOfMonth);
+        String todayDate = dayOfMonthStr + "." + (cal.get(Calendar.MONTH) + 1) + "." + (cal.get(Calendar.YEAR));
         generatedString = RandomStringUtils.randomAlphanumeric(10);
-        generatedString = "Test_"+ generatedString;
+        generatedString = "Test_" + generatedString + " " + todayDate;
         $$(By.xpath("//*[@type='text']")).get(0).clear();
         $$(By.xpath("//*[@type='text']")).get(0).setValue(generatedString);
 
@@ -54,14 +68,14 @@ public class PredictionStepDefs {
     @Then("^can see new buttons in Prediction field$")
     public void canSeeNewButtonsInPredictionField() throws InterruptedException {
         Thread.sleep(2000);
-        $(By.xpath("//*[@title='Close']")).waitUntil(visible,1000);
-        $(By.xpath("//*[@title='Copy']")).waitUntil(visible,1000);
-        $(By.xpath("//*[@title='Delete']")).waitUntil(visible,1000);
+        $(By.xpath("//*[@title='Close']")).waitUntil(visible, 1000);
+        $(By.xpath("//*[@title='Copy']")).waitUntil(visible, 1000);
+        $(By.xpath("//*[@title='Delete']")).waitUntil(visible, 1000);
     }
 
     @When("^click to cancel button in Prediction$")
     public void clickToCancelButtonInPrediction() {
-        $(By.xpath("//*[@title='Close']")).waitUntil(visible,5500);
+        $(By.xpath("//*[@title='Close']")).waitUntil(visible, 5500);
         $(By.xpath("//*[@title='Close']")).click();
     }
 
@@ -82,14 +96,14 @@ public class PredictionStepDefs {
 
     @Then("^can see our Prediction$")
     public void canSeeOurPrediction() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible,4000);
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 4000);
         $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Patient Level Prediction #"));
     }
 
     @When("^enter new name of Prediction$")
     public void enterNewNameOfPrediction() {
         newGeneratedString = RandomStringUtils.randomAlphanumeric(10);
-        newGeneratedString = "Test_"+ newGeneratedString;
+        newGeneratedString = "Test_" + newGeneratedString;
         $(By.xpath("//*[@type='text']")).clear();
         $(By.xpath("//*[@type='text']")).setValue(newGeneratedString);
     }
@@ -174,7 +188,7 @@ public class PredictionStepDefs {
 
     @Then("^can see Execution page in Prediction$")
     public void canSeeExecutionPageInPrediction() {
-        $(By.xpath("//*[@class='prediction-executions__title']")).waitUntil(visible,4000);
+        $(By.xpath("//*[@class='prediction-executions__title']")).waitUntil(visible, 4000);
         $(By.xpath("//*[@class='prediction-executions__title']")).shouldHave(text("Generations"));
     }
 
@@ -185,7 +199,7 @@ public class PredictionStepDefs {
 
     @Then("^can see Utilities page in Prediction$")
     public void canSeeUtilitiesPageInPrediction() {
-        $$(By.xpath("//*[@class='active']/a")).get(1).waitUntil(visible,3000);
+        $$(By.xpath("//*[@class='active']/a")).get(1).waitUntil(visible, 3000);
         $$(By.xpath("//*[@class='active']/a")).get(1).shouldHave(text("Review & Download"));
     }
 
@@ -196,7 +210,7 @@ public class PredictionStepDefs {
 
     @Then("^can see cohort definition window in Predictions$")
     public void canSeeCohortDefinitionWindowInPredictions() {
-        $(By.xpath("//*[@class='linkish']")).waitUntil(visible,4000);
+        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 4000);
     }
 
     @When("^enter \"([^\"]*)\" in filter in cohort definition window in Predictions$")
@@ -286,5 +300,59 @@ public class PredictionStepDefs {
     public void canSeeReviewAndDownloadTableWithSelectedTargetCohort() throws InterruptedException {
         Thread.sleep(3000);
         $$(By.xpath("//table/tbody/tr/td[3]")).get(2).shouldHave(text("LassoLogisticRegressionSettings"));
+    }
+
+    @When("^choose \"([^\"]*)\" in droplist$")
+    public void chooseInDroplist(String arg0) throws Throwable {
+//        $(By.xpath("//*[@class='dropdown-menu']/li/a")).click();
+        $(byText(arg0)).click();
+    }
+
+    @Then("^can see Model Settings Page with \"([^\"]*)\"$")
+    public void canSeeModelSettingsPageWith(String arg0) throws Throwable {
+        Thread.sleep(3000);
+        $(By.xpath("//*[@class='editor-heading']")).shouldHave(text(arg0));
+    }
+
+    @When("^click to copy button of prediction$")
+    public void clickToCopyButtonOfPrediction() {
+        $(By.xpath("//*[@class='fa fa-copy']")).click();
+    }
+
+    @When("^enter name of our Prediction in filter with COPY OF$")
+    public void enterNameOfOurPredictionInFilterWithCOPYOF() {
+        $(By.xpath("//*[@type='search']")).setValue("COPY OF: " + newGeneratedString);
+    }
+
+    @Then("^click to copy of our Prediction$")
+    public void clickToCopyOfOurPrediction() {
+        $(By.xpath("//table/tbody/tr/td[2]/a")).click();
+    }
+
+    @When("^click to Import tab in Prediction$")
+    public void clickToImportTabInPrediction() {
+//        $(By.xpath("//*[@class='nav nav-pills']/li[2]")).click();
+        $(byText("Import")).click();
+    }
+
+    @When("^enter text from json Prediction$")
+    public void enterTextFromJsonPrediction() throws IOException {
+        String myString = readFile("src/test/java/atlastests/json/prediction.json", StandardCharsets.ISO_8859_1);
+        StringSelection stringSelection = new StringSelection(myString);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+        $(By.xpath("//*[@class='import__json-box']")).sendKeys(Keys.CONTROL, "v");
+//        $(By.xpath("//*[@class='import__json-box']")).;
+    }
+
+    @When("^click Import button in Prediction$")
+    public void clickImportButtonInPrediction() {
+        $(By.xpath("//*[@class='import__import-btn btn btn-default btn-sm']")).click();
+    }
+
+
+    @Then("^can see \"([^\"]*)\" in target cohorts$")
+    public void canSeeInTargetCohorts(String arg0) throws Throwable {
+        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).waitUntil((text(arg0)), 10000);
     }
 }
