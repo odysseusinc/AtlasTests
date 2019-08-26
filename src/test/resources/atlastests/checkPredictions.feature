@@ -126,6 +126,7 @@ Feature: Check Prediction
     When click to Add Population button
     Then can see Population Page
     When click to return back button
+
   @impre
   Scenario: Import prediction
     When login to ATLAS as QA

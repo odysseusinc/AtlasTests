@@ -11,7 +11,9 @@ import org.openqa.selenium.Keys;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
@@ -343,6 +345,21 @@ public class PredictionStepDefs {
         clipboard.setContents(stringSelection, null);
         $(By.xpath("//*[@class='import__json-box']")).sendKeys(Keys.CONTROL, "v");
 //        $(By.xpath("//*[@class='import__json-box']")).;
+
+    }
+    private void paste() {
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        DataFlavor flavor = DataFlavor.stringFlavor;
+        if (clipboard.isDataFlavorAvailable(flavor)) {
+            try {
+                String text = (String) clipboard.getData(flavor);
+                System.out.println(text);
+            } catch (UnsupportedFlavorException e) {
+                System.out.println(e);
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
     }
 
     @When("^click Import button in Prediction$")

@@ -74,8 +74,8 @@ Feature: Characterization check
     When enter Characterization name and save it
     When click to Import Cohort Definition
     Then can see window with cohort definition
-    When choose cohort definition "New users of ACE inhibitors" from the table in characterization
-    Then can see cohort definition in characterization list with text "New users of ACE inhibitors"
+    When choose cohort definition "New users" from the table in characterization
+    Then can see cohort definition in characterization list with text "New users"
     When click to Import Feature analyses
     Then can see Feature analyses window
     When click to feature checkbox with text "Condition Era Long Term" from Feature analyses
@@ -101,8 +101,8 @@ Feature: Characterization check
     When enter Characterization name and save it
     When click to Import Cohort Definition
     Then can see window with cohort definition
-    When choose cohort definition "New users of ACE inhibitors" from the table in characterization
-    Then can see cohort definition in characterization list with text "New users of ACE inhibitors"
+    When choose cohort definition "New users" from the table in characterization
+    Then can see cohort definition in characterization list with text "New users"
     When click to Import Feature analyses
     Then can see Feature analyses window
     When click to feature checkbox with text "Condition Era Long Term" from Feature analyses
@@ -125,8 +125,8 @@ Feature: Characterization check
     When enter Characterization name and save it
     When click to Import Cohort Definition
     Then can see window with cohort definition
-    When choose cohort definition "New users of ACE inhibitors" from the table in characterization
-    Then can see cohort definition in characterization list with text "New users of ACE inhibitors"
+    When choose cohort definition "New users" from the table in characterization
+    Then can see cohort definition in characterization list with text "New users"
     When click to Import Feature analyses
     Then can see Feature analyses window
     When click to feature checkbox with text "Condition Era Long Term" from Feature analyses
@@ -150,8 +150,8 @@ Feature: Characterization check
     When enter Characterization name and save it
     When click to Import Cohort Definition
     Then can see window with cohort definition
-    When choose cohort definition "New users of ACE inhibitors" from the table in characterization
-    Then can see cohort definition in characterization list with text "New users of ACE inhibitors"
+    When choose cohort definition "New users" from the table in characterization
+    Then can see cohort definition in characterization list with text "New users"
     When click to Import Feature analyses
     Then can see Feature analyses window
     When click to feature checkbox with text "Condition Era Long Term" from Feature analyses
@@ -174,8 +174,8 @@ Feature: Characterization check
     When enter Characterization name and save it
     When click to Import Cohort Definition
     Then can see window with cohort definition
-    When choose cohort definition "New users of ACE inhibitors" from the table in characterization
-    Then can see cohort definition in characterization list with text "New users of ACE inhibitors"
+    When choose cohort definition "New users" from the table in characterization
+    Then can see cohort definition in characterization list with text "New users"
     When click to Import Feature analyses
     Then can see Feature analyses window
     When click to feature checkbox with text "Condition Era Long Term" from Feature analyses

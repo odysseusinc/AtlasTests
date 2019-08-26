@@ -23,11 +23,16 @@ Feature: Check Jobs
     Then can see job table with all fields
     When click to name of column
     Then can see that Id order was changed
+    Then can see job table with all fields
     #change after
     When enter "Generating " in search filter
     Then can see our result in table
 
-  @2406
+  @2308
+  Scenario: Get all jobs
+    When send post request to get all jobs
+    Then can see values in ID and Author fields
+
   Scenario: Feedback page
     When login to ATLAS as QA
     When click to Feedback menu as QA
