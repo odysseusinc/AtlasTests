@@ -4,6 +4,10 @@
 
 Clone this project to your computer.
 
+You have to set correct parameters in *.feature files (blue color), e.g. you have to set existing cohorts
+or concept sets, also you have to set existing data sources with correct names (as on UI). In another
+case tests will have "failed" status.
+
 Create file **application.properties** in _src_ directory with parameters:
 
 - login
@@ -24,6 +28,8 @@ _test.mode_ local or remote
 _test.browser_
 
 _link_ is link to test environment
+
+
 
 You can run tests in a local browser or remote Selenium Server
 
