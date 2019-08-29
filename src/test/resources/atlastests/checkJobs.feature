@@ -29,9 +29,9 @@ Feature: Check Jobs
     Then can see our result in table
 
   @2308
-  Scenario: Get all jobs
-    When send post request to get all jobs
-    Then can see values in ID and Author fields
+#  Scenario: Get all jobs
+#    When send post request to get all jobs
+#    Then can see values in ID and Author fields
 
   Scenario: Feedback page
     When login to ATLAS as QA
