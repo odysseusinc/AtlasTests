@@ -13,7 +13,7 @@ import java.util.Properties;
         (plugin = {"pretty", "json:target/cucumber.json"},
                 glue = {"atlastests"}
                 , tags = {"not @ds and not @qds"}
-//                    , tags = {"@2308"}
+//                    , tags = {"@impre"}
         )
 
 public class RunCucumberTest {

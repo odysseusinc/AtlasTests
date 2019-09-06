@@ -96,6 +96,6 @@ Feature: check Estimation
     Then can see creation page of Estimation
     When click to Utilities tab
     When click to Import tab in Estimation
-    When past body of file "test.json" in Import input
+    When past body of file "estimation.json" in Import input
     When click to Import button in Estimation
     Then can see "Celecoxib new users (Target Cohort)" in Comparisons table
