@@ -50,6 +50,7 @@ public class CohortDefinitionStepDefs {
 
     @Then("^filtered Cohort Definition$")
     public void filteredCohortDefinition() throws InterruptedException {
+        Thread.sleep(1500);
         $(By.xpath("//*[@type='search']")).waitUntil(visible, 4000);
         $(By.xpath("//*[@type='search']")).setValue(nameCohort);
         Thread.sleep(1500);

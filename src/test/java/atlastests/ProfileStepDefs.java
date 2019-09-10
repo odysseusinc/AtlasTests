@@ -40,7 +40,7 @@ public class ProfileStepDefs {
 
     @Then("^can see overlay$")
     public void canSeeOverlay() {
-        $(By.xpath("//*[@class='overlay']")).waitUntil(visible,60000);
+        $(By.xpath("//*[@class='overlay']")).waitUntil(visible,100000);
     }
 
     @Then("^can see table$")
