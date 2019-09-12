@@ -1,7 +1,7 @@
 @configuration
 Feature: Check configuration
 
-  @co
+
   Scenario: Open configuration page and check connection
     When login to ATLAS as QA
     When click to Configuration menu as QA

@@ -20,6 +20,7 @@ Feature: check Profile
     Then can see overlay
     Then can see table
 
+
   Scenario: choose profile of OVH02_110K
     When login to ATLAS as QA
     When click to Profiles menu as QA
@@ -41,7 +42,7 @@ Feature: check Profile
     Then can see overlay
     Then can see table
 
-  @aa
+
   Scenario: choose profile of synpuf_110k_bigquery
     When login to ATLAS as QA
     When click to Profiles menu as QA
@@ -82,6 +83,7 @@ Feature: check Profile
     When enter 100 in Profile Id and press Enter
     Then can see overlay
     Then can see table
+
 
   Scenario: choose profile of oracle-110k
     When login to ATLAS as QA

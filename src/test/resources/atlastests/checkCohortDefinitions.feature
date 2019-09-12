@@ -142,7 +142,7 @@ Feature: Check Cohort Definitions
     Then can see name "ACE inhibitors" of concept set at the button
 
 
-
+  @1209
   Scenario: Generate IMPALA and Export tabs
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -179,7 +179,7 @@ Feature: Check Cohort Definitions
     When click to SQL tab
     Then can see sql query
 
-  @dev0907
+
   Scenario: Generate SynPUF 110K Cost&Util
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA

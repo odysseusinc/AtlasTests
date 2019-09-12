@@ -15,7 +15,7 @@ Feature: Characterization check
     When accept delete characterization
     Then cant find characterization in the table
 
-  @chcopy
+  @1209
   Scenario: Create new characterization and copy it
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -141,7 +141,7 @@ Feature: Characterization check
     Then "SynPUF 110k CDM5.3" generate button has to be with Cancel text
 
 
-  @0108
+  @1209
   Scenario: Import definitions, features and oracle-110k report
     When login to ATLAS as QA
     When click to Characterizations menu as QA

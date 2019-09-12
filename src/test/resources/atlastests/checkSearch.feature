@@ -34,6 +34,7 @@ Feature: Search in Vocabularies
     When enter in filtering search area "SULFINPYRAZONE"
     Then can see search result only with "SULFINPYRAZONE"
 
+
   Scenario: Downloading CSV in Search
     When login to ATLAS as QA
     When click to Search menu as QA
