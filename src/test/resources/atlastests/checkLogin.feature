@@ -15,6 +15,3 @@ Feature: Check login page
     When login with correct credentionas as QA
     Then see success message
     Then close login window
-
-
-
