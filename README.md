@@ -4,7 +4,7 @@
 
 Clone this project to your computer.
 
-You have to set correct parameters in *.feature files (blue color), e.g. you have to set existing cohorts
+It is required to set correct parameters in *.feature files (blue color), e.g. you have to set existing cohorts
 or concept sets, also you have to set existing data sources with correct names (as on UI). In another
 case tests will have "failed" status.
 
@@ -39,7 +39,7 @@ You can run tests in a local browser or remote Selenium Server
 
 **Requirements for running test**
 
-I need installed JDK and Apache Maven 
+It is required to have JDK and Apache Maven 
 
 ### Setup and configure Selenoide
 
