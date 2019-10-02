@@ -1,0 +1,475 @@
+{
+  "getPlpDataArgs": {
+    "maxSampleSize": null,
+    "washoutPeriod": 0
+  },
+  "id": 6,
+  "name": "COPY OF: Prediction of angioedema on Levetriacetam new users",
+  "description": null,
+  "version": "v2.7.0",
+  "organizationName": "OHDSI",
+  "packageName": null,
+  "skeletonType": "PatientLevelPredictionStudy",
+  "skeletonVersion": "v0.0.1",
+  "createdBy": null,
+  "createdDate": null,
+  "modifiedBy": null,
+  "modifiedDate": null,
+  "cohortDefinitions": [
+    {
+      "id": 8,
+      "name": "Transfusion",
+      "description": null,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "Title": null,
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "ConditionOccurrence": {
+                "CorrelatedCriteria": null,
+                "CodesetId": 2,
+                "First": null,
+                "OccurrenceStartDate": null,
+                "OccurrenceEndDate": null,
+                "ConditionType": null,
+                "ConditionTypeExclude": false,
+                "StopReason": null,
+                "ConditionSourceConcept": null,
+                "Age": null,
+                "Gender": null,
+                "ProviderSpecialty": null,
+                "VisitType": null
+              }
+            }
+          ],
+          "ObservationWindow": {
+            "PriorDays": 0,
+            "PostDays": 0
+          },
+          "PrimaryCriteriaLimit": {
+            "Type": "First"
+          }
+        },
+        "AdditionalCriteria": null,
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "Surgery",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4301351,
+                    "CONCEPT_NAME": "Surgical procedure",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "387713003",
+                    "DOMAIN_ID": "Procedure",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Procedure"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 1,
+            "name": "Transfusion",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4142651,
+                    "CONCEPT_NAME": "Transfusion of whole blood",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "33389009",
+                    "DOMAIN_ID": "Procedure",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Procedure"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": false,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4022173,
+                    "CONCEPT_NAME": "Transfusion of red blood cells",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "116863004",
+                    "DOMAIN_ID": "Procedure",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Procedure"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": false,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4184733,
+                    "CONCEPT_NAME": "Transfusion of blood component",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "54790000",
+                    "DOMAIN_ID": "Procedure",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Procedure"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": false,
+                  "includeMapped": false
+                },
+                {
+                  "concept": {
+                    "CONCEPT_ID": 4201540,
+                    "CONCEPT_NAME": "Intravenous blood transfusion",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "301842006",
+                    "DOMAIN_ID": "Procedure",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Procedure"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": false,
+                  "includeMapped": false
+                }
+              ]
+            }
+          },
+          {
+            "id": 2,
+            "name": "Unnamed Concept Set",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 194286,
+                    "CONCEPT_NAME": "Malignant neoplasm of corpus uteri, excluding isthmus",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "188189001",
+                    "DOMAIN_ID": "Condition",
+                    "VOCABULARY_ID": "SNOMED",
+                    "CONCEPT_CLASS_ID": "Clinical Finding"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": false,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {
+          "Type": "First"
+        },
+        "ExpressionLimit": {
+          "Type": "First"
+        },
+        "InclusionRules": [],
+        "EndStrategy": null,
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {
+          "StartDate": null,
+          "EndDate": null
+        }
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "createdBy": "admin@odysseusinc.com",
+      "createdDate": "2018-11-15T15:42:06.663+0000",
+      "modifiedBy": "admin@odysseusinc.com",
+      "modifiedDate": "2018-11-21T16:01:02.663+0000"
+    },
+    {
+      "id": 36,
+      "name": "ibuprofen",
+      "description": null,
+      "expression": {
+        "cdmVersionRange": ">=5.0.0",
+        "Title": null,
+        "PrimaryCriteria": {
+          "CriteriaList": [
+            {
+              "DrugExposure": {
+                "CorrelatedCriteria": null,
+                "CodesetId": 0,
+                "First": null,
+                "OccurrenceStartDate": null,
+                "OccurrenceEndDate": null,
+                "DrugType": null,
+                "DrugTypeExclude": false,
+                "StopReason": null,
+                "Refills": null,
+                "Quantity": null,
+                "DaysSupply": null,
+                "RouteConcept": null,
+                "EffectiveDrugDose": null,
+                "DoseUnit": null,
+                "LotNumber": null,
+                "DrugSourceConcept": null,
+                "Age": null,
+                "Gender": null,
+                "ProviderSpecialty": null,
+                "VisitType": null
+              }
+            }
+          ],
+          "ObservationWindow": {
+            "PriorDays": 0,
+            "PostDays": 0
+          },
+          "PrimaryCriteriaLimit": {
+            "Type": "First"
+          }
+        },
+        "AdditionalCriteria": null,
+        "ConceptSets": [
+          {
+            "id": 0,
+            "name": "Ibuprofen",
+            "expression": {
+              "items": [
+                {
+                  "concept": {
+                    "CONCEPT_ID": 1177480,
+                    "CONCEPT_NAME": "Ibuprofen",
+                    "STANDARD_CONCEPT": "S",
+                    "STANDARD_CONCEPT_CAPTION": "Standard",
+                    "INVALID_REASON": "V",
+                    "INVALID_REASON_CAPTION": "Valid",
+                    "CONCEPT_CODE": "5640",
+                    "DOMAIN_ID": "Drug",
+                    "VOCABULARY_ID": "RxNorm",
+                    "CONCEPT_CLASS_ID": "Ingredient"
+                  },
+                  "isExcluded": false,
+                  "includeDescendants": true,
+                  "includeMapped": false
+                }
+              ]
+            }
+          }
+        ],
+        "QualifiedLimit": {
+          "Type": "First"
+        },
+        "ExpressionLimit": {
+          "Type": "First"
+        },
+        "InclusionRules": [
+          {
+            "name": "Age",
+            "description": null,
+            "expression": {
+              "Type": "ALL",
+              "Count": null,
+              "CriteriaList": [],
+              "DemographicCriteriaList": [],
+              "Groups": []
+            }
+          }
+        ],
+        "EndStrategy": null,
+        "CensoringCriteria": [],
+        "CollapseSettings": {
+          "CollapseType": "ERA",
+          "EraPad": 0
+        },
+        "CensorWindow": {
+          "StartDate": null,
+          "EndDate": null
+        }
+      },
+      "expressionType": "SIMPLE_EXPRESSION",
+      "createdBy": "mikhail.ivanko@odysseusinc.com",
+      "createdDate": "2019-03-13T12:39:08.067+0000",
+      "modifiedBy": null,
+      "modifiedDate": null
+    }
+  ],
+  "conceptSets": [],
+  "conceptSetCrossReference": [],
+  "targetIds": [
+    36
+  ],
+  "outcomeIds": [
+    8
+  ],
+  "covariateSettings": [
+    {
+      "attr_class": "covariateSettings",
+      "temporal": false,
+      "DemographicsGender": true,
+      "DemographicsAge": false,
+      "DemographicsAgeGroup": true,
+      "DemographicsRace": true,
+      "DemographicsEthnicity": true,
+      "DemographicsIndexYear": false,
+      "DemographicsIndexMonth": true,
+      "DemographicsPriorObservationTime": false,
+      "DemographicsPostObservationTime": false,
+      "DemographicsTimeInCohort": false,
+      "DemographicsIndexYearMonth": false,
+      "ConditionOccurrenceAnyTimePrior": false,
+      "ConditionOccurrenceLongTerm": false,
+      "ConditionOccurrenceMediumTerm": false,
+      "ConditionOccurrenceShortTerm": false,
+      "ConditionOccurrencePrimaryInpatientAnyTimePrior": false,
+      "ConditionOccurrencePrimaryInpatientLongTerm": false,
+      "ConditionOccurrencePrimaryInpatientMediumTerm": false,
+      "ConditionOccurrencePrimaryInpatientShortTerm": false,
+      "ConditionEraAnyTimePrior": false,
+      "ConditionEraLongTerm": false,
+      "ConditionEraMediumTerm": false,
+      "ConditionEraShortTerm": false,
+      "ConditionEraOverlapping": false,
+      "ConditionEraStartLongTerm": false,
+      "ConditionEraStartMediumTerm": false,
+      "ConditionEraStartShortTerm": false,
+      "ConditionGroupEraAnyTimePrior": false,
+      "ConditionGroupEraLongTerm": true,
+      "ConditionGroupEraMediumTerm": false,
+      "ConditionGroupEraShortTerm": true,
+      "ConditionGroupEraOverlapping": false,
+      "ConditionGroupEraStartLongTerm": false,
+      "ConditionGroupEraStartMediumTerm": false,
+      "ConditionGroupEraStartShortTerm": false,
+      "DrugExposureAnyTimePrior": false,
+      "DrugExposureLongTerm": false,
+      "DrugExposureMediumTerm": false,
+      "DrugExposureShortTerm": false,
+      "DrugEraAnyTimePrior": false,
+      "DrugEraLongTerm": false,
+      "DrugEraMediumTerm": false,
+      "DrugEraShortTerm": false,
+      "DrugEraOverlapping": false,
+      "DrugEraStartLongTerm": false,
+      "DrugEraStartMediumTerm": false,
+      "DrugEraStartShortTerm": false,
+      "DrugGroupEraAnyTimePrior": false,
+      "DrugGroupEraLongTerm": true,
+      "DrugGroupEraMediumTerm": false,
+      "DrugGroupEraShortTerm": true,
+      "DrugGroupEraOverlapping": true,
+      "DrugGroupEraStartLongTerm": false,
+      "DrugGroupEraStartMediumTerm": false,
+      "DrugGroupEraStartShortTerm": false,
+      "ProcedureOccurrenceAnyTimePrior": false,
+      "ProcedureOccurrenceLongTerm": true,
+      "ProcedureOccurrenceMediumTerm": false,
+      "ProcedureOccurrenceShortTerm": true,
+      "DeviceExposureAnyTimePrior": false,
+      "DeviceExposureLongTerm": true,
+      "DeviceExposureMediumTerm": false,
+      "DeviceExposureShortTerm": true,
+      "MeasurementAnyTimePrior": false,
+      "MeasurementLongTerm": true,
+      "MeasurementMediumTerm": false,
+      "MeasurementShortTerm": true,
+      "MeasurementValueAnyTimePrior": false,
+      "MeasurementValueLongTerm": false,
+      "MeasurementValueMediumTerm": false,
+      "MeasurementValueShortTerm": false,
+      "MeasurementRangeGroupAnyTimePrior": false,
+      "MeasurementRangeGroupLongTerm": true,
+      "MeasurementRangeGroupMediumTerm": false,
+      "MeasurementRangeGroupShortTerm": false,
+      "ObservationAnyTimePrior": false,
+      "ObservationLongTerm": true,
+      "ObservationMediumTerm": false,
+      "ObservationShortTerm": true,
+      "CharlsonIndex": true,
+      "Dcsi": true,
+      "Chads2": true,
+      "Chads2Vasc": true,
+      "DistinctConditionCountLongTerm": false,
+      "DistinctConditionCountMediumTerm": false,
+      "DistinctConditionCountShortTerm": false,
+      "DistinctIngredientCountLongTerm": false,
+      "DistinctIngredientCountMediumTerm": false,
+      "DistinctIngredientCountShortTerm": false,
+      "DistinctProcedureCountLongTerm": false,
+      "DistinctProcedureCountMediumTerm": false,
+      "DistinctProcedureCountShortTerm": false,
+      "DistinctMeasurementCountLongTerm": false,
+      "DistinctMeasurementCountMediumTerm": false,
+      "DistinctMeasurementCountShortTerm": false,
+      "DistinctObservationCountLongTerm": false,
+      "DistinctObservationCountMediumTerm": false,
+      "DistinctObservationCountShortTerm": false,
+      "VisitCountLongTerm": false,
+      "VisitCountMediumTerm": false,
+      "VisitCountShortTerm": false,
+      "VisitConceptCountLongTerm": false,
+      "VisitConceptCountMediumTerm": false,
+      "VisitConceptCountShortTerm": false,
+      "longTermStartDays": -365,
+      "mediumTermStartDays": -180,
+      "shortTermStartDays": -30,
+      "endDays": 0,
+      "includedCovariateConceptIds": [],
+      "addDescendantsToInclude": false,
+      "excludedCovariateConceptIds": [],
+      "addDescendantsToExclude": false,
+      "includedCovariateIds": [],
+      "attr_fun": "getDbDefaultCovariateData"
+    }
+  ],
+  "populationSettings": [
+    {
+      "attr_class": "populationSettings",
+      "binary": true,
+      "includeAllOutcomes": true,
+      "firstExposureOnly": false,
+      "washoutPeriod": 365,
+      "removeSubjectsWithPriorOutcome": false,
+      "priorOutcomeLookback": 99999,
+      "requireTimeAtRisk": true,
+      "minTimeAtRisk": 364,
+      "riskWindowStart": 1,
+      "addExposureDaysToStart": false,
+      "riskWindowEnd": 365,
+      "addExposureDaysToEnd": false
+    }
+  ],
+  "modelSettings": [
+    {
+      "LassoLogisticRegressionSettings": {
+        "seed": null,
+        "variance": 0.01
+      }
+    }
+  ],
+  "runPlpArgs": {
+    "minCovariateFraction": 0.001,
+    "normalizeData": true,
+    "testSplit": "person",
+    "testFraction": 0.25,
+    "splitSeed": null,
+    "nfold": 3
+  }
+}

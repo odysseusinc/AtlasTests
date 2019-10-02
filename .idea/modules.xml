@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/odysseusAT.iml" filepath="$PROJECT_DIR$/odysseusAT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AtlasTests.iml" filepath="$PROJECT_DIR$/AtlasTests.iml" />
     </modules>
   </component>
 </project>
