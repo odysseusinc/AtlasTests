@@ -76,7 +76,7 @@ public class LoginQT extends testDefs {
         loginButtonPress();
     }
 
-    private void clickToLogInLink() {
+    public static void clickToLogInLink() {
         $(xpath("//*[@title='Sign In']")).waitUntil(visible, 4000).shouldHave(text("Sign In")).click();
     }
 

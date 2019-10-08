@@ -1,54 +1,37 @@
 package atlastests;
 
-import com.codeborne.selenide.Configuration;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.BeforeClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeOptions;
 
-
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.Properties;
-
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Condition.*;
 import static atlastests.MyStepdefs.openProjectPage;
-import static org.openqa.selenium.By.xpath;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 
-import static atlastests.MyStepdefs.closeBrowser;
-
-public class LoginStepsDefs extends testDefs{
+public class LoginStepsDefs extends testDefs {
 
     @Before
     public void chromeDriver() {
     }
 
     @When("^click to LogIn link$")
-    public static void clickToLogInLink() throws InterruptedException {
-        $(xpath("//*[@title='Sign In']")).waitUntil(visible, 4000);
-        $(xpath("//*[@title='Sign In']")).shouldHave(text("Sign In"));
-
-        Thread.sleep(1000);
-        $(By.xpath("//*[@title='Sign In']")).click();
-
+    public static void clickToLogInLink() {
+        LoginQT.clickToLogInLink();
     }
 
     @When("^click QA Arachne$")
     public static void clickTopQAArachne() {
-        $(By.xpath("//*[@class='paddedWrapper']/div/span")).shouldHave(text("ARACHNE"));
-        $(By.xpath("//*[@class='paddedWrapper']/div/span")).click();
+        $(By.xpath("//*[@class='paddedWrapper']/div/span")).shouldHave(text("ARACHNE")).click();
         $(By.xpath("//*[@id='lg_username']")).waitUntil(visible, 30000);
     }
 
 
     @Then("^see message \"([^\"]*)\"$")
     public void seeMessage(String errorLogin) {
-        $(By.xpath("//*[@class = 'error text-center']/span")).waitUntil(visible, 300000);
-        $(By.xpath("//*[@class = 'error text-center']/span")).shouldHave(text(errorLogin));
-
+        $(By.xpath("//*[@class = 'error text-center']/span")).waitUntil(visible, 300000).
+                shouldHave(text(errorLogin));
     }
 
 
@@ -64,11 +47,9 @@ public class LoginStepsDefs extends testDefs{
     }
 
     @When("^login \"([^\"]*)\" and password \"([^\"]*)\" Entered and submitted$")
-    public void loginAndPasswordEnteredAndSubmitted(String login, String password) throws InterruptedException {
-        $(By.xpath("//*[@id='lg_username']")).waitUntil(visible, 2000);
-        $(By.xpath("//*[@id='lg_username']")).setValue(login);
+    public static void loginAndPasswordEnteredAndSubmitted(String login, String password) {
+        $(By.xpath("//*[@id='lg_username']")).waitUntil(visible, 2000).setValue(login);
         $(By.xpath("//*[@id='lg_password']")).setValue(password);
-        Thread.sleep(2000);
         loginButtonPress();
     }
 
@@ -77,26 +58,22 @@ public class LoginStepsDefs extends testDefs{
     }
 
     @Then("^close login window$")
-    public static void closeLoginWindow() throws InterruptedException {
-        Thread.sleep(1000);
+    public static void closeLoginWindow() {
         $(By.xpath("//*[@class='close']")).click();
 
     }
 
     @Then("^check authorise user as QA$")
-    public static void checkAuthoriseUserAs(String arg0) throws Throwable {
+    public static void checkAuthoriseUserAs(String arg0) {
 
-        $(By.xpath("//*[@class='paddedWrapper']/div/div/div[2]/div")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@class='paddedWrapper']/div/div/div[2]/div")).shouldHave(text("Logged in as '" + arg0));
+        $(By.xpath("//*[@class='paddedWrapper']/div/div/div[2]/div")).waitUntil(visible, 60000).
+                shouldHave(text("Logged in as '" + arg0));
     }
 
 
     @When("^login with correct credentionas as QA$")
     public static void loginWithCorrectCredentionasAsQA() throws Exception {
-        $(By.xpath("//*[@id='lg_username']")).waitUntil(visible, 2000);
-        $(By.xpath("//*[@id='lg_username']")).setValue(getDataProperties("login"));
-        $(By.xpath("//*[@id='lg_password']")).setValue(getDataProperties("password"));
-        Thread.sleep(2000);
+        loginAndPasswordEnteredAndSubmitted(getDataProperties("login"), getDataProperties("password"));
         loginButtonPress();
     }
 
