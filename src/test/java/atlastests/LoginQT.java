@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
+import static atlastests.MyStepdefs.closeLicenseAgreement;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -33,25 +34,14 @@ public class LoginQT extends testDefs {
 
     }
 
-    public static void openProjectPage() throws InterruptedException {
-        try{
-            Thread.sleep(1000);
-            open("https://qaatlas.arachnenetwork.com");
-            Thread.sleep(3000);
-            $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible,10000);
-            $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).waitUntil(visible,10000);
-            Thread.sleep(300);
-            $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).click();
-        }catch (Exception k) {
-            openProjectPage();
-        }
+    public static void openProjectPage() throws Exception {
+        open(getDataProperties("link_dev"));
+        closeLicenseAgreement();
     }
 
 
-    public static void closeLoginWindow() throws InterruptedException {
-        Thread.sleep(1000);
-        $(By.xpath("//*[@class='close']")).click();
-        Thread.sleep(1000);
+    public static void closeLoginWindow() {
+        $(By.xpath("//*[@class='close']")).waitUntil(visible, 5000).click();
     }
 
 
@@ -64,10 +54,9 @@ public class LoginQT extends testDefs {
         }
     }
 
-    public static void checkAuthoriseUserAs(String arg0) throws Throwable {
-
-        $(By.xpath("//*[@class='paddedWrapper']/div/div/div/div")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@class='paddedWrapper']/div/div/div/div")).shouldHave(text(arg0));
+    public static void checkAuthoriseUserAs(String arg0) {
+        $(By.xpath("//*[@class='paddedWrapper']/div/div/div/div")).waitUntil(visible, 60000).
+                shouldHave(text(arg0));
     }
 
     private void clickTopQAArachne() {
@@ -81,29 +70,19 @@ public class LoginQT extends testDefs {
     }
 
     private void loginWithCorrectCredentionasAsQA() throws Exception {
-        $(By.xpath("//*[@id='lg_username']")).waitUntil(visible, 2000);
-        $(By.xpath("//*[@id='lg_username']")).setValue(getDataProperties("login"));
+        $(By.xpath("//*[@id='lg_username']")).waitUntil(visible, 2000).
+                setValue(getDataProperties("login"));
         $(By.xpath("//*[@id='lg_password']")).setValue(getDataProperties("password"));
-        Thread.sleep(2000);
         loginButtonPress();
     }
 
-
-    private void clickToLogInLink() throws InterruptedException {
-        $(xpath("//*[@title='Sign In']")).waitUntil(visible, 4000);
-        $(xpath("//*[@title='Sign In']")).shouldHave(text("Sign In"));
-
-        Thread.sleep(1000);
-        $(By.xpath("//*[@title='Sign In']")).click();
+    private void clickToLogInLink() {
+        $(xpath("//*[@title='Sign In']")).waitUntil(visible, 4000).shouldHave(text("Sign In")).click();
     }
 
     @When("^just open home page$")
-    public void justOpenHomePage() throws InterruptedException {
-        open("https://qaatlas.arachnenetwork.com");
-        Thread.sleep(3000);
+    public void justOpenHomePage() throws Exception {
+        open(getDataProperties("link_dev"));
         $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible, 10000);
-//        $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).waitUntil(visible, 10000);
-//        Thread.sleep(300);
-//        $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).click();
     }
 }

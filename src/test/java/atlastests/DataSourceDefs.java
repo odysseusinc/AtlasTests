@@ -1,7 +1,5 @@
 package atlastests;
 
-import com.codeborne.selenide.Selectors;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
@@ -13,38 +11,29 @@ import static org.openqa.selenium.By.xpath;
 
 public class DataSourceDefs {
     @When("^choose Source from Data Source as IMPALA$")
-    public void chooseSourceFromDataSourceAsIMPALA() throws InterruptedException {
-
+    public void chooseSourceFromDataSourceAsIMPALA() {
         $(By.xpath("//*[@id='currentComponent']/div/div[1]/div[1]/div/select")).selectOption("IMPALA");
-        Thread.sleep(1000);
-
     }
 
     @When("^Data Source Page opened$")
     public void dataSourcePageOpened() {
-        //*[@id="currentComponent"]/heading-title/div/span
-        $(xpath("//*[@id='currentComponent']/heading-title/div/span")).waitUntil(visible, 30000);
-        $(xpath("//*[@id='currentComponent']/heading-title/div/span")).shouldHave(text("Data Sources"));
+        $(xpath("//*[@id='currentComponent']/heading-title/div/span")).waitUntil(visible, 30000).
+                shouldHave(text("Data Sources"));
     }
 
     @When("^choose Report from Data Source as Dashboard$")
-    public void chooseReportFromDataSourceAsDashboard() throws InterruptedException {
+    public void chooseReportFromDataSourceAsDashboard() {
         $(By.xpath("//*[@id='currentComponent']/div/div[1]/div[2]/div/select")).selectOption("Dashboard");
-        Thread.sleep(1000);
     }
 
     @Then("^can see dashboard$")
     public void canSeeDashboard() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 20000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Dashboard Report"));
-
-
+        titleCheck("Dashboard Report");
     }
 
     @Then("^can see windows in DASHBOARD page$")
-    public void canSeeWindowsInDashboard() throws Throwable {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 20000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Dashboard Report"));
+    public void canSeeWindowsInDashboard() {
+        titleCheck("Dashboard Report");
         $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("CDM Summary"));
         $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Population by Gender"));
         $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Age at First Observation"));
@@ -53,24 +42,13 @@ public class DataSourceDefs {
     }
 
     @When("^choose Source from Data Source as SynPUF110KCost&Util$")
-    public void chooseSourceFromDataSourceAsSynPUFKCostUtil() throws InterruptedException {
+    public void chooseSourceFromDataSourceAsSynPUFKCostUtil() {
         $(By.xpath("//*[@id='currentComponent']/div/div[1]/div[1]/div/select")).selectOption("SynPUF 110K Cost&Util");
-        Thread.sleep(1000);
-
-    }
-
-    @Then("^can see dashboard synpuf110kcost$")
-    public void canSeeDashboardSynpufKcost() throws InterruptedException {
-
-        Thread.sleep(2000);
-
-
     }
 
     @Then("^can see windows in SynPufCostUtil Dashboard$")
     public void canSeeWindowsInSynPufCostUtilDashboard() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Dashboard Report"));
+        titleCheck("Dashboard Report");
         $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("CDM Summary"));
         $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Population by Gender"));
         $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Age at First Observation"));
@@ -79,15 +57,13 @@ public class DataSourceDefs {
     }
 
     @When("^choose Source from Data Source as \"([^\"]*)\"$")
-    public void chooseSourceFromDataSourceAs(String arg0) throws InterruptedException {
+    public void chooseSourceFromDataSourceAs(String arg0) {
         $(By.xpath("//*[@class='reportControls pad-5']/div/div/select")).selectOption(arg0);
-        Thread.sleep(1000);
     }
 
     @Then("^can see Data Density windows$")
     public void canSeeDataDensityWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Data Density Report"));
+        titleCheck("Data Density Report");
         $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("Total Rows"));
         $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Records Per Person"));
         $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Concepts Per Person"));
@@ -95,8 +71,7 @@ public class DataSourceDefs {
 
     @Then("^can see Person windows$")
     public void canSeePersonWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Person Report"));
+        titleCheck("Person Report");
         $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("Year of Birth"));
         $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Gender"));
         $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Race"));
@@ -105,68 +80,55 @@ public class DataSourceDefs {
 
     @Then("^can see Visit windows$")
     public void canSeeVisitWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Visit Report"));
+        titleCheck("Visit Report");
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Condition windows$")
     public void canSeeConditionWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Condition Occurrence Report"));
+        titleCheck("Condition Occurrence Report");
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Condition Era windows$")
     public void canSeeConditionEraWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Condition Era Report"));
+        titleCheck("Condition Era Report");
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
-
-        //*[@id="treemap-panel"]/treemap/empty-state/div/span
-
-
     }
 
     @Then("^can see Procedure windows$")
     public void canSeeProcedureWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Procedure Report"));
+        titleCheck("Procedure Report");
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Drug windows$")
     public void canSeeDrugWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Drug Exposure Report"));
+        titleCheck("Drug Exposure Report");
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Drug Era windows$")
     public void canSeeDrugEraWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Drug Era Report"));
+        titleCheck("Drug Era Report");
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Measurement windows$")
     public void canSeeMeasurementWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Measurement Report"));
+        titleCheck("Measurement Report");
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Observation windows$")
     public void canSeeObservationWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Observation Report"));
+        titleCheck("Observation Report");
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Death windows$")
     public void canSeeDeathWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Death Report"));
+        titleCheck("Death Report");
         $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("Death Prevalence by Age, Gender, Year"));
         $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Death Prevalence by Month"));
         $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Death by Type"));
@@ -176,16 +138,19 @@ public class DataSourceDefs {
 
     @Then("^can see Achilles Heel windows$")
     public void canSeeAchillesHeelWindows() {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000);
-        $(By.xpath("//*[@params='name: title']/div/span")).shouldHave(text("Achilles Heel Report"));
+        titleCheck("Achilles Heel Report");
         $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Achilles Heel Results"));
 
     }
 
-    @When("^choose Report from Data Source as \"([^\"]*)\"$")
-    public void chooseReportFromDataSourceAs(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='reportControls pad-5']/div[2]/div/select")).selectOption(arg0);
+    private void titleCheck(String expectedTitleText) {
+        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000).
+                shouldHave(text(expectedTitleText));
+    }
 
+    @When("^choose Report from Data Source as \"([^\"]*)\"$")
+    public void chooseReportFromDataSourceAs(String arg0) {
+        $(By.xpath("//*[@class='reportControls pad-5']/div[2]/div/select")).selectOption(arg0);
     }
 
     @When("^click to element in prevalence in Visit$")
@@ -212,7 +177,6 @@ public class DataSourceDefs {
     public void clickToElementInPrevalenceInTable() {
         $(By.xpath("//*[@class='cell']")).click();
         $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).waitUntil(visible, 120000);
-
     }
 
     @Then("^can see tables in Visit for cell$")
@@ -302,6 +266,6 @@ public class DataSourceDefs {
 
     @Then("^can see preloader in Data Source$")
     public void canSeePreloaderInDataSource() {
-        $(By.xpath("//*[@id='currentComponent']/div/loading")).waitUntil(visible,3000);
+        $(By.xpath("//*[@id='currentComponent']/div/loading")).waitUntil(visible, 3000);
     }
 }

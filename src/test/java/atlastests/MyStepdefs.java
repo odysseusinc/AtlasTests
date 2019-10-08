@@ -31,6 +31,10 @@ public class MyStepdefs extends testDefs {
     public static void openProjectPage() throws Exception {
         Configuration.headless = false;
         open(getDataProperties("link"));
+        closeLicenseAgreement();
+    }
+
+    public static void closeLicenseAgreement() {
         $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible, 10000);
         $$(".modal-title").find(matchesText("License Agreement")).waitUntil(visible, 10000);
         $(".atlas-modal__modal-dialog .btn-success").hover().click();
@@ -164,7 +168,6 @@ public class MyStepdefs extends testDefs {
     @When("^click to Incidence Rates menu as QA$")
     public void clickToIncidentRatesMenuAsQA() {
         $(xpath("//*[@class='app__menu']/a[8]")).shouldHave(text("Incidence Rates")).click();
-        ;
     }
 
     @When("^click to Profiles menu as QA$")
