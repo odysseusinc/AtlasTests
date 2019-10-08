@@ -8,7 +8,6 @@ Feature: Check Jobs
     Then can see job table with all fields
     When click to Column visibility button
     Then can see window with column names
-    #have to change  line before cause I dont use param
     When click to "ExecutionId" button
     When click to free space
     Then cant see ExecutionId in table
