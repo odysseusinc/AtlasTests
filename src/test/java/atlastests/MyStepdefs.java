@@ -1,13 +1,13 @@
 package atlastests;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.openqa.selenium.By.xpath;
 
@@ -28,37 +28,13 @@ public class MyStepdefs extends testDefs {
     }
 
     @When("^open project page$")
-    public static void openProjectPage() throws InterruptedException {
-        try {
-            Configuration.headless = false;
-            Thread.sleep(1000);
-            open(getDataProperties("link"));
-            Thread.sleep(3000);
-            $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible, 10000);
-            $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).waitUntil(visible, 10000);
-            Thread.sleep(300);
-            $(xpath("//*[@class='terms-and-conditions__btn btn btn-success']")).click();
-        } catch (Exception k) {
-            openProjectPage(); //cz main page isn't opened
-        }
-     }
-
-    @Then("^check unauthorized user$")
-    public void checkUnauthorizedUser() {
-        $(xpath("//*[@data-bind='click: function () { $component.signInOpened(true) }']")).shouldHave(text("Sign In"));
-    }
-
-    @Then("^can see message \"([^\"]*)\"$")
-    public void canSeeMessage(String warningAboutUnauthorized) throws Throwable {
-        $(xpath("//*[@class='white-page flexed']")).waitUntil(visible, 5000).
-                shouldHave(text(warningAboutUnauthorized));
-    }
-
-    @Then("^click to Data Sources menu$")
-    public void clickToDataSourcesMenu() throws InterruptedException {
-
-        $(xpath("//*[@class='app__menu']/a[2]")).shouldHave(text("Data Sources")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
+    public static void openProjectPage() throws Exception {
+        Configuration.headless = false;
+        open(getDataProperties("link"));
+        $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible, 10000);
+        $$(".modal-title").find(matchesText("License Agreement")).waitUntil(visible, 10000);
+        $(".atlas-modal__modal-dialog .btn-success").hover().click();
+        $("heading-title .fa-home").waitUntil(visible, 5000);
     }
 
     @Then("^close browser$")
@@ -66,190 +42,162 @@ public class MyStepdefs extends testDefs {
         close();
     }
 
+    @Then("^check unauthorized user$")
+    public void checkUnauthorizedUser() {
+        $("[data-bind='click: function () { $component.signInOpened(true) }']").shouldHave(text("Sign In"));
+    }
+
+    @Then("^can see message \"([^\"]*)\"$")
+    public void canSeeMessage(String warningAboutUnauthorized) {
+        $("unauthenticated").waitUntil(visible, 5000).
+                shouldHave(text(warningAboutUnauthorized));
+    }
+
+    @Then("^click to Data Sources menu$")
+    public void clickToDataSourcesMenu() {
+        $(xpath("//*[@class='app__menu']/a[2]")).shouldHave(text("Data Sources")).click();
+        unauthenticatedCheck();
+    }
+
     @Then("^can see message at home menu \"([^\"]*)\"$")
-    public void canSeeMessageAtHomeMenu(String welcomeText) throws Throwable {
+    public void canSeeMessageAtHomeMenu(String welcomeText) {
         $(xpath("//*[@class='home-welcome']/div")).shouldHave(text(welcomeText));
     }
 
     @When("^click to Concept Sets menu$")
-    public void clickToConceptSetsMenu() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[4]")).shouldHave(text("Concept Sets"));
-        $(xpath("//*[@class='app__menu']/a[4]/span")).waitUntil(visible, 5000).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
+    public void clickToConceptSetsMenu() {
+        $(xpath("//*[@class='app__menu']/a[4]")).shouldHave(text("Concept Sets")).click();
+        unauthenticatedCheck();
     }
 
     @When("^click to Cohort Definitions menu$")
-    public void clickToCohortDefinitionsMenu() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[5]")).shouldHave(text("Cohort Definitions"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[5]/span")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
-
+    public void clickToCohortDefinitionsMenu() {
+        $(xpath("//*[@class='app__menu']/a[5]")).shouldHave(text("Cohort Definitions")).click();
+        unauthenticatedCheck();
     }
 
     @When("^click to Incidence Rates menu$")
-    public void clickToIncidenceRatesMenu() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[8]")).shouldHave(text("Incidence Rates"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[8]/span")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
+    public void clickToIncidenceRatesMenu() {
+        $(xpath("//*[@class='app__menu']/a[8]")).shouldHave(text("Incidence Rates")).click();
+        unauthenticatedCheck();
     }
 
     @When("^click to Profiles menu$")
-    public void clickToProfilesMenu() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[9]")).shouldHave(text("Profiles"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[9]/span")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
+    public void clickToProfilesMenu() {
+        $(xpath("//*[@class='app__menu']/a[9]")).shouldHave(text("Profiles")).click();
+        unauthenticatedCheck();
     }
 
     @When("^click to Estimation menu$")
-    public void clickToEstimationMenu() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[10]")).shouldHave(text("Estimation"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[10]/span")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
+    public void clickToEstimationMenu() {
+        $(xpath("//*[@class='app__menu']/a[10]")).shouldHave(text("Estimation")).click();
+        unauthenticatedCheck();
     }
 
     @When("^click to Prediction menu$")
-    public void clickToPredictionMenu() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[11]")).shouldHave(text("Prediction"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[11]/span")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
+    public void clickToPredictionMenu() {
+        $(xpath("//*[@class='app__menu']/a[11]")).shouldHave(text("Prediction")).click();
+        unauthenticatedCheck();
     }
 
     @When("^click to Jobs menu$")
-    public void clickToJobsMenu() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[12]")).shouldHave(text("Jobs"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[12]/span")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
+    public void clickToJobsMenu() {
+        $(xpath("//*[@class='app__menu']/a[12]")).shouldHave(text("Jobs")).click();
+        unauthenticatedCheck();
     }
 
     @When("^click to Configuration menu$")
-    public void clickToConfigurationMenu() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[13]")).shouldHave(text("Configuration"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[13]/span")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
-
+    public void clickToConfigurationMenu() {
+        $(xpath("//*[@class='app__menu']/a[13]")).shouldHave(text("Configuration")).click();
+        unauthenticatedCheck();
     }
 
-
     @When("^click to Search menu$")
-    public void clickToSearchMenu() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[3]")).shouldHave(text("Search"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[3]/span")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
+    public void clickToSearchMenu() {
+        $(xpath("//*[@class='app__menu']/a[3]")).shouldHave(text("Search")).click();
+        unauthenticatedCheck();
     }
 
     @When("^click to Data Sources menu as user$")
     public void clickToDataSourcesMenuAsUser() {
-        $(xpath("//*[@class='app__menu']/a[2]")).shouldHave(text("Data Sources"));
-        $(xpath("//*[@class='app__menu']/a[2]")).click();
+        $(xpath("//*[@class='app__menu']/a[2]")).shouldHave(text("Data Sources")).click();
     }
 
     @When("^click to Characterizations menu$")
-    public void clickToCharacterizationsMenu() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[6]")).shouldHave(text("Characterizations"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[6]/span")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
+    public void clickToCharacterizationsMenu() {
+        $(xpath("//*[@class='app__menu']/a[6]")).shouldHave(text("Characterizations")).click();
+        unauthenticatedCheck();
     }
 
     @When("^click to Cohort Pathways menu$")
-    public void clickToCohortPathwaysMenu() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[7]")).shouldHave(text("Cohort Pathways"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[7]/span")).click();
-        $(xpath("//*[@id='currentComponent']/div/unauthenticated")).waitUntil(visible, 20000);
+    public void clickToCohortPathwaysMenu() {
+        $(xpath("//*[@class='app__menu']/a[7]")).shouldHave(text("Cohort Pathways")).click();
+        unauthenticatedCheck();
     }
 
     @When("^click to Search menu as QA$")
-    public void clickToSearchMenuAsQA() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[3]")).shouldHave(text("Search"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[3]/span")).click();
+    public void clickToSearchMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[3]")).shouldHave(text("Search")).click();
     }
 
     @When("^click to Concept Sets menu as QA$")
-    public void clickToConceptSetsMenuAsQA() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[4]")).shouldHave(text("Concept Sets"));
-//        Thread.sleep(3000);
-        $(xpath("//*[@class='app__menu']/a[4]/span")).click();
+    public void clickToConceptSetsMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[4]")).shouldHave(text("Concept Sets")).click();
     }
 
-
     @When("^click to Cohort Definitions menu as QA$")
-    public void clickToCohortDefinitionsMenuAsQA() throws InterruptedException {
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[5]")).shouldHave(text("Cohort Definitions"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[5]/span")).click();
+    public void clickToCohortDefinitionsMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[5]")).waitUntil(Condition.enabled, 5000).
+                shouldHave(text("Cohort Definitions")).click();
     }
 
     @When("^click to Characterizations menu as QA$")
-    public void clickToCharacterizationsMenuAsQA() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[6]")).shouldHave(text("Characterizations"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[6]")).click();
+    public void clickToCharacterizationsMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[6]")).shouldHave(text("Characterizations")).click();
     }
 
     @When("^click to Cohort Pathways menu as QA$")
-    public void clickToCohortPathwaysMenuAsQA() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[7]")).shouldHave(text("Cohort Pathway"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[7]")).click();
+    public void clickToCohortPathwaysMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[7]")).shouldHave(text("Cohort Pathway")).click();
     }
 
     @When("^click to Incidence Rates menu as QA$")
-    public void clickToIncidentRatesMenuAsQA() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[8]")).shouldHave(text("Incidence Rates"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[8]")).click();
+    public void clickToIncidentRatesMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[8]")).shouldHave(text("Incidence Rates")).click();
+        ;
     }
 
     @When("^click to Profiles menu as QA$")
-    public void clickToProfilesMenuAsQA() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[9]")).shouldHave(text("Profiles"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[9]")).click();
+    public void clickToProfilesMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[9]")).shouldHave(text("Profiles")).click();
     }
 
     @When("^click to Estimation menu as QA$")
-    public void clickToEstimationMenuAsQA() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[10]")).shouldHave(text("Estimation"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[10]")).click();
+    public void clickToEstimationMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[10]")).shouldHave(text("Estimation")).click();
     }
 
     @When("^click to Prediction menu as QA$")
-    public void clickToPredictionMenuAsQA() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[11]")).shouldHave(text("Prediction"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[11]")).click();
+    public void clickToPredictionMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[11]")).shouldHave(text("Prediction")).click();
     }
 
     @When("^click to Jobs menu as QA$")
-    public void clickToJobsMenuAsQA() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[12]")).shouldHave(text("Jobs"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[12]")).click();
+    public void clickToJobsMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[12]")).shouldHave(text("Jobs")).click();
     }
 
     @When("^click to Feedback menu as QA$")
-    public void clickToFeedbackMenuAsQA() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[14]")).shouldHave(text("Feedback"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[14]")).click();
+    public void clickToFeedbackMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[14]")).shouldHave(text("Feedback")).click();
     }
 
     @When("^click to Configuration menu as QA$")
-    public void clickToConfigurationMenuAsQA() throws InterruptedException {
-        $(xpath("//*[@class='app__menu']/a[13]")).shouldHave(text("Configuration"));
-        Thread.sleep(1000);
-        $(xpath("//*[@class='app__menu']/a[13]")).click();
+    public void clickToConfigurationMenuAsQA() {
+        $(xpath("//*[@class='app__menu']/a[13]")).shouldHave(text("Configuration")).click();
+    }
+
+    private void unauthenticatedCheck() {
+        $("unauthenticated").waitUntil(visible, 20000);
     }
 }
