@@ -30,7 +30,7 @@ public class LoginStepsDefs extends testDefs {
 
     @Then("^see message \"([^\"]*)\"$")
     public void seeMessage(String errorLogin) {
-        $(By.xpath("//*[@class = 'error text-center']/span")).waitUntil(visible, 300000).
+        $(By.xpath("//*[@class = 'error text-center']/span")).waitUntil(visible, 5000).
                 shouldHave(text(errorLogin));
     }
 
@@ -38,7 +38,7 @@ public class LoginStepsDefs extends testDefs {
     @Then("^see success message$")
     public static void seeSuccessMessage() {
         try {
-            $(By.xpath("//*[@class='fa fa-sign-out']")).waitUntil(visible, 300000);
+            $(By.xpath("//*[@class='fa fa-sign-out']")).waitUntil(visible, 10000);
         } catch (Exception e) {
             loginButtonPress();
             $(By.xpath("//*[@class='fa fa-sign-out']")).waitUntil(visible, 30000);

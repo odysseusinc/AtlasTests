@@ -1,7 +1,9 @@
 package atlastests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import cucumber.api.java.Before;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.FileInputStream;
@@ -18,6 +20,8 @@ public class testDefs {
     @Before
     public void chromeDriver() {
         String testmode, browserURL;
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).
+                savePageSource(false));
         try {
             Configuration.timeout = 30000;
 
