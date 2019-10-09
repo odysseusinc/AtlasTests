@@ -88,3 +88,14 @@ or
 
 for running tests with tag _@unauthorized_
 
+### Allure report
+For generating allure report after test's running you should execute the command:
+
+`mvn site` 
+
+After that just open:
+target\site\allure-maven-plugin\index.html
+
+ 
+  Allure report
+ ![alt text](allure/allure.PNG "Allure report example")
