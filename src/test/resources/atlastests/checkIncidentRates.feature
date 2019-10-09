@@ -15,7 +15,7 @@ Feature: Incident rates check
     Then can see our incidence rate in table
     When click to our incidence rate
     Then can see our incidence rate
-    When enter new name of incidence rate
+    When enter name on new Incidence Rates
     When click to save Incidence Rates Button
     When click to cancel button in Incidence rates
     When enter name of new IR in filter

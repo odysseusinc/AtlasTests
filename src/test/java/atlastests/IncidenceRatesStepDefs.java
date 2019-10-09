@@ -1,15 +1,12 @@
 package atlastests;
 
-import com.codeborne.selenide.Selectors;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -18,15 +15,13 @@ public class IncidenceRatesStepDefs {
     private String newGeneratedString;
     @Then("^can see Incidence Rates page$")
     public void canSeeIncidenceRatesPage() {
-        $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@data-bind='text: title']")).shouldHave(text("Incidence Rate Analysis"));
-
+        $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 4000).
+                shouldHave(text("Incidence Rate Analysis"));
     }
 
     @When("^click to New Analysis button in Incidence Rates$")
     public void clickToNewAnalysisButtonInIncidenceRates() {
         $(By.xpath("//*[@class='pull-right btn btn-sm btn-primary']")).click();
-        
     }
 
     @Then("^can see Incidence Rates creation page$")
@@ -38,7 +33,6 @@ public class IncidenceRatesStepDefs {
     public void enterNameOnNewIncidenceRates() {
         generatedString = RandomStringUtils.randomAlphanumeric(10);
         generatedString = "Test_"+ generatedString;
-        $(By.xpath("//*[@type='text']")).clear();
         $(By.xpath("//*[@type='text']")).setValue(generatedString);
     }
 
@@ -48,8 +42,7 @@ public class IncidenceRatesStepDefs {
     }
 
     @Then("^can see new buttons in incidence rates field$")
-    public void canSeeNewButtonsInIncidenceRatesField() throws InterruptedException {
-        Thread.sleep(1500);
+    public void canSeeNewButtonsInIncidenceRatesField() {
         $(By.xpath("//*[@title='Close']")).shouldBe(visible);
         $(By.xpath("//*[@title='Create a copy']")).shouldBe(visible);
         $(By.xpath("//*[@title='Delete']")).shouldBe(visible);
@@ -61,10 +54,8 @@ public class IncidenceRatesStepDefs {
     }
 
     @When("^enter name of our IR in filter$")
-    public void enterNameOfOurIRInFilter() throws InterruptedException {
-        Thread.sleep(1000);
-        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@type='search']")).setValue(generatedString);
+    public void enterNameOfOurIRInFilter() {
+        $(By.xpath("//*[@type='search']")).waitUntil(enabled,5000).setValue(generatedString);
     }
 
     @Then("^can see our incidence rate in table$")
@@ -73,30 +64,19 @@ public class IncidenceRatesStepDefs {
     }
 
     @When("^click to our incidence rate$")
-    public void clickToOurIncidenceRate() throws InterruptedException {
-        $(By.xpath("//tbody/tr/td[2]/span")).waitUntil(visible,4000);
-        $(By.xpath("//tbody/tr/td[2]/span")).click();
+    public void clickToOurIncidenceRate() {
+        $(By.xpath("//tbody/tr/td[2]/span")).waitUntil(visible,4000).click();
     }
 
     @Then("^can see our incidence rate$")
-    public void canSeeOurIncidenceRate() throws InterruptedException {
-        Thread.sleep(1500);
-        $(By.xpath("//*[@data-bind='text: title']")).shouldHave(text("Incidence Rate Analysis #"));
-    }
-
-    @When("^enter new name of incidence rate$")
-    public void enterNewNameOfIncidenceRate() {
-        newGeneratedString = RandomStringUtils.randomAlphanumeric(10);
-        newGeneratedString = "Test_"+ newGeneratedString;
-        $(By.xpath("//*[@type='text']")).clear();
-        $(By.xpath("//*[@type='text']")).setValue(newGeneratedString);
-
+    public void canSeeOurIncidenceRate() {
+        $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 5000).
+                shouldHave(text("Incidence Rate Analysis #"));
     }
 
     @When("^enter name of new IR in filter$")
     public void enterNameOfNewIRInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible,5000).setValue(newGeneratedString);
     }
 
     @Then("^can see new incidence rate in table$")
@@ -105,9 +85,8 @@ public class IncidenceRatesStepDefs {
     }
 
     @When("^click to new incidence rate$")
-    public void clickToNewIncidenceRate() throws InterruptedException {
-        Thread.sleep(2000);
-        $(By.xpath("//tbody/tr/td[2]/span")).click();
+    public void clickToNewIncidenceRate() {
+        $(By.xpath("//tbody/tr/td[2]/span")).waitUntil(enabled, 5000).click();
     }
 
     @When("^click to delete IR button$")
@@ -130,8 +109,7 @@ public class IncidenceRatesStepDefs {
 
     @Then("^can see concept set page in IR$")
     public void canSeeConceptSetPageInIR() {
-        $(By.xpath("//*[@class='btn btn-primary btn-sm'][2]")).waitUntil(visible,3000);
-        $(By.xpath("//*[@class='btn btn-primary btn-sm'][2]")).shouldHave(text("Load"));
+        $(By.xpath("//*[@class='btn btn-primary btn-sm'][2]")).waitUntil(visible,3000).shouldHave(text("Load"));
         $(By.xpath("//*[@class='btn btn-primary btn-sm'][1]")).shouldHave(text("New Concept Set"));
     }
 
@@ -148,7 +126,8 @@ public class IncidenceRatesStepDefs {
     @Then("^can see Generation page in IR$")
     public void canSeeGenerationPageInIR() {
         $(By.xpath("//*[@class='select-sources-btn__label']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@class='ir-analysis-results__tbl-th ir-analysis-results__tbl-th--source']")).shouldHave(text("Source Name"));
+        $(By.xpath("//*[@class='ir-analysis-results__tbl-th ir-analysis-results__tbl-th--source']")).
+                shouldHave(text("Source Name"));
     }
 
 
@@ -166,15 +145,12 @@ public class IncidenceRatesStepDefs {
 
     @When("^click to add Target Cohort$")
     public void clickToAddTargetCohort() {
-//        $("Add Target Cohort").click();
         $(byText("Add Target Cohort")).click();
     }
 
     @When("^enter \"([^\"]*)\" in filter of cohort$")
-    public void enterInFilterOfCohort(String arg0) throws Throwable {
-        Thread.sleep(500);
+    public void enterInFilterOfCohort(String arg0) {
         $(By.xpath("//*[@class='dataTables_filter']/label/input")).setValue(arg0);
-        Thread.sleep(500);
     }
 
     @When("^click to result in IR$")
@@ -202,7 +178,8 @@ public class IncidenceRatesStepDefs {
 
     @Then("^can see new rows under Outcome Cohort$")
     public void canSeeNewRowsUnderOutcomeCohort() {
-        $(By.xpath("//table[1]/tbody/tr[2]/td[2]/table/tbody/tr/td[3]/span")).shouldHave(text("Levetriacetam vs phenytoin outcome cohort"));
+        $(By.xpath("//table[1]/tbody/tr[2]/td[2]/table/tbody/tr/td[3]/span")).
+                shouldHave(text("Levetriacetam vs phenytoin outcome cohort"));
     }
 
     @When("^choose Time at risk starts with value (\\d+)$")
@@ -260,7 +237,8 @@ public class IncidenceRatesStepDefs {
 
     @When("^past json to IR textarea$")
     public void pastJsonToIRTextarea() {
-        $(By.xpath("//*[@class='import__json-box']")).sendKeys(Keys.CONTROL, "v");
+        $(By.xpath("//*[@class='import__json-box']")).
+                sendKeys(Keys.CONTROL, "v");
     }
 
     @When("^click to import ir button$")

@@ -1,7 +1,5 @@
 package atlastests;
 
-import com.codeborne.selenide.Selectors;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -31,7 +29,7 @@ public class EstimationStepDefs {
 
 
 
-    static String readFile(String path, Charset encoding)
+    private static String readFile(String path, Charset encoding)
             throws IOException
     {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
@@ -51,23 +49,20 @@ public class EstimationStepDefs {
 
     @Then("^can see creation page of Estimation$")
     public void canSeeCreationPageOfEstimation() {
-        $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@data-bind='text: title']")).shouldHave(text("New Population Level Effect Estimation - Comparative Cohort Analysis"));
-
+        $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 3000).
+                shouldHave(text("New Population Level Effect Estimation - Comparative Cohort Analysis"));
     }
 
     @When("^enter new name of Estimation$")
     public void enterNewNameOfEstimation() {
         generatedString = RandomStringUtils.randomAlphanumeric(10);
         generatedString = "Test_" + generatedString;
-        $$(By.xpath("//*[@type='text']")).get(0).clear();
         $$(By.xpath("//*[@type='text']")).get(0).setValue(generatedString);
     }
 
     @When("^click to save New Estimation button$")
     public void clickToSaveNewEstimationButton() {
-        $(By.xpath("//*[@title='Save']")).waitUntil(visible, 3500);
-        $(By.xpath("//*[@title='Save']")).click();
+        $(By.xpath("//*[@title='Save']")).waitUntil(visible, 3500).click();
     }
 
     @Then("^can see buttons to Estimation$")
@@ -83,10 +78,8 @@ public class EstimationStepDefs {
     }
 
     @When("^enter name of our estimation in filter$")
-    public void enterNameOfOurEstimationInFilter() throws InterruptedException {
-        Thread.sleep(1000);
-        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@type='search']")).setValue(generatedString);
+    public void enterNameOfOurEstimationInFilter() {
+        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000).setValue(generatedString);
     }
 
     @Then("^can see name of new Estimation in table$")
@@ -95,28 +88,25 @@ public class EstimationStepDefs {
     }
 
     @When("^click to Estimation in table$")
-    public void clickToEstimationInTable() throws InterruptedException {
-        Thread.sleep(1000);
+    public void clickToEstimationInTable() {
         $(By.xpath("//tbody/tr/td[2]/a")).click();
     }
 
     @Then("^can see our Estimation$")
     public void canSeeOurEstimation() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible,5000);
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Population Level Effect Estimation - Comparative Cohort Analysis #"));
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible,5000).
+                shouldHave(text("Population Level Effect Estimation - Comparative Cohort Analysis #"));
     }
 
     @Then("^can see new name of new Estimation in table$")
     public void canSeeNewNameOfNewEstimationInTable() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000).setValue(newGeneratedString);
     }
 
     @When("^change name of Estimation and press save$")
     public void changeNameOfEstimationAndPressSave() {
         newGeneratedString = RandomStringUtils.randomAlphanumeric(10);
         newGeneratedString = "Test_"+ newGeneratedString;
-        $(By.xpath("//*[@type='text']")).clear();
         $(By.xpath("//*[@type='text']")).setValue(newGeneratedString);
         $(By.xpath("//*[@title='Save']")).click();
     }
@@ -133,8 +123,7 @@ public class EstimationStepDefs {
 
     @Then("^cant see our Estimation in table$")
     public void cantSeeOurEstimationInTable() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000).setValue(newGeneratedString);
         $(By.xpath("//tbody/tr/td[2]")).shouldNotHave(text(newGeneratedString));
     }
 
@@ -198,8 +187,7 @@ public class EstimationStepDefs {
 
     @Then("^can see Comparison inputs$")
     public void canSeeComparisonInputs() {
-        $(By.xpath("//*[@class='editor-heading']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@class='editor-heading']")).shouldHave(text("Comparison"));
+        $(By.xpath("//*[@class='editor-heading']")).waitUntil(visible,3000).shouldHave(text("Comparison"));
     }
 
     @When("^click to open target cohort button$")
@@ -214,7 +202,7 @@ public class EstimationStepDefs {
     }
 
     @When("^enter \"([^\"]*)\" in Filter in Cohort window$")
-    public void enterInFilterInCohortWindow(String arg0) throws Throwable {
+    public void enterInFilterInCohortWindow(String arg0) {
         $$(By.xpath("//*[@type='search']")).get(3).setValue(arg0);
     }
 
@@ -306,7 +294,7 @@ public class EstimationStepDefs {
         StringSelection stringSelection = new StringSelection(myString);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, null);
-        $(By.xpath("//*[@class='import__json-box']")).sendKeys(Keys.CONTROL, "v");
+        $("textarea.import__json-box").sendKeys(Keys.CONTROL, "v");
     }
 
     @When("^click to Import button in Estimation$")
@@ -316,7 +304,6 @@ public class EstimationStepDefs {
 
     @Then("^can see \"([^\"]*)\" in Comparisons table$")
     public void canSeeInComparisonsTable(String arg0) throws Throwable {
-        $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible,30000);
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text(arg0));
+        $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible,30000).shouldHave(text(arg0));
     }
 }
