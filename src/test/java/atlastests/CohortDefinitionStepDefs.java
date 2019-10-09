@@ -1,6 +1,5 @@
 package atlastests;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -14,46 +13,39 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class CohortDefinitionStepDefs {
 
-    String nameCohort;
+    private String nameCohort;
     private String newGeneratedString;
 
     @Then("^can see Cohort Definition page$")
     public void canSeeCohortDefinitionPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Cohort definitions"));
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 4000).
+                shouldHave(text("Cohort definitions"));
     }
 
     @When("^click New Cohort button$")
     public void clickNewCohortButton() {
         $(By.xpath("//*[@class='btn btn-sm btn-primary']")).click();
-
-
     }
 
     @Then("^can see new cohort page creation$")
     public void canSeeNewCohortPageCreation() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).shouldHave(text("New Cohort Definition"));
-
+        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible, 3000).
+                shouldHave(text("New Cohort Definition"));
     }
 
     @When("^enter name of New Cohort Definition and save it$")
-    public void enterNameOfNewCohortDefinitionAndSaveIt() throws InterruptedException {
+    public void enterNameOfNewCohortDefinitionAndSaveIt() {
         String generatedString = RandomStringUtils.randomAlphanumeric(10);
         nameCohort = "Test_" + generatedString;
         $(By.xpath("//*[@class='form-control']")).clear();
         $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
-        Thread.sleep(300);
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        $(By.xpath("//*[@class='fa fa-save']")).waitUntil(enabled, 5000).click();
 
     }
 
     @Then("^filtered Cohort Definition$")
-    public void filteredCohortDefinition() throws InterruptedException {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@type='search']")).setValue(nameCohort);
-        Thread.sleep(1500);
-
+    public void filteredCohortDefinition() {
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 4000).setValue(nameCohort);
     }
 
     @Then("^Cohort Definition should be found$")
@@ -69,7 +61,6 @@ public class CohortDefinitionStepDefs {
 
     @Then("^can see our Cohort Definition$")
     public void canSeeOurCohortDefinition() {
-//        $(By.xpath("//*[@id='cohortTextView']/div")).shouldHave(value(nameCohort));
         $(By.xpath("//*[@class='panel panel-primary cohort-definition-panel']")).waitUntil(visible, 2000);
 
     }
@@ -93,20 +84,18 @@ public class CohortDefinitionStepDefs {
     }
 
     @When("^press Add Initial Event$")
-    public void pressAddInitialEvent() throws InterruptedException {
-        Thread.sleep(1000);
-        $$(By.xpath("//*[@class='btn btn-primary btn-sm dropdown-toggle']")).get(0).click();
+    public void pressAddInitialEvent() {
+        $$(By.xpath("//*[@class='btn btn-primary btn-sm dropdown-toggle']")).get(0).
+                waitUntil(visible, 5000).click();
     }
 
     @When("^press Add Condition Occurrence$")
-    public void pressAddConditionOcurrence() throws InterruptedException {
-        Thread.sleep(1000);
-        $$(By.xpath("//*[@class='dropdown-menu']/li/a")).get(1).click();
+    public void pressAddConditionOcurrence() {
+        $$(By.xpath("//*[@class='dropdown-menu']/li/a")).get(1).waitUntil(visible, 5000).click();
     }
 
     @Then("^a condition era block shown$")
-    public void aConditionEraBlockShown() throws InterruptedException {
-        Thread.sleep(1000);
+    public void aConditionEraBlockShown() {
         $(By.xpath("//*[@class='criteriaTable'][1]/tbody/tr/td")).shouldHave(text("a condition occurrence of"));
     }
 
@@ -127,22 +116,21 @@ public class CohortDefinitionStepDefs {
 
 
     @When("^enter \"([^\"]*)\" to Filter of Concept Set from Repository$")
-    public void enterToFilterOfConceptSetFromRepository(String arg0) throws Throwable {
-        Thread.sleep(500);
-        $(By.xpath("//*[@type='search']")).setValue(arg0);
+    public void enterToFilterOfConceptSetFromRepository(String arg0) {
+        $(By.xpath("//*[@type='search']")).waitUntil(enabled, 5000).setValue(arg0);
     }
 
 
     @When("^click to chosen concept set from repository$")
-    public void clickToChosenConceptSetFromRepository() throws InterruptedException {
-        Thread.sleep(3500);
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).click();
+    public void clickToChosenConceptSetFromRepository() {
+        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).
+                waitUntil(enabled, 5000).click();
     }
 
     @Then("^can see name of concept set at the button$")
-    public void canSeeNameOfConceptSetAtTheButton() throws InterruptedException {
-        Thread.sleep(3500);
-        $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).shouldHave(text("Angioedema"));
+    public void canSeeNameOfConceptSetAtTheButton() {
+        $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).waitUntil(visible, 5000).
+                shouldHave(text("Angioedema"));
     }
 
     @When("^click to Concept Sets tab$")
@@ -164,7 +152,6 @@ public class CohortDefinitionStepDefs {
 
     @Then("^can see table of concept set with concepts$")
     public void canSeeTableOfConceptSetWithConcepts() {
-//        $(By.xpath("//*[@class='standard']")).shouldHave(text("Aspirin"));
         $$(By.xpath("//table/tbody/tr/td[2]")).get(6).shouldHave(text("Angioedema"));
     }
 
@@ -214,11 +201,9 @@ public class CohortDefinitionStepDefs {
     }
 
     @Then("^can see Messages page$")
-    public void canSeeMessagesPage() throws InterruptedException {
-        Thread.sleep(500);
-        $(By.xpath("//*[@aria-label='Severity: activate to sort column ascending']")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@aria-label='Severity: activate to sort column ascending']")).shouldHave(text("Severity"));
-
+    public void canSeeMessagesPage() {
+        $(By.xpath("//*[@aria-label='Severity: activate to sort column ascending']")).waitUntil(visible, 4000).
+                shouldHave(text("Severity"));
     }
 
     @When("^click to Run diagnostic Button$")
@@ -227,9 +212,8 @@ public class CohortDefinitionStepDefs {
     }
 
     @When("^add Inclusion criteria$")
-    public void addInclusionCriteria() throws InterruptedException {
-        Thread.sleep(3000);
-        $$(By.xpath("//*[@class='btn btn-sm btn-success']")).get(1).click();
+    public void addInclusionCriteria() {
+        $$(By.xpath("//*[@class='btn btn-sm btn-success']")).get(1).waitUntil(enabled, 5000).click();
         $(By.xpath("//*[@class='inclusion-rule-header']/div/input")).setValue("TEST INCLUSION");
         $(By.xpath("//*[@class='divtext']")).setValue("TEST INCLUSION DESCRIPTION");
     }
@@ -252,14 +236,11 @@ public class CohortDefinitionStepDefs {
     }
 
     @When("^enter new name of cohort definition$")
-    public void enterNewNameOfCohortDefinition() throws InterruptedException {
+    public void enterNewNameOfCohortDefinition() {
         String generatedString = RandomStringUtils.randomAlphanumeric(10);
         newGeneratedString = "Test_" + generatedString;
         $(By.xpath("//*[@class='form-control']")).clear();
         $(By.xpath("//*[@class='input-group']/input")).setValue(newGeneratedString);
-        Thread.sleep(300);
-
-
     }
 
     @When("^save new name of cohort definition$")
@@ -268,10 +249,8 @@ public class CohortDefinitionStepDefs {
     }
 
     @Then("^filtered new Cohort Definition$")
-    public void filteredNewCohortDefinition() throws InterruptedException {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
-        Thread.sleep(1500);
+    public void filteredNewCohortDefinition() {
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 4000).setValue(newGeneratedString);
     }
 
     @Then("^new Cohort Definition should be found$")
@@ -280,12 +259,10 @@ public class CohortDefinitionStepDefs {
     }
 
     @When("^enter the same name of New Cohort Definition and save it$")
-    public void enterTheSameNameOfNewCohortDefinitionAndSaveIt() throws InterruptedException {
-        Thread.sleep(1500);
-        $(By.xpath("//*[@class='form-control']")).clear();
+    public void enterTheSameNameOfNewCohortDefinitionAndSaveIt() {
+        $(By.xpath("//*[@class='form-control']")).waitUntil(enabled, 5000).clear();
         $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
-        Thread.sleep(300);
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        $(By.xpath("//*[@class='fa fa-save']")).waitUntil(enabled, 5000).click();
     }
 
     @Then("^condition occurrence block shown$")
@@ -300,15 +277,13 @@ public class CohortDefinitionStepDefs {
 
     @When("^click to Id column$")
     public void clickToIdColumn() {
-        $(By.xpath("//*[@class='id-column sorting']")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@class='id-column sorting']")).click();
+        $(By.xpath("//*[@class='id-column sorting']")).waitUntil(visible, 3000).click();
     }
 
     @Then("^can see that first value less then second$")
     public void canSeeThatFirstValueLessThenSecond() {
-        String a, b;
-        a = $(By.xpath("//table/tbody/tr/td[1]")).getText();
-        b = $(By.xpath("//table/tbody/tr[2]/td[1]")).getText();
+        String a = $(By.xpath("//table/tbody/tr/td[1]")).getText();
+        String b = $(By.xpath("//table/tbody/tr[2]/td[1]")).getText();
         Assert.assertTrue(Integer.parseInt(a) < Integer.parseInt(b));
     }
 
@@ -318,7 +293,7 @@ public class CohortDefinitionStepDefs {
     }
 
     @When("^enter \"([^\"]*)\" in filter in cohort definition$")
-    public void enterInFilterInCohortDefinition(String arg0) throws Throwable {
+    public void enterInFilterInCohortDefinition(String arg0) {
         $(By.xpath("//*[@type='search']")).setValue(arg0);
     }
 
@@ -343,9 +318,8 @@ public class CohortDefinitionStepDefs {
     }
 
     @When("^past json from clipboard$")
-    public void pastJsonFromClipboard() throws InterruptedException {
+    public void pastJsonFromClipboard() {
         $(By.xpath("//*[@id='cohortExpressionJSON']")).sendKeys(Keys.CONTROL, "v");
-        Thread.sleep(1000);
     }
 
     @When("^click to Reload button$")
@@ -359,7 +333,7 @@ public class CohortDefinitionStepDefs {
     }
 
     @Then("^can see name \"([^\"]*)\" of concept set at the button$")
-    public void canSeeNameOfConceptSetAtTheButton(String arg0) throws Throwable {
+    public void canSeeNameOfConceptSetAtTheButton(String arg0) {
         $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).shouldHave(text(arg0));
     }
 
@@ -380,7 +354,7 @@ public class CohortDefinitionStepDefs {
 
 
     @When("^select \"([^\"]*)\" source$")
-    public void selectSource(String arg0) throws Throwable {
+    public void selectSource(String arg0) {
         $(By.xpath("//*[@class='form-control invalid']")).click();
         $(By.xpath("//*[@class='form-control invalid']")).selectOptionByValue(arg0);
     }
@@ -391,8 +365,7 @@ public class CohortDefinitionStepDefs {
     }
 
     @When("^accept an alert about time$")
-    public void acceptAnAlertAboutTime() throws InterruptedException {
-        Thread.sleep(3000);
+    public void acceptAnAlertAboutTime() {
         switchTo().alert().accept();
     }
 
@@ -402,7 +375,7 @@ public class CohortDefinitionStepDefs {
     }
 
     @Then("^can see only one field with text \"([^\"]*)\"$")
-    public void canSeeOnlyOneFieldWithText(String arg0) throws Throwable {
+    public void canSeeOnlyOneFieldWithText(String arg0) {
         $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).shouldHave(text(arg0));
     }
 
@@ -412,16 +385,14 @@ public class CohortDefinitionStepDefs {
     }
 
     @Then("^can see Complete in SynPUF (\\d+)K Cost&Util status in (\\d+) seconds$")
-    public void canSeeCompleteInSynPUFKCostUtilStatusInSeconds(int arg0, int arg1) throws InterruptedException {
-        Thread.sleep(500);
+    public void canSeeCompleteInSynPUFKCostUtilStatusInSeconds(int arg0, int arg1) {
         $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[4]/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
 
     }
 
     @When("^click to utilisation button$")
-    public void clickToUtilisationButton() throws InterruptedException {
-        Thread.sleep(500);
-        $(By.xpath("//*[@class='btn btn-info btn-sm']")).click();
+    public void clickToUtilisationButton() {
+        $(By.xpath("//*[@class='btn btn-info btn-sm']")).waitUntil(enabled, 5000).click();
 
     }
 
@@ -436,7 +407,6 @@ public class CohortDefinitionStepDefs {
         $(By.xpath("//*[@value='rollupUtilizationDrug']")).click();
         $$(By.xpath("//*[@class='btn btn-info btn-sm']")).get(1).click();
     }
-
 
 
     @When("^click to Generate SynPUF (\\d+)k CDM(\\d+)$")
@@ -456,7 +426,7 @@ public class CohortDefinitionStepDefs {
     }
 
     @Then("^can see \"([^\"]*)\" in Initial Event Cohort$")
-    public void canSeeInInitialEventCohort(String arg0){
+    public void canSeeInInitialEventCohort(String arg0) {
         $(By.xpath("//*[@id='cohortTextView']/cohort-expression-viewer/ul/li/div/conceptset-reference/span")).shouldHave(text(arg0));
     }
 
