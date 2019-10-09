@@ -4,6 +4,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 
+import static atlastests.testDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -59,6 +60,16 @@ public class DataSourceDefs {
     @When("^choose Source from Data Source as \"([^\"]*)\"$")
     public void chooseSourceFromDataSourceAs(String arg0) {
         $(By.xpath("//*[@class='reportControls pad-5']/div/div/select")).selectOption(arg0);
+    }
+
+    @When("^choose Source from Data Source as \"([^\"]*)\" from property")
+    public void chooseSourceFromDataSourceAsFromProperty(String arg0) throws Exception {
+        $(By.xpath("//*[@class='reportControls pad-5']/div/div/select")).selectOption(getDataProperties(arg0));
+    }
+
+    @When("^choose Report from Data Source as \"([^\"]*)\" from property")
+    public void chooseReportFromDataSourceAsFromProperty(String arg0) throws Exception {
+        $(By.xpath("//*[@class='reportControls pad-5']/div[2]/div/select")).selectOption(getDataProperties(arg0));
     }
 
     @Then("^can see Data Density windows$")

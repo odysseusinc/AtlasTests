@@ -4,6 +4,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 
+import static atlastests.testDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -25,6 +26,11 @@ public class ProfileStepDefs {
     @When("^choose \"([^\"]*)\" in Profile Source$")
     public void chooseInProfileSource(String arg0) {
         $(byText(arg0)).click();
+    }
+
+    @When("^choose \"([^\"]*)\" in Profile Source from property$")
+    public void chooseInProfileSourceFromProperty(String arg0) throws Exception {
+        $(byText(getDataProperties(arg0))).click();
     }
 
     @When("^enter (\\d+) in Profile Id and press Enter$")
