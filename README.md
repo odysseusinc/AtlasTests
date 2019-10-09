@@ -88,6 +88,17 @@ or
 
 for running tests with tag _@unauthorized_
 
+### Test data from properties
+You can use your own test data from application.properties, just add fields(example):
+```
+profile = IMPALA
+source = Netezza CDM5.3
+report = Procedure
+```
+
+and run command:
+`mvn clean test -Dcucumber.options="src/test/resources/odysseusAT --tags @owndatatestsfromproperty"`
+
 ### Allure report
 For generating allure report after test's running you should execute the command:
 
