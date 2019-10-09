@@ -15,20 +15,19 @@ public class ConfigurationStepDefs {
 
     @Then("^Configuration page opens$")
     public void configurationPageOpens() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Configuration"));
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 3000).
+                shouldHave(text("Configuration"));
     }
 
     @When("^click to check connection button for Impala$")
-    public void clickToCheckConnectionButtonForImpala() throws InterruptedException {
-        Thread.sleep(2000);
-        $(By.xpath("//table/tbody/tr[1]/td[9]/button")).click();
+    public void clickToCheckConnectionButtonForImpala() {
+        $(By.xpath("//table/tbody/tr[1]/td[9]/button")).waitUntil(visible, 5000).click();
     }
 
     @Then("^can see success message in button for Impala$")
-    public void canSeeSuccessMessageInButtonForImpala() throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[1]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
-//        Assert.assertTrue($(By.xpath("//table/tbody/tr[1]/td[6]/button")).getAttribute("class").contains("btn-success"));
+    public void canSeeSuccessMessageInButtonForImpala() {
+        $(By.xpath("//table/tbody/tr[1]/td[9]/button")).waitUntil(attribute("class",
+                "connection-check-button btn btn-sm btn-success"), 10000);
     }
 
     @When("^click to check connection button for Netezza$")
@@ -38,8 +37,9 @@ public class ConfigurationStepDefs {
     }
 
     @Then("^can see success message in button for Netezza$")
-    public void canSeeSuccessMessageInButtonForNetezza() throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[2]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
+    public void canSeeSuccessMessageInButtonForNetezza() {
+        $(By.xpath("//table/tbody/tr[2]/td[9]/button")).waitUntil(attribute("class",
+                "connection-check-button btn btn-sm btn-success"), 10000);
 
     }
 
@@ -50,8 +50,9 @@ public class ConfigurationStepDefs {
     }
 
     @Then("^can see success message in button for OVH(\\d+)$")
-    public void canSeeSuccessMessageInButtonForOVH(int arg0) throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[3]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
+    public void canSeeSuccessMessageInButtonForOVH(int arg0) {
+        $(By.xpath("//table/tbody/tr[3]/td[9]/button")).waitUntil(attribute("class",
+                "connection-check-button btn btn-sm btn-success"), 10000);
     }
 
     @When("^click to check connection button for SynPUF (\\d+)K Cost and Util$")
@@ -60,8 +61,9 @@ public class ConfigurationStepDefs {
     }
 
     @Then("^can see success message in button for SynPUF (\\d+)K Cost and Util$")
-    public void canSeeSuccessMessageInButtonForSynPUFKCostAndUtil(int arg0) throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[4]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
+    public void canSeeSuccessMessageInButtonForSynPUFKCostAndUtil(int arg0) {
+        $(By.xpath("//table/tbody/tr[4]/td[9]/button")).waitUntil(attribute("class",
+                "connection-check-button btn btn-sm btn-success"), 10000);
     }
 
     @When("^click to check connection button for SynPUF (\\d+)K GCP Big query$")
@@ -70,8 +72,9 @@ public class ConfigurationStepDefs {
     }
 
     @Then("^can see success message in button for SynPUF (\\d+)K GCP Big query$")
-    public void canSeeSuccessMessageInButtonForSynPUFKGCPBigQuery(int arg0) throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[5]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
+    public void canSeeSuccessMessageInButtonForSynPUFKGCPBigQuery(int arg0) {
+        $(By.xpath("//table/tbody/tr[5]/td[9]/button")).waitUntil(attribute("class",
+                "connection-check-button btn btn-sm btn-success"), 10000);
     }
 
     @When("^click to check connection button for SynPUF (\\d+)K CDM(\\d+) (\\d+)$")
@@ -80,8 +83,9 @@ public class ConfigurationStepDefs {
     }
 
     @Then("^can see success message in button for SynPUF (\\d+)K CDM(\\d+) (\\d+)$")
-    public void canSeeSuccessMessageInButtonForSynPUFKCDM(int arg0, int arg1, int arg2) throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[6]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
+    public void canSeeSuccessMessageInButtonForSynPUFKCDM(int arg0, int arg1, int arg2) {
+        $(By.xpath("//table/tbody/tr[6]/td[9]/button")).waitUntil(attribute("class",
+                "connection-check-button btn btn-sm btn-success"), 10000);
     }
 
     @When("^click to check connection button for SynPUF (\\d+) (\\d+) GCP BigQuery$")
@@ -90,8 +94,9 @@ public class ConfigurationStepDefs {
     }
 
     @Then("^can see success message in button for SynPUF (\\d+) (\\d+) GCP BigQuery$")
-    public void canSeeSuccessMessageInButtonForSynPUFGCPBigQuery(int arg0, int arg1) throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[7]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
+    public void canSeeSuccessMessageInButtonForSynPUFGCPBigQuery(int arg0, int arg1) {
+        $(By.xpath("//table/tbody/tr[7]/td[9]/button")).waitUntil(attribute("class",
+                "connection-check-button btn btn-sm btn-success"), 10000);
     }
 
     @When("^click to check connection button for SynPUF (\\d+)M GCP BigQuery$")
@@ -100,8 +105,9 @@ public class ConfigurationStepDefs {
     }
 
     @Then("^can see success message in button for SynPUF (\\d+)M GCP BigQuery$")
-    public void canSeeSuccessMessageInButtonForSynPUFMGCPBigQuery(int arg0) throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[8]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
+    public void canSeeSuccessMessageInButtonForSynPUFMGCPBigQuery(int arg0) {
+        $(By.xpath("//table/tbody/tr[8]/td[9]/button")).waitUntil(attribute("class",
+                "connection-check-button btn btn-sm btn-success"), 10000);
     }
 
     @When("^click to check connection button for SynPUF Geo$")
@@ -110,8 +116,9 @@ public class ConfigurationStepDefs {
     }
 
     @Then("^can see success message in button for SynPUF Geo$")
-    public void canSeeSuccessMessageInButtonForSynPUFGeo() throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[9]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
+    public void canSeeSuccessMessageInButtonForSynPUFGeo() {
+        $(By.xpath("//table/tbody/tr[9]/td[9]/button")).waitUntil(attribute("class",
+                "connection-check-button btn btn-sm btn-success"), 10000);
     }
 
     @When("^click to check connection button for oracle (\\d+)k$")
@@ -120,8 +127,9 @@ public class ConfigurationStepDefs {
     }
 
     @Then("^can see success message in button for oracle (\\d+)k$")
-    public void canSeeSuccessMessageInButtonForOracleK(int arg0) throws InterruptedException {
-        $(By.xpath("//table/tbody/tr[10]/td[9]/button")).waitUntil(attribute("class", "connection-check-button btn btn-sm btn-success"), 10000);
+    public void canSeeSuccessMessageInButtonForOracleK(int arg0) {
+        $(By.xpath("//table/tbody/tr[10]/td[9]/button")).waitUntil(attribute("class",
+                "connection-check-button btn btn-sm btn-success"), 10000);
     }
 
     @When("^click to Manage permission button$")
@@ -131,8 +139,8 @@ public class ConfigurationStepDefs {
 
     @Then("^can see Roles creation page$")
     public void canSeeRolesCreationPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Roles"));
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 3000).
+                shouldHave(text("Roles"));
     }
 
     @When("^click to New role button$")
@@ -148,8 +156,7 @@ public class ConfigurationStepDefs {
     @When("^enter new name of role$")
     public void enterNewNameOfRole() {
         generatedString = RandomStringUtils.randomAlphanumeric(10);
-        $(By.xpath("//*[@class='form-control']")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@class='form-control']")).clear();
+        $(By.xpath("//*[@class='form-control']")).waitUntil(visible, 4000).clear();
         $(By.xpath("//*[@class='form-control emptyInput']")).setValue("Test_" + generatedString);
     }
 
@@ -170,9 +177,8 @@ public class ConfigurationStepDefs {
     }
 
     @When("^enter name of our role in filter$")
-    public void enterNameOfOurRoleInFilter() throws InterruptedException {
-        Thread.sleep(2000);
-        $(By.xpath("//*[@type='search']")).setValue(generatedString);
+    public void enterNameOfOurRoleInFilter() {
+        $(By.xpath("//*[@type='search']")).waitUntil(enabled, 5000).setValue(generatedString);
     }
 
     @Then("^can see our role in table$")
@@ -187,8 +193,8 @@ public class ConfigurationStepDefs {
 
     @Then("^can see our role page$")
     public void canSeeOurRolePage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).shouldHave(text("Role #"));
+        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible, 3000).
+                shouldHave(text("Role #"));
     }
 
     @When("^enter new name of our role$")
@@ -199,9 +205,8 @@ public class ConfigurationStepDefs {
     }
 
     @Then("^can see our new name role in table$")
-    public void canSeeOurNewNameRoleInTable() throws InterruptedException {
-        Thread.sleep(2000);
-        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
+    public void canSeeOurNewNameRoleInTable() {
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000).setValue(newGeneratedString);
         $(By.xpath("//table/tbody/tr/td")).shouldHave(text(newGeneratedString));
     }
 
