@@ -1,21 +1,13 @@
 package atlastests;
 
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.commands.PressEnter;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.api.java.eo.Se;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Keys;
 
-import java.nio.charset.Charset;
-import java.util.Random;
-
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ConseptSetsStepDefs {
@@ -30,14 +22,12 @@ public class ConseptSetsStepDefs {
 
     @Then("^Concept Sets page opens$")
     public void conceptSetsPageOpens() {
-        $(By.xpath("//*[@id='currentComponent']/heading-title/div/span")).waitUntil(visible, 5000);
-        $(By.xpath("//*[@id='currentComponent']/heading-title/div/span")).shouldHave(text("Concept Sets"));
-
-
+        $(By.xpath("//*[@id='currentComponent']/heading-title/div/span")).waitUntil(visible, 5000).
+                shouldHave(text("Concept Sets"));
     }
 
     @When("^click to New Concept Set$")
-    public void clickToNewConceptSet() throws InterruptedException {
+    public void clickToNewConceptSet() {
         $(By.xpath("//*[@class='btn btn-sm btn-primary new-concept-set']")).click();
     }
 
@@ -47,18 +37,16 @@ public class ConseptSetsStepDefs {
     }
 
     @When("^enter random name of Concept set and save it$")
-    public void enterRandomNameOfConceptSetAndSaveIt() throws InterruptedException {
+    public void enterRandomNameOfConceptSetAndSaveIt() {
         generatedString = RandomStringUtils.randomAlphanumeric(10);
-        $(By.xpath("//*[@id='txtConceptSetName']")).clear();
         $(By.xpath("//*[@id='txtConceptSetName']")).setValue("Test_" + generatedString);
         $(By.xpath("//*[@class='fa fa-save']")).click();
-        Thread.sleep(5000);
     }
 
     @Then("^show new buttons in Concept Set$")
     public void showNewButtonsInConceptSet() {
-        $(By.xpath("//*[@data-bind='click: optimize, css: { disabled: !canOptimize() || isProcessing() }']")).waitUntil(visible, 2000);
-        $(By.xpath("//*[@data-bind='click: optimize, css: { disabled: !canOptimize() || isProcessing() }']")).shouldHave(text("Optimize"));
+        $(By.xpath("//*[@data-bind='click: optimize, css: { disabled: !canOptimize() || isProcessing() }']")).
+                waitUntil(visible, 2000).shouldHave(text("Optimize"));
     }
 
     @Then("^new concept set shown in table$")
@@ -81,15 +69,15 @@ public class ConseptSetsStepDefs {
 
     @Then("^new concept set removed from table$")
     public void newConceptSetRemovedFromTable() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000);
-        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).shouldNotHave(text(newGeneratedString));
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000).setValue(newGeneratedString);
+        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).
+                shouldNotHave(text(newGeneratedString));
     }
 
     @When("^click to shop cart items first$")
     public void clickToShopCartItemsFirst() {
-        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[1]/i")).waitUntil(visible, 10000);
-        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[1]/i")).click();
+        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[1]/i")).
+                waitUntil(visible, 10000).click();
         $(By.xpath("//*[@class='fa fa-shopping-cart selected']")).waitUntil(visible, 1000);
 //        $(By.xpath("//*[@id='DataTables_Table_4']/tbody/tr[2]/td[1]/i")).click();
         idValue = $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).getText();
@@ -114,9 +102,8 @@ public class ConseptSetsStepDefs {
     }
 
     @When("^set checkbox in Descendants$")
-    public void setCheckboxInDescendants() throws InterruptedException {
+    public void setCheckboxInDescendants() {
         $(By.xpath("//table/tbody/tr/td[8]/span")).click();
-        Thread.sleep(4000);
     }
 
     @Then("^can see other value of Included Concepts$")
@@ -127,8 +114,7 @@ public class ConseptSetsStepDefs {
 
     @When("^click to Included Concepts tab$")
     public void clickToIncludedConceptsTab() {
-        $$(".tabs__header span").get(1).shouldHave(text("Included Concepts"));
-        $$(".tabs__header span").get(1).click();
+        $$(".tabs__header span").get(1).shouldHave(text("Included Concepts")).click();
     }
 
     @Then("^can see table of Included Concepts$")
@@ -141,19 +127,18 @@ public class ConseptSetsStepDefs {
 
     @When("^click to Included Source Codes tab$")
     public void clickToIncludedSourceCodesTab() {
-        $(By.xpath("//*[@class='tabs__header-title'][2]")).shouldHave(text("Included Source Codes"));
-        $(By.xpath("//*[@class='tabs__header-title'][2]")).click();
+        $(By.xpath("//*[@class='tabs__header-title'][2]")).shouldHave(text("Included Source Codes")).click();
     }
 
     @Then("^can see table of Included Source codes$")
     public void canSeeTableOfIncludedSourceCodes() {
-        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).waitUntil(visible, 5000);
+        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).
+                waitUntil(visible, 5000);
     }
 
     @When("^click to Explore Evidence$")
     public void clickToExploreEvidence() {
-        $(By.xpath("//*[@class='tabs__header-title'][3]")).shouldHave(text("Explore Evidence"));
-        $(By.xpath("//*[@class='tabs__header-title'][3]")).click();
+        $(By.xpath("//*[@class='tabs__header-title'][3]")).shouldHave(text("Explore Evidence")).click();
     }
 
     @Then("^can see explore evidence text$")
@@ -168,33 +153,29 @@ public class ConseptSetsStepDefs {
     }
 
     @Then("^can see message in Concept Set table \"([^\"]*)\"$")
-    public void canSeeMessageInConceptSetTable(String arg0) throws Throwable {
+    public void canSeeMessageInConceptSetTable(String arg0) {
         $(By.xpath("//*[@class='dataTables_empty']")).shouldHave(text(arg0));
     }
 
     @When("^click to Export tab in Concept set$")
-    public void clickToExportTabInConceptSet() throws InterruptedException {
-        $(By.xpath("//*[@class='tabs__header']/span[5]")).shouldHave(text("Export"));
-        Thread.sleep(1000);
-        $(By.xpath("//*[@class='tabs__header']/span[5]")).click();
+    public void clickToExportTabInConceptSet() {
+        $(By.xpath("//*[@class='tabs__header']/span[5]")).shouldHave(text("Export")).click();
     }
 
     @Then("^can see Concept Set JSON$")
     public void canSeeConceptSetJSON() {
-        $(By.xpath("//*[@class='heading']")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@class='heading']")).shouldHave(text("Concept Set Expression JSON"));
+        $(By.xpath("//*[@class='heading']")).waitUntil(visible, 3000).
+                shouldHave(text("Concept Set Expression JSON"));
     }
 
     @When("^click to export button$")
     public void clickToExportButton() throws Exception {
-        $(By.xpath("//*[@class='btn btn-success']")).waitUntil(visible, 4000);
+        $(By.xpath("//*[@class='btn btn-success']")).waitUntil(visible, 4000).click();
         $(By.xpath("//*[@class='btn btn-success']")).click();
-        Thread.sleep(2000);
-        String str = $(By.xpath("//*[@data-bind='text: title']")).getText();
+        String str = $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 5000).getText();
         String d = str.substring(str.indexOf("#") + 1);
         String filename = "conceptset-" + d + ".zip";
         Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), filename));
-
     }
 
     @Then("^csv file download$")
@@ -214,48 +195,38 @@ public class ConseptSetsStepDefs {
 
     @When("^click to Compare tab in Concept Set$")
     public void clickToCompareTabInConceptSet() {
-        $(By.xpath("//*[@class='tabs__header']/span[6]")).shouldHave(text("Compare"));
-        $(By.xpath("//*[@class='tabs__header']/span[6]")).click();
+        $(By.xpath("//*[@class='tabs__header']/span[6]")).shouldHave(text("Compare")).click();
     }
 
     @Then("^can see text \"([^\"]*)\"$")
-    public void canSeeText(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='heading']")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@class='heading']")).shouldHave(text(arg0));
+    public void canSeeText(String arg0) {
+        $(By.xpath("//*[@class='heading']")).waitUntil(visible, 3000).shouldHave(text(arg0));
     }
 
     @When("^enter new name of Concept Set$")
-    public void enterNewNameOfConceptSet() throws InterruptedException {
-        Thread.sleep(1000);
+    public void enterNewNameOfConceptSet() {
         newGeneratedString = RandomStringUtils.randomAlphanumeric(10);
-        $(By.xpath("//*[@id='txtConceptSetName']")).clear();
         $(By.xpath("//*[@id='txtConceptSetName']")).setValue("Test_" + newGeneratedString);
-        Thread.sleep(500);
-
     }
 
     @Then("^click to save button in Concept Set$")
-    public void clickToSaveButtonInConceptSet() throws InterruptedException {
-        Thread.sleep(2000);
-        $(By.xpath("//*[@class='btn btn-success']")).click();
+    public void clickToSaveButtonInConceptSet() {
+        $(By.xpath("//*[@class='btn btn-success']")).waitUntil(visible, 5000).click();
     }
 
     @Then("^click to cancel button in Concept Set$")
-    public void clickToCancelButtonInConceptSet() throws InterruptedException {
-        Thread.sleep(2000);
-        $(By.xpath("//*[@class='fa fa-times']")).click();
+    public void clickToCancelButtonInConceptSet() {
+        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(visible, 5000).click();
     }
 
     @When("^enter new concept set name in filter$")
     public void enterNewConceptSetNameInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000);
-        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000).setValue(newGeneratedString);
     }
 
     @Then("^can see row with new name of concept set$")
-    public void canSeeRowWithNewNameOfConceptSet() throws InterruptedException {
-        Thread.sleep(1000);
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text(newGeneratedString));
+    public void canSeeRowWithNewNameOfConceptSet() {
+        $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible, 3000).shouldHave(text(newGeneratedString));
     }
 
     @When("^click to row with new name of concept set$")
@@ -265,8 +236,7 @@ public class ConseptSetsStepDefs {
 
     @When("^enter name of concept set in filter$")
     public void enterNameOfConceptSetInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000);
-        $(By.xpath("//*[@type='search']")).setValue(generatedString);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000).setValue(generatedString);
     }
 
     @Then("^can see our Concept Set creation form$")
@@ -275,7 +245,7 @@ public class ConseptSetsStepDefs {
     }
 
     @When("^enter \"([^\"]*)\" of concept set in filter$")
-    public void enterOfConceptSetInFilter(String arg0) throws Throwable {
+    public void enterOfConceptSetInFilter(String arg0) {
         $(By.xpath("//*[@type='search']")).setValue(arg0);
     }
 
@@ -297,7 +267,7 @@ public class ConseptSetsStepDefs {
     }
 
     @When("^enter \"([^\"]*)\" of concept set window in filter$")
-    public void enterOfConceptSetWindowInFilter(String arg0) throws Throwable {
+    public void enterOfConceptSetWindowInFilter(String arg0) {
         $$(By.xpath("//*[@type='search']")).get(1).setValue(arg0);
     }
 
