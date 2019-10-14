@@ -1,13 +1,15 @@
 package atlastests;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ConseptSetsStepDefs {
@@ -45,8 +47,7 @@ public class ConseptSetsStepDefs {
 
     @Then("^show new buttons in Concept Set$")
     public void showNewButtonsInConceptSet() {
-        $(By.xpath("//*[@data-bind='click: optimize, css: { disabled: !canOptimize() || isProcessing() }']")).
-                waitUntil(visible, 2000).shouldHave(text("Optimize"));
+        $(withText("Optimize")).waitUntil(visible, 5000);
     }
 
     @Then("^new concept set shown in table$")
@@ -98,7 +99,7 @@ public class ConseptSetsStepDefs {
 
     @When("^save value of Included Concepts$")
     public void saveValueOfIncludedConcepts() {
-        includedConceptsBefore = $(By.xpath("//*[@data-bind='text:inclusionCount()']")).getText();
+        includedConceptsBefore = $("[data-bind='text:inclusionCount()']").getText();
     }
 
     @When("^set checkbox in Descendants$")
@@ -108,7 +109,8 @@ public class ConseptSetsStepDefs {
 
     @Then("^can see other value of Included Concepts$")
     public void canSeeOtherValueOfIncludedConcepts() {
-        includedConceptsAfter = $(By.xpath("//*[@data-bind='text:inclusionCount()']")).getText();
+        includedConceptsAfter = $("[data-bind='text:inclusionCount()']").
+                waitUntil(not(Condition.text("1")), 5000).getText();
         Assert.assertNotEquals(includedConceptsAfter, includedConceptsBefore);
     }
 
@@ -159,7 +161,7 @@ public class ConseptSetsStepDefs {
 
     @When("^click to Export tab in Concept set$")
     public void clickToExportTabInConceptSet() {
-        $(By.xpath("//*[@class='tabs__header']/span[5]")).shouldHave(text("Export")).click();
+        $$(".tabs__header-title").find(matchesText("Export")).click();
     }
 
     @Then("^can see Concept Set JSON$")
@@ -170,12 +172,13 @@ public class ConseptSetsStepDefs {
 
     @When("^click to export button$")
     public void clickToExportButton() throws Exception {
-        $(By.xpath("//*[@class='btn btn-success']")).waitUntil(visible, 4000).click();
-        $(By.xpath("//*[@class='btn btn-success']")).click();
-        String str = $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 5000).getText();
-        String d = str.substring(str.indexOf("#") + 1);
-        String filename = "conceptset-" + d + ".zip";
-        Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), filename));
+        SelenideElement exportButton = $(withText("Export To CSV"));
+        while (exportButton.is(disabled)) {
+            clickToExportTabInConceptSet();
+        }
+        exportButton.waitUntil(visible, 5000).hover().click();
+        exportButton.waitUntil(hidden, 5000);
+        csvFileDownload();
     }
 
     @Then("^csv file download$")
@@ -183,14 +186,15 @@ public class ConseptSetsStepDefs {
         String str = $(By.xpath("//*[@data-bind='text: title']")).getText();
         String d = str.substring(str.indexOf("#") + 1);
         String filename = "conceptset-" + d + ".zip";
+        Thread.sleep(2000);//only one way to wait file downloading, cz don't have href
         Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), filename));
-
     }
 
     @When("^press SAVE button$")
     public void pressSAVEButton() {
-        $(By.xpath("//*[@class='btn btn-success']")).click();
-
+        SelenideElement saveButton = $(".input-group-btn .btn-success");
+        saveButton.waitUntil(enabled, 5000).click();
+        $(".fa-trash-o").waitUntil(enabled, 5000);
     }
 
     @When("^click to Compare tab in Concept Set$")
@@ -332,7 +336,8 @@ public class ConseptSetsStepDefs {
 
     @When("^click Export Concept set button$")
     public void clickExportConceptSetButton() {
-        $$(By.xpath("//*[@class='btn btn-sm btn-primary new-concept-set']")).get(1).click();
+        $(".conceptsets-export .new-concept-set").click();
+        $("circle").waitUntil(hidden, 5000);
     }
 
     @Then("^file with archive downloaded$")
