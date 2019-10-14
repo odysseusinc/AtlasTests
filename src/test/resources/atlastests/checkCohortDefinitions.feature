@@ -53,13 +53,9 @@ Feature: Check Cohort Definitions
     Then Import Concept Set window shown
     When click to Id to sort
     When enter "Angioedema" to Filter of Concept Set from Repository
-    #hardcode, fix later
     Then can see only one field with text "Angioedema"
-    #
     When click to chosen concept set from repository
-    #hardcode, fix later
-    Then can see name of concept set at the button
-    #
+    Then can see name "Angioedema" of concept set at the button
     When add Inclusion criteria
     Then can see block with inclusion criterias
     When click to save button in Cohort Definition
@@ -80,7 +76,7 @@ Feature: Check Cohort Definitions
     When enter name of New Cohort Definition and save it
     When press Add Initial Event
     When press Add Condition Occurrence
-    Then a condition era block shown
+    Then condition occurrence block shown
     When click to Any Condition menu
     When choose Import Concept Set
     Then Import Concept Set window shown
@@ -88,7 +84,7 @@ Feature: Check Cohort Definitions
     When click to Id to sort
     Then can see only one field with text "Angioedema"
     When click to chosen concept set from repository
-    Then can see name of concept set at the button
+    Then can see name "Angioedema" of concept set at the button
     When click to Concept Sets tab
     Then can see row with name of Concept Set in the table
     When click to Generation tab
@@ -166,7 +162,7 @@ Feature: Check Cohort Definitions
     When click to save button in Cohort Definition
     When click to Generation tab
     When click to Generate Impala button
-    Then can see Complete in IMPALA status in 180 seconds
+    Then can see Complete in IMPALA status in 360 seconds
     When click to Reporting tab tab
     When select "IMPALA" source
     When click to quick analysis button
@@ -203,7 +199,7 @@ Feature: Check Cohort Definitions
     When click to save button in Cohort Definition
     When click to Generation tab
     When click to Generate SynPUF 110K Cost&Util button
-    Then can see Complete in SynPUF 110K Cost&Util status in 120 seconds
+    Then can see Complete in SynPUF 110K Cost&Util status in 180 seconds
     When click to Reporting tab tab
     When select "synpuf_110k_cu" source
     When click to utilisation button
@@ -236,7 +232,7 @@ Feature: Check Cohort Definitions
     When click to save button in Cohort Definition
     When click to Generation tab
     When click to Generate SynPUF 110k CDM53
-    Then can see Complete in SynPUF 110k CDM53 status in 120 seconds
+    Then can see Complete in SynPUF 110k CDM53 status in 360 seconds
     When click to Reporting tab tab
     When select "SYNPUF_110K" source
     When click to Full analysis button

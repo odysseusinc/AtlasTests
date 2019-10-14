@@ -4,16 +4,11 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.Properties;
-
 import static atlastests.MyStepdefs.closeLicenseAgreement;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-
 import static org.openqa.selenium.By.xpath;
 
 public class LoginQT extends testDefs {

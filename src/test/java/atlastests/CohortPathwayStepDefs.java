@@ -1,5 +1,8 @@
 package atlastests;
 
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -49,8 +52,10 @@ public class CohortPathwayStepDefs {
     }
 
     @When("^click to cancel button$")
-    public void clickToCancelButton() {
-        $(By.xpath("//*[@class='btn btn-primary']")).waitUntil(enabled, 5000).click();
+    public void clickToCancelButton()  {
+        $$(".asset-heading .input-group-btn .btn").shouldHave(CollectionCondition.size(5)).
+                forEach(SelenideElement::hover);
+        $("[title='Close cohort definition']").waitUntil(enabled, 5000).click();
     }
 
     @Then("^can see table with our cohort pathway$")

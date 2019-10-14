@@ -151,8 +151,9 @@ public class MyStepdefs extends testDefs {
 
     @When("^click to Cohort Definitions menu as QA$")
     public void clickToCohortDefinitionsMenuAsQA() {
-        $(xpath("//*[@class='app__menu']/a[5]")).waitUntil(Condition.enabled, 5000).
+        $("[href='#/cohortdefinitions']").waitUntil(Condition.enabled, 5000).
                 shouldHave(text("Cohort Definitions")).click();
+        $(".buttons-collection").waitUntil(visible, 5000);
     }
 
     @When("^click to Characterizations menu as QA$")

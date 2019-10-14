@@ -1,5 +1,9 @@
 package atlastests;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -9,6 +13,7 @@ import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CohortDefinitionStepDefs {
@@ -24,7 +29,7 @@ public class CohortDefinitionStepDefs {
 
     @When("^click New Cohort button$")
     public void clickNewCohortButton() {
-        $(By.xpath("//*[@class='btn btn-sm btn-primary']")).click();
+        $(By.xpath("//*[@class='btn btn-sm btn-primary']")).waitUntil(enabled, 5000).click();
     }
 
     @Then("^can see new cohort page creation$")
@@ -39,8 +44,10 @@ public class CohortDefinitionStepDefs {
         nameCohort = "Test_" + generatedString;
         $(By.xpath("//*[@class='form-control']")).clear();
         $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
-        $(By.xpath("//*[@class='fa fa-save']")).waitUntil(enabled, 5000).click();
-
+        SelenideElement saveButton = $("[title='Save cohort definition']");
+        saveButton.waitUntil(enabled, 5000).click();
+        saveButton.waitUntil(disabled, 5000);
+        $(".fa-trash-o").waitUntil(enabled, 5000);
     }
 
     @Then("^filtered Cohort Definition$")
@@ -85,28 +92,24 @@ public class CohortDefinitionStepDefs {
 
     @When("^press Add Initial Event$")
     public void pressAddInitialEvent() {
-        $$(By.xpath("//*[@class='btn btn-primary btn-sm dropdown-toggle']")).get(0).
-                waitUntil(visible, 5000).click();
+        $(withText("Add Initial Event")).waitUntil(visible, 5000).click();
+        $$("[data-bind='foreach:$component.primaryCriteriaOptions'] .optionText").
+                forEach(e -> e.hover().shouldHave(visible));
     }
 
     @When("^press Add Condition Occurrence$")
     public void pressAddConditionOcurrence() {
-        $$(By.xpath("//*[@class='dropdown-menu']/li/a")).get(1).waitUntil(visible, 5000).click();
-    }
-
-    @Then("^a condition era block shown$")
-    public void aConditionEraBlockShown() {
-        $(By.xpath("//*[@class='criteriaTable'][1]/tbody/tr/td")).shouldHave(text("a condition occurrence of"));
+        $(withText("Add Condition Occurrence")).waitUntil(visible, 5000).click();
     }
 
     @When("^click to Any Condition menu$")
     public void clickToAnyConditionMenu() {
-        $(By.xpath("//*[@class='btn btn-primary dropdown-toggle']")).click();
+        $("[data-bind='with: Criteria'] conceptset-selector [type='button'][data-toggle='dropdown']").click();
     }
 
     @When("^choose Import Concept Set$")
     public void chooseImportConceptSet() {
-        $(By.xpath("//*[@class='dropdown-menu dropdown-menu-right']/li[2]")).click();
+        $(withText("Import Concept Set")).click();
     }
 
     @Then("^Import Concept Set window shown$")
@@ -123,11 +126,12 @@ public class CohortDefinitionStepDefs {
 
     @When("^click to chosen concept set from repository$")
     public void clickToChosenConceptSetFromRepository() {
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).
+        $("#repositoryConceptSetTable_wrapper tr.repositoryConceptSetItem").
                 waitUntil(enabled, 5000).click();
+        $("#repositoryConceptSetTable .circle").waitUntil(hidden, 10000);
     }
 
-    @Then("^can see name of concept set at the button$")
+    @Then("^can see name of concept set at the button ")
     public void canSeeNameOfConceptSetAtTheButton() {
         $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).waitUntil(visible, 5000).
                 shouldHave(text("Angioedema"));
@@ -267,7 +271,7 @@ public class CohortDefinitionStepDefs {
 
     @Then("^condition occurrence block shown$")
     public void conditionOccurrenceBlockShown() {
-        $(By.xpath("//*[@class = 'criteriaTable']/tbody/tr/td")).shouldHave(text("a condition occurrence of"));
+        $(By.xpath("//*[@class='criteriaTable'][1]/tbody/tr/td")).shouldHave(matchesText("a condition occurrence of"));
     }
 
     @When("^click to save button in Cohort Definition$")
@@ -376,7 +380,7 @@ public class CohortDefinitionStepDefs {
 
     @Then("^can see only one field with text \"([^\"]*)\"$")
     public void canSeeOnlyOneFieldWithText(String arg0) {
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).shouldHave(text(arg0));
+        $("#repositoryConceptSetTable_wrapper .repositoryConceptSetItem").shouldHave(matchesText(arg0));
     }
 
     @When("^click to Generate SynPUF (\\d+)K Cost&Util button$")
@@ -437,7 +441,7 @@ public class CohortDefinitionStepDefs {
     }
 
     @Then("^can see \"([^\"]*)\" in Primary Criteria$")
-    public void canSeeInPrimaryCriteria(String arg0) throws Throwable {
+    public void canSeeInPrimaryCriteria(String arg0) {
         $(By.xpath("//*[@class='name col-xs-2']")).shouldHave(text(arg0));
     }
 
