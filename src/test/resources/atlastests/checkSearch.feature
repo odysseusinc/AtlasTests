@@ -56,7 +56,7 @@ Feature: Search in Vocabularies
     Then check second of four tabs
     #Have to understand issue
 #    Then check third of four tabs
-    Then check fourth of four tabs
+#    Then check fourth of four tabs
 
 
 
