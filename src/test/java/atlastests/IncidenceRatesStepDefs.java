@@ -79,6 +79,13 @@ public class IncidenceRatesStepDefs {
         $(By.xpath("//*[@type='search']")).waitUntil(visible,5000).setValue(newGeneratedString);
     }
 
+    @When("^enter new name of incidence rate$")
+    public void enterNewNameOfIncidenceRate() {
+        newGeneratedString = RandomStringUtils.randomAlphanumeric(10);
+        newGeneratedString = "Test_"+ newGeneratedString;
+        $(By.xpath("//*[@type='text']")).setValue(newGeneratedString);
+    }
+
     @Then("^can see new incidence rate in table$")
     public void canSeeNewIncidenceRateInTable() {
         $(By.xpath("//tbody/tr/td[2]")).shouldHave(text(newGeneratedString));
