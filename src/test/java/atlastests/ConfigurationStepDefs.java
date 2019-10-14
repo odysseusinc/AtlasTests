@@ -1,5 +1,6 @@
 package atlastests;
 
+import com.codeborne.selenide.Condition;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -168,7 +169,8 @@ public class ConfigurationStepDefs {
 
     @When("^click to save button of new role$")
     public void clickToSaveButtonOfNewRole() {
-        $(By.xpath("//*[@class='btn btn-success']")).click();
+        $("[title='Save']").click();
+        $(".disabled[title='Save']").waitUntil(visible, 5000);
     }
 
     @When("^click to cancel button in roles$")
@@ -178,7 +180,8 @@ public class ConfigurationStepDefs {
 
     @When("^enter name of our role in filter$")
     public void enterNameOfOurRoleInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(enabled, 5000).setValue(generatedString);
+        $("[data-bind='text: title']").waitUntil(Condition.text("Roles"), 5000);
+        $(".dataTables_filter input[type='search']").waitUntil(enabled, 5000).setValue(generatedString);
     }
 
     @Then("^can see our role in table$")

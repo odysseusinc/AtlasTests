@@ -46,6 +46,7 @@ Feature: Check configuration
     When enter new name of our role
     When click to save button of new role
     When click to cancel button in roles
+    When enter name of our role in filter
     Then can see our new name role in table
     When click to our new name role
     Then can see our role page
