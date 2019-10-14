@@ -58,7 +58,7 @@ Feature: Check Prediction
     When enter "test" in filter in cohort definition window in Predictions
     When click to result in cohort in Predictions
     Then can see choosed cohort in Prediction Target table
-    When click to add Outcome  Cohort in Predictions
+    When click to add Outcome Cohort in Predictions
     Then can see cohort definition window in Predictions
     When enter "test" in filter in cohort definition window in Predictions
     When click to result in cohort in Predictions
