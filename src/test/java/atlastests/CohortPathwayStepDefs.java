@@ -43,7 +43,9 @@ public class CohortPathwayStepDefs {
 
     @When("^click to save New Cohort Pathway button$")
     public void clickToSaveNewCohortPathwayButton() {
-        $(By.xpath("//*[@class='btn btn-success']")).click();
+        SelenideElement saveButton = $(".asset-heading .btn-success");
+        saveButton.waitUntil(enabled, 5000).click();
+        $(".fa-trash-o").waitUntil(enabled, 5000);
     }
 
     @Then("^can see buttons to cohort pathway$")
@@ -53,6 +55,11 @@ public class CohortPathwayStepDefs {
 
     @When("^click to cancel button$")
     public void clickToCancelButton()  {
+        $(By.xpath("//*[@class='btn btn-primary']")).waitUntil(enabled, 5000).click();
+    }
+
+    @When("^click to cancel button Cohort definition$")
+    public void clickToCancelButtonCohortDefinition()  {
         $$(".asset-heading .input-group-btn .btn").shouldHave(CollectionCondition.size(5)).
                 forEach(SelenideElement::hover);
         $("[title='Close cohort definition']").waitUntil(enabled, 5000).click();
