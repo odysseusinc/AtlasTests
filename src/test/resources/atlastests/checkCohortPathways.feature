@@ -45,7 +45,7 @@ Feature: Cohort Pathway check
     When click to button New Pathway Analysis
     Then can see creation page of New Cohort Pathway
     When enter the same name of cohort pathway
-    When click to save New Cohort Pathway button
+    When click to save New Cohort Pathway button special case
     Then can see alert message about uniqueness
 
   Scenario: Choose target cohorts and event cohorts

@@ -1,6 +1,7 @@
 package atlastests;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -215,7 +216,8 @@ public class ConseptSetsStepDefs {
 
     @Then("^click to save button in Concept Set$")
     public void clickToSaveButtonInConceptSet() {
-        $(By.xpath("//*[@class='btn btn-success']")).waitUntil(visible, 5000).click();
+        $(".input-group-btn .btn-success").waitUntil(enabled, 5000).click();
+        Selenide.sleep(2000);//only one way to wait frontend scenarios
     }
 
     @Then("^click to cancel button in Concept Set$")

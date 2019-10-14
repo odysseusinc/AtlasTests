@@ -48,6 +48,11 @@ public class CohortPathwayStepDefs {
         $(".fa-trash-o").waitUntil(enabled, 5000);
     }
 
+    @When("^click to save New Cohort Pathway button special case$")
+    public void clickToSaveNewCohortPathwaySpecialCaseButton() {
+        $(By.xpath("//*[@class='btn btn-success']")).click();
+    }
+
     @Then("^can see buttons to cohort pathway$")
     public void canSeeButtonsToCohortPathway() {
         $(By.xpath("//*[@class='btn btn-primary']")).waitUntil(visible, 2000);
