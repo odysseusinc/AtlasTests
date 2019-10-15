@@ -1,6 +1,7 @@
 @jobs
 Feature: Check Jobs
 
+  @local
   Scenario: Open job table
     When login to ATLAS as QA
     When click to Jobs menu as QA

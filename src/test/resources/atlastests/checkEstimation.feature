@@ -87,7 +87,7 @@ Feature: check Estimation
 
 
 
-  @estimp
+  @local
   Scenario: Import Levetriacetam vs phenytoin in angioedema
     When login to ATLAS as QA
     When click to Estimation menu as QA

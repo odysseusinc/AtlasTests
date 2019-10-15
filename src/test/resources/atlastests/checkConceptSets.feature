@@ -116,7 +116,7 @@ Feature: Check Concept Sets
     When click to Explore Evidence
     Then can see explore evidence text
 
-
+  @local
   Scenario: Check Export tab in Concept set
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -228,7 +228,7 @@ Feature: Check Concept Sets
     When choose Overwrite Current Concept Set point
     Then can see only one concept in table of concept sets
 
-  @downl
+  @local
   Scenario: Open export mode in the list of concepts and export them
     When login to ATLAS as QA
     When click to Concept Sets menu as QA

@@ -13,7 +13,7 @@ import java.util.Properties;
         (plugin = {"pretty"},
                  glue = {"atlastests"}
 //                 , tags = {"@estimp"}
-                , tags ={"not @qds"}//"not @ds and not @qds"}
+                , tags ={"not @qds and not @local"}//"not @ds and not @qds"}
 //                    , tags = {"@exp"}
                 )
 
