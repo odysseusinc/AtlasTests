@@ -180,7 +180,7 @@ public class ConfigurationStepDefs {
 
     @When("^enter name of our role in filter$")
     public void enterNameOfOurRoleInFilter() {
-        $("[data-bind='text: title']").waitUntil(Condition.text("Roles"), 5000);
+        $("[data-bind='text: title']").waitUntil(Condition.text("Roles"), 10000);
         $(".dataTables_filter input[type='search']").waitUntil(enabled, 5000).setValue(generatedString);
     }
 
