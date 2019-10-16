@@ -101,6 +101,7 @@ report = Procedure
 
 and run command:
 `mvn clean test -Dcucumber.options="src/test/resources/odysseusAT --tags @owndatatestsfromproperty"`
+but it's not possible to set the list of sources for example, because cucumber doesn't support iterations 
 
 ### Allure report
 For generating allure report after test's running you should execute the command:
