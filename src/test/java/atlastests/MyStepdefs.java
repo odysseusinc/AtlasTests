@@ -29,7 +29,7 @@ public class MyStepdefs extends testDefs {
 
     @When("^open project page$")
     public static void openProjectPage() throws Exception {
-        Configuration.headless = false;
+        Configuration.headless = Boolean.parseBoolean(getDataProperties("headless"));
         open(getDataProperties("link"));
         closeLicenseAgreement();
     }

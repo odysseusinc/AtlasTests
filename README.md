@@ -12,6 +12,7 @@ Create file **application.properties** in _src_ directory with parameters:
 - test.mode  
 - test.browser 
 - link
+- headless
 - e.g.
 
 
@@ -24,6 +25,8 @@ _test.mode_ local or remote
 _test.browser_
 
 _link_ is link to test environment
+
+_headless_ false by default, you can configure it
 
 You can run tests in a local browser or remote Selenium Server
 
