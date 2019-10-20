@@ -22,8 +22,8 @@ public class LoginStepsDefs extends testDefs {
     }
 
     @When("^click QA Arachne$")
-    public static void clickTopQAArachne() {
-        $(By.xpath("//*[@class='paddedWrapper']/div/span")).shouldHave(text("ARACHNE")).click();
+    public static void clickTopQAArachne() throws Exception {
+	$(By.xpath("//*[@class='paddedWrapper']/div/span")).shouldHave(text(getDataProperties("environmentname"))).click();
         $(By.xpath("//*[@id='lg_username']")).waitUntil(visible, 30000);
     }
 
