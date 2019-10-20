@@ -30,7 +30,7 @@ public class LoginQT extends testDefs {
     }
 
     public static void openProjectPage() throws Exception {
-        open(getDataProperties("link_dev"));
+        open(getDataProperties("link"));
         closeLicenseAgreement();
     }
 
@@ -77,7 +77,7 @@ public class LoginQT extends testDefs {
 
     @When("^just open home page$")
     public void justOpenHomePage() throws Exception {
-        open(getDataProperties("link_dev"));
+        open(getDataProperties("link"));
         $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible, 10000);
     }
 }
