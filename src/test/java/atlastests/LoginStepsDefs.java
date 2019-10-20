@@ -74,7 +74,6 @@ public class LoginStepsDefs extends testDefs {
     @When("^login with correct credentionas as QA$")
     public static void loginWithCorrectCredentionasAsQA() throws Exception {
         loginAndPasswordEnteredAndSubmitted(getDataProperties("login"), getDataProperties("password"));
-        loginButtonPress();
     }
 
     @When("^login to ATLAS as QA$")
