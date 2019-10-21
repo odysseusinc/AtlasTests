@@ -1125,4 +1125,144 @@ Feature: Check Data Sources reports
     Then can see Achilles Heel windows
 
 
+  #############################################################################################################
+  #eunomia#
+  #############################################################################################################
+
+  @eunomia
+  Scenario: eunomia Source & Dashboard
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Dashboard"
+    Then can see windows in DASHBOARD page
+
+  @eunomia
+  Scenario: eunomia Source & Data Density
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Data Density"
+    Then can see Data Density windows
+
+  @eunomia
+  Scenario: eunomia Source & Person
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Person"
+    Then can see Person windows
+
+  @eunomia
+  Scenario: eunomia Source & Visit
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Visit"
+    Then can see Visit windows
+    When click to element in prevalence in table
+    Then can see tables in Visit for cell
+
+  @eunomia
+  Scenario: eunomia Source & Condition
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Condition Occurrence"
+    Then can see Condition windows
+    When click to element in prevalence in table
+    Then can see tables in Condition for cell
+
+  @eunomia
+  Scenario: eunomia Source & Condition Era
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Condition Era"
+    Then can see Condition Era windows
+    When click to element in prevalence in table
+    Then can see tables in Condition era for cell
+
+
+  @eunomia
+  Scenario: eunomia Source & Procedure
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Procedure"
+    Then can see Procedure windows
+    When click to element in prevalence in table
+    Then can see tables in Procedure for cell
+
+  @eunomia
+  Scenario: eunomia Source & Drug Exposure
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Drug Exposure"
+    Then can see Drug windows
+    When click to element in prevalence in table
+    Then can see tables in Drugs for cell
+
+  @eunomia
+  Scenario: eunomia Source & Drug Era
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Drug Era"
+    Then can see Drug Era windows
+    When click to element in prevalence in table
+    Then can see tables in Drugs Era for cell
+
+
+  @eunomia
+  Scenario: eunomia Source & Measurement
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Measurement"
+    Then can see Measurement windows
+    When click to element in prevalence in table
+    Then can see tables in Measurement for cell
+
+
+  @eunomia
+  Scenario: eunomia Source & Observation
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Observation"
+    Then can see Observation windows
+    When click to element in prevalence in table
+    Then can see tables in Observation for cell
+
+  @eunomia
+  Scenario: eunomia Source & Death
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Death"
+    Then can see Death windows
+
+  @eunomia
+  Scenario: eunomia Source & Achilles Heel
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Achilles Heel"
+    Then can see Achilles Heel windows
+
 
