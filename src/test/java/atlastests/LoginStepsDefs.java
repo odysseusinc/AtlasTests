@@ -22,8 +22,8 @@ public class LoginStepsDefs extends testDefs {
     }
 
     @When("^click QA Arachne$")
-    public static void clickTopQAArachne() {
-        $(By.xpath("//*[@class='paddedWrapper']/div/span")).shouldHave(text("ARACHNE")).click();
+    public static void clickTopQAArachne() throws Exception {
+	$(By.xpath("//*[@class='paddedWrapper']/div/span")).shouldHave(text(getDataProperties("environmentname"))).click();
         $(By.xpath("//*[@id='lg_username']")).waitUntil(visible, 30000);
     }
 
@@ -74,7 +74,6 @@ public class LoginStepsDefs extends testDefs {
     @When("^login with correct credentionas as QA$")
     public static void loginWithCorrectCredentionasAsQA() throws Exception {
         loginAndPasswordEnteredAndSubmitted(getDataProperties("login"), getDataProperties("password"));
-        loginButtonPress();
     }
 
     @When("^login to ATLAS as QA$")
