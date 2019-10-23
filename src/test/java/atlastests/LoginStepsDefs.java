@@ -21,8 +21,8 @@ public class LoginStepsDefs extends testDefs {
         LoginQT.clickToLogInLink();
     }
 
-    @When("^click QA Arachne$")
-    public static void clickTopQAArachne() throws Exception {
+    @When("^click Environment$")
+    public static void clickToEnvironment() throws Exception {
 	$(By.xpath("//*[@class='paddedWrapper']/div/span")).shouldHave(text(getDataProperties("environmentname"))).click();
         $(By.xpath("//*[@id='lg_username']")).waitUntil(visible, 30000);
     }
@@ -80,7 +80,7 @@ public class LoginStepsDefs extends testDefs {
     public void loginToATLASAsQA() throws Throwable {
         openProjectPage();
         clickToLogInLink();
-        clickTopQAArachne();
+        clickToEnvironment();
         loginWithCorrectCredentionasAsQA();
         seeSuccessMessage();
         checkAuthoriseUserAs(getDataProperties("login"));
