@@ -1,6 +1,9 @@
 package atlastests;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -12,7 +15,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class ConfigurationStepDefs {
     private String generatedString;
     private String newGeneratedString;
-
+    private int dataSourceQuantity;
 
     @Then("^Configuration page opens$")
     public void configurationPageOpens() {
@@ -20,117 +23,17 @@ public class ConfigurationStepDefs {
                 shouldHave(text("Configuration"));
     }
 
-    @When("^click to check connection button for Impala$")
-    public void clickToCheckConnectionButtonForImpala() {
-        $(By.xpath("//table/tbody/tr[1]/td[9]/button")).waitUntil(visible, 5000).click();
+    @When("^Click to every datasource connection button$")
+    public void checkEveryDataSourceConnection() {
+        ElementsCollection dataSources = $$("[data-bind='if: $component.canCheckConnection($data)'] .btn");
+        dataSourceQuantity = dataSources.size();
+        dataSources.forEach(SelenideElement::click);
     }
 
-    @Then("^can see success message in button for Impala$")
-    public void canSeeSuccessMessageInButtonForImpala() {
-        $(By.xpath("//table/tbody/tr[1]/td[9]/button")).waitUntil(attribute("class",
-                "connection-check-button btn btn-sm btn-success"), 10000);
-    }
-
-    @When("^click to check connection button for Netezza$")
-    public void clickToCheckConnectionButtonForNetezza() {
-        $(By.xpath("//table/tbody/tr[2]/td[9]/button")).click();
-
-    }
-
-    @Then("^can see success message in button for Netezza$")
-    public void canSeeSuccessMessageInButtonForNetezza() {
-        $(By.xpath("//table/tbody/tr[2]/td[9]/button")).waitUntil(attribute("class",
-                "connection-check-button btn btn-sm btn-success"), 10000);
-
-    }
-
-    @When("^click to check connection button for OVH(\\d+)$")
-    public void clickToCheckConnectionButtonForOVH(int arg0) {
-        $(By.xpath("//table/tbody/tr[3]/td[9]/button")).click();
-
-    }
-
-    @Then("^can see success message in button for OVH(\\d+)$")
-    public void canSeeSuccessMessageInButtonForOVH(int arg0) {
-        $(By.xpath("//table/tbody/tr[3]/td[9]/button")).waitUntil(attribute("class",
-                "connection-check-button btn btn-sm btn-success"), 10000);
-    }
-
-    @When("^click to check connection button for SynPUF (\\d+)K Cost and Util$")
-    public void clickToCheckConnectionButtonForSynPUFKCostAndUtil(int arg0) {
-        $(By.xpath("//table/tbody/tr[4]/td[9]/button")).click();
-    }
-
-    @Then("^can see success message in button for SynPUF (\\d+)K Cost and Util$")
-    public void canSeeSuccessMessageInButtonForSynPUFKCostAndUtil(int arg0) {
-        $(By.xpath("//table/tbody/tr[4]/td[9]/button")).waitUntil(attribute("class",
-                "connection-check-button btn btn-sm btn-success"), 10000);
-    }
-
-    @When("^click to check connection button for SynPUF (\\d+)K GCP Big query$")
-    public void clickToCheckConnectionButtonForSynPUFKGCPBigQuery(int arg0) {
-        $(By.xpath("//table/tbody/tr[5]/td[9]/button")).click();
-    }
-
-    @Then("^can see success message in button for SynPUF (\\d+)K GCP Big query$")
-    public void canSeeSuccessMessageInButtonForSynPUFKGCPBigQuery(int arg0) {
-        $(By.xpath("//table/tbody/tr[5]/td[9]/button")).waitUntil(attribute("class",
-                "connection-check-button btn btn-sm btn-success"), 10000);
-    }
-
-    @When("^click to check connection button for SynPUF (\\d+)K CDM(\\d+) (\\d+)$")
-    public void clickToCheckConnectionButtonForSynPUFKCDM(int arg0, int arg1, int arg2) {
-        $(By.xpath("//table/tbody/tr[6]/td[9]/button")).click();
-    }
-
-    @Then("^can see success message in button for SynPUF (\\d+)K CDM(\\d+) (\\d+)$")
-    public void canSeeSuccessMessageInButtonForSynPUFKCDM(int arg0, int arg1, int arg2) {
-        $(By.xpath("//table/tbody/tr[6]/td[9]/button")).waitUntil(attribute("class",
-                "connection-check-button btn btn-sm btn-success"), 10000);
-    }
-
-    @When("^click to check connection button for SynPUF (\\d+) (\\d+) GCP BigQuery$")
-    public void clickToCheckConnectionButtonForSynPUFGCPBigQuery(int arg0, int arg1) {
-        $(By.xpath("//table/tbody/tr[7]/td[9]/button")).click();
-    }
-
-    @Then("^can see success message in button for SynPUF (\\d+) (\\d+) GCP BigQuery$")
-    public void canSeeSuccessMessageInButtonForSynPUFGCPBigQuery(int arg0, int arg1) {
-        $(By.xpath("//table/tbody/tr[7]/td[9]/button")).waitUntil(attribute("class",
-                "connection-check-button btn btn-sm btn-success"), 10000);
-    }
-
-    @When("^click to check connection button for SynPUF (\\d+)M GCP BigQuery$")
-    public void clickToCheckConnectionButtonForSynPUFMGCPBigQuery(int arg0) {
-        $(By.xpath("//table/tbody/tr[8]/td[9]/button")).click();
-    }
-
-    @Then("^can see success message in button for SynPUF (\\d+)M GCP BigQuery$")
-    public void canSeeSuccessMessageInButtonForSynPUFMGCPBigQuery(int arg0) {
-        $(By.xpath("//table/tbody/tr[8]/td[9]/button")).waitUntil(attribute("class",
-                "connection-check-button btn btn-sm btn-success"), 10000);
-    }
-
-    @When("^click to check connection button for SynPUF Geo$")
-    public void clickToCheckConnectionButtonForSynPUFGeo() {
-        $(By.xpath("//table/tbody/tr[9]/td[9]/button")).click();
-    }
-
-    @Then("^can see success message in button for SynPUF Geo$")
-    public void canSeeSuccessMessageInButtonForSynPUFGeo() {
-        $(By.xpath("//table/tbody/tr[9]/td[9]/button")).waitUntil(attribute("class",
-                "connection-check-button btn btn-sm btn-success"), 10000);
-    }
-
-    @When("^click to check connection button for oracle (\\d+)k$")
-    public void clickToCheckConnectionButtonForOracleK(int arg0) {
-        $(By.xpath("//table/tbody/tr[10]/td[9]/button")).click();
-    }
-
-    @Then("^can see success message in button for oracle (\\d+)k$")
-    public void canSeeSuccessMessageInButtonForOracleK(int arg0) {
-        $(By.xpath("//table/tbody/tr[10]/td[9]/button")).waitUntil(attribute("class",
-                "connection-check-button btn btn-sm btn-success"), 10000);
+    @Then("^Successful connection messages are visible$")
+    public void checkVisibilityOfEverySuccessfulConnection() {
+        $$("[data-bind='if: $component.canCheckConnection($data)'] .btn-success").
+                shouldHave(CollectionCondition.size(dataSourceQuantity), 60000);
     }
 
     @When("^click to Manage permission button$")

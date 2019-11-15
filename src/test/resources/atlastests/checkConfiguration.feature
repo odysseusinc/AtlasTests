@@ -6,26 +6,8 @@ Feature: Check configuration
     When login to ATLAS as QA
     When click to Configuration menu as QA
     Then Configuration page opens
-    When click to check connection button for Impala
-    Then can see success message in button for Impala
-    When click to check connection button for Netezza
-    Then can see success message in button for Netezza
-    When click to check connection button for OVH02
-    Then can see success message in button for OVH02
-    When click to check connection button for SynPUF 110K Cost and Util
-    Then can see success message in button for SynPUF 110K Cost and Util
-    When click to check connection button for SynPUF 110K GCP Big query
-    Then can see success message in button for SynPUF 110K GCP Big query
-    When click to check connection button for SynPUF 110K CDM5 3
-    Then can see success message in button for SynPUF 110K CDM5 3
-    When click to check connection button for SynPUF 2 3 GCP BigQuery
-    Then can see success message in button for SynPUF 2 3 GCP BigQuery
-    When click to check connection button for SynPUF 2M GCP BigQuery
-    Then can see success message in button for SynPUF 2M GCP BigQuery
-    When click to check connection button for SynPUF Geo
-    Then can see success message in button for SynPUF Geo
-    When click to check connection button for oracle 110k
-    Then can see success message in button for oracle 110k
+    When Click to every datasource connection button
+    Then Successful connection messages are visible
 
   Scenario: Create edit and delete role
     When login to ATLAS as QA
