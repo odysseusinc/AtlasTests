@@ -120,6 +120,7 @@ public class SearchDefs {
 
     @Then("^file download$")
     public void fileDownload() throws Exception {
+	Thread.sleep(5000); // wait for file to download
         Assert.assertTrue(isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), "ATLAS Search.csv"));
     }
 
