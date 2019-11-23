@@ -109,15 +109,6 @@ Feature: Check Cohort Definitions
     Then can see block with inclusion criterias
 
 
-  Scenario: Sorting, paging
-    When login to ATLAS as QA
-    When click to Cohort Definitions menu as QA
-    Then can see Cohort Definition page
-    When click to Id column
-    Then can see that first value less then second
-    Then can see paging
-
-
   Scenario: Export and Import to new Cohort Definition
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -239,5 +230,48 @@ Feature: Check Cohort Definitions
     When accept an alert about time
     Then can see a row with status Started
 
+Scenario: Sorting, paging
+    When login to ATLAS as QA
+    When click to Cohort Definitions menu as QA
+    Then can see Cohort Definition page
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When click to cancel button Cohort definition
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When click to cancel button Cohort definition
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When click to cancel button Cohort definition
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When click to cancel button Cohort definition
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When click to cancel button Cohort definition
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When click to cancel button Cohort definition
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When click to cancel button Cohort definition
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When click to cancel button Cohort definition
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When click to cancel button Cohort definition
+    When click to Id column
+    Then can see that first value less then second
+    Then can see paging
 
 

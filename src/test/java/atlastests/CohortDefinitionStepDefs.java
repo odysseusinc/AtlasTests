@@ -293,7 +293,7 @@ public class CohortDefinitionStepDefs {
 
     @Then("^can see paging$")
     public void canSeePaging() {
-        $(By.xpath("//*[@class= 'paginate_button ']")).shouldBe(visible);
+        $(By.xpath("//*[@class= 'paginate_button next']")).shouldBe(visible);
     }
 
     @When("^enter \"([^\"]*)\" in filter in cohort definition$")
