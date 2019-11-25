@@ -47,6 +47,31 @@ Feature: Incident rates check
     Then can see Utilities page in IR
 
 
+  @eunomiaIr
+  Scenario: Create IR as GI Bleed across Celecoxib new users
+    When login to ATLAS as QA
+    When click to Incidence Rates menu as QA
+    Then can see Incidence Rates page
+    When click to New Analysis button in Incidence Rates
+    Then can see Incidence Rates creation page
+    When enter "Incidence of GI Bleed after Celecoxib initiation" name on new Incidence Rate
+    When click to save Incidence Rates Button
+    When click to add Target Cohort
+    When enter "Celecoxib new users" in filter of cohort
+    When click to result in IR
+    When close Cohort window in IR
+    Then can see "Celecoxib new users" Target Cohort
+    When click to Add Outcome Cohort
+    When enter "GI bleed" in filter of cohort
+    When click to result in IR
+    When close Cohort window in IR
+    Then can see "GI bleed" Outcome Cohort
+    When choose Time at risk starts with value 0
+    When choose Time at risk ends with value 1095
+    When click to save Incidence Rates Button
+    When click to cancel button in Incidence rates
+  
+   
   @2406
   Scenario: Create IR as Angioedema across levetriacetam new users
     When login to ATLAS as QA
@@ -93,3 +118,20 @@ Feature: Incident rates check
       When past json to IR textarea
       When click to import ir button
       Then can see Target cohorts with "Aspirin users" and "Clopidogrel" values
+
+    @eunomiaExpImpIr
+    Scenario: GI Bleed Celecoxib new users Export and Import
+      When login to ATLAS as QA
+      When click to Incidence Rates menu as QA
+      Then can see Incidence Rates page
+      When enter "Incidence of GI Bleed after Celecoxib initiation" in filter of cohort
+      When click to result in IR
+      When click to Utilities tab
+      When click to Export tab in IR
+      When copy text from export textarea
+      When click to cancel button in Incidence rates
+      When click to New Analysis button in Incidence Rates
+      When click to Utilities tab
+      When past json to IR textarea
+      When click to import ir button
+      Then can see Target cohort with "Celecoxib new users" value

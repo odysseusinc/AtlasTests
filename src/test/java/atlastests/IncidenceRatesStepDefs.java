@@ -36,6 +36,11 @@ public class IncidenceRatesStepDefs {
         $(By.xpath("//*[@type='text']")).setValue(generatedString);
     }
 
+    @When("^enter \"([^\"]*)\" name on new Incidence Rate$")
+    public void enterNameOnNewIncidenceRate(String arg0) {
+        $(By.xpath("//*[@type='text']")).setValue(arg0);
+    }
+
     @When("^click to save Incidence Rates Button$")
     public void clickToSaveIncidenceRatesButton() {
         $(By.xpath("//*[@class='fa fa-save']")).click();
@@ -175,7 +180,11 @@ public class IncidenceRatesStepDefs {
     public void canSeeNewRowsUnderTargetCohorts() {
         $(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]/span")).shouldHave(text("New users of phenytoin"));
         $(By.xpath("//table/tbody/tr[2]/td/table/tbody[2]/tr/td[3]/span")).shouldHave(text("New users of levetiracetam "));
+    }
 
+    @Then("^can see \"([^\"]*)\" Target Cohort$")
+    public void canSeeTargetCohort(String arg0) {
+        $(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]/span")).shouldHave(text(arg0));
     }
 
     @When("^click to Add Outcome Cohort$")
@@ -187,6 +196,11 @@ public class IncidenceRatesStepDefs {
     public void canSeeNewRowsUnderOutcomeCohort() {
         $(By.xpath("//table[1]/tbody/tr[2]/td[2]/table/tbody/tr/td[3]/span")).
                 shouldHave(text("Levetriacetam vs phenytoin outcome cohort"));
+    }
+
+    @Then("^can see \"([^\"]*)\" Outcome Cohort$")
+    public void canSeeOutcomeCohort(String arg0) {
+        $(By.xpath("//table[1]/tbody/tr[2]/td[2]/table/tbody/tr/td[3]/span")).shouldHave(text(arg0));
     }
 
     @When("^choose Time at risk starts with value (\\d+)$")
@@ -257,5 +271,10 @@ public class IncidenceRatesStepDefs {
     public void canSeeTargetCohortsWithAndValues(String arg0, String arg1) throws Throwable {
         $$(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]")).get(0).shouldHave(text(arg0));
         $$(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]")).get(1).shouldHave(text(arg1));
+    }
+
+    @Then("^can see Target cohort with \"([^\"]*)\" value$")
+    public void canSeeTargetCohortWithValue(String arg0) throws Throwable {
+        $$(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]")).get(0).shouldHave(text(arg0));
     }
 }
