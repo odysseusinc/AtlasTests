@@ -24,7 +24,7 @@ Feature: Check Jobs
     When click to name of column
     Then can see that Id order was changed
     #change after
-    When enter "Generating " in search filter
+    When enter "warming" in search filter
     Then can see our result in table
 
   @2406
