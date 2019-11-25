@@ -201,6 +201,11 @@ public class MyStepdefs extends testDefs {
         $(xpath("//*[@class='app__menu']/a[13]")).shouldHave(text("Configuration")).click();
     }
 
+    @When("^click to Configuration menu as admin$")
+    public void clickToConfigurationMenuAsAdmin() {
+        $(xpath("//*[@class='app__menu']/a[13]")).shouldHave(text("Configuration")).click();
+    }
+
     private void unauthenticatedCheck() {
         $("unauthenticated").waitUntil(visible, 20000);
     }

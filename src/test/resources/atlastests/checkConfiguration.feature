@@ -3,15 +3,15 @@ Feature: Check configuration
 
   @co
   Scenario: Open configuration page and check connection
-    When login to ATLAS as QA
-    When click to Configuration menu as QA
+    When login to ATLAS as admin
+    When click to Configuration menu as admin
     Then Configuration page opens
     When Click to every datasource connection button
     Then Successful connection messages are visible
 
   Scenario: Create edit and delete role
-    When login to ATLAS as QA
-    When click to Configuration menu as QA
+    When login to ATLAS as admin
+    When click to Configuration menu as admin
     Then Configuration page opens
     When click to Manage permission button
     Then can see Roles creation page
