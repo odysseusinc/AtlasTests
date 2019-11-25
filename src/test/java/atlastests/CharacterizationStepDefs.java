@@ -249,13 +249,13 @@ public class CharacterizationStepDefs {
         $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
     }
 
-    @When("^click to IMPALA Generate report button$")
-    public void clickToIMPALAGenerateReportButton() {
+    @When("^click Generate report button on first data source$")
+    public void clickToGenerateReportButtonOnFirstDataSource() {
         $$(By.xpath("//*[@class='characterization-view-edit-executions__action-text']")).get(0).click();
     }
 
-    @Then("^Impala generate button has to be with Cancel text$")
-    public void impalaGenerateButtonHasToBeWithCancelText() {
+    @Then("^first data source generate button has to be with Cancel text$")
+    public void firstGenerateButtonHasToBeWithCancelText() {
         $$(By.xpath("//*[@class='btn btn-sm btn-danger']")).get(0).waitUntil(text("Cancel"), 4000);
     }
 

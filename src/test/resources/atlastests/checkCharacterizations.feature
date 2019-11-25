@@ -66,6 +66,29 @@ Feature: Characterization check
     Then cant find feature analyse in the table
 
 
+  @eunomiaCharacterization
+  Scenario: Import cohort definition, feature analyses, and generate with first data source
+    When login to ATLAS as QA
+    When click to Characterizations menu as QA
+    Then can see Characterization page
+    When click to New characterization button
+    When enter Characterization name and save it
+    When click to Import Cohort Definition
+    Then can see window with cohort definition
+    When choose cohort definition "Celecoxib new users" from the table in characterization
+    Then can see cohort definition in characterization list with text "Celecoxib new users"
+    When click to Import Feature analyses
+    Then can see Feature analyses window
+    When click to feature checkbox with text "Condition Era Long Term" from Feature analyses
+    When click to feature checkbox with text "Condition Era Short Term" from Feature analyses
+    When click to Import Feature analyse
+    Then Feature analyse table is visible
+    Then can see result of our search "Condition Era Short Term" and "Condition Era Long Term"
+    When click to save Chacterization
+    When click to Executions tab in Characterizations
+    When click Generate report button on first data source
+    Then first data source generate button has to be with Cancel text
+
   Scenario: Import definitions, features and IMPALA report
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -86,9 +109,8 @@ Feature: Characterization check
     When click Remove first Feature Analyse from the table
     When click to save Chacterization
     When click to Executions tab in Characterizations
-    When click to IMPALA Generate report button
-    Then Impala generate button has to be with Cancel text
-
+    When click Generate report button on first data source
+    Then first data source generate button has to be with Cancel text
 
   Scenario: Import definitions, features and Netezza report
     When login to ATLAS as QA
