@@ -10,6 +10,17 @@ Feature: check Profile
     Then can see overlay
     Then can see table
 
+@eunomiaprofile
+  Scenario: choose profile of Eunomia
+    When login to ATLAS as QA
+    When click to Profiles menu as QA
+    Then can see Profiles page
+    When click to Select a Data Source
+    When choose "OHDSI Eunomia CDM V5 Database" in Profile Source
+    When enter 1 in Profile Id and press Enter
+    Then can see overlay
+    Then can see table
+
   Scenario: choose profile of Netezza53
     When login to ATLAS as QA
     When click to Profiles menu as QA
