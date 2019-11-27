@@ -124,6 +124,11 @@ public class PredictionStepDefs {
         $("#filters").find(withText("Prediction Problem Settings")).click();
     }
 
+    @When("^click to Prediction Problem Settings tab without ee$")
+    public void clickToPredictionProblemSettingsTabWithoutEE() {
+        $(By.xpath("//*[@id='filters']/div/div[2]/ul/li[2]/a")).click();
+    }
+
     @Then("^can see Prediction Problem Settings page$")
     public void canSeePredictionProblemSettingsPage() {
         panelPrimary.get(1).waitUntil(Condition.enabled, 5000).shouldNotBe(visible);
@@ -142,6 +147,11 @@ public class PredictionStepDefs {
     @When("^click to Execution Setting tab in Prediction$")
     public void clickToExecutionSettingTabInPrediction() {
         $(By.xpath("//*[@class='pull-left']/ul/li[4]")).click();
+    }
+
+    @When("^click to Execution Setting tab in Prediction without ee$")
+    public void clickToExecutionSettingTabInPredictionWithoutEE() {
+        $(By.xpath("//*[@id='filters']/div/div[2]/ul/li[4]/a")).click();
     }
 
     @Then("^can see Execution Setting page in Prediction$")
@@ -176,6 +186,11 @@ public class PredictionStepDefs {
     @When("^click to Utilities page in Prediction$")
     public void clickToUtilitiesPageInPrediction() {
         $(By.xpath("//*[@class='tabs__header']/span[3]")).click();
+    }
+
+    @When("^click to Utilities page in Prediction without ee$")
+    public void clickToUtilitiesPageInPredictionWithoutEE() {
+        $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
     }
 
     @Then("^can see Utilities page in Prediction$")
@@ -274,6 +289,11 @@ public class PredictionStepDefs {
     @When("^click to Utilities button in Prediction$")
     public void clickToUtilitiesButtonInPrediction() {
         $(By.xpath("//*[@class='tabs__header']/span[3]")).click();
+    }
+
+    @When("^click to Utilities button in Prediction without ee$")
+    public void clickToUtilitiesButtonInPredictioWithoutEEn() {
+        $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
     }
 
     @Then("^can see Review and Download table with selected target cohort$")
