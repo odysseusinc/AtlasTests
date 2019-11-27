@@ -57,15 +57,12 @@ Feature: Cohort Pathway check
     When enter new name of cohort pathway
     When click to save New Cohort Pathway button
     When click to Import Target Cohorts
-    Then can see window with cohort definition
-    When choose cohort definition from the table in target cohort list
+    When choose cohort definition "Celecoxib new users" from the table in target cohort list
     Then can see cohort definition in target cohort list list
     When click to Import Event Cohorts
-#    Then can see window with cohort definition
-    When choose cohort definition from the table in event cohort list
+    When choose cohort definition "GI bleed" from the table in event cohort list
     Then can see cohort definition in event cohort list list
     When click to save our cohort pathway
-
 
   Scenario: Executions and Utilities tab
     When login to ATLAS as QA
@@ -80,12 +77,24 @@ Feature: Cohort Pathway check
     When click to Utilities tab
     Then can see Utilities page
 
-  @exp
+#  @exp
   Scenario: Export and Import
     When login to ATLAS as QA
     When click to Cohort Pathways menu as QA
     Then can see Cohort Pathway page
-    When enter "Kinda-real Diabetes type-II treatment pathways" in search filter
+    When click to button New Pathway Analysis
+    Then can see creation page of New Cohort Pathway
+    When enter new name of cohort pathway
+    When click to save New Cohort Pathway button
+    When click to Import Target Cohorts
+    When choose cohort definition "Celecoxib new users" from the table in target cohort list
+    Then can see cohort definition in target cohort list list
+    When click to Import Event Cohorts
+    When choose cohort definition "GI bleed" from the table in event cohort list
+    Then can see cohort definition in event cohort list list
+    When click to save our cohort pathway
+    When click to cancel button
+    Then can see table with our cohort pathway
     When click to cohort pathway in table
     When click to Utilities tab
     When copy text from export textarea
@@ -98,8 +107,6 @@ Feature: Cohort Pathway check
     When click to Import cohort pathway
     When past json to pathway textarea
     When click Import button in Pathways
-    Then can see target cohorts in table like as "New users of levetiracetam"
-
-
+    Then can see target cohorts in table like as "Celecoxib new users"
 
 
