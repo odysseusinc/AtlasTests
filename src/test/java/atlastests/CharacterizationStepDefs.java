@@ -77,7 +77,7 @@ public class CharacterizationStepDefs {
 
     @When("^click to Import Cohort Definition$")
     public void clickToImportCohortDefinition() {
-        $$(byText("Import")).get(0).click();
+        $$(byText("Import")).get(0).waitUntil(visible, 3000).click();
     }
 
     @When("^choose cohort definition from the table in characterization$")
