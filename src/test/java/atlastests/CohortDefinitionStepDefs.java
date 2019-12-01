@@ -346,8 +346,18 @@ public class CohortDefinitionStepDefs {
         $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td/span/span/button")).click();
     }
 
+    @When("^click to Generate first data source button$")
+    public void clickToGenerateFirstDataSourceButton() {
+        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td/span/span/button")).click();
+    }
+
     @Then("^can see Complete in IMPALA status in (\\d+) seconds$")
     public void canSeeCompleteStatusInSeconds(int arg0) {
+        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
+    }
+
+    @Then("^can see Complete in first data source status in (\\d+) seconds$")
+    public void canSeeCompleteFirstDSStatusInSeconds(int arg0) {
         $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
     }
 
@@ -356,11 +366,16 @@ public class CohortDefinitionStepDefs {
         $(By.xpath("//*[@class='nav nav-tabs']/li[4]")).click();
     }
 
-
     @When("^select \"([^\"]*)\" source$")
     public void selectSource(String arg0) {
         $(By.xpath("//*[@class='form-control invalid']")).click();
         $(By.xpath("//*[@class='form-control invalid']")).selectOptionByValue(arg0);
+    }
+
+    @When("^select first data source$")
+    public void selectFirstDataSource() {
+        $(By.xpath("//*[@class='form-control invalid']")).click();
+        $(By.xpath("//*[@class='form-control invalid']")).selectOption(1);
     }
 
     @When("^click to quick analysis button$")
