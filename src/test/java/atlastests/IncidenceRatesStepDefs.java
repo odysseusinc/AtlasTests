@@ -157,7 +157,7 @@ public class IncidenceRatesStepDefs {
 
     @When("^click to add Target Cohort$")
     public void clickToAddTargetCohort() {
-        $(byText("Add Target Cohort")).click();
+        $(byText("Add Target Cohort")).waitUntil(visible, 3000).click();
     }
 
     @When("^enter \"([^\"]*)\" in filter of cohort$")
@@ -189,7 +189,7 @@ public class IncidenceRatesStepDefs {
 
     @When("^click to Add Outcome Cohort$")
     public void clickToAddOutcomeCohort() {
-        $(byText("Add Outcome Cohort")).click();
+        $(byText("Add Outcome Cohort")).waitUntil(visible, 3000).click();
     }
 
     @Then("^can see new rows under Outcome Cohort$")
@@ -264,7 +264,7 @@ public class IncidenceRatesStepDefs {
 
     @When("^click to import ir button$")
     public void clickToImportIrButton() {
-        $(By.xpath("//*[@class='import__import-btn btn btn-default btn-sm']")).click();
+        $(By.xpath("//*[@class='import__import-btn btn btn-default btn-sm']")).waitUntil(visible, 3000).click();
     }
 
     @Then("^can see Target cohorts with \"([^\"]*)\" and \"([^\"]*)\" values$")

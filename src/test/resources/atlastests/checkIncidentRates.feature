@@ -46,7 +46,6 @@ Feature: Incident rates check
     When click to Utilities page in IR
     Then can see Utilities page in IR
 
-
   @eunomiaIr
   Scenario: Create IR as GI Bleed across Celecoxib new users
     When login to ATLAS as QA
@@ -65,7 +64,7 @@ Feature: Incident rates check
     When enter "GI bleed" in filter of cohort
     When click to result in IR
     When close Cohort window in IR
-    Then can see "GI bleed" Outcome Cohort
+    Then can see "bleed" Outcome Cohort
     When choose Time at risk starts with value 0
     When choose Time at risk ends with value 1095
     When click to save Incidence Rates Button
