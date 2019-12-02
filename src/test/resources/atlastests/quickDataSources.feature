@@ -4,6 +4,57 @@ Feature: Quick test Data Source
   ##################################################################
     # Quick tests                                                    #
     ##################################################################
+  @qt_ds @eunomiaqt
+  Scenario: Quick test Eunomia data source
+    When login to ATLAS as QA
+    When click to Data Sources menu as user
+    When Data Source Page opened
+    When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
+    When choose Report from Data Source as "Dashboard"
+    Then can see windows in DASHBOARD page
+    When Data Source Page opened
+    When choose Report from Data Source as "Data Density"
+    Then can see Data Density windows
+    When choose Report from Data Source as "Person"
+    Then can see Person windows
+    When choose Report from Data Source as "Visit"
+    Then can see Visit windows
+    When click to element in prevalence in table
+    Then can see tables in Visit for cell
+    When choose Report from Data Source as "Condition Occurrence"
+    Then can see Condition windows
+    When click to element in prevalence in table
+    Then can see tables in Condition for cell
+    When choose Report from Data Source as "Condition Era"
+    Then can see Condition Era windows
+    When click to element in prevalence in table
+    Then can see tables in Condition era for cell
+    When choose Report from Data Source as "Procedure"
+    Then can see Procedure windows
+    When click to element in prevalence in table
+    Then can see tables in Procedure for cell
+    When choose Report from Data Source as "Drug Exposure"
+    Then can see Drug windows
+    When click to element in prevalence in table
+    Then can see tables in Drugs for cell
+    When choose Report from Data Source as "Drug Era"
+    Then can see Drug Era windows
+    When click to element in prevalence in table
+    Then can see tables in Drugs Era for cell
+    When choose Report from Data Source as "Measurement"
+    Then can see Measurement windows
+    When click to element in prevalence in table
+    Then can see tables in Measurement for cell
+    When choose Report from Data Source as "Observation"
+    Then can see Observation windows
+    When click to element in prevalence in table
+    Then can see tables in Observation for cell
+    When choose Report from Data Source as "Death"
+    Then can see Death windows
+    When choose Report from Data Source as "Achilles Heel"
+    Then can see Achilles Heel windows
+
+
   @qt_dev
   Scenario: Quick Test Impala
     When login to ATLAS as QA QT
