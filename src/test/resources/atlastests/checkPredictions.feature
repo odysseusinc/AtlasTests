@@ -1,6 +1,7 @@
 @predictions
 Feature: Check Prediction
 
+  @common
   Scenario: Create, Edit, Delete predictions
     When login to ATLAS as QA
     When click to Prediction menu as QA
@@ -25,7 +26,7 @@ Feature: Check Prediction
     When accept delete Prediction alert
     Then cant find Prediction in table
 
-  @2406
+  @2406 @odysseus
   Scenario: Check tabs in Prediction with execution engine
     When login to ATLAS as QA
     When click to Prediction menu as QA
@@ -44,7 +45,7 @@ Feature: Check Prediction
     When click to Utilities page in Prediction
     Then can see Utilities page in Prediction
 
-  @no_ee
+  @no_ee @ohdsi
   Scenario: Check tabs in Prediction without execution engine
     When login to ATLAS as QA
     When click to Prediction menu as QA
@@ -61,7 +62,7 @@ Feature: Check Prediction
     When click to Utilities page in Prediction without ee
     Then can see Utilities page in Prediction
 
-  @pr_dev
+  @pr_dev @odysseus
   Scenario: Fill all fields as we can with execution engine
     When login to ATLAS as QA
     When click to Prediction menu as QA
@@ -96,7 +97,7 @@ Feature: Check Prediction
     When click to Utilities button in Prediction
     Then can see Review and Download table with selected target cohort
 
-  @no_ee
+  @no_ee @ohdsi
   Scenario: Fill all fields as we can without execution engine
     When login to ATLAS as QA
     When click to Prediction menu as QA

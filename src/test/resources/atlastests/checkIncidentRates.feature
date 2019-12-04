@@ -1,6 +1,7 @@
 @incidencerates
 Feature: Incident rates check
 
+  @common
   Scenario: Create IR, save, edit, create copy, delete
     When login to ATLAS as QA
     When click to Incidence Rates menu as QA
@@ -31,6 +32,7 @@ Feature: Incident rates check
     Then cant find IR in table
 
 
+  @common
   Scenario: Check tabs in IR
     When login to ATLAS as QA
     When click to Incidence Rates menu as QA
@@ -46,7 +48,8 @@ Feature: Incident rates check
     When click to Utilities page in IR
     Then can see Utilities page in IR
 
-  @eunomiaIr
+
+  @ohdsi
   Scenario: Create IR as GI Bleed across Celecoxib new users
     When login to ATLAS as QA
     When click to Incidence Rates menu as QA
@@ -71,7 +74,7 @@ Feature: Incident rates check
     When click to cancel button in Incidence rates
   
    
-  @2406
+  @2406 @odysseus
   Scenario: Create IR as Angioedema across levetriacetam new users
     When login to ATLAS as QA
     When click to Incidence Rates menu as QA
@@ -101,7 +104,7 @@ Feature: Incident rates check
     #hardcode
     Then can see chosen concept set in table
 
-    @expIr
+    @expIr @odysseus
     Scenario: Import and Export
       When login to ATLAS as QA
       When click to Incidence Rates menu as QA
@@ -118,7 +121,7 @@ Feature: Incident rates check
       When click to import ir button
       Then can see Target cohorts with "Aspirin users" and "Clopidogrel" values
 
-    @eunomiaExpImpIr
+    @ohdsi
     Scenario: GI Bleed Celecoxib new users Export and Import
       When login to ATLAS as QA
       When click to Incidence Rates menu as QA

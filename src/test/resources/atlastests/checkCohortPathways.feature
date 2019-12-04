@@ -1,7 +1,7 @@
 @cohortpathways
 Feature: Cohort Pathway check
 
-  @1707
+  @1707 @common
   Scenario: Create, Edit, copy and delete pathway
     When login to ATLAS as QA
     When click to Cohort Pathways menu as QA
@@ -29,6 +29,7 @@ Feature: Cohort Pathway check
     When accept delete cohort pathway
     Then cant see our cohort pathway in table
 
+  @common
   Scenario:  Check uniqueness of cohort pathway
     When login to ATLAS as QA
     When click to Cohort Pathways menu as QA
@@ -48,6 +49,7 @@ Feature: Cohort Pathway check
     When click to save New Cohort Pathway button special case
     Then can see alert message about uniqueness
 
+  @common
   Scenario: Choose target cohorts and event cohorts
     When login to ATLAS as QA
     When click to Cohort Pathways menu as QA
@@ -64,6 +66,7 @@ Feature: Cohort Pathway check
     Then can see cohort definition in event cohort list list
     When click to save our cohort pathway
 
+  @common
   Scenario: Executions and Utilities tab
     When login to ATLAS as QA
     When click to Cohort Pathways menu as QA
@@ -77,7 +80,7 @@ Feature: Cohort Pathway check
     When click to Utilities tab
     Then can see Utilities page
 
-#  @exp
+  @exp @common
   Scenario: Export and Import
     When login to ATLAS as QA
     When click to Cohort Pathways menu as QA

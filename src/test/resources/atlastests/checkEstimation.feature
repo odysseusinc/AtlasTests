@@ -1,6 +1,7 @@
 @estimations
 Feature: check Estimation
 
+  @common
   Scenario: Create, Edit, Delete estimate
     When login to ATLAS as QA
     When click to Estimation menu as QA
@@ -24,7 +25,7 @@ Feature: check Estimation
     When accept delete Estimation
     Then cant see our Estimation in table
 
-  @2406
+  @2406 @common
   Scenario: Check tabs in Estimation
     When login to ATLAS as QA
     When click to Estimation menu as QA
@@ -41,7 +42,7 @@ Feature: check Estimation
     When click to Utilities page in Estimation
     Then can see Utilities page in Estimation
 
-  @est
+  @est @common
   Scenario: Create full list of Estimation
     When login to ATLAS as QA
     When click to Estimation menu as QA
@@ -87,7 +88,7 @@ Feature: check Estimation
 
 
 
-  @local
+  @local @common
   Scenario: Import Levetriacetam vs phenytoin in angioedema
     When login to ATLAS as QA
     When click to Estimation menu as QA

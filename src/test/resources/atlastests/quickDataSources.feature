@@ -4,7 +4,7 @@ Feature: Quick test Data Source
   ##################################################################
     # Quick tests                                                    #
     ##################################################################
-  @qt_ds @eunomiaqt
+  @qt_ds @eunomiaqt @ohdsi
   Scenario: Quick test Eunomia data source
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -55,7 +55,7 @@ Feature: Quick test Data Source
     Then can see Achilles Heel windows
 
 
-  @qt_dev
+  @qt_dev @odysseus
   Scenario: Quick Test Impala
     When login to ATLAS as QA QT
     When click to Data Sources menu as user
@@ -119,7 +119,7 @@ Feature: Quick test Data Source
     Then can see preloader in Data Source
     Then can see Achilles Heel windows
 
-  @qt_ds @qt_netezza
+  @qt_ds @qt_netezza @odysseus
   Scenario: Quick test Netezza CDM5.3
     When login to ATLAS as QA QT
     When click to Data Sources menu as user
@@ -182,7 +182,7 @@ Feature: Quick test Data Source
     Then can see Achilles Heel windows
 
 
-  @qt_ds @qt_ovh02synpuf110k
+  @qt_ds @qt_ovh02synpuf110k @odysseus
   Scenario: Quick test OVH02 SynPUF 110k
     When login to ATLAS as QA QT
     When click to Data Sources menu as user
@@ -244,7 +244,7 @@ Feature: Quick test Data Source
     Then can see preloader in Data Source
     Then can see Achilles Heel windows
 
-  @qt_ds @qt_synpuf110kcost&util
+  @qt_ds @qt_synpuf110kcost&util @odysseus
   Scenario: Quick test SynPUF 110k Cost&Util
     When login to ATLAS as QA QT
     When click to Data Sources menu as user
@@ -306,7 +306,7 @@ Feature: Quick test Data Source
     Then can see preloader in Data Source
     Then can see Achilles Heel windows
 
-  @qt_ds @qt_synpuf110kcdm5.3
+  @qt_ds @qt_synpuf110kcdm5.3 @odysseus
   Scenario: Quick test SynPUF 110k CDM5.3
     When login to ATLAS as QA QT
     When click to Data Sources menu as user
@@ -368,7 +368,7 @@ Feature: Quick test Data Source
     Then can see preloader in Data Source
     Then can see Achilles Heel windows
 
-  @qt_ds @qt_synpuf2.3m(GCPbigQuery)
+  @qt_ds @qt_synpuf2.3m(GCPbigQuery) @odysseus
   Scenario: Quick test SynPUF 2.3m (GCP BigQuery)
     When login to ATLAS as QA QT
     When click to Data Sources menu as user
@@ -431,7 +431,7 @@ Feature: Quick test Data Source
     Then can see Achilles Heel windows
 
 
-  @qt_ds @qt_synpuf2mcdm5.3
+  @qt_ds @qt_synpuf2mcdm5.3 @odysseus
   Scenario: Quick test SynPUF 2M CDM5.3
     When login to ATLAS as QA QT
     When click to Data Sources menu as user
@@ -494,7 +494,7 @@ Feature: Quick test Data Source
     Then can see Achilles Heel windows
 
 
-  @qt_ds @qt_oracle-110k
+  @qt_ds @qt_oracle-110k @odysseus
   Scenario: Quick test oracle-110k
     When login to ATLAS as QA QT
     When click to Data Sources menu as user

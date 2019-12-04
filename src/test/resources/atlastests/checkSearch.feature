@@ -1,7 +1,7 @@
 @search
 Feature: Search in Vocabularies
 
-  @ss
+  @ss @common
   Scenario: Search something
     When login to ATLAS as QA
     When click to Search menu as QA
@@ -14,6 +14,7 @@ Feature: Search in Vocabularies
     When click to button Standard Concept Caption
     Then Standard Concept Caption should be shown
 
+  @common
   Scenario: Sort values by ID
     When login to ATLAS as QA
     When click to Search menu as QA
@@ -25,6 +26,7 @@ Feature: Search in Vocabularies
     When click to Id header
     Then second value more then first
 
+  @common
   Scenario: Filtering in Search
     When login to ATLAS as QA
     When click to Search menu as QA
@@ -34,7 +36,7 @@ Feature: Search in Vocabularies
     When enter in filtering search area "SULFINPYRAZONE"
     Then can see search result only with "SULFINPYRAZONE"
 
-  @local
+  @local @common
   Scenario: Downloading CSV in Search
     When login to ATLAS as QA
     When click to Search menu as QA
@@ -45,7 +47,7 @@ Feature: Search in Vocabularies
     When click to CSV button
     Then file download
 
-  @0407
+  @0407 @common
   Scenario: Open the concept and check content of tabs
     When login to ATLAS as QA
     When click to Search menu as QA

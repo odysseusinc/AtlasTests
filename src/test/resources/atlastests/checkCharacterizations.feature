@@ -1,6 +1,7 @@
 @characterization
 Feature: Characterization check
 
+  @common
   Scenario: Create new characterization and delete it
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -15,7 +16,7 @@ Feature: Characterization check
     When accept delete characterization
     Then cant find characterization in the table
 
-  @chcopy
+  @chcopy @common
   Scenario: Create new characterization and copy it
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -31,7 +32,7 @@ Feature: Characterization check
     When enter "COPY OF: " and name of our characterization
     Then can see copy of our characterization
 
-  @chun
+  @chun @common
   Scenario: Check uniqueness of characterization
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -43,7 +44,7 @@ Feature: Characterization check
     When enter the same Characterization name and save it
     Then can see alert message about uniqueness
 
-  @2406
+  @2406 @common
   Scenario: Add new feature analyses and delete it
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -66,7 +67,7 @@ Feature: Characterization check
     Then cant find feature analyse in the table
 
 
-  @eunomiaCharacterization
+  @ohdsi  
   Scenario: Import cohort definition, feature analyses, and generate with first data source
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -89,6 +90,7 @@ Feature: Characterization check
     When click Generate report button on first data source
     Then first data source generate button has to be with Cancel text
 
+  @odysseus
   Scenario: Import definitions, features and IMPALA report
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -112,6 +114,7 @@ Feature: Characterization check
     When click Generate report button on first data source
     Then first data source generate button has to be with Cancel text
 
+  @odysseus
   Scenario: Import definitions, features and Netezza report
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -135,7 +138,7 @@ Feature: Characterization check
     When click to Netezza Generate report button
     Then Netezza generate button has to be with Cancel text
 
-  @1107
+  @1107 @odysseus
   Scenario: Import definitions, features and SynPUF 110k CDM5.3 report
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -160,7 +163,7 @@ Feature: Characterization check
     Then SynPUF110k generate button has to be with Cancel text
 
 
-  @1107
+  @1107 @odysseus
   Scenario: Import definitions, features and SynPUF 110k CDM5.3 report
     When login to ATLAS as QA
     When click to Characterizations menu as QA
@@ -184,7 +187,7 @@ Feature: Characterization check
     When click to oracle Generate report button
     Then oracle generate button has to be with Cancel text
 
-    @sub
+    @sub @common
   Scenario: Create characterization with Subgroup analyses and Feature Analyses
     When login to ATLAS as QA
     When click to Characterizations menu as QA

@@ -1,6 +1,7 @@
 @cohortdefinitions
 Feature: Check Cohort Definitions
 
+  @common
   Scenario: Create, edit and delete cohort
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -25,6 +26,7 @@ Feature: Check Cohort Definitions
     Then filtered Cohort Definition
     Then Cohort Definition should be not found
 
+  @common
   Scenario: Check uniqueness of cohort definition
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -37,7 +39,7 @@ Feature: Check Cohort Definitions
     When enter the same name of New Cohort Definition and save it
     Then can see alert message about uniqueness
 
-  @dev_new_t
+  @dev_new_t @common
   Scenario: Add Initial events to new Cohort
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -66,7 +68,7 @@ Feature: Check Cohort Definitions
     When click to Close concept set
     Then table of concept sets close
 
-
+  @common
   Scenario: Cohort Definitions tabs
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -97,7 +99,7 @@ Feature: Check Cohort Definitions
 #    When click to Run diagnostic Button
 #    Then can see Messages page
 
-
+  @common
   Scenario: inclusion criterias
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -108,7 +110,7 @@ Feature: Check Cohort Definitions
     When add Inclusion criteria
     Then can see block with inclusion criterias
 
-
+  @common
   Scenario: Export and Import to new Cohort Definition
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -128,6 +130,7 @@ Feature: Check Cohort Definitions
     When click to Definition tab
     Then can see name "ACE inhibitors" of concept set at the button
 
+  @ohdsi
   Scenario: Generate using first data source, quick analysis and Export tabs
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -164,7 +167,7 @@ Feature: Check Cohort Definitions
     When click to SQL tab
     Then can see sql query
 
-
+  @odysseus
   Scenario: Generate IMPALA and Export tabs
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -201,6 +204,7 @@ Feature: Check Cohort Definitions
     When click to SQL tab
     Then can see sql query
 
+  @ohdsi
   Scenario: Generate using first data source and Cost&Util
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -233,7 +237,7 @@ Feature: Check Cohort Definitions
     When accept an alert about time
     Then can see a row with status Started
 
-  @dev0907
+  @dev0907 @odysseus
   Scenario: Generate SynPUF 110K Cost&Util
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -266,7 +270,7 @@ Feature: Check Cohort Definitions
     When accept an alert about time
     Then can see a row with status Started
 
-
+  @ohdsi
   Scenario: Generate using first data source and Full analysis
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -297,6 +301,7 @@ Feature: Check Cohort Definitions
     When accept an alert about time
     Then can see a row with status Started
 
+  @odysseus
   Scenario: Generate  SynPUF 110k CDM5.3 and Full analysis
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -327,7 +332,8 @@ Feature: Check Cohort Definitions
     When accept an alert about time
     Then can see a row with status Started
 
-Scenario: Sorting, paging
+  @common
+  Scenario: Sorting, paging
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
     Then can see Cohort Definition page

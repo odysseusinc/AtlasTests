@@ -1,7 +1,7 @@
 @configuration
 Feature: Check configuration
 
-  @co
+  @co @common
   Scenario: Open configuration page and check connection
     When login to ATLAS as admin
     When click to Configuration menu as admin
@@ -9,6 +9,7 @@ Feature: Check configuration
     When Click to every datasource connection button
     Then Successful connection messages are visible
 
+  @common
   Scenario: Create edit and delete role
     When login to ATLAS as admin
     When click to Configuration menu as admin
