@@ -5,8 +5,7 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -128,17 +127,17 @@ public class CharacterizationStepDefs {
 
     @When("^click to save feature analyse button$")
     public void clickToSaveFeatureAnalyseButton() {
-        $(By.xpath("//*[@class='btn btn-success']")).click();
+        $(By.xpath("//*[@class='btn btn-success']")).waitUntil(enabled, 5000).click();
     }
 
     @Then("^go to feature analyses table by pressing close button$")
     public void goToFeatureAnalysesTableByPressingCloseButton() {
-        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(visible, 5000).click();;
+        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(enabled, 5000).click();;
     }
 
     @When("^enter name of our feature to filter$")
     public void enterNameOfOurFeatureToFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000).setValue(featureName);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 10000).setValue(featureName);
     }
 
     @Then("^can see our feature in table of feature analyses$")
@@ -148,7 +147,7 @@ public class CharacterizationStepDefs {
 
     @When("^click to our feature analyse$")
     public void clickToOurFeatureAnalyse() {
-        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']/a")).click();
+        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']/a")).waitUntil(visible, 5000).click();
     }
 
     @Then("^can see page of our Feature Analyse$")
