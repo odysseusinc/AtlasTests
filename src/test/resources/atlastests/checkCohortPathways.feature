@@ -60,7 +60,7 @@ Feature: Cohort Pathway check
     When choose cohort definition "Celecoxib new users" from the table in target cohort list
     Then can see cohort definition in target cohort list list
     When click to Import Event Cohorts
-    When choose cohort definition "GI bleed" from the table in event cohort list
+    When choose cohort definition "bleed" from the table in event cohort list
     Then can see cohort definition in event cohort list list
     When click to save our cohort pathway
 
@@ -90,7 +90,7 @@ Feature: Cohort Pathway check
     When choose cohort definition "Celecoxib new users" from the table in target cohort list
     Then can see cohort definition in target cohort list list
     When click to Import Event Cohorts
-    When choose cohort definition "GI bleed" from the table in event cohort list
+    When choose cohort definition "bleed" from the table in event cohort list
     Then can see cohort definition in event cohort list list
     When click to save our cohort pathway
     When click to cancel button
