@@ -138,7 +138,7 @@ public class CharacterizationStepDefs {
 
     @When("^enter name of our feature to filter$")
     public void enterNameOfOurFeatureToFilter() {
-        $(By.xpath("//*[@type='search']")).setValue(featureName);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000).setValue(featureName);
     }
 
     @Then("^can see our feature in table of feature analyses$")
@@ -153,7 +153,7 @@ public class CharacterizationStepDefs {
 
     @Then("^can see page of our Feature Analyse$")
     public void canSeePageOfOurFeatureAnalyse() {
-        $(By.xpath("//*[@data-bind='text: title'][1]")).waitUntil(visible, 3000).
+        $(By.xpath("//*[@data-bind='text: title'][1]")).waitUntil(visible, 5000).
                 shouldHave(text("Feature Analysis #"));
     }
 
