@@ -196,14 +196,14 @@ public class CharacterizationStepDefs {
 
     @When("^click to Import Feature analyse$")
     public void clickToImportFeatureAnalyse() {
-        $(By.xpath("//*[@class='characterization-design__button-panel']/button[1]")).click();
+        $(By.xpath("//*[@class='characterization-design__button-panel']/button[1]")).waitUntil(visible, 3000).click();
 
     }
 
     @When("^enter the same Characterization name and save it$")
     public void enterTheSameCharacterizationNameAndSaveIt() {
-        $(By.xpath("//*[@class='input-group']/input")).setValue(characterizationName);
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        $(By.xpath("//*[@class='input-group']/input")).waitUntil(visible, 3000).setValue(characterizationName);
+        $(By.xpath("//*[@class='fa fa-save']")).waitUntil(visible, 3000).click();
     }
 
     @Then("^can see alert message about uniqueness$")
