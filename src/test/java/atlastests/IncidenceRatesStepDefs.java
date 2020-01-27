@@ -36,6 +36,11 @@ public class IncidenceRatesStepDefs {
         $(By.xpath("//*[@type='text']")).setValue(generatedString);
     }
 
+    @When("^enter \"([^\"]*)\" name on new Incidence Rate$")
+    public void enterNameOnNewIncidenceRate(String arg0) {
+        $(By.xpath("//*[@type='text']")).setValue(arg0);
+    }
+
     @When("^click to save Incidence Rates Button$")
     public void clickToSaveIncidenceRatesButton() {
         $(By.xpath("//*[@class='fa fa-save']")).click();
@@ -152,7 +157,7 @@ public class IncidenceRatesStepDefs {
 
     @When("^click to add Target Cohort$")
     public void clickToAddTargetCohort() {
-        $(byText("Add Target Cohort")).click();
+        $(byText("Add Target Cohort")).waitUntil(visible, 3000).click();
     }
 
     @When("^enter \"([^\"]*)\" in filter of cohort$")
@@ -175,18 +180,27 @@ public class IncidenceRatesStepDefs {
     public void canSeeNewRowsUnderTargetCohorts() {
         $(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]/span")).shouldHave(text("New users of phenytoin"));
         $(By.xpath("//table/tbody/tr[2]/td/table/tbody[2]/tr/td[3]/span")).shouldHave(text("New users of levetiracetam "));
+    }
 
+    @Then("^can see \"([^\"]*)\" Target Cohort$")
+    public void canSeeTargetCohort(String arg0) {
+        $(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]/span")).shouldHave(text(arg0));
     }
 
     @When("^click to Add Outcome Cohort$")
     public void clickToAddOutcomeCohort() {
-        $(byText("Add Outcome Cohort")).click();
+        $(byText("Add Outcome Cohort")).waitUntil(visible, 3000).click();
     }
 
     @Then("^can see new rows under Outcome Cohort$")
     public void canSeeNewRowsUnderOutcomeCohort() {
         $(By.xpath("//table[1]/tbody/tr[2]/td[2]/table/tbody/tr/td[3]/span")).
                 shouldHave(text("Levetriacetam vs phenytoin outcome cohort"));
+    }
+
+    @Then("^can see \"([^\"]*)\" Outcome Cohort$")
+    public void canSeeOutcomeCohort(String arg0) {
+        $(By.xpath("//table[1]/tbody/tr[2]/td[2]/table/tbody/tr/td[3]/span")).shouldHave(text(arg0));
     }
 
     @When("^choose Time at risk starts with value (\\d+)$")
@@ -250,12 +264,17 @@ public class IncidenceRatesStepDefs {
 
     @When("^click to import ir button$")
     public void clickToImportIrButton() {
-        $(By.xpath("//*[@class='import__import-btn btn btn-default btn-sm']")).click();
+        $(By.xpath("//*[@class='import__import-btn btn btn-default btn-sm']")).waitUntil(visible, 3000).click();
     }
 
     @Then("^can see Target cohorts with \"([^\"]*)\" and \"([^\"]*)\" values$")
     public void canSeeTargetCohortsWithAndValues(String arg0, String arg1) throws Throwable {
         $$(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]")).get(0).shouldHave(text(arg0));
         $$(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]")).get(1).shouldHave(text(arg1));
+    }
+
+    @Then("^can see Target cohort with \"([^\"]*)\" value$")
+    public void canSeeTargetCohortWithValue(String arg0) throws Throwable {
+        $$(By.xpath("//table/tbody/tr[2]/td/table/tbody/tr/td[3]")).get(0).shouldHave(text(arg0));
     }
 }

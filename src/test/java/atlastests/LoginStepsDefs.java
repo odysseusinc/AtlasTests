@@ -87,5 +87,20 @@ public class LoginStepsDefs extends testDefs {
         closeLoginWindow();
     }
 
+    @When("^login with correct credentials as admin$")
+    public static void loginWithCorrectCredentialsAsAdmin() throws Exception {
+        loginAndPasswordEnteredAndSubmitted(getDataProperties("adminlogin"), getDataProperties("adminpassword"));
+    }
+
+    @When("^login to ATLAS as admin$")
+    public void loginToATLASAsAdmin() throws Throwable {
+        openProjectPage();
+        clickToLogInLink();
+        clickToEnvironment();
+        loginWithCorrectCredentialsAsAdmin();
+        seeSuccessMessage();
+        checkAuthoriseUserAs(getDataProperties("adminlogin"));
+        closeLoginWindow();
+    }
 
 }

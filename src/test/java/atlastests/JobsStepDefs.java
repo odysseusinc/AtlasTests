@@ -21,9 +21,8 @@ public class JobsStepDefs {
 
     @Then("^can see job table with all fields$")
     public void canSeeJobTableWithAllFields() {
-        ElementsCollection table = $$(By.xpath("//table/tbody/tr/td"));
-        for (int i = 0; i < 2; i++) {
-            table.get(i).shouldNotBe(empty, text("-"));
+	for (int i = 1; i <= 6; i++) {
+	    Assert.assertNotEquals("column should not contain value '-'", $(By.xpath("//table/tbody/tr/td[" + String.valueOf(i) + "]")).getText(), "-");
         }
     }
 
@@ -77,7 +76,7 @@ public class JobsStepDefs {
 
     @Then("^can see our result in table$")
     public void canSeeOurResultInTable() {
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text("Generating "));
+        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text("warming"));
     }
 
     @When("^click to free space$")

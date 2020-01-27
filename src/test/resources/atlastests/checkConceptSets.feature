@@ -1,7 +1,7 @@
 @conceptsets
 Feature: Check Concept Sets
 
-  @ct1
+  @ct1 @common
   Scenario: Create, edit and delete new Concept set
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -26,7 +26,7 @@ Feature: Check Concept Sets
     When click to Concept Sets menu as QA
     Then new concept set removed from table
 
-
+  @common
   Scenario: Create and add new items in new Concept Set
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -40,7 +40,7 @@ Feature: Check Concept Sets
     When search activated
     Then can see search result table
 
-
+  @common
   Scenario: compare value of Included Concepts
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -62,6 +62,7 @@ Feature: Check Concept Sets
     When set checkbox in Descendants
     Then can see other value of Included Concepts
 
+  @common
   Scenario: Check Included Concept table
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -80,6 +81,7 @@ Feature: Check Concept Sets
     When click to Included Concepts tab
     Then can see table of Included Concepts
 
+  @common
   Scenario: Check Included concept codes table
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -98,6 +100,7 @@ Feature: Check Concept Sets
     When click to Included Source Codes tab
     Then can see table of Included Source codes
 
+  @common
   Scenario: Check explore evidance tab in Concept Set
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -116,7 +119,7 @@ Feature: Check Concept Sets
     When click to Explore Evidence
     Then can see explore evidence text
 
-  @local
+  @local @common @checkexport123
   Scenario: Check Export tab in Concept set
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -138,6 +141,7 @@ Feature: Check Concept Sets
     Then click to export button
 
 
+  @common
   Scenario: Check compare concepts in Concept Set
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -157,6 +161,7 @@ Feature: Check Concept Sets
     Then can see text "Concept Set Comparison"
 
 
+  @common
   Scenario: Create and add new items in new Concept Set and remove them
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -183,7 +188,7 @@ Feature: Check Concept Sets
   # water, alcohol, aspirin, ibuprofen, acetaminophen, benzocaine, alcohol kit
   # and desogestrel and ethinyl estradiol KIT [velivet triphasic regimen] AT COMPARE 2 test concept Sets
 
-  @comp
+  @comp @common
   Scenario: Compare 2 concept sets test
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -200,7 +205,7 @@ Feature: Check Concept Sets
     Then can see compare table
     Then can see results of comparison
 
-  @opt
+  @opt @common
   Scenario: Check Optimization of concept set
     When login to ATLAS as QA
     When click to Concept Sets menu as QA
@@ -228,7 +233,7 @@ Feature: Check Concept Sets
     When choose Overwrite Current Concept Set point
     Then can see only one concept in table of concept sets
 
-  @local
+  @local @common
   Scenario: Open export mode in the list of concepts and export them
     When login to ATLAS as QA
     When click to Concept Sets menu as QA

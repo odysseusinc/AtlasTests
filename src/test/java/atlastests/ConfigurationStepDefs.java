@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static atlastests.testDefs.getDataProperties;
 
 public class ConfigurationStepDefs {
     private String generatedString;
@@ -65,8 +66,8 @@ public class ConfigurationStepDefs {
     }
 
     @When("^choose qa login from table$")
-    public void chooseQaLoginFromTable() {
-        $(By.xpath("//*[@type='search']")).setValue("qa");
+    public void chooseQaLoginFromTable() throws Exception {
+        $(By.xpath("//*[@type='search']")).setValue(getDataProperties("login"));
         $(By.xpath("//*[@class=' text-center']/span")).click();
     }
 

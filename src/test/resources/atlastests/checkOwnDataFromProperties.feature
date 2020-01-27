@@ -1,5 +1,7 @@
 @owndatatestsfromproperty
 Feature: check own data
+
+  @odysseus
   Scenario: choose profile from properties data
     When login to ATLAS as QA
     When click to Profiles menu as QA
@@ -10,6 +12,7 @@ Feature: check own data
     Then can see overlay
     Then can see table
 
+  @odysseus
   Scenario: Netezza CDM5.3 Source & Procedure from properties data
     When login to ATLAS as QA
     When click to Data Sources menu as user

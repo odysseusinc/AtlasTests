@@ -6,8 +6,7 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -78,7 +77,7 @@ public class CharacterizationStepDefs {
 
     @When("^click to Import Cohort Definition$")
     public void clickToImportCohortDefinition() {
-        $$(byText("Import")).get(0).click();
+        $$(byText("Import")).get(0).waitUntil(visible, 3000).click();
     }
 
     @When("^choose cohort definition from the table in characterization$")
@@ -129,17 +128,17 @@ public class CharacterizationStepDefs {
 
     @When("^click to save feature analyse button$")
     public void clickToSaveFeatureAnalyseButton() {
-        $(By.xpath("//*[@class='btn btn-success']")).click();
+        $(By.xpath("//*[@class='btn btn-success']")).waitUntil(enabled, 5000).click();
     }
 
     @Then("^go to feature analyses table by pressing close button$")
     public void goToFeatureAnalysesTableByPressingCloseButton() {
-        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(visible, 5000).click();
-            }
+        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(enabled, 5000).click();
+    }
 
     @When("^enter name of our feature to filter$")
     public void enterNameOfOurFeatureToFilter() {
-        $(By.xpath("//*[@type='search']")).setValue(featureName);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 10000).setValue(featureName);
     }
 
     @Then("^can see our feature in table of feature analyses$")
@@ -149,12 +148,12 @@ public class CharacterizationStepDefs {
 
     @When("^click to our feature analyse$")
     public void clickToOurFeatureAnalyse() {
-        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']/a")).click();
+        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']/a")).waitUntil(visible, 5000).click();
     }
 
     @Then("^can see page of our Feature Analyse$")
     public void canSeePageOfOurFeatureAnalyse() {
-        $(By.xpath("//*[@data-bind='text: title'][1]")).waitUntil(visible, 3000).
+        $(By.xpath("//*[@data-bind='text: title'][1]")).waitUntil(visible, 5000).
                 shouldHave(text("Feature Analysis #"));
     }
 
@@ -197,14 +196,14 @@ public class CharacterizationStepDefs {
 
     @When("^click to Import Feature analyse$")
     public void clickToImportFeatureAnalyse() {
-        $(By.xpath("//*[@class='characterization-design__button-panel']/button[1]")).click();
+        $(By.xpath("//*[@class='characterization-design__button-panel']/button[1]")).waitUntil(visible, 3000).click();
 
     }
 
     @When("^enter the same Characterization name and save it$")
     public void enterTheSameCharacterizationNameAndSaveIt() {
-        $(By.xpath("//*[@class='input-group']/input")).setValue(characterizationName);
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        $(By.xpath("//*[@class='input-group']/input")).waitUntil(visible, 3000).setValue(characterizationName);
+        $(By.xpath("//*[@class='fa fa-save']")).waitUntil(visible, 3000).click();
     }
 
     @Then("^can see alert message about uniqueness$")
@@ -250,13 +249,13 @@ public class CharacterizationStepDefs {
         $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
     }
 
-    @When("^click to IMPALA Generate report button$")
-    public void clickToIMPALAGenerateReportButton() {
+    @When("^click Generate report button on first data source$")
+    public void clickToGenerateReportButtonOnFirstDataSource() {
         $$(By.xpath("//*[@class='characterization-view-edit-executions__action-text']")).get(0).click();
     }
 
-    @Then("^Impala generate button has to be with Cancel text$")
-    public void impalaGenerateButtonHasToBeWithCancelText() {
+    @Then("^first data source generate button has to be with Cancel text$")
+    public void firstGenerateButtonHasToBeWithCancelText() {
         $$(By.xpath("//*[@class='btn btn-sm btn-danger']")).get(0).waitUntil(text("Cancel"), 4000);
     }
 

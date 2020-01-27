@@ -178,7 +178,6 @@ public class ConseptSetsStepDefs {
             clickToExportTabInConceptSet();
         }
         exportButton.waitUntil(visible, 5000).hover().click();
-        exportButton.waitUntil(hidden, 5000);
         csvFileDownload();
     }
 

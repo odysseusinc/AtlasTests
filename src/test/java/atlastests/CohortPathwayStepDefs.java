@@ -137,10 +137,16 @@ public class CohortPathwayStepDefs {
         $$(byText("Import")).get(0).click();
     }
 
-    @When("^choose cohort definition from the table in target cohort list$")
-    public void chooseCohortDefinitionFromTheTableInTargetCohortList() {
-        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 3000).click();
+//   @When("^choose cohort definition from the table in target cohort list$")
+//    public void chooseCohortDefinitionFromTheTableInTargetCohortList() {
+//        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 3000).click();
+//    }
+    @When("^choose cohort definition \"([^\"]*)\" from the table in target cohort list$")
+    public void chooseCohortDefinitionFromTheTableInTargetCohortList(String arg0) {
+        $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue(arg0);
+        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 4000).shouldHave(text(arg0)).click();
     }
+
 
     @Then("^can see cohort definition in target cohort list list$")
     public void canSeeCohortDefinitionInTargetCohortListList() {
@@ -152,15 +158,20 @@ public class CohortPathwayStepDefs {
         $$(byText("Import")).get(1).click();
     }
 
-    @When("^choose cohort definition from the table in event cohort list$")
-    public void chooseCohortDefinitionFromTheTableInEventCohortList() {
-        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 3000).click();
+//    @When("^choose cohort definition from the table in event cohort list$")
+//    public void chooseCohortDefinitionFromTheTableInEventCohortList() {
+//        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 3000).click();
+//    }
+    @When("^choose cohort definition \"([^\"]*)\" from the table in event cohort list$")
+    public void chooseCohortDefinitionFromTheTableInEventCohortList(String arg0) {
+        $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue(arg0);
+        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 4000).shouldHave(text(arg0)).click();
     }
+
 
     @Then("^can see cohort definition in event cohort list list$")
     public void canSeeCohortDefinitionInEventCohortListList() {
-        $$("table.linked-entity-list__table").get(1).$(".linked-cohort-list__col-cohort-id").
-                waitUntil(visible, 2000);
+        $$("table.linked-entity-list__table").get(1).$(".linked-cohort-list__col-cohort-id").waitUntil(visible, 2000);
     }
 
     @When("^click to Executions tab$")
@@ -170,8 +181,7 @@ public class CohortPathwayStepDefs {
 
     @Then("^can see Execution page$")
     public void canSeeExecutionPage() {
-        $(By.xpath("//*[@class = 'pathway-executions__title']")).waitUntil(visible, 4000).
-                shouldHave(text("Executions"));
+        $(By.xpath("//*[@class = 'pathway-executions__title']")).waitUntil(visible, 4000).shouldHave(text("Executions"));
     }
 
     @When("^click to Utilities tab$")
@@ -181,8 +191,7 @@ public class CohortPathwayStepDefs {
 
     @Then("^can see Utilities page$")
     public void canSeeUtilitiesPage() {
-        $(By.xpath("//*[@class = 'pathway-utils__title']")).waitUntil(visible, 3000).
-                shouldHave(text("Utilities"));
+        $(By.xpath("//*[@class = 'pathway-utils__title']")).waitUntil(visible, 3000).shouldHave(text("Utilities"));
     }
 
     @When("^enter the same name of cohort pathway$")
@@ -192,7 +201,8 @@ public class CohortPathwayStepDefs {
 
     @When("^click to save our cohort pathway$")
     public void clickToSaveOurCohortPathway() {
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        $(By.xpath("//*[@class='fa fa-save']")).waitUntil(visible, 3000).click();
+        $(By.xpath("//*[@class='btn btn-success disabled']")).waitUntil(visible, 4000);
     }
 
     @When("^click to copy button for our cohort pathway$")
@@ -207,8 +217,7 @@ public class CohortPathwayStepDefs {
 
     @Then("^can see copy of our pathway$")
     public void canSeeCopyOfOurPathway() {
-        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']/a")).
-                shouldHave(text("COPY OF: " + newNamePathway));
+        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']/a")).shouldHave(text("COPY OF: " + newNamePathway));
     }
 
     @When("^copy text from export textarea$")

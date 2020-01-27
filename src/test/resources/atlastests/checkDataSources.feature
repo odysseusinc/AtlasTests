@@ -5,7 +5,7 @@ Feature: Check Data Sources reports
   ############################################################################################################
   #IMPALA#
   #############################################################################################################
-@impala
+@impala @odysseus
   Scenario: Impala Source & Dashboard
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -14,7 +14,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Data Density
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -23,7 +23,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Data Density"
     Then can see Data Density windows
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Person
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -32,7 +32,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Person"
     Then can see Person windows
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Visit
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -44,7 +44,7 @@ Feature: Check Data Sources reports
     Then can see tables in Visit for cell
 
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Condition
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -55,7 +55,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition for cell
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Condition Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -66,7 +66,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition era for cell
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Procedure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -77,7 +77,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Procedure for cell
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Drug Exposure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -88,7 +88,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Drugs for cell
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Drug Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -100,7 +100,7 @@ Feature: Check Data Sources reports
     Then can see tables in Drugs Era for cell
 
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Measurement
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -112,7 +112,7 @@ Feature: Check Data Sources reports
     Then can see tables in Measurement for cell
 
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Observation
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -123,7 +123,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Observation for cell
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Death
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -132,7 +132,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Death"
     Then can see Death windows
 
-  @impala
+  @impala @odysseus
   Scenario: IMPALA Source & Achilles Heel
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -144,7 +144,7 @@ Feature: Check Data Sources reports
  ############################################################################################################
   #Netezza CDM5.3#
   #############################################################################################################
-@netezza
+@netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Dashboard
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -154,7 +154,7 @@ Feature: Check Data Sources reports
     Then can see dashboard
     Then can see windows in DASHBOARD page
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Data Density
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -163,7 +163,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Data Density"
     Then can see Data Density windows
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Person
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -172,7 +172,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Person"
     Then can see Person windows
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Visit
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -184,7 +184,7 @@ Feature: Check Data Sources reports
     Then can see tables in Visit for cell
 
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Condition
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -195,7 +195,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition for cell
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Condition Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -207,7 +207,7 @@ Feature: Check Data Sources reports
     Then can see tables in Condition era for cell
 
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Procedure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -218,7 +218,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Procedure for cell
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Drug Exposure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -229,7 +229,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Drugs for cell
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Drug Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -241,7 +241,7 @@ Feature: Check Data Sources reports
     Then can see tables in Drugs Era for cell
 
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Measurement
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -253,7 +253,7 @@ Feature: Check Data Sources reports
     Then can see tables in Measurement for cell
 
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Observation
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -264,7 +264,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Observation for cell
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Death
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -273,7 +273,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Death"
     Then can see Death windows
 
-  @netezza
+  @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Achilles Heel
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -287,7 +287,7 @@ Feature: Check Data Sources reports
   #OVH02 SynPUF 110k#
   #############################################################################################################
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Dashboard
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -297,7 +297,7 @@ Feature: Check Data Sources reports
     Then can see dashboard
     Then can see windows in DASHBOARD page
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Data Density
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -306,7 +306,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Data Density"
     Then can see Data Density windows
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Person
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -315,7 +315,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Person"
     Then can see Person windows
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Visit
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -326,7 +326,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Visit for cell
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Condition
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -337,7 +337,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition for cell
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Condition Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -348,7 +348,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition era for cell
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Procedure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -359,7 +359,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Procedure for cell
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Drug Exposure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -370,7 +370,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Drugs for cell
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Drug Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -382,7 +382,7 @@ Feature: Check Data Sources reports
     Then can see tables in Drugs Era for cell
 
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Measurement
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -393,7 +393,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Measurement for cell
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Observation
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -404,7 +404,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Observation for cell
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Death
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -413,7 +413,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Death"
     Then can see Death windows
 
-  @ovh02
+  @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Achilles Heel
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -426,7 +426,7 @@ Feature: Check Data Sources reports
   #SynPUF110K COST & UTIL#
   #############################################################################################################
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Dashboard
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -436,7 +436,7 @@ Feature: Check Data Sources reports
     Then can see windows in DASHBOARD page
 
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Data Density
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -445,7 +445,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Data Density"
     Then can see Data Density windows
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Person
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -454,7 +454,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Person"
     Then can see Person windows
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Visit
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -466,7 +466,7 @@ Feature: Check Data Sources reports
     Then can see tables in Visit for cell
 
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Condition
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -477,7 +477,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition for cell
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Condition Era
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -488,7 +488,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition era for cell
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Procedure
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -499,7 +499,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Procedure for cell
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Drug Exposure
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -510,7 +510,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Drugs for cell
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Drug Era
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -522,7 +522,7 @@ Feature: Check Data Sources reports
     Then can see tables in Drugs Era for cell
 
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Measurement
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -534,7 +534,7 @@ Feature: Check Data Sources reports
     Then can see tables in Measurement for cell
 
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Observation
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -545,7 +545,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Observation for cell
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Death
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -554,7 +554,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Death"
     Then can see Death windows
 
-  @SynPUF110KCost
+  @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Achilles Heel
    When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -567,7 +567,7 @@ Feature: Check Data Sources reports
   #SynPUF110K CDM5.3#
   #############################################################################################################
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Dashboard
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -576,7 +576,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Data Density
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -585,7 +585,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Data Density"
     Then can see Data Density windows
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Person
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -594,7 +594,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Person"
     Then can see Person windows
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Visit
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -606,7 +606,7 @@ Feature: Check Data Sources reports
     Then can see tables in Visit for cell
 
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Condition
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -617,7 +617,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition for cell
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Condition Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -628,7 +628,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition era for cell
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Procedure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -639,7 +639,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Procedure for cell
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Drug Exposure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -650,7 +650,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Drugs for cell
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Drug Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -662,7 +662,7 @@ Feature: Check Data Sources reports
     Then can see tables in Drugs Era for cell
 
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Measurement
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -674,7 +674,7 @@ Feature: Check Data Sources reports
     Then can see tables in Measurement for cell
 
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Observation
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -685,7 +685,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Observation for cell
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Death
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -694,7 +694,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Death"
     Then can see Death windows
 
-  @SynPUF110Kcdm
+  @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Achilles Heel
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -708,7 +708,7 @@ Feature: Check Data Sources reports
   #SynPUF 2.3m (GCP BigQuery)#
   #############################################################################################################
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Dashboard
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -717,7 +717,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Data Density
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -726,7 +726,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Data Density"
     Then can see Data Density windows
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Person
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -735,7 +735,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Person"
     Then can see Person windows
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Visit
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -746,7 +746,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Visit for cell
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Condition
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -757,7 +757,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition for cell
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Condition Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -768,7 +768,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition era for cell
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Procedure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -779,7 +779,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Procedure for cell
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Drug Exposure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -790,7 +790,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Drugs for cell
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Drug Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -802,7 +802,7 @@ Feature: Check Data Sources reports
     Then can see tables in Drugs Era for cell
 
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Measurement
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -814,7 +814,7 @@ Feature: Check Data Sources reports
     Then can see tables in Measurement for cell
 
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Observation
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -825,7 +825,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Observation for cell
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Death
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -834,7 +834,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Death"
     Then can see Death windows
 
-  @synPUF23m
+  @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Achilles Heel
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -848,7 +848,7 @@ Feature: Check Data Sources reports
   #SynPUF 2M CDM5.3#
   #############################################################################################################
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Dashboard
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -857,7 +857,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Data Density
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -866,7 +866,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Data Density"
     Then can see Data Density windows
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Person
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -875,7 +875,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Person"
     Then can see Person windows
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Visit
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -886,7 +886,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Visit for cell
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Condition
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -897,7 +897,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition for cell
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Condition Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -908,7 +908,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition era for cell
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Procedure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -919,7 +919,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Procedure for cell
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Drug Exposure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -930,7 +930,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Drugs for cell
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Drug Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -942,7 +942,7 @@ Feature: Check Data Sources reports
     Then can see tables in Drugs Era for cell
 
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Measurement
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -954,7 +954,7 @@ Feature: Check Data Sources reports
     Then can see tables in Measurement for cell
 
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Observation
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -965,7 +965,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Observation for cell
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Death
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -974,7 +974,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Death"
     Then can see Death windows
 
-  @synPUF2mcdm
+  @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Achilles Heel
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -988,7 +988,7 @@ Feature: Check Data Sources reports
   #oracle-110k#
   #############################################################################################################
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Dashboard
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -997,7 +997,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Data Density
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1006,7 +1006,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Data Density"
     Then can see Data Density windows
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Person
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1015,7 +1015,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Person"
     Then can see Person windows
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Visit
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1026,7 +1026,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Visit for cell
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Condition
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1037,7 +1037,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition for cell
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Condition Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1049,7 +1049,7 @@ Feature: Check Data Sources reports
     Then can see tables in Condition era for cell
 
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Procedure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1060,7 +1060,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Procedure for cell
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Drug Exposure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1071,7 +1071,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Drugs for cell
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Drug Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1083,7 +1083,7 @@ Feature: Check Data Sources reports
     Then can see tables in Drugs Era for cell
 
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Measurement
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1095,7 +1095,7 @@ Feature: Check Data Sources reports
     Then can see tables in Measurement for cell
 
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Observation
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1106,7 +1106,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Observation for cell
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Death
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1115,7 +1115,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Death"
     Then can see Death windows
 
-  @oracle110k
+  @oracle110k @odysseus
   Scenario: oracle-110k Source & Achilles Heel
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1129,7 +1129,7 @@ Feature: Check Data Sources reports
   #eunomia#
   #############################################################################################################
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Dashboard
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1138,7 +1138,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Data Density
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1147,7 +1147,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Data Density"
     Then can see Data Density windows
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Person
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1156,7 +1156,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Person"
     Then can see Person windows
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Visit
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1167,7 +1167,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Visit for cell
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Condition
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1178,7 +1178,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Condition for cell
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Condition Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1190,7 +1190,7 @@ Feature: Check Data Sources reports
     Then can see tables in Condition era for cell
 
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Procedure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1201,7 +1201,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Procedure for cell
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Drug Exposure
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1212,7 +1212,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Drugs for cell
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Drug Era
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1224,7 +1224,7 @@ Feature: Check Data Sources reports
     Then can see tables in Drugs Era for cell
 
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Measurement
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1236,7 +1236,7 @@ Feature: Check Data Sources reports
     Then can see tables in Measurement for cell
 
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Observation
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1247,7 +1247,7 @@ Feature: Check Data Sources reports
     When click to element in prevalence in table
     Then can see tables in Observation for cell
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Death
     When login to ATLAS as QA
     When click to Data Sources menu as user
@@ -1256,7 +1256,7 @@ Feature: Check Data Sources reports
     When choose Report from Data Source as "Death"
     Then can see Death windows
 
-  @eunomia
+  @eunomia @ohdsi
   Scenario: eunomia Source & Achilles Heel
     When login to ATLAS as QA
     When click to Data Sources menu as user

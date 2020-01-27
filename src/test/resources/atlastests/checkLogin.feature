@@ -1,6 +1,7 @@
 @login
 Feature: Check login page
 
+  @common
   Scenario:  Homepage check incorrect credentials
     When open project page
     When click to LogIn link
@@ -8,6 +9,7 @@ Feature: Check login page
     When login "daf" and password "das" Entered and submitted
     Then see message "Bad credentials"
 
+  @common
   Scenario:  Homepage check correct credentials
     When open project page
     When click to LogIn link
