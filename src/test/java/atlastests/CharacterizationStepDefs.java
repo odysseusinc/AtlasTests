@@ -1,5 +1,6 @@
 package atlastests;
 
+import com.codeborne.selenide.Condition;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -60,7 +61,7 @@ public class CharacterizationStepDefs {
     @When("^click to delete characterization button$")
     public void clickToDeleteCharacterizationButton() {
         $(By.xpath("//*[@class='btn btn-danger']")).waitUntil(visible, 3000).click();
-     }
+    }
 
     @When("^accept delete characterization$")
     public void acceptDeleteCharacterization() {
@@ -88,8 +89,8 @@ public class CharacterizationStepDefs {
 
     @When("^click to Feature Analyses tab$")
     public void clickToFeatureAnalysesTab() {
-        $(By.xpath("//*[@class='characterizations-tabbed-grid__toolbar-nav nav nav-tabs']/li[2]/a")).click();
-        $(By.xpath("//*[@class='characterizations-tabbed-grid__new-entity-btn btn btn-primary btn-sm']")).waitUntil(visible, 4000);
+        $$("[role='presentation']").find(Condition.matchesText("Feature analyses")).click();
+        $(".btn-primary").waitUntil(Condition.matchesText("New Feature analysis"), 5000);
     }
 
     @Then("^can see Feature Analyses table$")
@@ -132,7 +133,7 @@ public class CharacterizationStepDefs {
 
     @Then("^go to feature analyses table by pressing close button$")
     public void goToFeatureAnalysesTableByPressingCloseButton() {
-        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(enabled, 5000).click();;
+        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(enabled, 5000).click();
     }
 
     @When("^enter name of our feature to filter$")
@@ -316,7 +317,7 @@ public class CharacterizationStepDefs {
     }
 
     @When("^enter Stratified by text \"([^\"]*)\"$")
-    public void enterStratifiedByText(String arg0) throws Throwable {
+    public void enterStratifiedByText(String arg0) {
         $(By.xpath("//*[@class='characterization-design__stratified-by form-control']")).setValue(arg0);
     }
 

@@ -1,5 +1,7 @@
 package atlastests;
 
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.ElementsCollection;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
@@ -8,9 +10,12 @@ import static atlastests.testDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static org.openqa.selenium.By.xpath;
 
 public class DataSourceDefs {
+    private ElementsCollection reportTabsHeaders = $$("#report .panel-heading");
+
     @When("^choose Source from Data Source as IMPALA$")
     public void chooseSourceFromDataSourceAsIMPALA() {
         $(By.xpath("//*[@id='currentComponent']/div/div[1]/div[1]/div/select")).selectOption("IMPALA");
@@ -35,11 +40,9 @@ public class DataSourceDefs {
     @Then("^can see windows in DASHBOARD page$")
     public void canSeeWindowsInDashboard() {
         titleCheck("Dashboard Report");
-        $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("CDM Summary"));
-        $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Population by Gender"));
-        $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Age at First Observation"));
-        $(By.xpath("//*[@id='report']/div/div[4]/div/div[1]")).shouldHave(text("Cumulative Observation"));
-        $(By.xpath("//*[@id='report']/div/div[5]/div/div[1]")).shouldHave(text("Persons With Continuous Observation By Month"));
+        reportTabsHeaders.shouldHave(CollectionCondition.size(5)).shouldHave(CollectionCondition.texts("CDM Summary",
+                "Population by Gender", "Age at First Observation", "Cumulative Observation",
+                "Persons With Continuous Observation By Month"));
     }
 
     @When("^choose Source from Data Source as SynPUF110KCost&Util$")
