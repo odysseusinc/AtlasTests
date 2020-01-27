@@ -151,7 +151,7 @@ public class PredictionStepDefs {
 
     @When("^click to Execution Setting tab in Prediction without ee$")
     public void clickToExecutionSettingTabInPredictionWithoutEE() {
-        $(By.xpath("//*[@id='filters']/div/div[2]/ul/li[4]/a")).click();
+        $$("#filters li").find(Condition.matchesText("Execution Settings")).click();
     }
 
     @Then("^can see Execution Setting page in Prediction$")
