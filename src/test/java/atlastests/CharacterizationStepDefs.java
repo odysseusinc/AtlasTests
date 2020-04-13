@@ -20,6 +20,7 @@ public class CharacterizationStepDefs implements FormControl, FilterControl {
     private String featureName;
     private SelenideElement pageHeader = $(".heading-title span");
     private SelenideElement cohortTableName = $("tbody .characterizations-list__tbl-col--name a");
+    private SelenideElement featureAnalysisTableName = $("tbody .feature-analyses-list__tbl-col--name");
 
     @Then("^can see Characterization page$")
     public void canSeeCharaterizationPage() {
@@ -77,15 +78,8 @@ public class CharacterizationStepDefs implements FormControl, FilterControl {
 
     @When("^click to Import Cohort Definition$")
     public void clickToImportCohortDefinition() {
-        $$(byText("Import")).get(0).waitUntil(visible, 3000).click();
+        $$(byText("Import")).get(0).waitUntil(visible, 5000).click();
     }
-
-    @When("^choose cohort definition from the table in characterization$")
-    public void chooseCohortDefinitionFromTheTableInCharacterization() {
-        $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue("test");
-        $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text("test")).click();
-    }
-
 
     @When("^click to Feature Analyses tab$")
     public void clickToFeatureAnalysesTab() {
@@ -95,72 +89,70 @@ public class CharacterizationStepDefs implements FormControl, FilterControl {
 
     @Then("^can see Feature Analyses table$")
     public void canSeeFeatureAnalysesTable() {
-        $(By.xpath("//table/tbody/tr")).waitUntil(visible, 5000);
+        $(".facetedDataTable tbody").waitUntil(visible, 10000);
     }
 
     @When("^click to New Feature analyses$")
     public void clickToNewFeatureAnalyses() {
-        $(By.xpath("//*[@class='characterizations-tabbed-grid__new-entity-btn btn btn-primary btn-sm']")).click();
+        $(byText("New Feature analysis")).click();
     }
 
     @Then("^can see page of creation New Feature Analyse$")
     public void canSeePageOfCreationNewFeatureAnalyse() {
-        $(By.xpath("//*[@class='panel-heading']")).waitUntil(visible, 4000);
+        pageHeader.shouldHave(text("New Feature Analysis"));
     }
 
     @When("^enter description$")
     public void enterDescription() {
-        $(By.xpath("//*[@class='feature-analysis-view-edit__descr form-control']")).setValue("TEST DESCRIPTION");
+        $("textarea.feature-analysis-view-edit__descr").setValue("TEST DESCRIPTION");
     }
 
     @When("^choose Criteria design$")
     public void chooseCriteriaDesign() {
-        $(By.xpath("//*[@class='feature-analysis-view-edit__type-selector']/ul/li[1]")).click();
-        $(By.xpath("//*[@class='feature-analysis-view-edit__criteria-name form-control']")).waitUntil(visible, 3000);
+        $$(".feature-analysis-view-edit__nav a").find(text("Criteria")).click();
+        $("input[placeholder='Criteria name']").waitUntil(visible, 5000);
     }
 
     @When("^enter name of New Feature Analyse$")
     public void enterNameOfNewFeatureAnalyse() {
-        String generatedStringFeature = RandomStringUtils.randomAlphanumeric(10);
-        featureName = "Test_" + generatedStringFeature;
-        $(By.xpath("//*[@class='input-group']/input")).setValue(featureName);
+        featureName = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(featureName);
     }
 
     @When("^click to save feature analyse button$")
     public void clickToSaveFeatureAnalyseButton() {
-        $(By.xpath("//*[@class='btn btn-success']")).waitUntil(enabled, 5000).click();
+        saveAction();
     }
 
     @Then("^go to feature analyses table by pressing close button$")
     public void goToFeatureAnalysesTableByPressingCloseButton() {
-        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(enabled, 5000).click();
+        closeAction();
     }
 
     @When("^enter name of our feature to filter$")
     public void enterNameOfOurFeatureToFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 10000).setValue(featureName);
+        search(featureName);
     }
 
     @Then("^can see our feature in table of feature analyses$")
     public void canSeeOurFeatureInTableOfFeatureAnalyses() {
-        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']")).shouldHave(text(featureName));
+        featureAnalysisTableName.shouldHave(text(featureName));
     }
 
     @When("^click to our feature analyse$")
     public void clickToOurFeatureAnalyse() {
-        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']/a")).waitUntil(visible, 5000).click();
+        featureAnalysisTableName.waitUntil(visible, 5000).click();
     }
 
     @Then("^can see page of our Feature Analyse$")
     public void canSeePageOfOurFeatureAnalyse() {
-        $(By.xpath("//*[@data-bind='text: title'][1]")).waitUntil(visible, 5000).
-                shouldHave(text("Feature Analysis #"));
+        pageHeader.shouldHave(text("Feature Analysis #"));
     }
 
 
     @When("^click to delete feature analyse$")
     public void clickToDeleteFeatureAnalyse() {
-        $(By.xpath("//*[@class='btn btn-danger']")).click();
+        deleteAction();
     }
 
     @When("^accept delete feature analyse$")
@@ -170,9 +162,8 @@ public class CharacterizationStepDefs implements FormControl, FilterControl {
 
     @Then("^cant find feature analyse in the table$")
     public void cantFindFeatureAnalyseInTheTable() {
-        $(By.xpath("//*[@type='search']")).setValue(featureName);
-        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']")).
-                shouldNotHave(text(featureName));
+        search(featureName);
+        featureAnalysisTableName.shouldNotHave(text(featureName));
     }
 
     @When("^click to Import Feature analyses$")
@@ -182,8 +173,8 @@ public class CharacterizationStepDefs implements FormControl, FilterControl {
 
     @Then("^can see Feature analyses window$")
     public void canSeeFeatureAnalysesWindow() {
-        $(By.xpath("//*[@class='atlas-modal__modal-dialog modal-dialog characterization-design__feature-" +
-                "analyses-modal']/div/div[1]/div")).waitUntil(visible, 4000).shouldHave(text("Choose a Feature analyses"));
+        $(".characterization-design__feature-analyses-modal .modal-header .modal-title").
+                waitUntil(visible, 4000).shouldHave(text("Choose a Feature analyses"));
     }
 
     @Then("^Feature analyse table is visible$")
