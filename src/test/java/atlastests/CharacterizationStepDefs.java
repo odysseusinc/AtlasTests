@@ -1,6 +1,10 @@
 package atlastests;
 
+import atlastests.components.FilterControl;
+import atlastests.components.FormControl;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -10,69 +14,65 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CharacterizationStepDefs {
+public class CharacterizationStepDefs implements FormControl, FilterControl {
 
     private String characterizationName;
     private String featureName;
-
+    private SelenideElement pageHeader = $(".heading-title span");
+    private SelenideElement cohortTableName = $("tbody .characterizations-list__tbl-col--name a");
 
     @Then("^can see Characterization page$")
     public void canSeeCharaterizationPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Cohort Characterizations"));
+        pageHeader.shouldHave(text("Cohort Characterizations"));
     }
 
     @When("^click to New characterization button$")
     public void clickToNewCharacterizationButton() {
         $(byText("New Characterization")).click();
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("New Characterization"));
-
+        pageHeader.shouldHave(text("New Characterization"));
     }
 
     @When("^enter Characterization name and save it$")
     public void enterCharacterizationNameAndSaveIt() {
-        String generatedString = RandomStringUtils.randomAlphanumeric(10);
-        characterizationName = "Test_" + generatedString;
-        $(By.xpath("//*[@class='input-group']/input")).setValue(characterizationName);
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        characterizationName = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(characterizationName);
+        saveAction();
     }
 
     @When("^return to Characterization table$")
     public void returnToCharacterizationTable() {
-        $$(By.xpath("//*[@class='btn btn-primary']")).get(0).click();
+        closeAction();
     }
 
     @When("^enter created characterization name in filter$")
     public void enterCreatedCharacterizationNameInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 3000).setValue(characterizationName);
+        search(characterizationName);
     }
 
     @Then("^can see new characterization in table$")
     public void canSeeNewCharacterizationInTable() {
-        $(By.xpath("//*[@class=' characterizations-list__tbl-col characterizations-list__tbl-col--name ']/a")).
-                shouldHave(text(characterizationName));
+        cohortTableName.shouldHave(text(characterizationName));
     }
 
     @When("^click to our characterization$")
     public void clickToOurCharacterization() {
-        $(By.xpath("//*[@class=' characterizations-list__tbl-col characterizations-list__tbl-col--name ']/a")).click();
-
+        cohortTableName.click();
     }
 
     @When("^click to delete characterization button$")
     public void clickToDeleteCharacterizationButton() {
-        $(By.xpath("//*[@class='btn btn-danger']")).waitUntil(visible, 3000).click();
+        deleteAction();
     }
 
     @When("^accept delete characterization$")
     public void acceptDeleteCharacterization() {
-        switchTo().alert().accept();
+        Selenide.confirm();
     }
 
     @Then("^cant find characterization in the table$")
     public void cantFindCharacterizationInTheTable() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 3000).setValue(characterizationName);
-        $(By.xpath("//*[@class=' characterizations-list__tbl-col characterizations-list__tbl-col--name ']/a")).
-                shouldNotHave(text(characterizationName));
+        search(characterizationName);
+        cohortTableName.shouldNotHave(text(characterizationName));
     }
 
     @When("^click to Import Cohort Definition$")
@@ -202,8 +202,8 @@ public class CharacterizationStepDefs {
 
     @When("^enter the same Characterization name and save it$")
     public void enterTheSameCharacterizationNameAndSaveIt() {
-        $(By.xpath("//*[@class='input-group']/input")).waitUntil(visible, 3000).setValue(characterizationName);
-        $(By.xpath("//*[@class='fa fa-save']")).waitUntil(visible, 3000).click();
+        setTitle(characterizationName);
+        saveAction();
     }
 
     @Then("^can see alert message about uniqueness$")
@@ -291,18 +291,17 @@ public class CharacterizationStepDefs {
 
     @When("^click to copy characterization$")
     public void clickToCopyCharacterization() {
-        $(By.xpath("//*[@class='btn btn-primary'][2]")).click();
+        copyAction();
     }
 
     @When("^enter \"([^\"]*)\" and name of our characterization$")
     public void enterAndNameOfOurCharacterization(String arg0) {
-        $(By.xpath("//*[@type='search']")).setValue(arg0 + characterizationName);
+        search(arg0 + characterizationName);
     }
 
     @Then("^can see copy of our characterization$")
     public void canSeeCopyOfOurCharacterization() {
-        $(By.xpath("//*[@class=' characterizations-list__tbl-col characterizations-list__tbl-col--name ']/a")).
-                shouldHave(text("COPY OF: " + characterizationName));
+        cohortTableName.shouldHave(text("COPY OF: " + characterizationName));
 
     }
 
