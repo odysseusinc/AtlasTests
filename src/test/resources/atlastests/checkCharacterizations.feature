@@ -159,12 +159,12 @@ Feature: Characterization check
     When click Remove first Feature Analyse from the table
     When click to save Chacterization
     When click to Executions tab in Characterizations
-    When click to SynPUF110k Generate report button
-    Then SynPUF110k generate button has to be with Cancel text
+    When click to "synpuf_110k" Generate report button
+    Then "synpuf_110k" generate button has to be with Cancel text
 
 
   @1107 @odysseus
-  Scenario: Import definitions, features and SynPUF 110k CDM5.3 report
+  Scenario: Import definitions, features and oracle report
     When login to ATLAS as QA
     When click to Characterizations menu as QA
     Then can see Characterization page
@@ -206,7 +206,6 @@ Feature: Characterization check
     Then Feature analyse table is visible
     Then can see result of our search "Condition Era Short Term" and "Condition Era Long Term"
     When click to Add Subgroup analyses
-    Then can see Stratified input and subgroup table
     When enter Stratified by text "test"
     When click to add criteria to group button
     When click to Add Demographic point
