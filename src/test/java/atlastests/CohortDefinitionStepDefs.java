@@ -1,5 +1,8 @@
 package atlastests;
 
+import atlastests.components.FilterControl;
+import atlastests.components.FormControl;
+import atlastests.components.PageControl;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
@@ -16,77 +19,68 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CohortDefinitionStepDefs {
+public class CohortDefinitionStepDefs implements PageControl, FormControl, FilterControl {
 
     private String nameCohort;
     private String newGeneratedString;
+    private SelenideElement cohortLinkInTable = $("tbody .linkish");
 
     @Then("^can see Cohort Definition page$")
     public void canSeeCohortDefinitionPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 4000).
-                shouldHave(text("Cohort definitions"));
+        checkPageHeader("Cohort definitions");
     }
 
     @When("^click New Cohort button$")
     public void clickNewCohortButton() {
-        $(By.xpath("//*[@class='btn btn-sm btn-primary']")).waitUntil(enabled, 5000).click();
+        $(".btn-primary").waitUntil(enabled, 5000).click();
     }
 
     @Then("^can see new cohort page creation$")
     public void canSeeNewCohortPageCreation() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible, 3000).
-                shouldHave(text("New Cohort Definition"));
+        checkPageHeader("New Cohort Definition");
     }
 
     @When("^enter name of New Cohort Definition and save it$")
     public void enterNameOfNewCohortDefinitionAndSaveIt() {
-        String generatedString = RandomStringUtils.randomAlphanumeric(10);
-        nameCohort = "Test_" + generatedString;
-        $(By.xpath("//*[@class='form-control']")).clear();
-        $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
-        SelenideElement saveButton = $("[title='Save cohort definition']");
-        saveButton.waitUntil(enabled, 5000).click();
-        saveButton.waitUntil(disabled, 5000);
-        $(".fa-trash-o").waitUntil(enabled, 5000);
+        nameCohort = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(nameCohort);
+        saveAction();
+        $(".fa-trash-o").waitUntil(enabled, 5000); //cz need to wait saving of cohort
     }
 
     @Then("^filtered Cohort Definition$")
     public void filteredCohortDefinition() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 4000).setValue(nameCohort);
+        search(nameCohort);
     }
 
     @Then("^Cohort Definition should be found$")
     public void cohortDefinitionShouldBeFound() {
-        $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text(nameCohort));
-
+        cohortLinkInTable.shouldHave(text(nameCohort));
     }
 
     @When("^click to our Cohort Definition$")
     public void clickToOurCohortDefinition() {
-        $(By.xpath("//table/tbody/tr/td[2]/span")).click();
+        cohortLinkInTable.click();
     }
 
     @Then("^can see our Cohort Definition$")
     public void canSeeOurCohortDefinition() {
-        $(By.xpath("//*[@class='panel panel-primary cohort-definition-panel']")).waitUntil(visible, 2000);
-
+        $$(".cohort-definition-panel").forEach(e -> e.shouldBe(visible));
     }
 
     @When("^click to delete our Cohort Definition$")
     public void clickToDeleteOurCohortDefinition() {
-        $(By.xpath("//*[@class='fa fa-trash-o']")).click();
-
+        deleteAction();
     }
 
     @When("^accept delete Cohort Definition alert$")
     public void acceptDeleteCohortDefinitionAlert() {
-        switchTo().alert().accept();
-
+        Selenide.confirm();
     }
 
     @Then("^Cohort Definition should be not found$")
     public void cohortDefinitionShouldBeNotFound() {
-        $(By.xpath("//table/tbody/tr/td")).shouldHave(text("No matching records found"));
+        $(".dataTables_empty").shouldHave(text("No matching records found"));
 
     }
 
@@ -241,32 +235,29 @@ public class CohortDefinitionStepDefs {
 
     @When("^enter new name of cohort definition$")
     public void enterNewNameOfCohortDefinition() {
-        String generatedString = RandomStringUtils.randomAlphanumeric(10);
-        newGeneratedString = "Test_" + generatedString;
-        $(By.xpath("//*[@class='form-control']")).clear();
-        $(By.xpath("//*[@class='input-group']/input")).setValue(newGeneratedString);
+        newGeneratedString = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(newGeneratedString);
     }
 
     @When("^save new name of cohort definition$")
     public void saveNewNameOfCohortDefinition() {
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        saveAction();
     }
 
     @Then("^filtered new Cohort Definition$")
     public void filteredNewCohortDefinition() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 4000).setValue(newGeneratedString);
+        search(newGeneratedString);
     }
 
     @Then("^new Cohort Definition should be found$")
     public void newCohortDefinitionShouldBeFound() {
-        $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text(newGeneratedString));
+        cohortLinkInTable.shouldHave(text(newGeneratedString));
     }
 
     @When("^enter the same name of New Cohort Definition and save it$")
     public void enterTheSameNameOfNewCohortDefinitionAndSaveIt() {
-        $(By.xpath("//*[@class='form-control']")).waitUntil(enabled, 5000).clear();
-        $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
-        $(By.xpath("//*[@class='fa fa-save']")).waitUntil(enabled, 5000).click();
+        setTitle(nameCohort);
+        saveAction();
     }
 
     @Then("^condition occurrence block shown$")
