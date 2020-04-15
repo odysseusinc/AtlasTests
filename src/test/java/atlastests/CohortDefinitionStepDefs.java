@@ -3,8 +3,6 @@ package atlastests;
 import atlastests.components.FilterControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
