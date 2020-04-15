@@ -2,6 +2,7 @@ package atlastests;
 
 import atlastests.components.FilterControl;
 import atlastests.components.FormControl;
+import atlastests.components.PageControl;
 import com.codeborne.selenide.*;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -13,11 +14,10 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CharacterizationStepDefs implements FormControl, FilterControl {
+public class CharacterizationStepDefs implements FormControl, FilterControl, PageControl {
 
     private String characterizationName;
     private String featureName;
-    private SelenideElement pageHeader = $(".heading-title span");
     private SelenideElement cohortTableName = $("tbody .characterizations-list__tbl-col--name a");
     private SelenideElement featureAnalysisTableName = $("tbody .feature-analyses-list__tbl-col--name");
     private ElementsCollection featureAnalysisTableRows = $$("tbody .characterization-design__col-feature-name");
@@ -27,13 +27,13 @@ public class CharacterizationStepDefs implements FormControl, FilterControl {
 
     @Then("^can see Characterization page$")
     public void canSeeCharaterizationPage() {
-        pageHeader.shouldHave(text("Cohort Characterizations"));
+        checkPageHeader("Cohort Characterizations");
     }
 
     @When("^click to New characterization button$")
     public void clickToNewCharacterizationButton() {
         $(byText("New Characterization")).click();
-        pageHeader.shouldHave(text("New Characterization"));
+        checkPageHeader("New Characterization");
     }
 
     @When("^enter Characterization name and save it$")
@@ -102,7 +102,7 @@ public class CharacterizationStepDefs implements FormControl, FilterControl {
 
     @Then("^can see page of creation New Feature Analyse$")
     public void canSeePageOfCreationNewFeatureAnalyse() {
-        pageHeader.shouldHave(text("New Feature Analysis"));
+        checkPageHeader("New Feature Analysis");
     }
 
     @When("^enter description$")
@@ -149,7 +149,7 @@ public class CharacterizationStepDefs implements FormControl, FilterControl {
 
     @Then("^can see page of our Feature Analyse$")
     public void canSeePageOfOurFeatureAnalyse() {
-        pageHeader.shouldHave(text("Feature Analysis #"));
+        checkPageHeader("Feature Analysis #");
     }
 
 
