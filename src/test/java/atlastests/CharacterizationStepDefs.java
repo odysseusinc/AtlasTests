@@ -340,12 +340,12 @@ public class CharacterizationStepDefs implements FormControl, FilterControl {
     }
 
     private void generateByDataSource(String dataSourceName) {
-        $$(".characterization-view-edit-executions__heading").find(Condition.text(dataSourceName)).
+        generationActions.find(Condition.text(dataSourceName)).
                 find(withText("Generate")).click();
     }
 
     private void checkRunning(String dataSourceName) {
-        $$(".characterization-view-edit-executions__heading").find(Condition.text(dataSourceName)).
+        generationActions.find(Condition.text(dataSourceName)).
                 find(withText("Cancel")).waitUntil(visible, 10000);
     }
 }
