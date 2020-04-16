@@ -3,6 +3,8 @@ package atlastests;
 import atlastests.components.FilterControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
@@ -22,6 +24,9 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
     private String nameCohort;
     private String newGeneratedString;
     private SelenideElement cohortLinkInTable = $("tbody .linkish");
+    private ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .repositoryConceptSetItem");
+    private ElementsCollection conceptSetsInDataTable = $$(".conceptSetTable span");
+    private SelenideElement closeConceptSetButton = $(withText("Close Concept Set"));
 
     @Then("^can see Cohort Definition page$")
     public void canSeeCohortDefinitionPage() {
@@ -106,20 +111,19 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @Then("^Import Concept Set window shown$")
     public void importConceptSetWindowShown() {
-        $(By.xpath("//*[@class='modal fade in']/div/div/div")).shouldHave(text("Import Concept Set From Repository..."));
+        $(".modal.fade.in .modal-header").shouldHave(text("Import Concept Set From Repository..."));
     }
 
 
     @When("^enter \"([^\"]*)\" to Filter of Concept Set from Repository$")
     public void enterToFilterOfConceptSetFromRepository(String arg0) {
-        $(By.xpath("//*[@type='search']")).waitUntil(enabled, 5000).setValue(arg0);
+        search(arg0);
     }
 
 
     @When("^click to chosen concept set from repository$")
     public void clickToChosenConceptSetFromRepository() {
-        $("#repositoryConceptSetTable_wrapper tr.repositoryConceptSetItem").
-                waitUntil(enabled, 5000).click();
+        conceptSetsInTableForChoosing.first().click();
         $("#repositoryConceptSetTable .circle").waitUntil(hidden, 10000);
     }
 
@@ -131,34 +135,32 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to Concept Sets tab$")
     public void clickToConceptSetsTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[2]")).click();
+        $$(".nav-tabs a").find(matchesText("Concept Sets")).click();
     }
 
     @Then("^can see row with name of Concept Set in the table$")
     public void canSeeRowWithNameOfConceptSetInTheTable() {
-        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/tbody/tr/td")).shouldHave(text("0"));
-        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).shouldHave(text("Angioedema"));
-
+        conceptSetsInDataTable.first().shouldHave(matchesText("Angioedema"));
     }
 
     @When("^click on the row in table concept set in cohort definitions$")
     public void clickOnTheRowInTableConceptSetInCohortDefinitions() {
-        $$(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).get(0).click();
+        conceptSetsInDataTable.first().hover().click();
     }
 
     @Then("^can see table of concept set with concepts$")
     public void canSeeTableOfConceptSetWithConcepts() {
-        $$(By.xpath("//table/tbody/tr/td[2]")).get(6).shouldHave(text("Angioedema"));
+        $(".active.tab-pane .divtext").shouldHave(text("Angioedema"));
     }
 
     @When("^click to Close concept set$")
     public void clickToCloseConceptSet() {
-        $(By.xpath("//*[@class='btn btn-sm btn-primary']")).click();
+        closeConceptSetButton.click();
     }
 
     @Then("^table of concept sets close$")
     public void tableOfConceptSetsClose() {
-        $(By.xpath("//*[@class='standard']")).shouldNotBe(visible);
+        closeConceptSetButton.shouldNotBe(visible);
     }
 
     @When("^click to Generation tab$")
@@ -209,16 +211,17 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^add Inclusion criteria$")
     public void addInclusionCriteria() {
-        $$(By.xpath("//*[@class='btn btn-sm btn-success']")).get(1).waitUntil(enabled, 5000).click();
-        $(By.xpath("//*[@class='inclusion-rule-header']/div/input")).setValue("TEST INCLUSION");
-        $(By.xpath("//*[@class='divtext']")).setValue("TEST INCLUSION DESCRIPTION");
+        $(".inclusion-criteria__block .btn[data-bind='click: addInclusionRule']").
+                waitUntil(visible, 5000).click();
+        $(".inclusion-rule-header input").setValue("TEST INCLUSION");
+        $("inclusion-rule-editor [placeholder='enter an inclusion rule description']").
+                setValue("TEST INCLUSION DESCRIPTION");
     }
 
     @Then("^can see block with inclusion criterias$")
     public void canSeeBlockWithInclusionCriterias() {
-        $(By.xpath("//*[@class='inclusionRules']/tbody/tr/td[2]/div[1]")).shouldHave(text("TEST INCLUSION"));
-        $(By.xpath("//*[@class='inclusionRules']/tbody/tr/td[2]/div[2]")).shouldHave(text("TEST INCLUSION DESCRIPTION"));
-
+        $$(".inclusionRuleItem div").shouldHave(CollectionCondition.texts("TEST INCLUSION",
+                "TEST INCLUSION DESCRIPTION"));
     }
 
     @Then("^can see window with cohort definition$")
@@ -228,7 +231,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to Id to sort$")
     public void clickToIdToSort() {
-        $(By.xpath("//*[@aria-label='Id: activate to sort column ascending']")).click();
+        $("[aria-label='Id: activate to sort column ascending']").click();
     }
 
     @When("^enter new name of cohort definition$")
@@ -260,12 +263,13 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @Then("^condition occurrence block shown$")
     public void conditionOccurrenceBlockShown() {
-        $(By.xpath("//*[@class='criteriaTable'][1]/tbody/tr/td")).shouldHave(matchesText("a condition occurrence of"));
+        $$(".criteria-content .criteriaTable").find(matchesText("a condition occurrence of")).
+                shouldBe(visible);
     }
 
     @When("^click to save button in Cohort Definition$")
     public void clickToSaveButtonInCohortDefinition() {
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        saveAction();
     }
 
     @When("^click to Id column$")
@@ -327,7 +331,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @Then("^can see name \"([^\"]*)\" of concept set at the button$")
     public void canSeeNameOfConceptSetAtTheButton(String arg0) {
-        $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).shouldHave(text(arg0));
+        $(".btn-group-sm .btn-primary").shouldHave(text(arg0));
     }
 
     @When("^click to Generate Impala button$")
@@ -384,7 +388,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @Then("^can see only one field with text \"([^\"]*)\"$")
     public void canSeeOnlyOneFieldWithText(String arg0) {
-        $("#repositoryConceptSetTable_wrapper .repositoryConceptSetItem").shouldHave(matchesText(arg0));
+        conceptSetsInTableForChoosing.forEach(e -> e.shouldHave(matchesText(arg0)));
     }
 
     @When("^click to Generate SynPUF (\\d+)K Cost&Util button$")
