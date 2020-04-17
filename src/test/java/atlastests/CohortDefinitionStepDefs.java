@@ -23,6 +23,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     private String nameCohort;
     private String newGeneratedString;
+    private ElementsCollection tabs = $$(".nav-tabs a");
     private SelenideElement cohortLinkInTable = $("tbody .linkish");
     private ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .repositoryConceptSetItem");
     private ElementsCollection conceptSetsInDataTable = $$(".conceptSetTable span");
@@ -135,7 +136,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to Concept Sets tab$")
     public void clickToConceptSetsTab() {
-        $$(".nav-tabs a").find(matchesText("Concept Sets")).click();
+        tabs.find(matchesText("Concept Sets")).click();
     }
 
     @Then("^can see row with name of Concept Set in the table$")
@@ -165,32 +166,32 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to Generation tab$")
     public void clickToGenerationTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[3]")).click();
+        tabs.find(matchesText("Generation")).click();
     }
 
     @Then("^can see Generation page$")
     public void canSeeGenerationSourcesPage() {
-        $(By.xpath("//*[@class='cohort-generate-sources']/../div")).shouldHave(text("Available CDM Sources"));
+        $(".cohort-generate-sources").shouldBe(visible);
     }
 
     @When("^click to Reporting tab$")
     public void clickToReportingTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[4]")).click();
+        tabs.find(matchesText("Reporting")).click();
     }
 
     @Then("^can see reporting page$")
     public void canSeeReportingPage() {
-        $(By.xpath("//*[@class='form-control invalid']")).shouldBe(visible);
+        $("select.form-control.invalid").shouldBe(visible);
     }
 
     @When("^click to Export tab in Cohort Definitions$")
     public void clickToExportTabInCohortDefinitions() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[5]")).click();
+        tabs.find(matchesText("Export")).click();
     }
 
     @Then("^can see Export page$")
     public void canSeeExportPage() {
-        $(By.xpath("//cohort-expression-viewer/div")).shouldHave(text("Initial Event Cohort"));
+        $("cohort-expression-viewer").shouldHave(text("Initial Event Cohort"));
     }
 
     @When("^click to Messages Tab$")

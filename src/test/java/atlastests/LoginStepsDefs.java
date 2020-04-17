@@ -6,9 +6,9 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 
 import static atlastests.MyStepdefs.openProjectPage;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class LoginStepsDefs extends testDefs {
 
@@ -23,7 +23,7 @@ public class LoginStepsDefs extends testDefs {
 
     @When("^click Environment$")
     public static void clickToEnvironment() throws Exception {
-	$(By.xpath("//*[@class='paddedWrapper']/div/span")).shouldHave(text(getDataProperties("environmentname"))).click();
+        $$("[data-bind='text:name']").find(matchesText((getDataProperties("environmentname")))).click();
         $(By.xpath("//*[@id='lg_username']")).waitUntil(visible, 30000);
     }
 
