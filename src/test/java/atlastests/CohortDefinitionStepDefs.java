@@ -27,7 +27,9 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
     private SelenideElement cohortLinkInTable = $("tbody .linkish");
     private ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .repositoryConceptSetItem");
     private ElementsCollection conceptSetsInDataTable = $$(".conceptSetTable span");
+    private ElementsCollection exportTabs = $$(".nav-pills.nav a");
     private SelenideElement closeConceptSetButton = $(withText("Close Concept Set"));
+    private SelenideElement jsonInputField = $("#cohortExpressionJSON");
 
     @Then("^can see Cohort Definition page$")
     public void canSeeCohortDefinitionPage() {
@@ -302,32 +304,33 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to JSON tab in Cohort Definitions$")
     public void clickToJSONTabInCohortDefinitions() {
-        $(By.xpath("//*[@class='nav nav-pills']/li[3]")).click();
+        exportTabs.filter(visible).find(matchesText("JSON")).click();
     }
 
     @When("^click to Copy to clipboard button$")
     public void clickToCopyToClipboardButton() {
-        $(By.xpath("//*[@id='btnCopyExpressionJSONClipboard']")).click();
+        $("#btnCopyExpressionJSONClipboard").click();
     }
 
     @When("^clear json input$")
     public void clearJsonInput() {
-        $(By.xpath("//*[@id='cohortExpressionJSON']")).clear();
+        jsonInputField.clear();
     }
 
     @When("^past json from clipboard$")
     public void pastJsonFromClipboard() {
-        $(By.xpath("//*[@id='cohortExpressionJSON']")).sendKeys(Keys.CONTROL, "v");
+        jsonInputField.sendKeys(Keys.CONTROL, "v");
     }
+
 
     @When("^click to Reload button$")
     public void clickToReloadButton() {
-        $(By.xpath("//*[@class='col-md-6'][2]/button")).click();
+        $(withText("Reload")).click();
     }
 
     @When("^click to Definition tab$")
     public void clickToDefinitionTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li")).click();
+        tabs.find(matchesText("Definition")).click();
     }
 
     @Then("^can see name \"([^\"]*)\" of concept set at the button$")
