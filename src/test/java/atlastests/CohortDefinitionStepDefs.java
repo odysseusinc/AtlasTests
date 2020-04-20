@@ -3,10 +3,7 @@ package atlastests;
 import atlastests.components.FilterControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -345,7 +342,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to Generate first data source button$")
     public void clickToGenerateFirstDataSourceButton() {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td/span/span/button")).click();
+        $$(".cohort-generate-sources button").first().click();
     }
 
     @Then("^can see Complete in IMPALA status in (\\d+) seconds$")
@@ -355,7 +352,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @Then("^can see Complete in first data source status in (\\d+) seconds$")
     public void canSeeCompleteFirstDSStatusInSeconds(int arg0) {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
+        $$(".statusIndicator.text-right").first().waitUntil(text("COMPLETE"), arg0 * 1000);
     }
 
     @When("^click to Reporting tab tab$")
