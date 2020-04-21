@@ -25,6 +25,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
     private ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .repositoryConceptSetItem");
     private ElementsCollection conceptSetsInDataTable = $$(".conceptSetTable span");
     private ElementsCollection exportTabs = $$(".nav-pills.nav a");
+    private ElementsCollection dataSources = $$(".cohort-generate-sources tr");
     private SelenideElement closeConceptSetButton = $(withText("Close Concept Set"));
     private SelenideElement jsonInputField = $("#cohortExpressionJSON");
 
@@ -337,7 +338,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to Generate Impala button$")
     public void clickToGenerateImpalaButton() {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td/span/span/button")).click();
+        generateByDataSource("IMPALA");
     }
 
     @When("^click to Generate first data source button$")
@@ -347,7 +348,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @Then("^can see Complete in IMPALA status in (\\d+) seconds$")
     public void canSeeCompleteStatusInSeconds(int arg0) {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
+        checkStatus("IMPALA", arg0);
     }
 
     @Then("^can see Complete in first data source status in (\\d+) seconds$")
@@ -357,24 +358,22 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to Reporting tab tab$")
     public void clickToReportingTabTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[4]")).click();
+        tabs.find(matchesText("Reporting")).click();
     }
 
     @When("^select \"([^\"]*)\" source$")
     public void selectSource(String arg0) {
-        $(By.xpath("//*[@class='form-control invalid']")).click();
-        $(By.xpath("//*[@class='form-control invalid']")).selectOptionByValue(arg0);
+        $$("select.form-control").filter(visible).first().selectOptionContainingText(arg0);
     }
 
     @When("^select first data source$")
     public void selectFirstDataSource() {
-        $(By.xpath("//*[@class='form-control invalid']")).click();
         $(By.xpath("//*[@class='form-control invalid']")).selectOption(1);
     }
 
     @When("^click to quick analysis button$")
     public void clickToQuickAnalysisButton() {
-        $(By.xpath("//*[@class='btn btn-success btn-sm']")).click();
+        $(".btn-group .btn-success").click();
     }
 
     @When("^accept an alert about time$")
@@ -384,23 +383,22 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @Then("^can see a row with status Started$")
     public void canSeeARowWithStatusStarted() {
-        $(By.xpath("//*[@class='panel panel-info']/div/table/tbody/tr/td[3]")).waitUntil(text("STARTED"), 10000);
+        $("[data-bind='html: status']").waitUntil(text("STARTED"), 10000);
     }
 
     @Then("^can see only one field with text \"([^\"]*)\"$")
     public void canSeeOnlyOneFieldWithText(String arg0) {
-        conceptSetsInTableForChoosing.forEach(e -> e.shouldHave(matchesText(arg0)));
+        conceptSetsInTableForChoosing.filter(visible).forEach(e -> e.shouldHave(text(arg0)));
     }
 
     @When("^click to Generate SynPUF (\\d+)K Cost&Util button$")
     public void clickToGenerateSynPUFKCostUtilButton(int arg0) {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[4]/td/span/span/button")).click();
+        generateByDataSource("SynPUF 110K Cost&Util");
     }
 
     @Then("^can see Complete in SynPUF (\\d+)K Cost&Util status in (\\d+) seconds$")
     public void canSeeCompleteInSynPUFKCostUtilStatusInSeconds(int arg0, int arg1) {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[4]/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
-
+        checkStatus("SynPUF 110K Cost&Util", arg0);
     }
 
     @When("^click to utilisation button$")
@@ -424,13 +422,12 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to Generate SynPUF (\\d+)k CDM(\\d+)$")
     public void clickToGenerateSynPUFKCDM(int arg0, int arg1) {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[6]/td/span/span/button")).click();
+        generateByDataSource("synpuf_110k");
     }
 
-    @Then("^can see Complete in SynPUF (\\d+)k CDM(\\d+) status in (\\d+) seconds$")
-    public void canSeeCompleteInSynPUFKCDMStatusInSeconds(int arg0, int arg1, int arg2) {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[6]/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
-
+    @Then("^can see Complete in SynPUF 110k CDM53 status in (\\d+) seconds$")
+    public void canSeeCompleteInSynPUFKCDMStatusInSeconds(int arg0) {
+        checkStatus("synpuf_110k", arg0);
     }
 
     @When("^click to Full analysis button$")
@@ -462,5 +459,15 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
     @Then("^can see sql query$")
     public void canSeeSqlQuery() {
         $(By.xpath("//*[@id='cohortSQL']/div/pre")).shouldHave(text("CREATE TABLE"));
+    }
+
+    private void generateByDataSource(String dataSourceName) {
+        dataSources.find(Condition.text(dataSourceName)).
+                find(withText("Generate")).click();
+    }
+
+    private void checkStatus(String dataSourceName, int seconds) {
+        dataSources.find(Condition.text(dataSourceName)).
+                find(".statusIndicator.text-right").waitUntil(text("COMPLETE"), seconds * 1000);
     }
 }

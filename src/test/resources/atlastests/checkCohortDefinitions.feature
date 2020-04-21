@@ -198,9 +198,9 @@ Feature: Check Cohort Definitions
     When accept an alert about time
     Then can see a row with status Started
     When click to Export tab in Cohort Definitions
-    Then can see "ACE inhibitors" in Initial Event Cohort
+    Then can see "ACE" in Initial Event Cohort
     When click to Graphical View
-    Then can see "ACE inhibitors" in Primary Criteria
+    Then can see "ACE" in Primary Criteria
     When click to SQL tab
     Then can see sql query
 
@@ -263,7 +263,7 @@ Feature: Check Cohort Definitions
     When click to Generate SynPUF 110K Cost&Util button
     Then can see Complete in SynPUF 110K Cost&Util status in 180 seconds
     When click to Reporting tab tab
-    When select "synpuf_110k_cu" source
+    When select "SynPUF 110K Cost&Util" source
     When click to utilisation button
     Then configure of reports to run window opens
     When choose reports and press Run
@@ -327,7 +327,7 @@ Feature: Check Cohort Definitions
     When click to Generate SynPUF 110k CDM53
     Then can see Complete in SynPUF 110k CDM53 status in 360 seconds
     When click to Reporting tab tab
-    When select "SYNPUF_110K" source
+    When select "synpuf_110k" source
     When click to Full analysis button
     When accept an alert about time
     Then can see a row with status Started
