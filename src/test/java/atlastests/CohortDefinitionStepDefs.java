@@ -275,7 +275,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to Id column$")
     public void clickToIdColumn() {
-        $(By.xpath("//*[@class='id-column sorting']")).waitUntil(visible, 3000).click();
+        $(".id-column.sorting").waitUntil(visible, 5000).click();
     }
 
     @Then("^can see that first value less then second$")
@@ -287,7 +287,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @Then("^can see paging$")
     public void canSeePaging() {
-        $(By.xpath("//*[@class= 'paginate_button next']")).shouldBe(visible);
+        $$(".next.paginate_button").forEach(e -> e.shouldBe(visible));
     }
 
     @When("^enter \"([^\"]*)\" in filter in cohort definition$")
@@ -437,28 +437,27 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @Then("^can see \"([^\"]*)\" in Initial Event Cohort$")
     public void canSeeInInitialEventCohort(String arg0) {
-        $(By.xpath("//*[@id='cohortTextView']/cohort-expression-viewer/ul/li/div/conceptset-reference/span")).shouldHave(text(arg0));
+        $("[data-bind='text: codesetName']").shouldHave(text(arg0));
     }
 
     @When("^click to Graphical View$")
     public void clickToGraphicalView() {
-        $(By.xpath("//*[@class='nav nav-pills']/li[2]")).click();
-
+        exportTabs.filter(visible).find(matchesText("Graphical View")).click();
     }
 
     @Then("^can see \"([^\"]*)\" in Primary Criteria$")
     public void canSeeInPrimaryCriteria(String arg0) {
-        $(By.xpath("//*[@class='name col-xs-2']")).shouldHave(text(arg0));
+        $(".name").shouldHave(text(arg0));
     }
 
     @When("^click to SQL tab$")
     public void clickToSQLTab() {
-        $(By.xpath("//*[@class='nav nav-pills']/li[4]")).click();
+        exportTabs.filter(visible).find(matchesText("SQL")).click();
     }
 
     @Then("^can see sql query$")
     public void canSeeSqlQuery() {
-        $(By.xpath("//*[@id='cohortSQL']/div/pre")).shouldHave(text("CREATE TABLE"));
+        $("#cohortSQL pre").shouldHave(text("CREATE TABLE"));
     }
 
     private void generateByDataSource(String dataSourceName) {

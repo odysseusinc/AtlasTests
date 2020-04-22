@@ -182,10 +182,10 @@ Feature: Check Cohort Definitions
     When choose Import Concept Set
     Then Import Concept Set window shown
     When click to Id to sort
-    When enter "ACE" to Filter of Concept Set from Repository
-    Then can see only one field with text "ACE"
+    When enter "angioedema" to Filter of Concept Set from Repository
+    Then can see only one field with text "angioedema"
     When click to chosen concept set from repository
-    Then can see name "ACE" of concept set at the button
+    Then can see name "angioedema" of concept set at the button
     When add Inclusion criteria
     Then can see block with inclusion criterias
     When click to save button in Cohort Definition
@@ -198,9 +198,9 @@ Feature: Check Cohort Definitions
     When accept an alert about time
     Then can see a row with status Started
     When click to Export tab in Cohort Definitions
-    Then can see "ACE" in Initial Event Cohort
+    Then can see "angioedema" in Initial Event Cohort
     When click to Graphical View
-    Then can see "ACE" in Primary Criteria
+    Then can see "angioedema" in Primary Criteria
     When click to SQL tab
     Then can see sql query
 
