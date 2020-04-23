@@ -196,7 +196,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to Messages Tab$")
     public void clickToMessagesTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[6]")).click();
+        tabs.find(matchesText("Messages")).click();
     }
 
     @Then("^can see Messages page$")
@@ -292,12 +292,12 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^enter \"([^\"]*)\" in filter in cohort definition$")
     public void enterInFilterInCohortDefinition(String arg0) {
-        $(By.xpath("//*[@type='search']")).setValue(arg0);
+       search(arg0);
     }
 
     @Then("^click to founded result$")
     public void clickToFoundedResult() {
-        $(By.xpath("//table/tbody/tr/td[2]")).click();
+        cohortLinkInTable.click();
     }
 
     @When("^click to JSON tab in Cohort Definitions$")
@@ -403,13 +403,14 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Filte
 
     @When("^click to utilisation button$")
     public void clickToUtilisationButton() {
-        $(By.xpath("//*[@class='btn btn-info btn-sm']")).waitUntil(enabled, 5000).click();
+        $(".btn-group .btn-info.btn-sm").waitUntil(enabled, 5000).click();
 
     }
 
     @Then("^configure of reports to run window opens$")
     public void configureOfReportsToRunWindowOpens() {
-        $(By.xpath("//*[@class='modal-pick-options__header']")).waitUntil(text("Reports"), 3000);
+        $$(".modal-pick-options__header").shouldHave(CollectionCondition.texts("Reports", "Periods",
+                "Rollups"));
     }
 
     @When("^choose reports and press Run$")

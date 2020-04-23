@@ -1,5 +1,7 @@
 package atlastests;
 
+import atlastests.components.FormControl;
+import atlastests.components.PageControl;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -13,38 +15,34 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CohortPathwayStepDefs {
+public class CohortPathwayStepDefs implements PageControl, FormControl {
     private String namePathway;
     private String newNamePathway;
 
     @Then("^can see Cohort Pathway page$")
     public void canSeeCohortPathwayPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible, 4000).
-                shouldHave(text("Cohort Pathways"));
+        checkPageHeader("Cohort Pathways");
     }
 
     @When("^click to button New Pathway Analysis$")
     public void clickToButtonNewPathwayAnalysis() {
-        $(By.xpath("//*[@class='pathways-browser__toolbar']/button")).waitUntil(visible, 3000).click();
+        $(".pathways-browser__create-btn").waitUntil(visible, 5000).click();
     }
 
     @Then("^can see creation page of New Cohort Pathway$")
     public void canSeeCreationPageOfNewCohortPathway() {
-        $(By.xpath("//*[@class='linked-entity-list__title']")).waitUntil(visible, 4000).
-                shouldHave(text("Target Cohorts"));
+        checkPageHeader("New Cohort Pathway");
     }
 
     @When("^enter new name of cohort pathway$")
     public void enterNewNameOfCohortPathway() {
-        String generatedString = RandomStringUtils.randomAlphanumeric(10);
-        namePathway = "Test_" + generatedString;
-        $(By.xpath("//*[@type='text']")).setValue(namePathway);
+        namePathway = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(namePathway);
     }
 
     @When("^click to save New Cohort Pathway button$")
     public void clickToSaveNewCohortPathwayButton() {
-        SelenideElement saveButton = $(".asset-heading .btn-success");
-        saveButton.waitUntil(enabled, 5000).click();
+        saveAction();
         $(".fa-trash-o").waitUntil(enabled, 5000);
     }
 
@@ -59,12 +57,12 @@ public class CohortPathwayStepDefs {
     }
 
     @When("^click to cancel button$")
-    public void clickToCancelButton()  {
+    public void clickToCancelButton() {
         $(By.xpath("//*[@class='btn btn-primary']")).waitUntil(enabled, 5000).click();
     }
 
     @When("^click to cancel button Cohort definition$")
-    public void clickToCancelButtonCohortDefinition()  {
+    public void clickToCancelButtonCohortDefinition() {
         $$(".asset-heading .input-group-btn .btn").shouldHave(CollectionCondition.size(5)).
                 forEach(SelenideElement::hover);
         $("[title='Close cohort definition']").waitUntil(enabled, 5000).click();
@@ -137,7 +135,7 @@ public class CohortPathwayStepDefs {
         $$(byText("Import")).get(0).click();
     }
 
-//   @When("^choose cohort definition from the table in target cohort list$")
+    //   @When("^choose cohort definition from the table in target cohort list$")
 //    public void chooseCohortDefinitionFromTheTableInTargetCohortList() {
 //        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 3000).click();
 //    }
@@ -158,7 +156,7 @@ public class CohortPathwayStepDefs {
         $$(byText("Import")).get(1).click();
     }
 
-//    @When("^choose cohort definition from the table in event cohort list$")
+    //    @When("^choose cohort definition from the table in event cohort list$")
 //    public void chooseCohortDefinitionFromTheTableInEventCohortList() {
 //        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 3000).click();
 //    }
