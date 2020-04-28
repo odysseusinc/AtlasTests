@@ -1,9 +1,11 @@
 package atlastests;
 
+import atlastests.components.FilterControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -15,9 +17,11 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CohortPathwayStepDefs implements PageControl, FormControl {
+public class CohortPathwayStepDefs implements PageControl, FormControl, FilterControl {
     private String namePathway;
     private String newNamePathway;
+    private SelenideElement facetedTableLink = $(".linkish");
+    private ElementsCollection tableLinksInTable = $$("tbody .pathways-browser__tbl-col--name a");
 
     @Then("^can see Cohort Pathway page$")
     public void canSeeCohortPathwayPage() {
@@ -48,17 +52,17 @@ public class CohortPathwayStepDefs implements PageControl, FormControl {
 
     @When("^click to save New Cohort Pathway button special case$")
     public void clickToSaveNewCohortPathwaySpecialCaseButton() {
-        $(By.xpath("//*[@class='btn btn-success']")).click();
+        saveAction();
     }
 
     @Then("^can see buttons to cohort pathway$")
     public void canSeeButtonsToCohortPathway() {
-        $(By.xpath("//*[@class='btn btn-primary']")).waitUntil(visible, 2000);
+        $(".fa-times.fa").waitUntil(visible, 5000);
     }
 
     @When("^click to cancel button$")
     public void clickToCancelButton() {
-        $(By.xpath("//*[@class='btn btn-primary']")).waitUntil(enabled, 5000).click();
+        closeAction();
     }
 
     @When("^click to cancel button Cohort definition$")
@@ -81,41 +85,36 @@ public class CohortPathwayStepDefs implements PageControl, FormControl {
 
     @Then("^can see name of new cohort pathway in table$")
     public void canSeeNameOfNewCohortPathwayInTable() {
-        $(By.xpath("//table/tbody/tr/td/a")).shouldHave(text(namePathway));
+        tableLinksInTable.first().shouldHave(text(namePathway));
     }
 
     @When("^click to cohort pathway in table$")
     public void clickToCohortPathwayInTable() {
-        $(By.xpath("//table/tbody/tr/td/a")).click();
+        tableLinksInTable.first().click();
     }
 
     @Then("^can see our cohort pathway$")
     public void canSeeOurCohortPathway() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Cohort Pathway #"));
+        checkPageHeader("Cohort Pathway #");
     }
 
     @When("^change name and press save$")
     public void changeNameAndPressSave() {
-        String generatedString = RandomStringUtils.randomAlphanumeric(10);
-        newNamePathway = "Test_" + generatedString;
-        $(By.xpath("//*[@type='text']")).setValue(newNamePathway);
-        $(By.xpath("//*[@class='btn btn-success']")).click();
+        newNamePathway = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(newNamePathway);
+        saveAction();
     }
 
     @Then("^can see new name of new cohort pathway in table$")
     public void canSeeNewNameOfNewCohortPathwayInTable() {
-        $(By.xpath("//*[@class='btn btn-primary']")).click();
-        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']")).
-                waitUntil(visible, 4000);
-        $(By.xpath("//*[@type='search']")).setValue(newNamePathway);
-        $(By.xpath("//table/tbody/tr/td/a")).shouldHave(text(newNamePathway));
-
-
+        closeAction();
+        search(newNamePathway);
+        tableLinksInTable.first().shouldHave(text(newNamePathway));
     }
 
     @When("^click to delete our cohort pathway$")
     public void clickToDeleteOurCohortPathway() {
-        $(By.xpath("//*[@class='btn btn-danger']")).click();
+        deleteAction();
     }
 
     @When("^accept delete cohort pathway$")
@@ -125,30 +124,26 @@ public class CohortPathwayStepDefs implements PageControl, FormControl {
 
     @Then("^cant see our cohort pathway in table$")
     public void cantSeeOurCohortPathwayInTable() {
-        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@type='search']")).setValue(String.valueOf(text(newNamePathway)));
-        $(By.xpath("//table/tbody/tr/td/a")).shouldNotHave(text(newNamePathway));
+        search(newNamePathway);
+        tableLinksInTable.first().shouldNotHave(text("COPY OF: " + newNamePathway));
     }
 
     @When("^click to Import Target Cohorts$")
-    public void clickToImportTargetCohorts() {
+    public void
+    clickToImportTargetCohorts() {
         $$(byText("Import")).get(0).click();
     }
 
-    //   @When("^choose cohort definition from the table in target cohort list$")
-//    public void chooseCohortDefinitionFromTheTableInTargetCohortList() {
-//        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 3000).click();
-//    }
     @When("^choose cohort definition \"([^\"]*)\" from the table in target cohort list$")
     public void chooseCohortDefinitionFromTheTableInTargetCohortList(String arg0) {
-        $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue(arg0);
-        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 4000).shouldHave(text(arg0)).click();
+        facetedTableSearch(arg0);
+        facetedTableLink.waitUntil(visible, 4000).shouldHave(text(arg0)).click();
     }
 
 
     @Then("^can see cohort definition in target cohort list list$")
     public void canSeeCohortDefinitionInTargetCohortListList() {
-        $(By.xpath("//*[@class='linked-cohort-list__col-cohort-id sorting_1']")).waitUntil(visible, 3000);
+        $("[data-bind='clickToEdit: name']").waitUntil(visible, 5000);
     }
 
     @When("^click to Import Event Cohorts$")
@@ -156,20 +151,16 @@ public class CohortPathwayStepDefs implements PageControl, FormControl {
         $$(byText("Import")).get(1).click();
     }
 
-    //    @When("^choose cohort definition from the table in event cohort list$")
-//    public void chooseCohortDefinitionFromTheTableInEventCohortList() {
-//        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 3000).click();
-//    }
     @When("^choose cohort definition \"([^\"]*)\" from the table in event cohort list$")
     public void chooseCohortDefinitionFromTheTableInEventCohortList(String arg0) {
-        $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue(arg0);
-        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 4000).shouldHave(text(arg0)).click();
+        facetedTableSearch(arg0);
+        facetedTableLink.shouldHave(text(arg0)).click();
     }
-
 
     @Then("^can see cohort definition in event cohort list list$")
     public void canSeeCohortDefinitionInEventCohortListList() {
-        $$("table.linked-entity-list__table").get(1).$(".linked-cohort-list__col-cohort-id").waitUntil(visible, 2000);
+        $$("table.linked-entity-list__table").first().find(".linked-cohort-list__col-cohort-id").
+                waitUntil(visible, 5000);
     }
 
     @When("^click to Executions tab$")
@@ -194,18 +185,18 @@ public class CohortPathwayStepDefs implements PageControl, FormControl {
 
     @When("^enter the same name of cohort pathway$")
     public void enterTheSameNameOfCohortPathway() {
-        $(By.xpath("//*[@type='text']")).setValue(namePathway);
+        setTitle(namePathway);
     }
 
     @When("^click to save our cohort pathway$")
     public void clickToSaveOurCohortPathway() {
-        $(By.xpath("//*[@class='fa fa-save']")).waitUntil(visible, 3000).click();
+        saveAction();
         $(By.xpath("//*[@class='btn btn-success disabled']")).waitUntil(visible, 4000);
     }
 
     @When("^click to copy button for our cohort pathway$")
     public void clickToCopyButtonForOurCohortPathway() {
-        $$(By.xpath("//*[@class='btn btn-primary']")).get(1).click();
+        copyAction();
     }
 
     @When("^enter \"([^\"]*)\" and name of our cohort pathway$")
