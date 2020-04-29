@@ -4,7 +4,6 @@ import atlastests.components.FilterControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
 import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
@@ -21,7 +20,9 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, FilterCo
     private String namePathway;
     private String newNamePathway;
     private SelenideElement facetedTableLink = $(".linkish");
+    private SelenideElement cohortOnPathwaysPage = $("[data-bind='clickToEdit: name']");
     private ElementsCollection tableLinksInTable = $$("tbody .pathways-browser__tbl-col--name a");
+    private ElementsCollection tabs = $$(".tabs__header-title div");
 
     @Then("^can see Cohort Pathway page$")
     public void canSeeCohortPathwayPage() {
@@ -143,7 +144,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, FilterCo
 
     @Then("^can see cohort definition in target cohort list list$")
     public void canSeeCohortDefinitionInTargetCohortListList() {
-        $("[data-bind='clickToEdit: name']").waitUntil(visible, 5000);
+        cohortOnPathwaysPage.waitUntil(visible, 5000);
     }
 
     @When("^click to Import Event Cohorts$")
@@ -165,22 +166,22 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, FilterCo
 
     @When("^click to Executions tab$")
     public void clickToExecutionsTab() {
-        $(byText("Executions")).click();
+        tabs.find(text("Executions")).click();
     }
 
     @Then("^can see Execution page$")
     public void canSeeExecutionPage() {
-        $(By.xpath("//*[@class = 'pathway-executions__title']")).waitUntil(visible, 4000).shouldHave(text("Executions"));
+        $(".pathway-executions__title").waitUntil(visible, 5000).shouldHave(text("Executions"));
     }
 
     @When("^click to Utilities tab$")
     public void clickToUtilitiesTab() {
-        $(byText("Utilities")).click();
+        tabs.find(text("Utilities")).click();
     }
 
     @Then("^can see Utilities page$")
     public void canSeeUtilitiesPage() {
-        $(By.xpath("//*[@class = 'pathway-utils__title']")).waitUntil(visible, 3000).shouldHave(text("Utilities"));
+        $(".pathway-utils__title").waitUntil(visible, 5000).shouldHave(text("Utilities"));
     }
 
     @When("^enter the same name of cohort pathway$")
@@ -211,29 +212,30 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, FilterCo
 
     @When("^copy text from export textarea$")
     public void copyTextFromExportTextarea() {
-        $(By.xpath("//*[@class='export__json-box']")).click();
-        $(By.xpath("//*[@class='export__json-box']")).sendKeys(Keys.CONTROL, "a");
-        $(By.xpath("//*[@class='export__json-box']")).sendKeys(Keys.CONTROL, "c");
+        SelenideElement jsonExportBox = $(".export__json-box");
+        jsonExportBox.click();
+        jsonExportBox.sendKeys(Keys.CONTROL, "a");
+        jsonExportBox.sendKeys(Keys.CONTROL, "c");
     }
 
     @When("^click to Import cohort pathway$")
     public void clickToImportCohortPathway() {
-        $(By.xpath("//*[@class='pathway-utils__nav-pill']")).click();
+        $$(".pathway-utils__nav-pill a").find(text("Import")).click();
     }
 
     @When("^past json to pathway textarea$")
     public void pastJsonToPathwayTextarea() {
-        $(By.xpath("//*[@class='import__json-box']")).sendKeys(Keys.CONTROL, "v");
+        $("textarea.import__json-box").sendKeys(Keys.CONTROL, "v");
     }
 
     @When("^click Import button in Pathways$")
     public void clickImportButtonInPathways() {
-        $(By.xpath("//*[@class='import__import-btn btn btn-default btn-sm']")).click();
+        $("button.btn-default").click();
     }
 
     @Then("^can see target cohorts in table like as \"([^\"]*)\"$")
     public void canSeeTargetCohortsInTableLikeAs(String arg0) {
-        $$(By.xpath("//*[@class=' linked-cohort-list__col-cohort-name linked-cohort-list__col-cohort-name--editable ']/span/span")).get(0).shouldHave(text(arg0));
+        cohortOnPathwaysPage.shouldHave(text(arg0));
     }
 }
 
