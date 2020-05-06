@@ -69,7 +69,7 @@
                 <configuration>
                     <reportVersion>2.8.0</reportVersion>
                     <allureDownloadUrl>
-                        http://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/%s/allure-commandline-%s.zip
+                        https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/%s/allure-commandline-%s.zip
                     </allureDownloadUrl>
                 </configuration>
             </plugin>
