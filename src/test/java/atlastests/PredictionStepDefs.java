@@ -15,6 +15,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class PredictionStepDefs {
     private ElementsCollection panelPrimary = $$(By.xpath("//*[@class='panel panel-primary']"));
+    private ElementsCollection tabs = $$(".tabs__header-title");
     private String generatedString;
     private String newGeneratedString;
     private String targetCohort;
@@ -293,7 +294,7 @@ public class PredictionStepDefs {
 
     @When("^click to Utilities button in Prediction without ee$")
     public void clickToUtilitiesButtonInPredictioWithoutEEn() {
-        $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
+        tabs.find(text("Utilities")).click();
     }
 
     @Then("^can see Review and Download table with selected target cohort$")
