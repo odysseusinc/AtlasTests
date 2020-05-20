@@ -14,6 +14,7 @@ import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CohortPathwayStepDefs implements PageControl, FormControl, FilterControl {
@@ -176,7 +177,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, FilterCo
 
     @When("^click to Utilities tab$")
     public void clickToUtilitiesTab() {
-        tabs.find(text("Utilities")).click();
+        $(withText("Utilities")).click();
     }
 
     @Then("^can see Utilities page$")
