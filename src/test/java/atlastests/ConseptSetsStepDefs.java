@@ -303,7 +303,7 @@ public class ConseptSetsStepDefs {
         $$(By.xpath("//*[@class='btn btn-primary']")).get(2).click();
     }
 
-    @Then("^can see Concept Set Optimization windowcan see Concept Set Optimization windowcan see Concept Set Optimization window$")
+    @Then("^can see Concept Set Optimization window$")
     public void canSeeConceptSetOptimizationWindow() {
         $(withText("The current concept set definition is fully optimized.")).shouldHave(visible);
         $$(".modal-header [aria-label='Close']").filter(visible).first().click();
