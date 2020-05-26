@@ -8,53 +8,40 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 public class testDefs {
     public static String getDataProperties(String param) throws Exception {
         Properties props = new Properties();
-        props.load(new InputStreamReader(new FileInputStream("src/application.properties"), "UTF-8"));
+        props.load(new InputStreamReader(new FileInputStream("src/application.properties"), StandardCharsets.UTF_8));
         return props.getProperty(param);
     }
 
     @Before
-    public void chromeDriver() {
-        String testmode, browserURL;
+    public void chromeDriver() throws Exception {
+        String browserURL = getDataProperties("test.browser");
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).
                 savePageSource(false));
         try {
             Configuration.timeout = 30000;
-
-            testmode = getDataProperties("test.mode");
-
-            switch(testmode) {
+            switch (getDataProperties("test.mode")) {
                 case "local":
-                    browserURL = getDataProperties("test.browser");
-                    if (!browserURL.equals("") && !browserURL.isEmpty()) {
-                        System.setProperty("webdriver.chrome.driver", browserURL);
-                    } else {
-                        throw new Exception("Error local browser property");
-                    }
+                    System.setProperty("webdriver.chrome.driver", browserURL);
                     break;
                 case "remote":
-                    Configuration.browser = "chrome";
-                    browserURL = getDataProperties("test.browser");
-                    if (!browserURL.equals("") && !browserURL.isEmpty()) {
+                    String remoteBrowser = getDataProperties("remote.browser");
+                    Configuration.browser = remoteBrowser == null ? "chrome" : remoteBrowser;
+                    Configuration.remote = browserURL;
 
-                        Configuration.remote = browserURL;
-
-                        // Разрешаем VNC
-                        ChromeOptions capabilities = new ChromeOptions();
-                        capabilities.setCapability("enableVNC", true);
-                    } else {
-                        throw new Exception("Error remote browser property");
-                    }
+                    ChromeOptions capabilities = new ChromeOptions();
+                    capabilities.setCapability("enableVNC", true);
                     break;
                 default:
                     throw new Exception("Error test mode");
             }
         } catch (Exception e) {
-            throw new AssertionError("Error settings", e);
+            throw new AssertionError("Error in settings property", e);
         }
     }
 }
