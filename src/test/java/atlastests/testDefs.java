@@ -26,6 +26,8 @@ public class testDefs {
         try {
             Configuration.timeout = 30000;
             switch (getDataProperties("test.mode")) {
+                case "mac":
+                    break;
                 case "local":
                     System.setProperty("webdriver.chrome.driver", browserURL);
                     break;
