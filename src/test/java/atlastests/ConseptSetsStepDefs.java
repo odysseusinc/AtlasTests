@@ -1,5 +1,6 @@
 package atlastests;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -278,7 +279,7 @@ public class ConseptSetsStepDefs {
 
     @Then("^click to first link in list in concept set window$")
     public void clickToFirstLinkInListInConceptSetWindow() {
-        $$(By.xpath("//table/tbody/tr/td[2]")).get(2).click();
+        $(".repositoryConceptSetItem").click();
     }
 
     @When("^click to Compare Concept Sets button$")
@@ -293,9 +294,8 @@ public class ConseptSetsStepDefs {
 
     @Then("^can see results of comparison$")
     public void canSeeResultsOfComparison() {
-        $$(By.xpath("//table/tbody/tr/td[1]")).get(2).shouldHave(text("Both"));
-        $$(By.xpath("//table/tbody/tr[2]/td[1]")).get(1).shouldHave(text("1 Only"));
-        $(By.xpath("//table/tbody/tr[3]/td[1]")).shouldHave(text("2 Only"));
+        $$("[role='row'] td:nth-child(1)").filter(visible).filter(not(empty)).
+                shouldHave(CollectionCondition.textsInAnyOrder("Both", "1 Only", "2 Only"));
     }
 
     @When("^click to Optimize button$")
