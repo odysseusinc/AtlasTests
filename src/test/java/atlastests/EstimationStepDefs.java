@@ -1,5 +1,6 @@
 package atlastests;
 
+import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -15,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static atlastests.testDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -28,10 +30,8 @@ public class EstimationStepDefs {
     private String cohortVal;
 
 
-
     private static String readFile(String path, Charset encoding)
-            throws IOException
-    {
+            throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         return new String(encoded, encoding);
     }
@@ -79,7 +79,7 @@ public class EstimationStepDefs {
 
     @When("^enter name of our estimation in filter$")
     public void enterNameOfOurEstimationInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000).setValue(generatedString);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 3000).setValue(generatedString);
     }
 
     @Then("^can see name of new Estimation in table$")
@@ -94,19 +94,19 @@ public class EstimationStepDefs {
 
     @Then("^can see our Estimation$")
     public void canSeeOurEstimation() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible,5000).
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 5000).
                 shouldHave(text("Population Level Effect Estimation - Comparative Cohort Analysis #"));
     }
 
     @Then("^can see new name of new Estimation in table$")
     public void canSeeNewNameOfNewEstimationInTable() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000).setValue(newGeneratedString);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 3000).setValue(newGeneratedString);
     }
 
     @When("^change name of Estimation and press save$")
     public void changeNameOfEstimationAndPressSave() {
         newGeneratedString = RandomStringUtils.randomAlphanumeric(10);
-        newGeneratedString = "Test_"+ newGeneratedString;
+        newGeneratedString = "Test_" + newGeneratedString;
         $(By.xpath("//*[@type='text']")).setValue(newGeneratedString);
         $(By.xpath("//*[@title='Save']")).click();
     }
@@ -123,7 +123,7 @@ public class EstimationStepDefs {
 
     @Then("^cant see our Estimation in table$")
     public void cantSeeOurEstimationInTable() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible,3000).setValue(newGeneratedString);
+        $(By.xpath("//*[@type='search']")).waitUntil(visible, 3000).setValue(newGeneratedString);
         $(By.xpath("//tbody/tr/td[2]")).shouldNotHave(text(newGeneratedString));
     }
 
@@ -187,7 +187,7 @@ public class EstimationStepDefs {
 
     @Then("^can see Comparison inputs$")
     public void canSeeComparisonInputs() {
-        $(By.xpath("//*[@class='editor-heading']")).waitUntil(visible,3000).shouldHave(text("Comparison"));
+        $(By.xpath("//*[@class='editor-heading']")).waitUntil(visible, 3000).shouldHave(text("Comparison"));
     }
 
     @When("^click to open target cohort button$")
@@ -197,7 +197,7 @@ public class EstimationStepDefs {
 
     @Then("^can see Select Cohort window$")
     public void canSeeSelectCohortWindow() {
-        $$(By.xpath("//*[@class='linkish']")).get(1).waitUntil(visible,4000);
+        $$(By.xpath("//*[@class='linkish']")).get(1).waitUntil(visible, 4000);
 
     }
 
@@ -236,7 +236,7 @@ public class EstimationStepDefs {
 
     @Then("^can see concept set window$")
     public void canSeeConceptSetWindow() {
-        $(By.xpath("//*[@class='btn btn-sm btn-primary new-concept-set']")).waitUntil(visible,4000);
+        $(By.xpath("//*[@class='btn btn-sm btn-primary new-concept-set']")).waitUntil(visible, 4000);
 
     }
 
@@ -257,7 +257,7 @@ public class EstimationStepDefs {
 
     @When("^press Add Analysis Settings$")
     public void pressAddAnalysisSettings() {
-        $(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).waitUntil(visible,4000);
+        $(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).waitUntil(visible, 4000);
         $$(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).get(1).click();
     }
 
@@ -294,7 +294,7 @@ public class EstimationStepDefs {
         StringSelection stringSelection = new StringSelection(myString);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, null);
-        $("textarea.import__json-box").sendKeys(Keys.CONTROL, "v");
+        $("textarea.import__json-box").sendKeys(Keys.SHIFT, Keys.INSERT);
     }
 
     @When("^click to Import button in Estimation$")
@@ -304,6 +304,6 @@ public class EstimationStepDefs {
 
     @Then("^can see \"([^\"]*)\" in Comparisons table$")
     public void canSeeInComparisonsTable(String arg0) throws Throwable {
-        $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible,30000).shouldHave(text(arg0));
+        $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible, 30000).shouldHave(text(arg0));
     }
 }
