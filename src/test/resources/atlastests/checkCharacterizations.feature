@@ -29,7 +29,7 @@ Feature: Characterization check
     When click to our characterization
     When click to copy characterization
     When click to cancel button
-    When enter "COPY OF: " and name of our characterization
+    When enter "COPY OF " and name of our characterization
     Then can see copy of our characterization
 
   @chun @common

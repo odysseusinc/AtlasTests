@@ -292,7 +292,7 @@ public class CharacterizationStepDefs implements FormControl, FilterControl, Pag
 
     @Then("^can see copy of our characterization$")
     public void canSeeCopyOfOurCharacterization() {
-        cohortTableName.shouldHave(text("COPY OF: " + characterizationName));
+        cohortTableName.shouldHave(text("COPY OF " + characterizationName));
 
     }
 
