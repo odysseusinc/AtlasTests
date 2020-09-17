@@ -41,7 +41,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^can see new cohort page creation$")
     public void canSeeNewCohortPageCreation() {
-        //checkPageHeader("New Cohort Definition");
+        checkPageHeader("New Cohort Definition");
     }
 
     @When("^enter name of New Cohort Definition and save it$")
