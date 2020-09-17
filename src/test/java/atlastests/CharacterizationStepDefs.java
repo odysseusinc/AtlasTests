@@ -107,13 +107,12 @@ public class CharacterizationStepDefs implements FormControl, FilterControl, Pag
 
     @When("^enter description$")
     public void enterDescription() {
-        $("textarea.feature-analysis-view-edit__descr").setValue("TEST DESCRIPTION");
+        $(".feature-analysis-design__descr").setValue("TEST DESCRIPTION");
     }
 
     @When("^choose Criteria design$")
     public void chooseCriteriaDesign() {
-        $$(".feature-analysis-view-edit__nav a").find(text("Criteria")).click();
-        $("input[placeholder='Criteria name']").waitUntil(visible, 5000);
+        $$(".feature-analysis-design__type-selector li").find(text("Criteria")).click();
     }
 
     @When("^enter name of New Feature Analyse$")
