@@ -9,6 +9,7 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 
+import static atlastests.components.StaticElements.ANALYSIS_EXECUTION_LIST;
 import static atlastests.components.StaticElements.EXECUTION_ACTION_BUTTONS;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -22,8 +23,6 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     private final SelenideElement cohortTableName = $("tbody .characterizations-list__tbl-col--name a");
     private final SelenideElement featureAnalysisTableName = $("tbody .feature-analyses-list__tbl-col--name");
     private final ElementsCollection featureAnalysisTableRows = $$("tbody .characterization-design__col-feature-name");
-    private final ElementsCollection generationActions = $$(".characterization-view-edit-executions__heading");
-
 
     @Then("^can see Characterization page$")
     public void canSeeCharaterizationPage() {
@@ -339,12 +338,12 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     }
 
     private void generateByDataSource(String dataSourceName) {
-        generationActions.find(Condition.text(dataSourceName)).
+        ANALYSIS_EXECUTION_LIST.find(Condition.text(dataSourceName)).
                 find(withText("Generate")).click();
     }
 
     private void checkRunning(String dataSourceName) {
-        generationActions.find(Condition.text(dataSourceName)).
+        ANALYSIS_EXECUTION_LIST.find(Condition.text(dataSourceName)).
                 find(withText("Cancel")).waitUntil(visible, 10000);
     }
 }
