@@ -9,14 +9,14 @@ Feature: Check Cohort Definitions
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to Cohort Definitions menu as QA
+    When click to close cohort button
     Then filtered Cohort Definition
     Then Cohort Definition should be found
     When click to our Cohort Definition
     Then can see our Cohort Definition
     When enter new name of cohort definition
     When save new name of cohort definition
-    When click to Cohort Definitions menu as QA
+    When click to close cohort button
     Then filtered new Cohort Definition
     Then new Cohort Definition should be found
     When click to our Cohort Definition
@@ -240,7 +240,7 @@ Feature: Check Cohort Definitions
   @dev0907 @odysseus
   Scenario: Generate SynPUF 110K Cost&Util
     When login to ATLAS as QA
-    When click to Cohort Definitions menu as QA
+    When click to close cohort button
     Then can see Cohort Definition page
     When click New Cohort button
     Then can see new cohort page creation

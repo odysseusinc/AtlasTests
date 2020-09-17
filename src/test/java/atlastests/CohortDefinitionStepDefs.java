@@ -20,14 +20,14 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     private String nameCohort;
     private String newGeneratedString;
-    private ElementsCollection tabs = $$(".nav-tabs a");
-    private SelenideElement cohortLinkInTable = $("tbody .linkish");
-    private ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .repositoryConceptSetItem");
-    private ElementsCollection conceptSetsInDataTable = $$(".conceptSetTable span");
-    private ElementsCollection exportTabs = $$(".nav-pills.nav a");
-    private ElementsCollection dataSources = $$(".cohort-generate-sources tr");
-    private SelenideElement closeConceptSetButton = $(withText("Close Concept Set"));
-    private SelenideElement jsonInputField = $("#cohortExpressionJSON");
+    private final ElementsCollection tabs = $$(".nav-tabs a");
+    private final SelenideElement cohortLinkInTable = $("tbody .linkish");
+    private final ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .repositoryConceptSetItem");
+    private final ElementsCollection conceptSetsInDataTable = $$(".conceptSetTable span");
+    private final ElementsCollection exportTabs = $$(".nav-pills.nav a");
+    private final ElementsCollection dataSources = $$(".cohort-generate-sources tr");
+    private final SelenideElement closeConceptSetButton = $(withText("Close Concept Set"));
+    private final SelenideElement jsonInputField = $("#cohortExpressionJSON");
 
     @Then("^can see Cohort Definition page$")
     public void canSeeCohortDefinitionPage() {
@@ -41,7 +41,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^can see new cohort page creation$")
     public void canSeeNewCohortPageCreation() {
-        checkPageHeader("New Cohort Definition");
+        //checkPageHeader("New Cohort Definition");
     }
 
     @When("^enter name of New Cohort Definition and save it$")
@@ -459,6 +459,11 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Then("^can see sql query$")
     public void canSeeSqlQuery() {
         $("#cohortSQL pre").shouldHave(text("CREATE TABLE"));
+    }
+
+    @When("^click to close cohort button$")
+    public void closeCurrentCohort() {
+       closeAction();
     }
 
     private void generateByDataSource(String dataSourceName) {
