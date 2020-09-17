@@ -1,6 +1,6 @@
 package atlastests;
 
-import atlastests.components.FilterControl;
+import atlastests.components.TablesControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
 import com.codeborne.selenide.*;
@@ -9,20 +9,20 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 
+import static atlastests.components.StaticElements.EXECUTION_ACTION_BUTTONS;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CharacterizationStepDefs implements FormControl, FilterControl, PageControl {
+public class CharacterizationStepDefs implements FormControl, TablesControl, PageControl {
 
     private String characterizationName;
     private String featureName;
-    private SelenideElement cohortTableName = $("tbody .characterizations-list__tbl-col--name a");
-    private SelenideElement featureAnalysisTableName = $("tbody .feature-analyses-list__tbl-col--name");
-    private ElementsCollection featureAnalysisTableRows = $$("tbody .characterization-design__col-feature-name");
-    private ElementsCollection executionActionButtons = $$(".characterization-view-edit-executions__action");
-    private ElementsCollection generationActions = $$(".characterization-view-edit-executions__heading");
+    private final SelenideElement cohortTableName = $("tbody .characterizations-list__tbl-col--name a");
+    private final SelenideElement featureAnalysisTableName = $("tbody .feature-analyses-list__tbl-col--name");
+    private final ElementsCollection featureAnalysisTableRows = $$("tbody .characterization-design__col-feature-name");
+    private final ElementsCollection generationActions = $$(".characterization-view-edit-executions__heading");
 
 
     @Then("^can see Characterization page$")
@@ -186,7 +186,7 @@ public class CharacterizationStepDefs implements FormControl, FilterControl, Pag
 
     @When("^click to Import Feature analyse$")
     public void clickToImportFeatureAnalyse() {
-        $(".characterization-design__button-panel .btn-primary").waitUntil(enabled, 5000).click();
+        importButtonClick();
     }
 
     @When("^enter the same Characterization name and save it$")
@@ -203,8 +203,8 @@ public class CharacterizationStepDefs implements FormControl, FilterControl, Pag
     @When("^choose cohort definition \"([^\"]*)\" from the table in characterization$")
     public void chooseCohortDefinitionFromTheTableInCharacterization(String arg0) {
         facetedTableSearch(arg0);
-        $$(".facetedDataTable tbody .linkish").shouldHave(CollectionCondition.sizeLessThan(15), 10000)
-                .find(Condition.matchesText(arg0)).click();
+        selectInTableResults(arg0);
+        importButtonClick();
     }
 
     @Then("^can see cohort definition in characterization list with text \"([^\"]*)\"$")
@@ -216,12 +216,12 @@ public class CharacterizationStepDefs implements FormControl, FilterControl, Pag
     @When("^click to feature checkbox with text \"([^\"]*)\" from Feature analyses$")
     public void clickToFeatureCheckboxWithTextFromFeatureAnalyses(String arg0) {
         facetedTableSearch(arg0);
-        $(".fa-check").click();
+        selectInTableResults(arg0);
     }
 
     @Then("^can see result of our search \"([^\"]*)\" and \"([^\"]*)\"$")
     public void canSeeResultOfOurSearchAnd(String arg0, String arg1) {
-        featureAnalysisTableRows.shouldHave(CollectionCondition.texts(arg0, arg1));
+        featureAnalysisTableRows.shouldHave(CollectionCondition.textsInAnyOrder(arg0, arg1));
     }
 
     @When("^click to save Chacterization$")
@@ -241,12 +241,12 @@ public class CharacterizationStepDefs implements FormControl, FilterControl, Pag
 
     @When("^click Generate report button on first data source$")
     public void clickToGenerateReportButtonOnFirstDataSource() {
-        executionActionButtons.get(0).click();
+        EXECUTION_ACTION_BUTTONS.get(0).click();
     }
 
     @Then("^first data source generate button has to be with Cancel text$")
     public void firstGenerateButtonHasToBeWithCancelText() {
-        executionActionButtons.get(0).waitUntil(text("Cancel"), 4000);
+        EXECUTION_ACTION_BUTTONS.get(0).waitUntil(matchesText("Cancel"), 5000);
     }
 
     @When("^click to Netezza Generate report button$")

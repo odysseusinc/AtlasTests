@@ -1,6 +1,6 @@
 package atlastests;
 
-import atlastests.components.FilterControl;
+import atlastests.components.TablesControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
 import com.codeborne.selenide.*;
@@ -16,7 +16,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CohortDefinitionStepDefs implements PageControl, FormControl, FilterControl {
+public class CohortDefinitionStepDefs implements PageControl, FormControl, TablesControl {
 
     private String nameCohort;
     private String newGeneratedString;
