@@ -58,7 +58,7 @@ Feature: Check Cohort Definitions
     Then can see only one field with text "Angioedema"
     When click to chosen concept set from repository
     Then can see name "Angioedema" of concept set at the button
-    When add Inclusion criteria
+    When add Inclusion criteria with group: "Drug Era"
     Then can see block with inclusion criterias
     When click to save button in Cohort Definition
     When click to Concept Sets tab

@@ -210,6 +210,14 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
         $(By.xpath("//*[@class='warnings-button-pane pull-right']/button")).click();
     }
 
+    @When("^add Inclusion criteria with group: \"([^\"]*)\"$")
+    public void addInclusionCriteriaWithGroup(String criteriaGroup) {
+        addInclusionCriteria();
+        $(withText("Add criteria to group...")).click();
+        $$("[data-bind='html:$component.formatOption($data), click:action']").
+                find(Condition.matchesText(criteriaGroup)).click();
+    }
+
     @When("^add Inclusion criteria$")
     public void addInclusionCriteria() {
         $(".inclusion-criteria__block .btn[data-bind='click: addInclusionRule']").
