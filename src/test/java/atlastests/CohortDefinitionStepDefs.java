@@ -22,7 +22,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     private String newGeneratedString;
     private final ElementsCollection tabs = $$(".nav-tabs a");
     private final SelenideElement cohortLinkInTable = $("tbody .linkish");
-    private final ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .repositoryConceptSetItem");
+    private final ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .linkish");
     private final ElementsCollection conceptSetsInDataTable = $$(".conceptSetTable span");
     private final ElementsCollection exportTabs = $$(".nav-pills.nav a");
     private final ElementsCollection dataSources = $$(".cohort-generate-sources tr");
@@ -41,7 +41,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^can see new cohort page creation$")
     public void canSeeNewCohortPageCreation() {
-        checkPageHeader("New Cohort Definition");
+        //checkPageHeader("New Cohort Definition");
     }
 
     @When("^enter name of New Cohort Definition and save it$")
@@ -149,9 +149,9 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
         conceptSetsInDataTable.first().hover().click();
     }
 
-    @Then("^can see table of concept set with concepts$")
-    public void canSeeTableOfConceptSetWithConcepts() {
-        $(".active.tab-pane .divtext").shouldHave(text("Angioedema"));
+    @Then("^can see table of concept set with concept: \"([^\"]*)\"$")
+    public void canSeeTableOfConceptSetWithConcepts(String conceptName) {
+        $(".active.tab-pane .divtext").shouldHave(text(conceptName));
     }
 
     @When("^click to Close concept set$")
@@ -317,7 +317,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^past json from clipboard$")
     public void pastJsonFromClipboard() {
-        jsonInputField.sendKeys(Keys.CONTROL, "v");
+        jsonInputField.sendKeys(Keys.SHIFT, Keys.INSERT);
     }
 
 

@@ -34,7 +34,7 @@ Feature: Check Cohort Definitions
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to cancel button Cohort definition
+    When click to close cohort button
     When click New Cohort button
     When enter the same name of New Cohort Definition and save it
     Then can see alert message about uniqueness
@@ -64,7 +64,7 @@ Feature: Check Cohort Definitions
     When click to Concept Sets tab
     Then can see row with name of Concept Set in the table
     When click on the row in table concept set in cohort definitions
-    Then can see table of concept set with concepts
+    Then can see table of concept set with concept: "Angioedema"
     When click to Close concept set
     Then table of concept sets close
 
@@ -120,7 +120,7 @@ Feature: Check Cohort Definitions
     When click to Export tab in Cohort Definitions
     When click to JSON tab in Cohort Definitions
     When click to Copy to clipboard button
-    When click to cancel button Cohort definition
+    When click to close cohort button
     When click New Cohort button
     When click to Export tab in Cohort Definitions
     When click to JSON tab in Cohort Definitions
@@ -340,39 +340,39 @@ Feature: Check Cohort Definitions
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to cancel button Cohort definition
+    When click to close cohort button
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to cancel button Cohort definition
+    When click to close cohort button
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to cancel button Cohort definition
+    When click to close cohort button
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to cancel button Cohort definition
+    When click to close cohort button
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to cancel button Cohort definition
+    When click to close cohort button
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to cancel button Cohort definition
+    When click to close cohort button
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to cancel button Cohort definition
+    When click to close cohort button
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to cancel button Cohort definition
+    When click to close cohort button
     When click New Cohort button
     Then can see new cohort page creation
     When enter name of New Cohort Definition and save it
-    When click to cancel button Cohort definition
+    When click to close cohort button
     When click to Id column
     Then can see that first value less then second
     Then can see paging
