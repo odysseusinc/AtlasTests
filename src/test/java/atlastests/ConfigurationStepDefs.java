@@ -27,6 +27,7 @@ public class ConfigurationStepDefs {
     @When("^Click to every datasource connection button$")
     public void checkEveryDataSourceConnection() {
         ElementsCollection dataSources = $$("[data-bind='if: $component.canCheckConnection($data)'] .btn");
+        dataSources.shouldHave(CollectionCondition.sizeGreaterThan(0), 5000);
         dataSourceQuantity = dataSources.size();
         dataSources.forEach(SelenideElement::click);
     }
@@ -34,7 +35,7 @@ public class ConfigurationStepDefs {
     @Then("^Successful connection messages are visible$")
     public void checkVisibilityOfEverySuccessfulConnection() {
         $$("[data-bind='if: $component.canCheckConnection($data)'] .btn-success").
-                shouldHave(CollectionCondition.size(dataSourceQuantity), 60000);
+                shouldHave(CollectionCondition.size(dataSourceQuantity), 30000);
     }
 
     @When("^click to Manage permission button$")
