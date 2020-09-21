@@ -208,7 +208,8 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
 
     @Then("^can see copy of our pathway$")
     public void canSeeCopyOfOurPathway() {
-        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']/a")).shouldHave(text("COPY OF: " + newNamePathway));
+        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']/a")).
+                shouldHave(text("COPY OF " + newNamePathway));
     }
 
     @When("^copy text from export textarea$")

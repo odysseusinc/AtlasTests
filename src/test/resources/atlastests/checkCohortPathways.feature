@@ -22,7 +22,7 @@ Feature: Cohort Pathway check
     When click to cohort pathway in table
     When click to copy button for our cohort pathway
     When click to cancel button
-    When enter "COPY OF: " and name of our cohort pathway
+    When enter "COPY OF " and name of our cohort pathway
     Then can see copy of our pathway
     When click to cohort pathway in table
     When click to delete our cohort pathway
