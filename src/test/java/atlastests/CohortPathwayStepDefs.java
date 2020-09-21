@@ -3,6 +3,7 @@ package atlastests;
 import atlastests.components.TablesControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
+import atlastests.components.TabsControl;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -17,13 +18,12 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CohortPathwayStepDefs implements PageControl, FormControl, TablesControl {
+public class CohortPathwayStepDefs implements PageControl, FormControl, TablesControl, TabsControl {
     private String namePathway;
     private String newNamePathway;
     private SelenideElement facetedTableLink = $(".linkish");
     private SelenideElement cohortOnPathwaysPage = $("[data-bind='clickToEdit: name']");
     private ElementsCollection tableLinksInTable = $$("tbody .pathways-browser__tbl-col--name a");
-    private ElementsCollection tabs = $$(".tabs__header-title div");
 
     @Then("^can see Cohort Pathway page$")
     public void canSeeCohortPathwayPage() {
@@ -136,10 +136,11 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
         $$(byText("Import")).get(0).click();
     }
 
-    @When("^choose cohort definition \"([^\"]*)\" from the table in target cohort list$")
+    @When("^choose cohort definition \"([^\"]*)\" from the table$")
     public void chooseCohortDefinitionFromTheTableInTargetCohortList(String arg0) {
         facetedTableSearch(arg0);
-        facetedTableLink.waitUntil(visible, 4000).shouldHave(text(arg0)).click();
+        selectInTableResults(arg0);
+        importButtonClick();
     }
 
 
@@ -153,12 +154,6 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
         $$(byText("Import")).get(1).click();
     }
 
-    @When("^choose cohort definition \"([^\"]*)\" from the table in event cohort list$")
-    public void chooseCohortDefinitionFromTheTableInEventCohortList(String arg0) {
-        facetedTableSearch(arg0);
-        facetedTableLink.shouldHave(text(arg0)).click();
-    }
-
     @Then("^can see cohort definition in event cohort list list$")
     public void canSeeCohortDefinitionInEventCohortListList() {
         $$("table.linked-entity-list__table").first().find(".linked-cohort-list__col-cohort-id").
@@ -167,17 +162,17 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
 
     @When("^click to Executions tab$")
     public void clickToExecutionsTab() {
-        tabs.find(text("Executions")).click();
+        chooseTab("Executions");
     }
 
     @Then("^can see Execution page$")
     public void canSeeExecutionPage() {
-        $(".pathway-executions__title").waitUntil(visible, 5000).shouldHave(text("Executions"));
+        $(".analysis-execution-list__title").waitUntil(visible, 5000).shouldHave(text("Executions"));
     }
 
     @When("^click to Utilities tab$")
     public void clickToUtilitiesTab() {
-        $(withText("Utilities")).click();
+        chooseTab("Utilities");
     }
 
     @Then("^can see Utilities page$")
@@ -214,10 +209,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
 
     @When("^copy text from export textarea$")
     public void copyTextFromExportTextarea() {
-        SelenideElement jsonExportBox = $(".export__json-box");
-        jsonExportBox.click();
-        jsonExportBox.sendKeys(Keys.CONTROL, "a");
-        jsonExportBox.sendKeys(Keys.CONTROL, "c");
+        copyToClipboard();
     }
 
     @When("^click to Import cohort pathway$")
@@ -227,17 +219,22 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
 
     @When("^past json to pathway textarea$")
     public void pastJsonToPathwayTextarea() {
-        $("textarea.import__json-box").sendKeys(Keys.CONTROL, "v");
+        $("textarea.import__json-box").sendKeys(Keys.SHIFT, Keys.INSERT);
     }
 
     @When("^click Import button in Pathways$")
     public void clickImportButtonInPathways() {
-        $("button.btn-default").click();
+        $(".import__import-btn").click();
     }
 
     @Then("^can see target cohorts in table like as \"([^\"]*)\"$")
     public void canSeeTargetCohortsInTableLikeAs(String arg0) {
         cohortOnPathwaysPage.shouldHave(text(arg0));
+    }
+
+    @When("^click to Design tab$")
+    public void clickToDesignTab() {
+        chooseTab("Design");
     }
 }
 

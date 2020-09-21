@@ -59,10 +59,10 @@ Feature: Cohort Pathway check
     When enter new name of cohort pathway
     When click to save New Cohort Pathway button
     When click to Import Target Cohorts
-    When choose cohort definition "Celecoxib new users" from the table in target cohort list
+    When choose cohort definition "Celecoxib new users" from the table
     Then can see cohort definition in target cohort list list
     When click to Import Event Cohorts
-    When choose cohort definition "bleed" from the table in event cohort list
+    When choose cohort definition "bleed" from the table
     Then can see cohort definition in event cohort list list
     When click to save our cohort pathway
 
@@ -90,10 +90,10 @@ Feature: Cohort Pathway check
     When enter new name of cohort pathway
     When click to save New Cohort Pathway button
     When click to Import Target Cohorts
-    When choose cohort definition "Celecoxib new users" from the table in target cohort list
+    When choose cohort definition "Celecoxib new users" from the table
     Then can see cohort definition in target cohort list list
     When click to Import Event Cohorts
-    When choose cohort definition "bleed" from the table in event cohort list
+    When choose cohort definition "bleed" from the table
     Then can see cohort definition in event cohort list list
     When click to save our cohort pathway
     When click to cancel button
@@ -110,6 +110,7 @@ Feature: Cohort Pathway check
     When click to Import cohort pathway
     When past json to pathway textarea
     When click Import button in Pathways
+    When click to Design tab
     Then can see target cohorts in table like as "Celecoxib new users"
 
 
