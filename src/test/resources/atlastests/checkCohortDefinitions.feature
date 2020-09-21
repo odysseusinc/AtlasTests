@@ -149,7 +149,7 @@ Feature: Check Cohort Definitions
     Then can see only one field with text "Chronic sinusitis"
     When click to chosen concept set from repository
     Then can see name "Chronic sinusitis" of concept set at the button
-    When add Inclusion criteria
+    When add Inclusion criteria with group: "Drug Era"
     Then can see block with inclusion criterias
     When click to save button in Cohort Definition
     When click to Generation tab
@@ -186,7 +186,7 @@ Feature: Check Cohort Definitions
     Then can see only one field with text "angioedema"
     When click to chosen concept set from repository
     Then can see name "angioedema" of concept set at the button
-    When add Inclusion criteria
+    When add Inclusion criteria with group: "Drug Era"
     Then can see block with inclusion criterias
     When click to save button in Cohort Definition
     When click to Generation tab
@@ -223,7 +223,7 @@ Feature: Check Cohort Definitions
     Then can see only one field with text "Chronic sinusitis"
     When click to chosen concept set from repository
     Then can see name "Chronic sinusitis" of concept set at the button
-    When add Inclusion criteria
+    When add Inclusion criteria with group: "Drug Era"
     Then can see block with inclusion criterias
     When click to save button in Cohort Definition
     When click to Generation tab
@@ -256,7 +256,7 @@ Feature: Check Cohort Definitions
     Then can see only one field with text "ACE"
     When click to chosen concept set from repository
     Then can see name "ACE" of concept set at the button
-    When add Inclusion criteria
+    When add Inclusion criteria with group: "Drug Era"
     Then can see block with inclusion criterias
     When click to save button in Cohort Definition
     When click to Generation tab
@@ -289,7 +289,7 @@ Feature: Check Cohort Definitions
     Then can see only one field with text "Chronic sinusitis"
     When click to chosen concept set from repository
     Then can see name "Chronic sinusitis" of concept set at the button
-    When add Inclusion criteria
+    When add Inclusion criteria with group: "Drug Era"
     Then can see block with inclusion criterias
     When click to save button in Cohort Definition
     When click to Generation tab
@@ -316,21 +316,27 @@ Feature: Check Cohort Definitions
     When choose Import Concept Set
     Then Import Concept Set window shown
     When click to Id to sort
-    When enter "ACE" to Filter of Concept Set from Repository
-    Then can see only one field with text "ACE"
+    When enter "angioedema" to Filter of Concept Set from Repository
+    Then can see only one field with text "angioedema"
     When click to chosen concept set from repository
-    Then can see name "ACE" of concept set at the button
-    When add Inclusion criteria
+    Then can see name "angioedema" of concept set at the button
+    When add Inclusion criteria with group: "Drug Era"
     Then can see block with inclusion criterias
     When click to save button in Cohort Definition
     When click to Generation tab
-    When click to Generate SynPUF 110k CDM53
-    Then can see Complete in SynPUF 110k CDM53 status in 360 seconds
+    When click to Generate: "SynPUF 110k PG12"
+    Then can see Complete in "SynPUF 110k PG12" status in 360 seconds
     When click to Reporting tab tab
-    When select "synpuf_110k" source
+    When select "SynPUF 110k PG12" source
     When click to Full analysis button
     When accept an alert about time
     Then can see a row with status Started
+    When click to Export tab in Cohort Definitions
+    Then can see "angioedema" in Initial Event Cohort
+    When click to Graphical View
+    Then can see "angioedema" in Primary Criteria
+    When click to SQL tab
+    Then can see sql query
 
   @common
   Scenario: Sorting, paging

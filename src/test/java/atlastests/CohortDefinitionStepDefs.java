@@ -429,19 +429,19 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     }
 
 
-    @When("^click to Generate SynPUF (\\d+)k CDM(\\d+)$")
-    public void clickToGenerateSynPUFKCDM(int arg0, int arg1) {
-        generateByDataSource("synpuf_110k");
+    @When("^click to Generate: \"([^\"]*)\"$")
+    public void clickToGenerateSynPUFKCDM(String sourceName) {
+        generateByDataSource(sourceName);
     }
 
-    @Then("^can see Complete in SynPUF 110k CDM53 status in (\\d+) seconds$")
-    public void canSeeCompleteInSynPUFKCDMStatusInSeconds(int arg0) {
-        checkStatus("synpuf_110k", arg0);
+    @Then("^can see Complete in \"([^\"]*)\" status in (\\d+) seconds$")
+    public void canSeeCompleteInSynPUFKCDMStatusInSeconds(String sourceName, int arg0) {
+        checkStatus(sourceName, arg0);
     }
 
     @When("^click to Full analysis button$")
     public void clickToFullAnalysisButton() {
-        $(By.xpath("//*[@class='btn btn-primary btn-sm']")).click();
+        $(withText("Full Analysis")).click();
     }
 
     @Then("^can see \"([^\"]*)\" in Initial Event Cohort$")
@@ -466,7 +466,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^can see sql query$")
     public void canSeeSqlQuery() {
-        $("#cohortSQL pre").shouldHave(text("CREATE TABLE"));
+        $("#sqlText").shouldHave(text("CREATE TABLE"));
     }
 
     @When("^click to close cohort button$")
