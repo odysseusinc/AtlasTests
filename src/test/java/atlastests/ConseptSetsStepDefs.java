@@ -79,19 +79,21 @@ public class ConseptSetsStepDefs {
                 shouldNotHave(text(newGeneratedString));
     }
 
-    @When("^click to shop cart items first$")
+    @When("^select first concept$")
     public void clickToShopCartItemsFirst() {
-        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[1]/i")).
-                waitUntil(visible, 10000).click();
-        $(By.xpath("//*[@class='fa fa-shopping-cart selected']")).waitUntil(visible, 1000);
-//        $(By.xpath("//*[@id='DataTables_Table_4']/tbody/tr[2]/td[1]/i")).click();
-        idValue = $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).getText();
-
+        $(".fa-check").waitUntil(visible, 10000).click();
+        idValue = $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).
+                getText();
     }
 
     @When("^return to concept set by the link at the head of table$")
     public void returnToConceptSetByTheLinkAtTheHeadOfTable() {
-        $(By.xpath("//*[@class='breadcrumb-container']/a")).click();
+        $(".app__menu-item--.unsaved").click();
+    }
+
+    @When("^click to add to concept set button$")
+    public void addToConceptSet() {
+        $("[data-bind='tooltip: buttonTooltipText'] .btn-success").click();
     }
 
     @Then("^can see item in the concept set table$")

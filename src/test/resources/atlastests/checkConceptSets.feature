@@ -52,10 +52,9 @@ Feature: Check Concept Sets
     When click to Search menu as QA
     When enter in search panel "aspirin"
     When search activated
-    # TODO this later
     Then can see search result table after conceptSet
-    #
-    When click to shop cart items first
+    When select first concept
+    When click to add to concept set button
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When save value of Included Concepts
@@ -75,7 +74,7 @@ Feature: Check Concept Sets
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
-    When click to shop cart items first
+    When select first concept
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When click to Included Concepts tab
@@ -94,7 +93,7 @@ Feature: Check Concept Sets
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
-    When click to shop cart items first
+    When select first concept
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When click to Included Source Codes tab
@@ -113,7 +112,7 @@ Feature: Check Concept Sets
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
-    When click to shop cart items first
+    When select first concept
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When click to Explore Evidence
@@ -132,7 +131,7 @@ Feature: Check Concept Sets
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
-    When click to shop cart items first
+    When select first concept
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When press SAVE button
@@ -154,7 +153,7 @@ Feature: Check Concept Sets
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
-    When click to shop cart items first
+    When select first concept
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When click to Compare tab in Concept Set
@@ -174,7 +173,7 @@ Feature: Check Concept Sets
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
-    When click to shop cart items first
+    When select first concept
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When click to shop cart items in concept set table
@@ -218,14 +217,14 @@ Feature: Check Concept Sets
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
-    When click to shop cart items first
+    When select first concept
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When set checkbox in Descendants
     When click to Search menu as QA
     When enter in search panel "Acetaminophen 325 MG Oral Tablet by Accurex"
     When search activated
-    When click to shop cart items first
+    When select first concept
     When return to concept set by the link at the head of table
     When click to Optimize button
     Then can see Concept Set Optimization window

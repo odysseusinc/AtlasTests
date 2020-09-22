@@ -28,21 +28,18 @@ public class SearchDefs {
     @Then("^can see search result table$")
     public void canSeeSearchResultTable() {
         $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']")).waitUntil(visible, 120000);
-        $(By.xpath("//*[@class='fa fa-shopping-cart']")).shouldBe(visible);
-        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[2]")).shouldHave(text("Id"));
-        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[3]")).shouldHave(text("Code"));
-        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[4]")).shouldHave(text("Name"));
-        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[5]")).shouldHave(text("Class"));
-//        $(By.xpath("//*[@id='DataTables_Table_2']/thead/tr/th[6]")).shouldHave(text("Standard Concept Caption"));
-        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[6]")).shouldHave(text("RC"));
-        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[7]")).shouldHave(text("DRC"));
-        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[8]")).shouldHave(text("Domain"));
-        $(By.xpath("//*[@data-bind='template: { name: $component.headersTemplateId }']/tr/th[9]")).shouldHave(text("Vocabulary"));
+        $(".fa-check").shouldBe(visible);
+        $("[aria-label='Id: activate to sort column ascending']").shouldHave(text("Id"));
+        $("[aria-label='Code: activate to sort column ascending']").shouldHave(text("Code"));
+        $("[aria-label='Name: activate to sort column ascending']").shouldHave(text("Name"));
+        $("[aria-label='Class: activate to sort column ascending']").shouldHave(text("Class"));
+        $("[aria-label='RC: activate to sort column ascending']").shouldHave(text("RC"));
+        $("[aria-label='DRC: activate to sort column ascending']").shouldHave(text("DRC"));
+        $("[aria-label='Domain: activate to sort column ascending']").shouldHave(text("Domain"));
+        $("[aria-label='Vocabulary: activate to sort column ascending']").shouldHave(text("Vocabulary"));
         //check paganation
         $(By.xpath("//*[@data-dt-idx='2']")).shouldBe(text("2"));
-
-
-    }//*[@id="DataTables_Table_8_wrapper"]/div/div[1]/div[1]/div[1]/div/div[2]/button[6]
+    }
 
     @When("^click to Column visibility$")
     public void clickToColumnVisibility() {
