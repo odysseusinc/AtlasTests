@@ -16,6 +16,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class ConseptSetsStepDefs {
 
+    private SelenideElement conceptSetInTable = $("#repositoryConceptSetTable .linkish");
     private String generatedString;
     private String idValue;
     private String idValueCP;
@@ -23,6 +24,7 @@ public class ConseptSetsStepDefs {
     private String includedConceptsAfter;
     private String conceptIdIC;
     private String newGeneratedString;
+
 
     @Then("^Concept Sets page opens$")
     public void conceptSetsPageOpens() {
@@ -54,12 +56,12 @@ public class ConseptSetsStepDefs {
 
     @Then("^new concept set shown in table$")
     public void newConceptSetShownInTable() {
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).shouldHave(text(generatedString));
+        conceptSetInTable.shouldHave(text(generatedString));
     }
 
     @When("^click to new concept set row$")
     public void clickToNewConceptSetRow() {
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).click();
+        conceptSetInTable.click();
 
     }
 
