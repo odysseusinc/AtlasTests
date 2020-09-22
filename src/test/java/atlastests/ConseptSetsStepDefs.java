@@ -1,5 +1,7 @@
 package atlastests;
 
+import atlastests.components.TablesControl;
+import atlastests.components.TabsControl;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
@@ -14,7 +16,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class ConseptSetsStepDefs {
+public class ConseptSetsStepDefs implements TabsControl, TablesControl {
 
     private SelenideElement conceptSetInTable = $("#repositoryConceptSetTable .linkish");
     private String generatedString;
@@ -80,8 +82,9 @@ public class ConseptSetsStepDefs {
     }
 
     @When("^select first concept$")
-    public void clickToShopCartItemsFirst() {
-        $(".fa-check").waitUntil(visible, 10000).click();
+    public void selectFirstConcept() {
+        $(".fa-check").waitUntil(visible,
+                120000).click();
         idValue = $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).
                 getText();
     }
@@ -155,9 +158,10 @@ public class ConseptSetsStepDefs {
         $(By.xpath("//*[@class='heading']/strong")).shouldHave(text("Additional Information:"));
     }
 
-    @When("^click to shop cart items in concept set table$")
-    public void clickToShopCartItemsInConceptSetTable() {
-        $(By.xpath("//*[@class='fa fa-shopping-cart selected']")).click();
+    @When("^remove all concepts$")
+    public void removeAllConcepts() {
+        $$(".conceptset-expression__checkmark").first().click();//to select all
+        $(withText("Remove selected concept")).waitUntil(enabled, 5000).click();
     }
 
     @Then("^can see message in Concept Set table \"([^\"]*)\"$")
@@ -188,11 +192,9 @@ public class ConseptSetsStepDefs {
 
     @Then("^csv file download$")
     public void csvFileDownload() throws Exception {
-        String str = $(By.xpath("//*[@data-bind='text: title']")).getText();
-        String d = str.substring(str.indexOf("#") + 1);
-        String filename = "conceptset-" + d + ".zip";
-        Thread.sleep(2000);//only one way to wait file downloading, cz don't have href
-        Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), filename));
+        String filename = "Test_" + generatedString + ".zip";
+        Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"),
+                filename));
     }
 
     @When("^press SAVE button$")
@@ -204,7 +206,7 @@ public class ConseptSetsStepDefs {
 
     @When("^click to Compare tab in Concept Set$")
     public void clickToCompareTabInConceptSet() {
-        $(By.xpath("//*[@class='tabs__header']/span[6]")).shouldHave(text("Compare")).click();
+        chooseTab("Compare");
     }
 
     @Then("^can see text \"([^\"]*)\"$")
@@ -278,12 +280,12 @@ public class ConseptSetsStepDefs {
 
     @When("^enter \"([^\"]*)\" of concept set window in filter$")
     public void enterOfConceptSetWindowInFilter(String arg0) {
-        $$(By.xpath("//*[@type='search']")).get(1).setValue(arg0);
+        facetedTableSearch(arg0);
     }
 
     @Then("^click to first link in list in concept set window$")
     public void clickToFirstLinkInListInConceptSetWindow() {
-        $(".repositoryConceptSetItem").click();
+        $("#csCompareConceptSets_wrapper .linkish").click();
     }
 
     @When("^click to Compare Concept Sets button$")
@@ -309,8 +311,8 @@ public class ConseptSetsStepDefs {
 
     @Then("^can see Concept Set Optimization window$")
     public void canSeeConceptSetOptimizationWindow() {
-        $(withText("The current concept set definition is fully optimized.")).shouldHave(visible);
-        $$(".modal-header [aria-label='Close']").filter(visible).first().click();
+        $$("div .modal-title").filter(visible).
+                shouldHave(CollectionCondition.texts("Concept Set Optimization"));
     }
 
     @When("^click to Save Options button$")

@@ -75,6 +75,7 @@ Feature: Check Concept Sets
     When search activated
     Then can see search result table
     When select first concept
+    When click to add to concept set button
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When click to Included Concepts tab
@@ -94,29 +95,11 @@ Feature: Check Concept Sets
     When search activated
     Then can see search result table
     When select first concept
+    When click to add to concept set button
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When click to Included Source Codes tab
     Then can see table of Included Source codes
-
-  @common
-  Scenario: Check explore evidance tab in Concept Set
-    When login to ATLAS as QA
-    When click to Concept Sets menu as QA
-    Then Concept Sets page opens
-    When click to New Concept Set
-    Then can see Concept Set creation form
-    When enter random name of Concept set and save it
-    Then show new buttons in Concept Set
-    When click to Search menu as QA
-    When enter in search panel "aspirin"
-    When search activated
-    Then can see search result table
-    When select first concept
-    When return to concept set by the link at the head of table
-    Then can see item in the concept set table
-    When click to Explore Evidence
-    Then can see explore evidence text
 
   @local @common @checkexport123
   Scenario: Check Export tab in Concept set
@@ -132,6 +115,7 @@ Feature: Check Concept Sets
     When search activated
     Then can see search result table
     When select first concept
+    When click to add to concept set button
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When press SAVE button
@@ -154,6 +138,7 @@ Feature: Check Concept Sets
     When search activated
     Then can see search result table
     When select first concept
+    When click to add to concept set button
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When click to Compare tab in Concept Set
@@ -174,9 +159,10 @@ Feature: Check Concept Sets
     When search activated
     Then can see search result table
     When select first concept
+    When click to add to concept set button
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
-    When click to shop cart items in concept set table
+    When remove all concepts
     Then can see message in Concept Set table "No data available in table"
 
   #Have to create compare1 and compare2 concept sets with Hydrocarbons and
@@ -197,7 +183,6 @@ Feature: Check Concept Sets
     Then can see our concept set page
     When click to Compare tab in Concept Set
     When click to select compare set2 button
-    Then can see concept set window
     When enter "toCompare2" of concept set window in filter
     Then click to first link in list in concept set window
     When click to Compare Concept Sets button
@@ -218,6 +203,7 @@ Feature: Check Concept Sets
     When search activated
     Then can see search result table
     When select first concept
+    When click to add to concept set button
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When set checkbox in Descendants
@@ -225,6 +211,7 @@ Feature: Check Concept Sets
     When enter in search panel "Acetaminophen 325 MG Oral Tablet by Accurex"
     When search activated
     When select first concept
+    When click to add to concept set button
     When return to concept set by the link at the head of table
     When click to Optimize button
     Then can see Concept Set Optimization window
