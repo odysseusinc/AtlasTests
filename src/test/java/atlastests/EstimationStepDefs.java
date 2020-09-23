@@ -302,7 +302,7 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
 
     @When("^click to Import button in Estimation$")
     public void clickToImportButtonInEstimation() {
-        $(By.xpath("//*[@class='import__import-btn btn btn-default btn-sm']")).click();
+        $(".import__import-btn").click();
     }
 
     @Then("^can see \"([^\"]*)\" in Comparisons table$")
