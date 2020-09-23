@@ -37,8 +37,8 @@ Feature: check Estimation
     Then can see Analysis Setting page
     When click to Evaluation Setting tab
     Then can see Evaluation Setting page
-#    When click to Executions tab in Estimation
-#    Then can see Execution page in Estimation
+    When click to Executions tab in Estimation
+    Then can see Execution page in Estimation
     When click to Utilities page in Estimation
     Then can see Utilities page in Estimation
 
@@ -62,9 +62,8 @@ Feature: check Estimation
     When enter "test" in Filter in Cohort window
     When click to result in CR in Cohort Window
     When click to Add Outcome button
-    Then can see Select Cohort window
     When enter "test" in Filter in Cohort window
-    When click to result in CR in Cohort Window
+    When import outcome cohort: "test"
     Then can see choosed cohort in estimation outcome table
     When click to Open Concept window
     Then can see concept set window

@@ -1,6 +1,8 @@
 package atlastests;
 
-import com.codeborne.selenide.SelenideElement;
+import atlastests.components.ModalControl;
+import atlastests.components.TablesControl;
+import com.codeborne.selenide.ElementsCollection;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -16,26 +18,24 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static atlastests.testDefs.getDataProperties;
+import static atlastests.components.StaticElements.CONCEPT_SET_IN_TABLE;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class EstimationStepDefs {
+public class EstimationStepDefs implements ModalControl, TablesControl {
 
-
+    private static final ElementsCollection covariatesButtons = $$(".fa-folder-open");
     private String generatedString;
     private String newGeneratedString;
     private String cohortVal;
-
 
     private static String readFile(String path, Charset encoding)
             throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         return new String(encoded, encoding);
     }
-
 
     @Then("^can see Estimation page$")
     public void canSeeEstimationPage() {
@@ -133,8 +133,7 @@ public class EstimationStepDefs {
     }
 
     @Then("^can see comparision page$")
-    public void canSeeComparisionPage() throws InterruptedException {
-        Thread.sleep(5000);
+    public void canSeeComparisionPage() {
         $(By.xpath("//*[@id='summary']/div/div[3]/div/div/div[1]")).shouldNotHave(visible);
     }
 
@@ -165,7 +164,7 @@ public class EstimationStepDefs {
 
     @Then("^can see Execution page in Estimation$")
     public void canSeeExecutionPageInEstimation() {
-        $(By.xpath("//*[@class='comparative-cohort-analysis-executions__title']")).shouldHave(text("Generations"));
+        $(".analysis-execution-list__title").shouldHave(text("Executions"));
     }
 
     @When("^click to Utilities page in Estimation$")
@@ -197,19 +196,24 @@ public class EstimationStepDefs {
 
     @Then("^can see Select Cohort window$")
     public void canSeeSelectCohortWindow() {
-        $$(By.xpath("//*[@class='linkish']")).get(1).waitUntil(visible, 4000);
-
+        checkModalTitle("Select Cohort...");
     }
 
     @When("^enter \"([^\"]*)\" in Filter in Cohort window$")
     public void enterInFilterInCohortWindow(String arg0) {
-        $$(By.xpath("//*[@type='search']")).get(3).setValue(arg0);
+        facetedTableSearch(arg0);
     }
 
     @When("^click to result in CR in Cohort Window$")
     public void clickToResultInCRInCohortWindow() {
         cohortVal = $$(By.xpath("//*[@class='linkish']")).get(1).getText();
         $$(By.xpath("//*[@class='linkish']")).get(1).click();
+    }
+
+    @When("^import outcome cohort: \"([^\"]*)\"$")
+    public void importOutcomeCohort(String cohortName) {
+        selectInTableResults(cohortName);
+        importButtonClick();
     }
 
 
@@ -236,18 +240,17 @@ public class EstimationStepDefs {
 
     @Then("^can see concept set window$")
     public void canSeeConceptSetWindow() {
-        $(By.xpath("//*[@class='btn btn-sm btn-primary new-concept-set']")).waitUntil(visible, 4000);
-
+        checkModalTitle("Select Concept Set...");
     }
 
     @When("^enter \"([^\"]*)\" in concept set window$")
-    public void enterInConceptSetWindow(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='conceptset-browser-panel']/following-sibling::div/div/div/div[2]/label/input")).setValue(arg0);
+    public void enterInConceptSetWindow(String arg0) {
+        facetedTableSearch(arg0);
     }
 
     @When("^click to search result in concept set window$")
     public void clickToSearchResultInConceptSetWindow() {
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).click();
+        CONCEPT_SET_IN_TABLE.click();
     }
 
     @When("^click back button to specification tab$")
@@ -269,12 +272,12 @@ public class EstimationStepDefs {
 
     @When("^Enter include concept set in baseline covariates in the propensity score model$")
     public void enterIncludeConceptSetInBaselineCovariatesInThePropensityScoreModel() {
-        $$(By.xpath("//*[@class='btn btn-primary']")).get(2).click();
+        covariatesButtons.first().click();
     }
 
     @When("^Enter exclude concept set in baseline covariates in the propensity score model$")
     public void enterExcludeConceptSetInBaselineCovariatesInThePropensityScoreModel() {
-        $$(By.xpath("//*[@class='btn btn-primary']")).get(3).click();
+        covariatesButtons.last().click();
     }
 
     @When("^click to cancel button in Estimation$")
@@ -303,7 +306,7 @@ public class EstimationStepDefs {
     }
 
     @Then("^can see \"([^\"]*)\" in Comparisons table$")
-    public void canSeeInComparisonsTable(String arg0) throws Throwable {
+    public void canSeeInComparisonsTable(String arg0) {
         $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible, 30000).shouldHave(text(arg0));
     }
 }

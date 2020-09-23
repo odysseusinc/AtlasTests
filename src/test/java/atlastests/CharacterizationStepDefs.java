@@ -1,5 +1,6 @@
 package atlastests;
 
+import atlastests.components.ModalControl;
 import atlastests.components.TablesControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
@@ -16,13 +17,14 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CharacterizationStepDefs implements FormControl, TablesControl, PageControl {
+public class CharacterizationStepDefs implements FormControl, TablesControl, PageControl, ModalControl {
 
-    private String characterizationName;
-    private String featureName;
     private final SelenideElement cohortTableName = $("tbody .characterizations-list__tbl-col--name a");
     private final SelenideElement featureAnalysisTableName = $("tbody .feature-analyses-list__tbl-col--name");
     private final ElementsCollection featureAnalysisTableRows = $$("tbody .characterization-design__col-feature-name");
+    private String characterizationName;
+    private String featureName;
+
 
     @Then("^can see Characterization page$")
     public void canSeeCharaterizationPage() {
@@ -174,8 +176,7 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
 
     @Then("^can see Feature analyses window$")
     public void canSeeFeatureAnalysesWindow() {
-        $(".characterization-design__feature-analyses-modal .modal-header .modal-title").
-                waitUntil(visible, 4000).shouldHave(text("Choose a Feature analyses"));
+       checkModalTitle("Choose a Feature analyses");
     }
 
     @Then("^Feature analyse table is visible$")

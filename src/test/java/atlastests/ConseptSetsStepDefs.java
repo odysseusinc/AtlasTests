@@ -1,5 +1,6 @@
 package atlastests;
 
+import atlastests.components.ModalControl;
 import atlastests.components.TablesControl;
 import atlastests.components.TabsControl;
 import com.codeborne.selenide.CollectionCondition;
@@ -12,13 +13,13 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
+import static atlastests.components.StaticElements.CONCEPT_SET_IN_TABLE;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class ConseptSetsStepDefs implements TabsControl, TablesControl {
+public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalControl {
 
-    private SelenideElement conceptSetInTable = $("#repositoryConceptSetTable .linkish");
     private String generatedString;
     private String idValue;
     private String idValueCP;
@@ -58,12 +59,12 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl {
 
     @Then("^new concept set shown in table$")
     public void newConceptSetShownInTable() {
-        conceptSetInTable.shouldHave(text(generatedString));
+        CONCEPT_SET_IN_TABLE.shouldHave(text(generatedString));
     }
 
     @When("^click to new concept set row$")
     public void clickToNewConceptSetRow() {
-        conceptSetInTable.click();
+        CONCEPT_SET_IN_TABLE.click();
 
     }
 
@@ -311,8 +312,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl {
 
     @Then("^can see Concept Set Optimization window$")
     public void canSeeConceptSetOptimizationWindow() {
-        $$("div .modal-title").filter(visible).
-                shouldHave(CollectionCondition.texts("Concept Set Optimization"));
+        checkModalTitle("Concept Set Optimization");
     }
 
     @When("^click to Save Options button$")

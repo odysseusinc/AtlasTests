@@ -1,5 +1,6 @@
 package atlastests;
 
+import atlastests.components.ModalControl;
 import atlastests.components.TablesControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
@@ -16,10 +17,8 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CohortDefinitionStepDefs implements PageControl, FormControl, TablesControl {
+public class CohortDefinitionStepDefs implements PageControl, FormControl, TablesControl, ModalControl {
 
-    private String nameCohort;
-    private String newGeneratedString;
     private final ElementsCollection tabs = $$(".nav-tabs a");
     private final SelenideElement cohortLinkInTable = $("tbody .linkish");
     private final ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .linkish");
@@ -28,6 +27,8 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     private final ElementsCollection dataSources = $$(".cohort-generate-sources tr");
     private final SelenideElement closeConceptSetButton = $(withText("Close Concept Set"));
     private final SelenideElement jsonInputField = $("#cohortExpressionJSON");
+    private String nameCohort;
+    private String newGeneratedString;
 
     @Then("^can see Cohort Definition page$")
     public void canSeeCohortDefinitionPage() {
@@ -235,7 +236,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^can see window with cohort definition$")
     public void canSeeWindowWithCohortDefinition() {
-        $(byText("Choose a Cohort definition")).shouldBe(visible);
+        checkModalTitle("Choose a Cohort definition");
     }
 
     @When("^click to Id to sort$")
