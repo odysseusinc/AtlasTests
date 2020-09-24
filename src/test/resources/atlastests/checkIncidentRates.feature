@@ -29,6 +29,7 @@ Feature: Incident rates check
     When click to our incidence rate
     When click to delete IR button
     When accept delete IR alert
+    When enter "COPY OF " and name of our IR
     Then cant find IR in table
 
 
