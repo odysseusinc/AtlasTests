@@ -105,13 +105,13 @@ public class SearchDefs {
 
 
     public static boolean isFileDownloaded(String downloadPath, String fileName) {
-        File dir = new File(downloadPath);
-        File[] dir_contents = dir.listFiles();
+        File[] dir_contents = new File(downloadPath).listFiles();
 
         for (File dir_content : Objects.requireNonNull(dir_contents)) {
             if (dir_content.getName().equals(fileName))
                 return true;
         }
+
         return false;
     }
 

@@ -181,14 +181,10 @@ public class MyStepdefs extends testDefs {
         $(xpath("//*[@class='app__menu']/a[11]")).shouldHave(text("Prediction")).click();
     }
 
-    @When("^click to Jobs menu as QA$")
-    public void clickToJobsMenuAsQA() {
-        $(xpath("//*[@class='app__menu']/a[12]")).shouldHave(text("Jobs")).click();
-    }
-
-    @When("^click to Feedback menu as QA$")
-    public void clickToFeedbackMenuAsQA() {
-        $(xpath("//*[@class='app__menu']/a[14]")).shouldHave(text("Feedback")).click();
+    @When("^click to \"([^\"]*)\" menu item")
+    public void clickToMenuItem(String menuItemName) {
+        $$(".app__menu-title").find(matchesText(menuItemName)).click();
+        //TODO remove other methods(menu navigation) and replace to this one
     }
 
     @When("^click to Configuration menu as QA$")

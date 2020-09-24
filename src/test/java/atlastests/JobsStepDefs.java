@@ -1,5 +1,8 @@
 package atlastests;
 
+import atlastests.components.PageControl;
+import atlastests.components.TablesControl;
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -9,21 +12,23 @@ import org.openqa.selenium.By;
 import static atlastests.SearchDefs.isFileDownloaded;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class JobsStepDefs {
+public class JobsStepDefs implements TablesControl, PageControl {
+    private static final ElementsCollection COLUMN_HEADERS = $$("thead th");
+
     @Then("^can see Jobs page$")
     public void canSeeJobsPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 4000).
-                shouldHave(text("Jobs"));
+        checkPageHeader("Jobs");
     }
 
     @Then("^can see job table with all fields$")
     public void canSeeJobTableWithAllFields() {
-	for (int i = 1; i <= 6; i++) {
-	    Assert.assertNotEquals("column should not contain value '-'", $(By.xpath("//table/tbody/tr/td[" + String.valueOf(i) + "]")).getText(), "-");
-        }
+        COLUMN_HEADERS.shouldHave(CollectionCondition.size(6),
+                CollectionCondition.exactTexts("ExecutionId", "Job Name", "Status",
+                        "Author", "Start Date", "End Date"));
     }
 
     @When("^click to Column visibility button$")
@@ -48,7 +53,7 @@ public class JobsStepDefs {
 
     @When("^click to CSV button in Jobs$")
     public void clickToCSVButtonInJobs() {
-        $(By.xpath("//*[@class='dt-button buttons-csv buttons-html5']")).click();
+        $(".buttons-csv").click();
     }
 
     @Then("^can see downloaded file$")
@@ -59,7 +64,8 @@ public class JobsStepDefs {
 
     @When("^click to name of column$")
     public void clickToNameOfColumn() {
-        $(By.xpath("//table/thead/tr/th[1]")).click();
+        $(withText("No data available in table")).waitUntil(hidden, 5000);
+        COLUMN_HEADERS.first().click();
     }
 
     @Then("^can see that Id order was changed$")
@@ -71,12 +77,12 @@ public class JobsStepDefs {
 
     @When("^enter \"([^\"]*)\" in search filter$")
     public void enterInSearchFilter(String arg0) {
-        $(By.xpath("//*[@type='search']")).setValue(arg0);
+        search(arg0);
     }
 
     @Then("^can see our result in table$")
     public void canSeeOurResultInTable() {
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text("warming"));
+        $(".odd").shouldHave(text("warming"));
     }
 
     @When("^click to free space$")
