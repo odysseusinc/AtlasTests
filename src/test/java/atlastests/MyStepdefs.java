@@ -9,6 +9,8 @@ import cucumber.api.java.en.When;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static com.codeborne.selenide.WebDriverRunner.hasWebDriverStarted;
 import static org.openqa.selenium.By.xpath;
 
 
@@ -19,11 +21,9 @@ public class MyStepdefs extends testDefs {
     }
 
     @After
-    public void closeOnFail() {
-        try {
-            closeBrowser();
-        } catch (Exception e) {
-            throw new AssertionError("A clear description of the failure", e);
+    public void closingDriver() {
+        if (hasWebDriverStarted()) {
+            getWebDriver().quit();
         }
     }
 
@@ -39,11 +39,6 @@ public class MyStepdefs extends testDefs {
         $$(".modal-title").find(matchesText("License Agreement")).waitUntil(visible, 10000);
         $(".atlas-modal__modal-dialog .btn-success").hover().click();
         $("heading-title .fa-home").waitUntil(visible, 5000);
-    }
-
-    @Then("^close browser$")
-    public static void closeBrowser() {
-        close();
     }
 
     @Then("^check unauthorized user$")
