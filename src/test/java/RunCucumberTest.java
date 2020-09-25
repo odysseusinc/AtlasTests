@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
         (plugin = {"pretty"},
                  glue = {"atlastests"}
 //                 , tags = {"@estimp"}
-                , tags ={"not @qds and not @local and not @owndatatestsfromproperty"}//"not @ds and not @qds"}
+                , tags ={"@local"}//"not @ds and not @qds"}
 //                    , tags = {"@exp"}
                 )
 

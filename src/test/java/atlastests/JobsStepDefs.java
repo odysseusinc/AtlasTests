@@ -9,8 +9,9 @@ import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-import static atlastests.SearchDefs.isFileDownloaded;
-import static atlastests.TestDefs.getDataProperties;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
@@ -19,6 +20,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class JobsStepDefs implements TablesControl, PageControl {
     private static final ElementsCollection COLUMN_HEADERS = $$("thead th");
+    private File jobs;
 
     @Then("^can see Jobs page$")
     public void canSeeJobsPage() {
@@ -53,14 +55,13 @@ public class JobsStepDefs implements TablesControl, PageControl {
     }
 
     @When("^click to CSV button in Jobs$")
-    public void clickToCSVButtonInJobs() {
-        $(".buttons-csv").click();
+    public void clickToCSVButtonInJobs() throws FileNotFoundException {
+        jobs = $(".buttons-csv").download();
     }
 
     @Then("^can see downloaded file$")
-    public void canSeeDownloadedFile() throws Exception {
-        Assert.assertTrue(isFileDownloaded(getDataProperties("downloadpath"),
-                "ATLAS Jobs.csv"));
+    public void canSeeDownloadedFile() {
+        Assert.assertEquals("ATLAS Jobs.csv", jobs.getName());
     }
 
     @When("^click to name of column$")

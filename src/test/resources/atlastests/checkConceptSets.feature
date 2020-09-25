@@ -122,6 +122,7 @@ Feature: Check Concept Sets
     When click to Export tab in Concept set
     Then can see Concept Set JSON
     Then click to export button
+    Then csv file is downloaded
 
 
   @common

@@ -7,14 +7,15 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 
 import java.io.File;
-import java.util.Objects;
+import java.io.FileNotFoundException;
 
-import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class SearchDefs {
+    private File search;
+
     @When("^enter in search panel \"([^\"]*)\"$")
     public void enterInSearchPanel(String arg0) {
         $(By.xpath("//*[@placeholder='Type your search here']")).waitUntil(visible, 10000).setValue(arg0);
@@ -100,26 +101,13 @@ public class SearchDefs {
     }
 
     @When("^click to CSV button$")
-    public void clickToCSVButton() {
-        $(By.xpath("//*[@class='dt-button buttons-csv buttons-html5']")).click();
-    }
-
-
-    public static boolean isFileDownloaded(String downloadPath, String fileName) {
-        File[] dir_contents = new File(downloadPath).listFiles();
-
-        for (File dir_content : Objects.requireNonNull(dir_contents)) {
-            if (dir_content.getName().equals(fileName))
-                return true;
-        }
-
-        return false;
+    public void clickToCSVButton() throws FileNotFoundException {
+        search = $(By.xpath("//*[@class='dt-button buttons-csv buttons-html5']")).download();
     }
 
     @Then("^file download$")
-    public void fileDownload() throws Exception {
-	Thread.sleep(5000); // wait for file to download
-        Assert.assertTrue(isFileDownloaded(getDataProperties("downloadpath"), "ATLAS Search.csv"));
+    public void fileDownload() {
+        Assert.assertEquals("ATLAS Search.csv", search.getName());
     }
 
     @When("^click to first link in list$")

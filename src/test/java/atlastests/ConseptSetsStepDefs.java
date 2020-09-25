@@ -13,7 +13,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-import static atlastests.TestDefs.getDataProperties;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import static atlastests.components.StaticElements.CONCEPT_SET_IN_TABLE;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
@@ -28,6 +30,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     private String includedConceptsAfter;
     private String conceptIdIC;
     private String newGeneratedString;
+    private File conceptSetsZip;
 
 
     @Then("^Concept Sets page opens$")
@@ -184,19 +187,12 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @When("^click to export button$")
     public void clickToExportButton() throws Exception {
-        SelenideElement exportButton = $(withText("Export To CSV"));
-        while (exportButton.is(disabled)) {
-            clickToExportTabInConceptSet();
-        }
-        exportButton.waitUntil(visible, 5000).hover().click();
-        csvFileDownload();
+        conceptSetsZip = $(withText("Export To CSV")).download();
     }
 
-    @Then("^csv file download$")
-    public void csvFileDownload() throws Exception {
-        String filename = "Test_" + generatedString + ".zip";
-        Assert.assertTrue(SearchDefs.isFileDownloaded(getDataProperties("downloadpath"),
-                filename));
+    @Then("^csv file is downloaded$")
+    public void csvFileDownload() {
+        Assert.assertEquals("Test_" + generatedString + ".zip", conceptSetsZip.getName());
     }
 
     @When("^press SAVE button$")
@@ -344,16 +340,13 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     }
 
     @When("^click Export Concept set button$")
-    public void clickExportConceptSetButton() {
-        $(".conceptsets-export .new-concept-set").click();
-        $("circle").waitUntil(hidden, 5000);
+    public void clickExportConceptSetButton() throws FileNotFoundException {
+        conceptSetsZip = $(".conceptsets-export .new-concept-set").download();
     }
 
     @Then("^file with archive downloaded$")
-    public void fileWithArchiveDownloaded() throws Exception {
-        String filename = "exportedConceptSets.zip";
-        Assert.assertTrue(SearchDefs.isFileDownloaded(getDataProperties("downloadpath"), filename));
-
+    public void fileWithArchiveDownloaded() {
+        Assert.assertEquals("exportedConceptSets.zip", conceptSetsZip.getName());
     }
 
     @Then("^can see search result table after conceptSet$")
