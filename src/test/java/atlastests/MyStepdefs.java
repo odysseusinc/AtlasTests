@@ -1,42 +1,27 @@
 package atlastests;
 
+import atlastests.components.ModalControl;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static com.codeborne.selenide.WebDriverRunner.hasWebDriverStarted;
 import static org.openqa.selenium.By.xpath;
 
 
-public class MyStepdefs extends testDefs {
-
-    @Before
-    public void chromeDriver() {
-    }
-
-    @After
-    public void closingDriver() {
-        if (hasWebDriverStarted()) {
-            getWebDriver().quit();
-        }
-    }
+public class MyStepdefs implements ModalControl {
 
     @When("^open project page$")
-    public static void openProjectPage() throws Exception {
-        Configuration.headless = Boolean.parseBoolean(getDataProperties("headless"));
+    public void openProjectPage() throws Exception {
         open(getDataProperties("link"));
         closeLicenseAgreement();
     }
 
-    public static void closeLicenseAgreement() {
-        $(xpath("//*[@id='wrapperLogo']/a")).waitUntil(visible, 10000);
-        $$(".modal-title").find(matchesText("License Agreement")).waitUntil(visible, 10000);
+    public void closeLicenseAgreement() {
+        $("#wrapperLogo").waitUntil(visible, 10000);
+        checkModalTitle("License Agreement");
         $(".atlas-modal__modal-dialog .btn-success").hover().click();
         $("heading-title .fa-home").waitUntil(visible, 5000);
     }

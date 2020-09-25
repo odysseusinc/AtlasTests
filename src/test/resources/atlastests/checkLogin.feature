@@ -11,12 +11,7 @@ Feature: Check login page
 
   @common
   Scenario:  Homepage check correct credentials
-    When open project page
-    When click to LogIn link
-    When click Environment
-    When login with correct credentionas as QA
-    Then see success message
-    Then close login window
+    When login to ATLAS as QA
 
 
 

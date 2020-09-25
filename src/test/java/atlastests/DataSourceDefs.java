@@ -6,7 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 
-import static atlastests.testDefs.getDataProperties;
+import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.$$;
 import static org.openqa.selenium.By.xpath;
 
 public class DataSourceDefs {
-    private ElementsCollection reportTabsHeaders = $$("#report .panel-heading");
+    private final ElementsCollection reportTabsHeaders = $$("#report .panel-heading");
 
     @When("^choose Source from Data Source as IMPALA$")
     public void chooseSourceFromDataSourceAsIMPALA() {

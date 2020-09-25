@@ -12,6 +12,7 @@ Feature: Quick test Data Source
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
+    When click to Data Sources menu as user
     When Data Source Page opened
     When choose Report from Data Source as "Data Density"
     Then can see Data Density windows
@@ -57,13 +58,12 @@ Feature: Quick test Data Source
 
   @qt_dev @odysseus
   Scenario: Quick Test Impala
-    When login to ATLAS as QA QT
+    When login to ATLAS as QA
     When click to Data Sources menu as user
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
-    When just open home page
     When click to Data Sources menu as user
     When Data Source Page opened
     When choose Report from Data Source as "Data Density"
@@ -121,7 +121,7 @@ Feature: Quick test Data Source
 
   @qt_ds @qt_netezza @odysseus
   Scenario: Quick test Netezza CDM5.3
-    When login to ATLAS as QA QT
+    When login to ATLAS as QA
     When click to Data Sources menu as user
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
@@ -184,7 +184,7 @@ Feature: Quick test Data Source
 
   @qt_ds @qt_ovh02synpuf110k @odysseus
   Scenario: Quick test OVH02 SynPUF 110k
-    When login to ATLAS as QA QT
+    When login to ATLAS as QA
     When click to Data Sources menu as user
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
@@ -246,7 +246,7 @@ Feature: Quick test Data Source
 
   @qt_ds @qt_synpuf110kcost&util @odysseus
   Scenario: Quick test SynPUF 110k Cost&Util
-    When login to ATLAS as QA QT
+    When login to ATLAS as QA
     When click to Data Sources menu as user
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
@@ -308,7 +308,7 @@ Feature: Quick test Data Source
 
   @qt_ds @qt_synpuf110kcdm5.3 @odysseus
   Scenario: Quick test SynPUF 110k CDM5.3
-    When login to ATLAS as QA QT
+    When login to ATLAS as QA
     When click to Data Sources menu as user
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K CDM5.3"
@@ -370,7 +370,7 @@ Feature: Quick test Data Source
 
   @qt_ds @qt_synpuf2.3m(GCPbigQuery) @odysseus
   Scenario: Quick test SynPUF 2.3m (GCP BigQuery)
-    When login to ATLAS as QA QT
+    When login to ATLAS as QA
     When click to Data Sources menu as user
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
@@ -433,7 +433,7 @@ Feature: Quick test Data Source
 
   @qt_ds @qt_synpuf2mcdm5.3 @odysseus
   Scenario: Quick test SynPUF 2M CDM5.3
-    When login to ATLAS as QA QT
+    When login to ATLAS as QA
     When click to Data Sources menu as user
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
@@ -496,7 +496,7 @@ Feature: Quick test Data Source
 
   @qt_ds @qt_oracle-110k @odysseus
   Scenario: Quick test oracle-110k
-    When login to ATLAS as QA QT
+    When login to ATLAS as QA
     When click to Data Sources menu as user
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"

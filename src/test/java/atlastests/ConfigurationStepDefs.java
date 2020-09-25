@@ -11,7 +11,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static atlastests.testDefs.getDataProperties;
+import static atlastests.TestDefs.getDataProperties;
 
 public class ConfigurationStepDefs {
     private String generatedString;

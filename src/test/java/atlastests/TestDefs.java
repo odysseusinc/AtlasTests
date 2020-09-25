@@ -2,6 +2,7 @@ package atlastests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,7 +12,10 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
-public class testDefs {
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static com.codeborne.selenide.WebDriverRunner.hasWebDriverStarted;
+
+public class TestDefs {
     public static String getDataProperties(String param) throws Exception {
         Properties props = new Properties();
         props.load(new InputStreamReader(new FileInputStream("src/application.properties"), StandardCharsets.UTF_8));
@@ -23,6 +27,8 @@ public class testDefs {
         String browserURL = getDataProperties("test.browser");
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).
                 savePageSource(false));
+        Configuration.headless = Boolean.parseBoolean(getDataProperties("headless"));
+
         try {
             Configuration.timeout = 30000;
             switch (getDataProperties("test.mode")) {
@@ -44,6 +50,13 @@ public class testDefs {
             }
         } catch (Exception e) {
             throw new AssertionError("Error in settings property", e);
+        }
+    }
+
+    @After
+    public void closingDriver() {
+        if (hasWebDriverStarted()) {
+            getWebDriver().quit();
         }
     }
 }
