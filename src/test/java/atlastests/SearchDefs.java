@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import java.io.File;
 import java.util.Objects;
 
+import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -118,7 +119,7 @@ public class SearchDefs {
     @Then("^file download$")
     public void fileDownload() throws Exception {
 	Thread.sleep(5000); // wait for file to download
-        Assert.assertTrue(isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), "ATLAS Search.csv"));
+        Assert.assertTrue(isFileDownloaded(getDataProperties("downloadpath"), "ATLAS Search.csv"));
     }
 
     @When("^click to first link in list$")

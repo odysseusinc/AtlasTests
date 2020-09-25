@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 
 import static atlastests.SearchDefs.isFileDownloaded;
+import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
@@ -58,7 +59,7 @@ public class JobsStepDefs implements TablesControl, PageControl {
 
     @Then("^can see downloaded file$")
     public void canSeeDownloadedFile() throws Exception {
-        Assert.assertTrue(isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"),
+        Assert.assertTrue(isFileDownloaded(getDataProperties("downloadpath"),
                 "ATLAS Jobs.csv"));
     }
 

@@ -13,6 +13,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
+import static atlastests.TestDefs.getDataProperties;
 import static atlastests.components.StaticElements.CONCEPT_SET_IN_TABLE;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
@@ -194,7 +195,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     @Then("^csv file download$")
     public void csvFileDownload() throws Exception {
         String filename = "Test_" + generatedString + ".zip";
-        Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"),
+        Assert.assertTrue(SearchDefs.isFileDownloaded(getDataProperties("downloadpath"),
                 filename));
     }
 
@@ -351,7 +352,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     @Then("^file with archive downloaded$")
     public void fileWithArchiveDownloaded() throws Exception {
         String filename = "exportedConceptSets.zip";
-        Assert.assertTrue(SearchDefs.isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), filename));
+        Assert.assertTrue(SearchDefs.isFileDownloaded(getDataProperties("downloadpath"), filename));
 
     }
 
