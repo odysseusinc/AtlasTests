@@ -66,12 +66,6 @@ public class MyStepdefs implements ModalControl {
         unauthenticatedCheck();
     }
 
-    @When("^click to Profiles menu$")
-    public void clickToProfilesMenu() {
-        $(xpath("//*[@class='app__menu']/a[9]")).shouldHave(text("Profiles")).click();
-        unauthenticatedCheck();
-    }
-
     @When("^click to Estimation menu$")
     public void clickToEstimationMenu() {
         $(xpath("//*[@class='app__menu']/a[10]")).shouldHave(text("Estimation")).click();
@@ -149,11 +143,6 @@ public class MyStepdefs implements ModalControl {
     @When("^click to Incidence Rates menu as QA$")
     public void clickToIncidentRatesMenuAsQA() {
         $(xpath("//*[@class='app__menu']/a[8]")).shouldHave(text("Incidence Rates")).click();
-    }
-
-    @When("^click to Profiles menu as QA$")
-    public void clickToProfilesMenuAsQA() {
-        $(xpath("//*[@class='app__menu']/a[9]")).shouldHave(text("Profiles")).click();
     }
 
     @When("^click to Estimation menu as QA$")

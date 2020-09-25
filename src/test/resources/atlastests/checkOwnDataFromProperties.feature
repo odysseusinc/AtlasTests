@@ -4,7 +4,7 @@ Feature: check own data
   @odysseus
   Scenario: choose profile from properties data
     When login to ATLAS as QA
-    When click to Profiles menu as QA
+    When click to "Profiles" menu item
     Then can see Profiles page
     When click to Select a Data Source
     When choose "profile" in Profile Source from property
