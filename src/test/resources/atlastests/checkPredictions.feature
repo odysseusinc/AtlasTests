@@ -42,7 +42,7 @@ Feature: Check Prediction
     Then can see Training Settings page in Prediction
     When click to Executions tab in Prediction
     Then can see Execution page in Prediction
-    When click to Utilities page in Prediction
+    When click to Utilities tab in Prediction
     Then can see Utilities page in Prediction
 
   @no_ee @ohdsi
@@ -59,7 +59,7 @@ Feature: Check Prediction
     Then can see Execution Setting page in Prediction
     When click to Training Settings tab in Prediction
     Then can see Training Settings page in Prediction
-    When click to Utilities page in Prediction without ee
+    When click to Utilities tab in Prediction
     Then can see Utilities page in Prediction
 
   @pr_dev @odysseus
@@ -72,30 +72,29 @@ Feature: Check Prediction
     When click to save Prediction Button
     Then can see new buttons in Prediction field
     When click to add Target Cohort in Predictions
-    Then can see cohort definition window in Predictions
     When enter "test" in filter in cohort definition window in Predictions
     When click to result in cohort in Predictions
-    Then can see choosed cohort in Prediction Target table
+    Then can see selected cohort in Prediction Target table
     When click to add Outcome Cohort in Predictions
-    Then can see cohort definition window in Predictions
     When enter "test" in filter in cohort definition window in Predictions
     When click to result in cohort in Predictions
-    Then can see choosed cohort in Prediction Outcome table
+    Then can see selected cohort in Prediction Outcome table
     When click to Add Model Settings button
-    Then can see Model Settings Page
+    When choose model: "Lasso Logistic Regression"
+    Then can see header for: "Lasso Logistic Regression"
     When click to return back button
     Then can see Row in Analysis Setting table
     When click to Add Covariate button
-    Then can see Covariate Page
+    Then can see header for: "Covariate"
     When click to return back button
     Then can see Row in Covariate table
     When click to Add Population button
-    Then can see Population Page
+    Then can see header for: "Population"
     When click to return back button
     Then can see Row in Population table
     When click to save Prediction Button
-    When click to Utilities button in Prediction
-    Then can see Review and Download table with selected target cohort
+    When click to Utilities tab in Prediction
+    Then can see Review and Download table with selected model: "Lasso Logistic Regression"
 
   @no_ee @ohdsi
   Scenario: Fill all fields as we can without execution engine
@@ -107,28 +106,27 @@ Feature: Check Prediction
     When click to save Prediction Button
     Then can see new buttons in Prediction field
     When click to add Target Cohort in Predictions
-    Then can see cohort definition window in Predictions
     When enter "Celecoxib new users" in filter in cohort definition window in Predictions
     When click to result in cohort in Predictions
-    Then can see choosed cohort in Prediction Target table
+    Then can see selected cohort in Prediction Target table
     When click to add Outcome Cohort in Predictions
-    Then can see cohort definition window in Predictions
     When enter "GI bleed" in filter in cohort definition window in Predictions
     When click to result in cohort in Predictions
-    Then can see choosed cohort in Prediction Outcome table
+    Then can see selected cohort in Prediction Outcome table
     When click to Add Model Settings button
-    Then can see Model Settings Page
+    When choose model: "Lasso Logistic Regression"
+    Then can see header for: "Lasso Logistic Regression"
     When click to return back button
     Then can see Row in Analysis Setting table
     When click to Add Covariate button
-    Then can see Covariate Page
+    Then can see header for: "Covariate"
     When click to return back button
     Then can see Row in Covariate table
     When click to Add Population button
-    Then can see Population Page
+    Then can see header for: "Population"
     When click to return back button
     Then can see Row in Population table
     When click to save Prediction Button
-    When click to Utilities button in Prediction without ee
-    Then can see Review and Download table with selected target cohort
+    When click to Utilities tab in Prediction
+    Then can see Review and Download table with selected model: "Lasso Logistic Regression"
 

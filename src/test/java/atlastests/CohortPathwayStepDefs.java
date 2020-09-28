@@ -167,7 +167,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
 
     @Then("^can see Execution page$")
     public void canSeeExecutionPage() {
-        $(".analysis-execution-list__title").waitUntil(visible, 5000).shouldHave(text("Executions"));
+        checkExecutionTitle();
     }
 
     @When("^click to Utilities tab$")

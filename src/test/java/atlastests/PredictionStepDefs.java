@@ -1,5 +1,9 @@
 package atlastests;
 
+import atlastests.components.FormControl;
+import atlastests.components.PageControl;
+import atlastests.components.TablesControl;
+import atlastests.components.TabsControl;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import cucumber.api.java.en.Then;
@@ -8,14 +12,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class PredictionStepDefs {
+public class PredictionStepDefs implements TabsControl, PageControl, TablesControl, FormControl {
     private ElementsCollection panelPrimary = $$(By.xpath("//*[@class='panel panel-primary']"));
-    private ElementsCollection tabs = $$(".tabs__header-title");
     private String generatedString;
     private String newGeneratedString;
     private String targetCohort;
@@ -47,7 +49,7 @@ public class PredictionStepDefs {
 
     @When("^click to save Prediction Button$")
     public void clickToSavePredictionButton() {
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        saveAction();
     }
 
     @Then("^can see new buttons in Prediction field$")
@@ -175,81 +177,75 @@ public class PredictionStepDefs {
 
     @When("^click to Executions tab in Prediction$")
     public void clickToExecutionsTabInPrediction() {
-        $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
+        chooseTab("Executions");
     }
 
     @Then("^can see Execution page in Prediction$")
     public void canSeeExecutionPageInPrediction() {
-        $(By.xpath("//*[@class='prediction-executions__title']")).waitUntil(visible, 4000).
-                shouldHave(text("Generations"));
+       checkExecutionTitle();
     }
 
-    @When("^click to Utilities page in Prediction$")
+    @When("^click to Utilities tab in Prediction$")
     public void clickToUtilitiesPageInPrediction() {
-        $(By.xpath("//*[@class='tabs__header']/span[3]")).click();
-    }
-
-    @When("^click to Utilities page in Prediction without ee$")
-    public void clickToUtilitiesPageInPredictionWithoutEE() {
-        $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
+        chooseTab("Utilities");
     }
 
     @Then("^can see Utilities page in Prediction$")
     public void canSeeUtilitiesPageInPrediction() {
-        $$(By.xpath("//*[@class='active']/a")).get(1).waitUntil(visible, 3000).
-                shouldHave(text("Review & Download"));
+       $(".prediction-utilities").shouldBe(visible);
     }
 
     @When("^click to add Target Cohort in Predictions$")
     public void clickToAddTargetCohortInPredictions() {
-        $$(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).get(0).click();
-    }
-
-    @Then("^can see cohort definition window in Predictions$")
-    public void canSeeCohortDefinitionWindowInPredictions() {
-        $(By.xpath("//*[@class='linkish']")).waitUntil(visible, 4000);
+        $(withText("Add Target Cohort")).click();
     }
 
     @When("^enter \"([^\"]*)\" in filter in cohort definition window in Predictions$")
     public void enterInFilterInCohortDefinitionWindowInPredictions(String arg0) {
-        $$(By.xpath("//*[@type='search']")).get(5).setValue(arg0);
+        facetedTableSearch(arg0);
+        selectInTableResults(arg0);
+        targetCohort = $$(".atlas-modal__modal-body cohort-definition-browser tr a").
+                find(matchesText(arg0)).getText();
     }
 
     @When("^click to result in cohort in Predictions$")
     public void clickToResultInCohortInPredictions() {
-        targetCohort = $(By.xpath("//table/tbody/tr/td[2]/span")).getText();
-        $(By.xpath("//table/tbody/tr/td[2]/span")).click();
+        importButtonClick();
     }
 
-    @Then("^can see choosed cohort in Prediction Target table$")
+    @Then("^can see selected cohort in Prediction Target table$")
     public void canSeeChoosedCohortInPredictionTargetTable() {
         Assert.assertEquals(targetCohort, $(By.xpath("//table/tbody/tr/td[2]")).getText());
     }
 
     @When("^click to add Outcome Cohort in Predictions$")
     public void clickToAddOutcomeCohortInPredictions() {
-        $$(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).get(1).click();
+        $(withText("Add Outcome Cohort")).click();
     }
 
-    @Then("^can see choosed cohort in Prediction Outcome table$")
+    @Then("^can see selected cohort in Prediction Outcome table$")
     public void canSeeChoosedCohortInPredictionOutcomeTable() {
         Assert.assertEquals(targetCohort, $$(By.xpath("//table/tbody/tr/td[2]")).get(1).getText());
     }
 
     @When("^click to Add Model Settings button$")
     public void clickToAddModelSettingsButton() {
-        $(By.xpath("//*[@class='btn btn-primary btn-sm dropdown-toggle']")).click();
-        $(By.xpath("//*[@class='dropdown-menu']/li/a")).click();
+        $(withText("Add Model Settings")).click();
     }
 
-    @Then("^can see Model Settings Page$")
-    public void canSeeModelSettingsPage() {
-        $(By.xpath("//*[@class='editor-heading']")).shouldHave(text("Lasso Logistic Regression Model Settings"));
+    @When("^choose model: \"([^\"]*)\"$")
+    public void chooseModel(String modelName) {
+        $$(".dropdown-menu [href='#']").find(matchesText(modelName)).click();
+    }
+
+    @Then("^can see header for: \"([^\"]*)\"$")
+    public void checkEditorHeading(String modelName) {
+        $(".editor-heading").shouldHave(matchesText(modelName));
     }
 
     @When("^click to return back button$")
     public void clickToReturnBackButton() {
-        $(By.xpath("//*[@class='editor-back-icon']")).click();
+        $(".editor-back-icon").click();
     }
 
     @Then("^can see Row in Analysis Setting table$")
@@ -259,12 +255,7 @@ public class PredictionStepDefs {
 
     @When("^click to Add Covariate button$")
     public void clickToAddCovariateButton() {
-        $$(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).get(2).click();
-    }
-
-    @Then("^can see Covariate Page$")
-    public void canSeeCovariatePage() {
-        $(By.xpath("//*[@class='editor-heading']")).shouldHave(text("Covariate Settings"));
+       $(withText("Add Covariate Settings")).click();
     }
 
     @Then("^can see Row in Covariate table$")
@@ -274,12 +265,7 @@ public class PredictionStepDefs {
 
     @When("^click to Add Population button$")
     public void clickToAddPopulationButton() {
-        $$(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).get(3).click();
-    }
-
-    @Then("^can see Population Page$")
-    public void canSeePopulationPage() {
-        $(By.xpath("//*[@class='editor-heading']")).shouldHave(text("Population Settings"));
+        $(withText("Add Population Settings")).click();
     }
 
     @Then("^can see Row in Population table$")
@@ -287,18 +273,9 @@ public class PredictionStepDefs {
         $$(By.xpath("//table/tbody/tr/td[2]")).get(4).shouldHave(text("1d from"));
     }
 
-    @When("^click to Utilities button in Prediction$")
-    public void clickToUtilitiesButtonInPrediction() {
-        $(By.xpath("//*[@class='tabs__header']/span[3]")).click();
-    }
-
-    @When("^click to Utilities button in Prediction without ee$")
-    public void clickToUtilitiesButtonInPredictioWithoutEEn() {
-        tabs.find(text("Utilities")).click();
-    }
-
-    @Then("^can see Review and Download table with selected target cohort$")
-    public void canSeeReviewAndDownloadTableWithSelectedTargetCohort() {
-        $$(By.xpath("//table/tbody/tr/td[3]")).get(2).shouldHave(text("LassoLogisticRegressionSettings"));
+    @Then("^can see Review and Download table with selected model: \"([^\"]*)\"$")
+    public void canSeeReviewAndDownloadTableWithSelectedTargetCohort(String modelName) {
+        $$(By.xpath("//table/tbody/tr/td[3]")).get(2).shouldHave(matchesText(modelName.
+                replaceAll( "\\s+","")));
     }
 }

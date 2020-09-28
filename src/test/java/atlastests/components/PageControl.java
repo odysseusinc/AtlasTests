@@ -1,10 +1,10 @@
 package atlastests.components;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 public interface PageControl {
 
@@ -14,5 +14,10 @@ public interface PageControl {
 
     default void copyToClipboard() {
         $("[title='Copy to clipboard']").click();
+    }
+
+    default void checkExecutionTitle()
+    {
+        $(".analysis-execution-list__title").waitUntil(visible, 5000).shouldHave(text("Executions"));
     }
 }

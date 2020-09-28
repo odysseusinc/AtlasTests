@@ -13,7 +13,7 @@ public interface TablesControl {
     }
 
     default void facetedTableSearch(String query) {
-        SelenideElement searchTab = $$(".facetedDataTable [type='search']").
+        SelenideElement searchTab = $$(".modal-content .facetedDataTable [type='search']").
                 filter(Condition.visible).first();
         searchTab.clear();
         searchTab.sendKeys(query);
