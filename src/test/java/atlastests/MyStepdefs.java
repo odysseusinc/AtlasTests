@@ -113,11 +113,6 @@ public class MyStepdefs implements ModalControl {
         unauthenticatedCheck();
     }
 
-    @When("^click to Search menu as QA$")
-    public void clickToSearchMenuAsQA() {
-        $(xpath("//*[@class='app__menu']/a[3]")).shouldHave(text("Search")).click();
-    }
-
     @When("^click to Concept Sets menu as QA$")
     public void clickToConceptSetsMenuAsQA() {
         $(xpath("//*[@class='app__menu']/a[4]")).shouldHave(text("Concept Sets")).click();

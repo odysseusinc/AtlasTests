@@ -12,18 +12,17 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
+import static atlastests.components.StaticElements.NAV_PILLS;
+import static atlastests.components.StaticElements.NAV_TABS;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CohortDefinitionStepDefs implements PageControl, FormControl, TablesControl, ModalControl {
 
-    private final ElementsCollection tabs = $$(".nav-tabs a");
     private final SelenideElement cohortLinkInTable = $("tbody .linkish");
     private final ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .linkish");
     private final ElementsCollection conceptSetsInDataTable = $$(".conceptSetTable span");
-    private final ElementsCollection exportTabs = $$(".nav-pills.nav a");
     private final ElementsCollection dataSources = $$(".cohort-generate-sources tr");
     private final SelenideElement closeConceptSetButton = $(withText("Close Concept Set"));
     private final SelenideElement jsonInputField = $("#cohortExpressionJSON");
@@ -137,7 +136,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^click to Concept Sets tab$")
     public void clickToConceptSetsTab() {
-        tabs.find(matchesText("Concept Sets")).click();
+        NAV_TABS.find(matchesText("Concept Sets")).click();
     }
 
     @Then("^can see row with name of Concept Set in the table$")
@@ -167,7 +166,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^click to Generation tab$")
     public void clickToGenerationTab() {
-        tabs.find(matchesText("Generation")).click();
+        NAV_TABS.find(matchesText("Generation")).click();
     }
 
     @Then("^can see Generation page$")
@@ -177,7 +176,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^click to Reporting tab$")
     public void clickToReportingTab() {
-        tabs.find(matchesText("Reporting")).click();
+        NAV_TABS.find(matchesText("Reporting")).click();
     }
 
     @Then("^can see reporting page$")
@@ -187,7 +186,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^click to Export tab in Cohort Definitions$")
     public void clickToExportTabInCohortDefinitions() {
-        tabs.find(matchesText("Export")).click();
+        NAV_TABS.find(matchesText("Export")).click();
     }
 
     @Then("^can see Export page$")
@@ -197,7 +196,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^click to Messages Tab$")
     public void clickToMessagesTab() {
-        tabs.find(matchesText("Messages")).click();
+        NAV_TABS.find(matchesText("Messages")).click();
     }
 
     @Then("^can see Messages page$")
@@ -311,7 +310,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^click to JSON tab in Cohort Definitions$")
     public void clickToJSONTabInCohortDefinitions() {
-        exportTabs.filter(visible).find(matchesText("JSON")).click();
+        NAV_PILLS.filter(visible).find(matchesText("JSON")).click();
     }
 
     @When("^click to Copy to clipboard button$")
@@ -337,7 +336,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^click to Definition tab$")
     public void clickToDefinitionTab() {
-        tabs.find(matchesText("Definition")).click();
+        NAV_TABS.find(matchesText("Definition")).click();
     }
 
     @Then("^can see name \"([^\"]*)\" of concept set at the button$")
@@ -367,7 +366,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^click to Reporting tab tab$")
     public void clickToReportingTabTab() {
-        tabs.find(matchesText("Reporting")).click();
+        NAV_TABS.find(matchesText("Reporting")).click();
     }
 
     @When("^select \"([^\"]*)\" source$")
@@ -452,7 +451,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^click to Graphical View$")
     public void clickToGraphicalView() {
-        exportTabs.filter(visible).find(matchesText("Graphical View")).click();
+        NAV_PILLS.filter(visible).find(matchesText("Graphical View")).click();
     }
 
     @Then("^can see \"([^\"]*)\" in Primary Criteria$")
@@ -462,7 +461,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^click to SQL tab$")
     public void clickToSQLTab() {
-        exportTabs.filter(visible).find(matchesText("SQL")).click();
+        NAV_PILLS.filter(visible).find(matchesText("SQL")).click();
     }
 
     @Then("^can see sql query$")

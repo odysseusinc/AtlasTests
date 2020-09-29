@@ -4,7 +4,7 @@ Feature: Search in Vocabularies
   @ss @common
   Scenario: Search something
     When login to ATLAS as QA
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -17,7 +17,7 @@ Feature: Search in Vocabularies
   @common
   Scenario: Sort values by ID
     When login to ATLAS as QA
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -29,7 +29,7 @@ Feature: Search in Vocabularies
   @common
   Scenario: Filtering in Search
     When login to ATLAS as QA
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -39,7 +39,7 @@ Feature: Search in Vocabularies
   @local @common
   Scenario: Downloading CSV in Search
     When login to ATLAS as QA
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -50,16 +50,14 @@ Feature: Search in Vocabularies
   @0407 @common
   Scenario: Open the concept and check content of tabs
     When login to ATLAS as QA
-    When click to Search menu as QA
-    When enter in search panel "aspirin"
+    When click to "Search" menu item
+    When enter in search panel "Acetaminophen 325 MG Oral Tablet by Accurex"
     When search activated
-    Then can see search result table
-    When click to first link in list
-    Then open page with first of four tabs for "aspirin"
-    Then check second of four tabs
-    #Have to understand issue
-#    Then check third of four tabs
-#    Then check fourth of four tabs
+    When click to the name of standard concept
+    Then page with concept fields is opened
+    Then check Related Concepts tab
+    Then check Hierarchy tab
+    Then check Record Counts tab
 
 
 

@@ -35,7 +35,7 @@ Feature: Check Concept Sets
     Then can see Concept Set creation form
     When enter random name of Concept set and save it
     Then show new buttons in Concept Set
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -49,7 +49,7 @@ Feature: Check Concept Sets
     Then can see Concept Set creation form
     When enter random name of Concept set and save it
     Then show new buttons in Concept Set
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table after conceptSet
@@ -70,7 +70,7 @@ Feature: Check Concept Sets
     Then can see Concept Set creation form
     When enter random name of Concept set and save it
     Then show new buttons in Concept Set
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -90,7 +90,7 @@ Feature: Check Concept Sets
     Then can see Concept Set creation form
     When enter random name of Concept set and save it
     Then show new buttons in Concept Set
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -110,7 +110,7 @@ Feature: Check Concept Sets
     Then can see Concept Set creation form
     When enter random name of Concept set and save it
     Then show new buttons in Concept Set
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -134,7 +134,7 @@ Feature: Check Concept Sets
     Then can see Concept Set creation form
     When enter random name of Concept set and save it
     Then show new buttons in Concept Set
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -155,7 +155,7 @@ Feature: Check Concept Sets
     Then can see Concept Set creation form
     When enter random name of Concept set and save it
     Then show new buttons in Concept Set
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -199,7 +199,7 @@ Feature: Check Concept Sets
     Then can see Concept Set creation form
     When enter random name of Concept set and save it
     Then show new buttons in Concept Set
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "aspirin"
     When search activated
     Then can see search result table
@@ -208,7 +208,7 @@ Feature: Check Concept Sets
     When return to concept set by the link at the head of table
     Then can see item in the concept set table
     When set checkbox in Descendants
-    When click to Search menu as QA
+    When click to "Search" menu item
     When enter in search panel "Acetaminophen 325 MG Oral Tablet by Accurex"
     When search activated
     When select first concept
