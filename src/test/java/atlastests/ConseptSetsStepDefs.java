@@ -230,7 +230,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @When("^enter new concept set name in filter$")
     public void enterNewConceptSetNameInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000).setValue(newGeneratedString);
+        search(newGeneratedString);
     }
 
     @Then("^can see row with new name of concept set$")
@@ -245,7 +245,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @When("^enter name of concept set in filter$")
     public void enterNameOfConceptSetInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000).setValue(generatedString);
+        search(newGeneratedString);
     }
 
     @Then("^can see our Concept Set creation form$")
@@ -255,7 +255,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @When("^enter \"([^\"]*)\" of concept set in filter$")
     public void enterOfConceptSetInFilter(String arg0) {
-        $(By.xpath("//*[@type='search']")).setValue(arg0);
+        search(arg0);
     }
 
     @When("^click concept set result$")
