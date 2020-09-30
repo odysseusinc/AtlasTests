@@ -31,16 +31,10 @@ public class MyStepdefs implements ModalControl {
         $("[data-bind='click: function () { $component.signInOpened(true) }']").shouldHave(text("Sign In"));
     }
 
-    @Then("^can see message \"([^\"]*)\"$")
-    public void canSeeMessage(String warningAboutUnauthorized) {
-        $("unauthenticated").waitUntil(visible, 5000).
+    @Then("^The warning message is shown \"([^\"]*)\"$")
+    public void checkUnauthorizedMessage(String warningAboutUnauthorized) {
+        $("unauthenticated").waitUntil(visible, 15000).
                 shouldHave(text(warningAboutUnauthorized));
-    }
-
-    @Then("^click to Data Sources menu$")
-    public void clickToDataSourcesMenu() {
-        $(xpath("//*[@class='app__menu']/a[2]")).shouldHave(text("Data Sources")).click();
-        unauthenticatedCheck();
     }
 
     @Then("^can see message at home menu \"([^\"]*)\"$")
@@ -48,69 +42,9 @@ public class MyStepdefs implements ModalControl {
         $(xpath("//*[@class='home-welcome']/div")).shouldHave(text(welcomeText));
     }
 
-    @When("^click to Concept Sets menu$")
-    public void clickToConceptSetsMenu() {
-        $(xpath("//*[@class='app__menu']/a[4]")).shouldHave(text("Concept Sets")).click();
-        unauthenticatedCheck();
-    }
-
-    @When("^click to Cohort Definitions menu$")
-    public void clickToCohortDefinitionsMenu() {
-        $(xpath("//*[@class='app__menu']/a[5]")).shouldHave(text("Cohort Definitions")).click();
-        unauthenticatedCheck();
-    }
-
-    @When("^click to Incidence Rates menu$")
-    public void clickToIncidenceRatesMenu() {
-        $(xpath("//*[@class='app__menu']/a[8]")).shouldHave(text("Incidence Rates")).click();
-        unauthenticatedCheck();
-    }
-
-    @When("^click to Estimation menu$")
-    public void clickToEstimationMenu() {
-        $(xpath("//*[@class='app__menu']/a[10]")).shouldHave(text("Estimation")).click();
-        unauthenticatedCheck();
-    }
-
-    @When("^click to Prediction menu$")
-    public void clickToPredictionMenu() {
-        $(xpath("//*[@class='app__menu']/a[11]")).shouldHave(text("Prediction")).click();
-        unauthenticatedCheck();
-    }
-
-    @When("^click to Jobs menu$")
-    public void clickToJobsMenu() {
-        $(xpath("//*[@class='app__menu']/a[12]")).shouldHave(text("Jobs")).click();
-        unauthenticatedCheck();
-    }
-
-    @When("^click to Configuration menu$")
-    public void clickToConfigurationMenu() {
-        $(xpath("//*[@class='app__menu']/a[13]")).shouldHave(text("Configuration")).click();
-        unauthenticatedCheck();
-    }
-
-    @When("^click to Search menu$")
-    public void clickToSearchMenu() {
-        $(xpath("//*[@class='app__menu']/a[3]")).shouldHave(text("Search")).click();
-        unauthenticatedCheck();
-    }
-
     @When("^click to Data Sources menu as user$")
     public void clickToDataSourcesMenuAsUser() {
         $(xpath("//*[@class='app__menu']/a[2]")).shouldHave(text("Data Sources")).click();
-    }
-
-    @When("^click to Characterizations menu$")
-    public void clickToCharacterizationsMenu() {
-        $(xpath("//*[@class='app__menu']/a[6]")).shouldHave(text("Characterizations")).click();
-        unauthenticatedCheck();
-    }
-
-    @When("^click to Cohort Pathways menu$")
-    public void clickToCohortPathwaysMenu() {
-        $(xpath("//*[@class='app__menu']/a[7]")).shouldHave(text("Cohort Pathways")).click();
-        unauthenticatedCheck();
     }
 
     @When("^click to Concept Sets menu as QA$")
@@ -164,9 +98,5 @@ public class MyStepdefs implements ModalControl {
     @When("^click to Configuration menu as admin$")
     public void clickToConfigurationMenuAsAdmin() {
         $(xpath("//*[@class='app__menu']/a[13]")).shouldHave(text("Configuration")).click();
-    }
-
-    private void unauthenticatedCheck() {
-        $("unauthenticated").waitUntil(visible, 20000);
     }
 }

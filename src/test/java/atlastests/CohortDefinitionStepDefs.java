@@ -12,8 +12,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
-import static atlastests.components.StaticElements.NAV_PILLS;
-import static atlastests.components.StaticElements.NAV_TABS;
+import static atlastests.components.StaticElements.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
@@ -84,7 +83,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^Cohort Definition should be not found$")
     public void cohortDefinitionShouldBeNotFound() {
-        $(".dataTables_empty").shouldHave(text("No matching records found"));
+        EMPTY_TABLE.shouldHave(text("No matching records found"));
 
     }
 
@@ -300,7 +299,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^enter \"([^\"]*)\" in filter in cohort definition$")
     public void enterInFilterInCohortDefinition(String arg0) {
-       search(arg0);
+        search(arg0);
     }
 
     @Then("^click to founded result$")
@@ -471,7 +470,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @When("^click to close cohort button$")
     public void closeCurrentCohort() {
-       closeAction();
+        closeAction();
     }
 
     private void generateByDataSource(String dataSourceName) {

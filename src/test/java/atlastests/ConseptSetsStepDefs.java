@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import static atlastests.components.StaticElements.CONCEPT_SET_IN_TABLE;
+import static atlastests.components.StaticElements.EMPTY_TABLE;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
@@ -69,7 +70,6 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     @When("^click to new concept set row$")
     public void clickToNewConceptSetRow() {
         CONCEPT_SET_IN_TABLE.click();
-
     }
 
     @When("^click to delete concept set$")
@@ -81,9 +81,8 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @Then("^new concept set removed from table$")
     public void newConceptSetRemovedFromTable() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000).setValue(newGeneratedString);
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).
-                shouldNotHave(text(newGeneratedString));
+        search(newGeneratedString);
+        EMPTY_TABLE.shouldBe(visible);
     }
 
     @When("^select first concept$")

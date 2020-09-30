@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 import static atlastests.components.StaticElements.CONCEPT_SET_IN_TABLE;
+import static atlastests.components.StaticElements.EMPTY_TABLE;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -123,7 +124,7 @@ public class IncidenceRatesStepDefs implements TabsControl, TablesControl {
 
     @Then("^cant find IR in table$")
     public void cantFindIRInTable() {
-        $(".dataTables_empty").shouldBe(visible);
+        EMPTY_TABLE.shouldBe(visible);
     }
 
     @Then("^can see concept set page in IR$")
