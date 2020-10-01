@@ -1,5 +1,6 @@
 package atlastests;
 
+import atlastests.components.PageControl;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import cucumber.api.java.en.Then;
@@ -11,10 +12,11 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static org.openqa.selenium.By.xpath;
 
-public class DataSourceDefs {
-    private final ElementsCollection reportTabsHeaders = $$("#report .panel-heading");
+
+public class DataSourceDefs implements PageControl {
+    private static final ElementsCollection SELECTS = $$(".reportControls select");
+    private static final ElementsCollection REPORT_TABS_HEADERS = $$("#report .panel-heading");
 
     @When("^choose Source from Data Source as IMPALA$")
     public void chooseSourceFromDataSourceAsIMPALA() {
@@ -23,8 +25,7 @@ public class DataSourceDefs {
 
     @When("^Data Source Page opened$")
     public void dataSourcePageOpened() {
-        $(xpath("//*[@id='currentComponent']/heading-title/div/span")).waitUntil(visible, 30000).
-                shouldHave(text("Data Sources"));
+        checkPageHeader("Data Sources");
     }
 
     @When("^choose Report from Data Source as Dashboard$")
@@ -40,7 +41,7 @@ public class DataSourceDefs {
     @Then("^can see windows in DASHBOARD page$")
     public void canSeeWindowsInDashboard() {
         titleCheck("Dashboard Report");
-        reportTabsHeaders.shouldHave(CollectionCondition.size(5)).shouldHave(CollectionCondition.texts("CDM Summary",
+        REPORT_TABS_HEADERS.shouldHave(CollectionCondition.size(5)).shouldHave(CollectionCondition.texts("CDM Summary",
                 "Population by Gender", "Age at First Observation", "Cumulative Observation",
                 "Persons With Continuous Observation By Month"));
     }
@@ -50,19 +51,9 @@ public class DataSourceDefs {
         $(By.xpath("//*[@id='currentComponent']/div/div[1]/div[1]/div/select")).selectOption("SynPUF 110K Cost&Util");
     }
 
-    @Then("^can see windows in SynPufCostUtil Dashboard$")
-    public void canSeeWindowsInSynPufCostUtilDashboard() {
-        titleCheck("Dashboard Report");
-        $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("CDM Summary"));
-        $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Population by Gender"));
-        $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Age at First Observation"));
-        $(By.xpath("//*[@id='report']/div/div[4]/div/div[1]")).shouldHave(text("Cumulative Observation"));
-        $(By.xpath("//*[@id='report']/div/div[5]/div/div[1]")).shouldHave(text("Persons With Continuous Observation By Month"));
-    }
-
     @When("^choose Source from Data Source as \"([^\"]*)\"$")
-    public void chooseSourceFromDataSourceAs(String arg0) {
-        $(By.xpath("//*[@class='reportControls pad-5']/div/div/select")).selectOption(arg0);
+    public void chooseSourceFromDataSourceAs(String dataSourceName) {
+        SELECTS.first().selectOption(dataSourceName);
     }
 
     @When("^choose Source from Data Source as \"([^\"]*)\" from property")
@@ -78,83 +69,69 @@ public class DataSourceDefs {
     @Then("^can see Data Density windows$")
     public void canSeeDataDensityWindows() {
         titleCheck("Data Density Report");
-        $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("Total Rows"));
-        $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Records Per Person"));
-        $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Concepts Per Person"));
+        REPORT_TABS_HEADERS.shouldHave(CollectionCondition.size(3)).
+                shouldHave(CollectionCondition.texts("Total Rows", "Records Per Person", "Concepts Per Person"));
     }
 
     @Then("^can see Person windows$")
     public void canSeePersonWindows() {
         titleCheck("Person Report");
-        $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("Year of Birth"));
-        $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Gender"));
-        $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Race"));
-        $(By.xpath("//*[@id='report']/div/div[4]/div/div[1]")).shouldHave(text("Ethnicity"));
+        REPORT_TABS_HEADERS.shouldHave(CollectionCondition.size(4)).
+                shouldHave(CollectionCondition.texts("Year of Birth", "Gender", "Race", "Ethnicity"));
     }
 
     @Then("^can see Visit windows$")
     public void canSeeVisitWindows() {
         titleCheck("Visit Report");
-        $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Condition windows$")
     public void canSeeConditionWindows() {
         titleCheck("Condition Occurrence Report");
-        $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Condition Era windows$")
     public void canSeeConditionEraWindows() {
         titleCheck("Condition Era Report");
-        $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Procedure windows$")
     public void canSeeProcedureWindows() {
         titleCheck("Procedure Report");
-        $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Drug windows$")
     public void canSeeDrugWindows() {
         titleCheck("Drug Exposure Report");
-        $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Drug Era windows$")
     public void canSeeDrugEraWindows() {
         titleCheck("Drug Era Report");
-        $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Measurement windows$")
     public void canSeeMeasurementWindows() {
         titleCheck("Measurement Report");
-        $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Observation windows$")
     public void canSeeObservationWindows() {
         titleCheck("Observation Report");
-        $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Prevalence"));
     }
 
     @Then("^can see Death windows$")
     public void canSeeDeathWindows() {
         titleCheck("Death Report");
-        $(By.xpath("//*[@id='report']/div/div[1]/div/div[1]")).shouldHave(text("Death Prevalence by Age, Gender, Year"));
-        $(By.xpath("//*[@id='report']/div/div[2]/div/div[1]")).shouldHave(text("Death Prevalence by Month"));
-        $(By.xpath("//*[@id='report']/div/div[3]/div/div[1]")).shouldHave(text("Death by Type"));
-        $(By.xpath("//*[@id='report']/div/div[4]/div/div[1]")).shouldHave(text("Age at Death"));
-
+        REPORT_TABS_HEADERS.shouldHave(CollectionCondition.size(4)).
+                shouldHave(CollectionCondition.texts("Death Prevalence by Age, Gender, Year",
+                        "Death Prevalence by Month", "Death by Type", "Age at Death"));
     }
 
     @Then("^can see Achilles Heel windows$")
     public void canSeeAchillesHeelWindows() {
         titleCheck("Achilles Heel Report");
-        $(By.xpath("//*[@id='report']/div/div/div[1]")).shouldHave(text("Achilles Heel Results"));
-
+        REPORT_TABS_HEADERS.shouldHave(CollectionCondition.texts("Achilles Heel Results"));
     }
 
     private void titleCheck(String expectedTitleText) {
@@ -163,8 +140,8 @@ public class DataSourceDefs {
     }
 
     @When("^choose Report from Data Source as \"([^\"]*)\"$")
-    public void chooseReportFromDataSourceAs(String arg0) {
-        $(By.xpath("//*[@class='reportControls pad-5']/div[2]/div/select")).selectOption(arg0);
+    public void chooseReportFromDataSourceAs(String reportName) {
+        SELECTS.last().selectOption(reportName);
     }
 
     @When("^click to element in prevalence in Visit$")
@@ -195,87 +172,61 @@ public class DataSourceDefs {
 
     @Then("^can see tables in Visit for cell$")
     public void canSeeTablesInVisitForCell() {
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldHave(text("Drilldown Report"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[1]/div/div[1]")).shouldHave(text("Prevalence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[2]/div/div[1]")).shouldHave(text("Prevalence by Month"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div/div[1]")).shouldHave(text("Age at First Occurrence"));
+        REPORT_TABS_HEADERS.shouldHave(CollectionCondition.size(4)).
+                shouldHave(CollectionCondition.texts("Prevalence", "Prevalence", "Prevalence by Month",
+                        "Age at First Occurrence"));
     }
 
     @Then("^can see tables in Condition for cell$")
     public void canSeeTablesInConditionForCell() {
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldHave(text("Drilldown Report"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[1]/div/div[1]")).shouldHave(text("Prevalence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[2]/div/div[1]")).shouldHave(text("Prevalence by Month"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div/div[1]")).shouldHave(text("Type"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div[2]/div/div[1]")).shouldHave(text("Age at First Occurrence"));
+        REPORT_TABS_HEADERS.shouldHave(CollectionCondition.size(5)).
+                shouldHave(CollectionCondition.texts("Prevalence", "Prevalence", "Prevalence by Month",
+                        "Type", "Age at First Occurrence"));
     }
 
     @Then("^can see tables in Condition era for cell$")
     public void canSeeTablesInConditionEraForCell() {
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldHave(text("Drilldown Report"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[1]/div/div[1]")).shouldHave(text("Prevalence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[2]/div/div[1]")).shouldHave(text("Prevalence by Month"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div/div[1]")).shouldHave(text("Age at First Occurrence"));
-    }
-
-    @Then("^can see tables in Drugs for cell$")
-    public void canSeeTablesInDrugsForCell() {
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldHave(text("Drilldown Report"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[1]/div/div[1]")).shouldHave(text("Prevalence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[2]/div/div[1]")).shouldHave(text("Prevalence by Month"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div/div[1]")).shouldHave(text("Type"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div[2]/div/div[1]")).shouldHave(text("Age at First Occurrence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[5]/div/div[1]")).shouldHave(text("Frequency Distribution"));
-
-    }
-
-    @Then("^can see tables in Drugs Era for cell$")
-    public void canSeeTablesInDrugsEraForCell() {
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldHave(text("Drilldown Report"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[1]/div/div[1]")).shouldHave(text("Prevalence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[2]/div/div[1]")).shouldHave(text("Prevalence by Month"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div/div[1]")).shouldHave(text("Age at First Occurrence"));
+        REPORT_TABS_HEADERS.shouldHave(CollectionCondition.size(4)).
+                shouldHave(CollectionCondition.texts("Prevalence", "Prevalence", "Prevalence by Month",
+                        "Age at First Occurrence"));
     }
 
     @Then("^can see tables in Procedure for cell$")
     public void canSeeTablesInProcedureForCell() {
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldHave(text("Drilldown Report"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[1]/div/div[1]")).shouldHave(text("Prevalence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[2]/div/div[1]")).shouldHave(text("Prevalence by Month"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div/div[1]")).shouldHave(text("Type"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div[2]/div/div[1]")).shouldHave(text("Age at First Occurrence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[5]/div/div[1]")).shouldHave(text("Frequency Distribution"));
+        REPORT_TABS_HEADERS.shouldHave(CollectionCondition.size(6)).
+                shouldHave(CollectionCondition.texts("Prevalence", "Prevalence", "Prevalence by Month",
+                        "Type", "Age at First Occurrence", "Frequency Distribution"));
+    }
+
+    @Then("^can see tables in Drugs for cell$")
+    public void canSeeTablesInDrugsForCell() {
+        REPORT_TABS_HEADERS.shouldHave(CollectionCondition.size(6)).
+                shouldHave(CollectionCondition.texts("Prevalence", "Prevalence", "Prevalence by Month",
+                        "Type", "Age at First Occurrence", "Frequency Distribution"));
+    }
+
+    @Then("^can see tables in Drugs Era for cell$")
+    public void canSeeTablesInDrugsEraForCell() {
+        REPORT_TABS_HEADERS.shouldHave(CollectionCondition.size(5)).
+                shouldHave(CollectionCondition.texts("Prevalence", "Prevalence", "Prevalence by Month",
+                        "Age at First Occurrence", "Length of Era Distribution"));
     }
 
     @Then("^can see tables in Measurement for cell$")
     public void canSeeTablesInMeasurementForCell() {
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldHave(text("Drilldown Report"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[1]/div/div[1]")).shouldHave(text("Prevalence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[2]/div/div[1]")).shouldHave(text("Prevalence by Month"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div/div[1]")).shouldHave(text("Type"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div[2]/div/div[1]")).shouldHave(text("Age at First Occurrence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[4]/div[1]/div/div[1]")).shouldHave(text("Value As Concept"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[4]/div[2]/div/div[1]")).shouldHave(text("Operator Concept"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[5]/div[1]/div/div[1]")).shouldHave(text("Measurement Records by Unit"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[5]/div[2]/div/div[1]")).shouldHave(text("Measurement Value Distribution"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[6]/div[1]/div/div[1]")).shouldHave(text("Lower limit Distribution"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[6]/div[2]/div/div[1]")).shouldHave(text("Upper limit Distribution"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[6]/div[3]/div/div[1]")).shouldHave(text("Values Relative to Normal Range"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[7]/div/div[1]")).shouldHave(text("Frequency Distribution"));
-
+        REPORT_TABS_HEADERS.
+                shouldHave(CollectionCondition.texts("Prevalence", "Prevalence", "Prevalence by Month",
+                        "Type", "Age at First Occurrence", "Value As Concept", "Operator Concept",
+                        "Measurement Records by Unit", "Measurement Value Distribution", "Lower limit Distribution",
+                        "Upper Limit Distribution", "Values Relative to Normal Range", "Frequency Distribution"));
     }
 
     @Then("^can see tables in Observation for cell$")
     public void canSeeTablesInObservationForCell() {
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldHave(text("Drilldown Report"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[1]/div/div[1]")).shouldHave(text("Prevalence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[2]/div/div[1]")).shouldHave(text("Prevalence by Month"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div/div[1]")).shouldHave(text("Type"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[3]/div[2]/div/div[1]")).shouldHave(text("Age at First Occurrence"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[4]/div[1]/div/div[1]")).shouldHave(text("Value As Concept"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[4]/div[2]/div/div[1]")).shouldHave(text("Qualifier Concept"));
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/div[5]/div/div[1]")).shouldHave(text("Frequency Distribution"));
-
+        REPORT_TABS_HEADERS.
+                shouldHave(CollectionCondition.texts("Prevalence", "Prevalence", "Prevalence by Month",
+                        "Type", "Age at First Occurrence", "Value As Concept", "Qualifier Concept",
+                        "Frequency Distribution"));
     }
 
     @Then("^can see preloader in Data Source$")

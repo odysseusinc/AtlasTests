@@ -8,7 +8,7 @@ Feature: Check Data Sources reports
 @impala @odysseus
   Scenario: Impala Source & Dashboard
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Dashboard"
@@ -17,7 +17,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Data Density
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Data Density"
@@ -26,7 +26,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Person
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Person"
@@ -35,7 +35,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Visit
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Visit"
@@ -47,7 +47,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Condition
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Condition Occurrence"
@@ -58,7 +58,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Condition Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Condition Era"
@@ -69,7 +69,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Procedure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Procedure"
@@ -80,7 +80,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Drug Exposure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Drug Exposure"
@@ -91,7 +91,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Drug Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Drug Era"
@@ -103,7 +103,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Measurement
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Measurement"
@@ -115,7 +115,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Observation
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Observation"
@@ -126,7 +126,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Death
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Death"
@@ -135,7 +135,7 @@ Feature: Check Data Sources reports
   @impala @odysseus
   Scenario: IMPALA Source & Achilles Heel
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Achilles Heel"
@@ -147,7 +147,7 @@ Feature: Check Data Sources reports
 @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Dashboard
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Dashboard"
@@ -157,7 +157,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Data Density
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Data Density"
@@ -166,7 +166,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Person
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Person"
@@ -175,7 +175,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Visit
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Visit"
@@ -187,7 +187,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Condition
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Condition Occurrence"
@@ -198,7 +198,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Condition Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Condition Era"
@@ -210,7 +210,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Procedure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Procedure"
@@ -221,7 +221,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Drug Exposure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Drug Exposure"
@@ -232,7 +232,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Drug Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Drug Era"
@@ -244,7 +244,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Measurement
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Measurement"
@@ -256,7 +256,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Observation
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Observation"
@@ -267,7 +267,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Death
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Death"
@@ -276,7 +276,7 @@ Feature: Check Data Sources reports
   @netezza @odysseus
   Scenario: Netezza CDM5.3 Source & Achilles Heel
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Achilles Heel"
@@ -290,7 +290,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Dashboard
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Dashboard"
@@ -300,7 +300,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Data Density
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Data Density"
@@ -309,7 +309,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Person
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Person"
@@ -318,7 +318,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Visit
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Visit"
@@ -329,7 +329,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Condition
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Condition Occurrence"
@@ -340,7 +340,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Condition Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Condition Era"
@@ -351,7 +351,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Procedure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Procedure"
@@ -362,7 +362,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Drug Exposure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Drug Exposure"
@@ -373,7 +373,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Drug Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Drug Era"
@@ -385,7 +385,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Measurement
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Measurement"
@@ -396,7 +396,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Observation
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Observation"
@@ -407,7 +407,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Death
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Death"
@@ -416,7 +416,7 @@ Feature: Check Data Sources reports
   @ovh02 @odysseus
   Scenario: OVH02 SynPUF 110k Source & Achilles Heel
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Achilles Heel"
@@ -429,7 +429,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Dashboard
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Dashboard"
@@ -439,7 +439,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Data Density
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Data Density"
@@ -448,7 +448,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Person
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Person"
@@ -457,7 +457,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Visit
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Visit"
@@ -469,7 +469,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Condition
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Condition Occurrence"
@@ -480,7 +480,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Condition Era
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Condition Era"
@@ -491,7 +491,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Procedure
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Procedure"
@@ -502,7 +502,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Drug Exposure
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Drug Exposure"
@@ -513,7 +513,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Drug Era
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Drug Era"
@@ -525,7 +525,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Measurement
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Measurement"
@@ -537,7 +537,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Observation
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Observation"
@@ -548,7 +548,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Death
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Death"
@@ -557,7 +557,7 @@ Feature: Check Data Sources reports
   @SynPUF110KCost @odysseus
   Scenario: SynPUF110KCost&Util Source & Achilles Heel
    When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Achilles Heel"
@@ -570,7 +570,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Dashboard
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Dashboard"
@@ -579,7 +579,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Data Density
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Data Density"
@@ -588,7 +588,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Person
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Person"
@@ -597,7 +597,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Visit
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Visit"
@@ -609,7 +609,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Condition
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Condition Occurrence"
@@ -620,7 +620,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Condition Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Condition Era"
@@ -631,7 +631,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Procedure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Procedure"
@@ -642,7 +642,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Drug Exposure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Drug Exposure"
@@ -653,7 +653,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Drug Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Drug Era"
@@ -665,7 +665,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Measurement
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Measurement"
@@ -677,7 +677,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Observation
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Observation"
@@ -688,7 +688,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Death
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Death"
@@ -697,7 +697,7 @@ Feature: Check Data Sources reports
   @SynPUF110Kcdm @odysseus
   Scenario: SynPUF 110k CDM5.3 Source & Achilles Heel
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110k CDM5.3"
     When choose Report from Data Source as "Achilles Heel"
@@ -711,7 +711,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Dashboard
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Dashboard"
@@ -720,7 +720,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Data Density
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Data Density"
@@ -729,7 +729,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Person
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Person"
@@ -738,7 +738,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Visit
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Visit"
@@ -749,7 +749,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Condition
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Condition Occurrence"
@@ -760,7 +760,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Condition Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Condition Era"
@@ -771,7 +771,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Procedure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Procedure"
@@ -782,7 +782,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Drug Exposure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Drug Exposure"
@@ -793,7 +793,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Drug Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Drug Era"
@@ -805,7 +805,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Measurement
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Measurement"
@@ -817,7 +817,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Observation
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Observation"
@@ -828,7 +828,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Death
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Death"
@@ -837,7 +837,7 @@ Feature: Check Data Sources reports
   @synPUF23m @odysseus
   Scenario: SynPUF110K 2.3m (GCP BigQuery) Source & Achilles Heel
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Achilles Heel"
@@ -851,7 +851,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Dashboard
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Dashboard"
@@ -860,7 +860,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Data Density
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Data Density"
@@ -869,7 +869,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Person
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Person"
@@ -878,7 +878,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Visit
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Visit"
@@ -889,7 +889,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Condition
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Condition Occurrence"
@@ -900,7 +900,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Condition Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Condition Era"
@@ -911,7 +911,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Procedure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Procedure"
@@ -922,7 +922,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Drug Exposure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Drug Exposure"
@@ -933,7 +933,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Drug Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Drug Era"
@@ -945,7 +945,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Measurement
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Measurement"
@@ -957,7 +957,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Observation
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Observation"
@@ -968,7 +968,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Death
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Death"
@@ -977,7 +977,7 @@ Feature: Check Data Sources reports
   @synPUF2mcdm @odysseus
   Scenario: SynPUF 2M CDM5.3 Source & Achilles Heel
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Achilles Heel"
@@ -991,7 +991,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Dashboard
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Dashboard"
@@ -1000,7 +1000,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Data Density
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Data Density"
@@ -1009,7 +1009,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Person
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Person"
@@ -1018,7 +1018,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Visit
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Visit"
@@ -1029,7 +1029,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Condition
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Condition Occurrence"
@@ -1040,7 +1040,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Condition Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Condition Era"
@@ -1052,7 +1052,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Procedure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Procedure"
@@ -1063,7 +1063,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Drug Exposure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Drug Exposure"
@@ -1074,7 +1074,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Drug Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Drug Era"
@@ -1086,7 +1086,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Measurement
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Measurement"
@@ -1098,7 +1098,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Observation
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Observation"
@@ -1109,7 +1109,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Death
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Death"
@@ -1118,7 +1118,7 @@ Feature: Check Data Sources reports
   @oracle110k @odysseus
   Scenario: oracle-110k Source & Achilles Heel
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Achilles Heel"
@@ -1132,7 +1132,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Dashboard
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Dashboard"
@@ -1141,7 +1141,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Data Density
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Data Density"
@@ -1150,7 +1150,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Person
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Person"
@@ -1159,7 +1159,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Visit
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Visit"
@@ -1170,7 +1170,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Condition
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Condition Occurrence"
@@ -1181,7 +1181,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Condition Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Condition Era"
@@ -1193,7 +1193,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Procedure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Procedure"
@@ -1204,7 +1204,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Drug Exposure
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Drug Exposure"
@@ -1215,7 +1215,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Drug Era
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Drug Era"
@@ -1227,7 +1227,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Measurement
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Measurement"
@@ -1239,7 +1239,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Observation
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Observation"
@@ -1250,7 +1250,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Death
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Death"
@@ -1259,7 +1259,7 @@ Feature: Check Data Sources reports
   @eunomia @ohdsi
   Scenario: eunomia Source & Achilles Heel
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Achilles Heel"

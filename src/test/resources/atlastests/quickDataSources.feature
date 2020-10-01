@@ -7,12 +7,12 @@ Feature: Quick test Data Source
   @qt_ds @eunomiaqt @ohdsi
   Scenario: Quick test Eunomia data source
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OHDSI Eunomia CDM V5 Database"
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Report from Data Source as "Data Density"
     Then can see Data Density windows
@@ -59,12 +59,12 @@ Feature: Quick test Data Source
   @qt_dev @odysseus
   Scenario: Quick Test Impala
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "IMPALA"
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Report from Data Source as "Data Density"
     Then can see preloader in Data Source
@@ -122,7 +122,7 @@ Feature: Quick test Data Source
   @qt_ds @qt_netezza @odysseus
   Scenario: Quick test Netezza CDM5.3
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "Netezza CDM5.3"
     When choose Report from Data Source as "Dashboard"
@@ -185,7 +185,7 @@ Feature: Quick test Data Source
   @qt_ds @qt_ovh02synpuf110k @odysseus
   Scenario: Quick test OVH02 SynPUF 110k
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "OVH02 SynPUF 110k"
     When choose Report from Data Source as "Dashboard"
@@ -247,7 +247,7 @@ Feature: Quick test Data Source
   @qt_ds @qt_synpuf110kcost&util @odysseus
   Scenario: Quick test SynPUF 110k Cost&Util
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 110K Cost&Util"
     When choose Report from Data Source as "Dashboard"
@@ -309,9 +309,9 @@ Feature: Quick test Data Source
   @qt_ds @qt_synpuf110kcdm5.3 @odysseus
   Scenario: Quick test SynPUF 110k CDM5.3
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
-    When choose Source from Data Source as "SynPUF 110K CDM5.3"
+    When choose Source from Data Source as "SynPUF 110k PG12"
     When choose Report from Data Source as "Dashboard"
     Then can see windows in DASHBOARD page
     When Data Source Page opened
@@ -371,7 +371,7 @@ Feature: Quick test Data Source
   @qt_ds @qt_synpuf2.3m(GCPbigQuery) @odysseus
   Scenario: Quick test SynPUF 2.3m (GCP BigQuery)
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2.3m (GCP BigQuery)"
     When choose Report from Data Source as "Dashboard"
@@ -434,7 +434,7 @@ Feature: Quick test Data Source
   @qt_ds @qt_synpuf2mcdm5.3 @odysseus
   Scenario: Quick test SynPUF 2M CDM5.3
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "SynPUF 2M CDM5.3"
     When choose Report from Data Source as "Dashboard"
@@ -497,7 +497,7 @@ Feature: Quick test Data Source
   @qt_ds @qt_oracle-110k @odysseus
   Scenario: Quick test oracle-110k
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "oracle-110k"
     When choose Report from Data Source as "Dashboard"

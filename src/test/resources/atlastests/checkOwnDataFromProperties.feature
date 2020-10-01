@@ -15,7 +15,7 @@ Feature: check own data
   @odysseus
   Scenario: Netezza CDM5.3 Source & Procedure from properties data
     When login to ATLAS as QA
-    When click to Data Sources menu as user
+    When click to "Data Sources" menu item
     When Data Source Page opened
     When choose Source from Data Source as "source" from property
     When choose Report from Data Source as "report" from property

@@ -42,11 +42,6 @@ public class MyStepdefs implements ModalControl {
         $(xpath("//*[@class='home-welcome']/div")).shouldHave(text(welcomeText));
     }
 
-    @When("^click to Data Sources menu as user$")
-    public void clickToDataSourcesMenuAsUser() {
-        $(xpath("//*[@class='app__menu']/a[2]")).shouldHave(text("Data Sources")).click();
-    }
-
     @When("^click to Concept Sets menu as QA$")
     public void clickToConceptSetsMenuAsQA() {
         $(xpath("//*[@class='app__menu']/a[4]")).shouldHave(text("Concept Sets")).click();
