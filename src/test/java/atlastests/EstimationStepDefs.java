@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static atlastests.components.StaticElements.CONCEPT_SET_IN_TABLE;
+import static atlastests.components.StaticElements.EMPTY_TABLE;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -123,8 +124,8 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
 
     @Then("^cant see our Estimation in table$")
     public void cantSeeOurEstimationInTable() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 3000).setValue(newGeneratedString);
-        $(By.xpath("//tbody/tr/td[2]")).shouldNotHave(text(newGeneratedString));
+        search(newGeneratedString);
+        EMPTY_TABLE.shouldHave(text("No matching records found"));
     }
 
     @When("^click to Comparisons tab$")

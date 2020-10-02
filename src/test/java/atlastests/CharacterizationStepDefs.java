@@ -10,8 +10,7 @@ import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 
-import static atlastests.components.StaticElements.ANALYSIS_EXECUTION_LIST;
-import static atlastests.components.StaticElements.EXECUTION_ACTION_BUTTONS;
+import static atlastests.components.StaticElements.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
@@ -77,7 +76,7 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     @Then("^cant find characterization in the table$")
     public void cantFindCharacterizationInTheTable() {
         search(characterizationName);
-        cohortTableName.shouldNotHave(text(characterizationName));
+        EMPTY_TABLE.shouldHave(text("No matching records found"));
     }
 
     @When("^click to Import Cohort Definition$")
@@ -166,7 +165,7 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     @Then("^cant find feature analyse in the table$")
     public void cantFindFeatureAnalyseInTheTable() {
         search(featureName);
-        featureAnalysisTableName.shouldNotHave(text(featureName));
+        EMPTY_TABLE.shouldHave(text("No matching records found"));
     }
 
     @When("^click to Import Feature analyses$")
@@ -292,7 +291,6 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     @Then("^can see copy of our characterization$")
     public void canSeeCopyOfOurCharacterization() {
         cohortTableName.shouldHave(text("COPY OF " + characterizationName));
-
     }
 
     @When("^click to Add Subgroup analyses$")

@@ -12,6 +12,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
+import static atlastests.components.StaticElements.EMPTY_TABLE;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
@@ -119,7 +120,8 @@ public class PredictionStepDefs implements TabsControl, PageControl, TablesContr
 
     @Then("^cant find Prediction in table$")
     public void cantFindPredictionInTable() {
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldNotHave(text(newGeneratedString));
+        search(generatedString);
+        EMPTY_TABLE.shouldHave(text("No matching records found"));
     }
 
     @When("^click to Prediction Problem Settings tab$")
