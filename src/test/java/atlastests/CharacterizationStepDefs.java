@@ -337,7 +337,7 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     }
 
     private void generateByDataSource(String dataSourceName) {
-        ANALYSIS_EXECUTION_LIST.find(Condition.text(dataSourceName)).
+        ANALYSIS_EXECUTION_LIST.find(Condition.matchesText(dataSourceName)).
                 find(withText("Generate")).click();
     }
 
