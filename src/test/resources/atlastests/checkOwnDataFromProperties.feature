@@ -2,7 +2,7 @@
 Feature: check own data
 
   @odysseus
-  Scenario: choose profile from properties data
+  Scenario: Choose profile from properties data
     When login to ATLAS as QA
     When click to "Profiles" menu item
     Then can see Profiles page
@@ -13,7 +13,7 @@ Feature: check own data
     Then can see table
 
   @odysseus
-  Scenario: Netezza CDM5.3 Source & Procedure from properties data
+  Scenario: Source & Procedure from properties data
     When login to ATLAS as QA
     When click to "Data Sources" menu item
     When Data Source Page opened
