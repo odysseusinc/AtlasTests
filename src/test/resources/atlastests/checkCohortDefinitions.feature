@@ -130,7 +130,7 @@ Feature: Check Cohort Definitions
     When click to Definition tab
     Then can see name "ACE inhibitors" of concept set at the button
 
-  @ohdsi
+  @common
   Scenario: Generate using first data source, quick analysis and Export tabs
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
@@ -270,7 +270,7 @@ Feature: Check Cohort Definitions
     When accept an alert about time
     Then can see a row with status Started
 
-  @ohdsi
+  @common
   Scenario: Generate using first data source and Full analysis
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA

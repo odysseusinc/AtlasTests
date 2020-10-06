@@ -105,7 +105,7 @@ Feature: Incident rates check
     When click to "Angioedema" in CS in IR
     Then can see chosen concept set in table: "Angioedema"
 
-    @ohdsi @odysseus
+    @common
     Scenario: GI Bleed Celecoxib new users Export and Import
       When login to ATLAS as QA
       When click to Incidence Rates menu as QA
