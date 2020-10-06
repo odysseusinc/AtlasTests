@@ -123,7 +123,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     @Then("^can see other value of Included Concepts$")
     public void canSeeOtherValueOfIncludedConcepts() {
         includedConceptsAfter = $("[data-bind='text:inclusionCount()']").
-                waitUntil(not(Condition.text("1")), 5000).getText();
+                waitUntil(not(Condition.exactText("1")), 5000).getText();
         Assert.assertNotEquals(includedConceptsAfter, includedConceptsBefore);
     }
 
