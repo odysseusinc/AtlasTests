@@ -237,7 +237,7 @@ Feature: Check Cohort Definitions
     When accept an alert about time
     Then can see a row with status Started
 
-  @dev0907 @odysseus @executions
+  @dev0907 @odysseus @executions @costutil
   Scenario: Generate SynPUF 110K Cost&Util
     When login to ATLAS as QA
     When click to close cohort button
@@ -270,7 +270,7 @@ Feature: Check Cohort Definitions
     When accept an alert about time
     Then can see a row with status Started
 
-  @common @executions
+  @ohdsi @executions
   Scenario: Generate using first data source and Full analysis
     When login to ATLAS as QA
     When click to Cohort Definitions menu as QA
