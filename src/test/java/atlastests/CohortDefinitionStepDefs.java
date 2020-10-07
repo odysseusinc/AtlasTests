@@ -19,7 +19,6 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class CohortDefinitionStepDefs implements PageControl, FormControl, TablesControl, ModalControl {
 
-    private final SelenideElement cohortLinkInTable = $("tbody .linkish");
     private final ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .linkish");
     private final ElementsCollection conceptSetsInDataTable = $$(".conceptSetTable span");
     private final ElementsCollection dataSources = $$(".cohort-generate-sources tr");
@@ -58,12 +57,12 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^Cohort Definition should be found$")
     public void cohortDefinitionShouldBeFound() {
-        cohortLinkInTable.shouldHave(text(nameCohort));
+        COHORT_LINK_IN_TABLE.shouldHave(text(nameCohort));
     }
 
     @When("^click to our Cohort Definition$")
     public void clickToOurCohortDefinition() {
-        cohortLinkInTable.click();
+        COHORT_LINK_IN_TABLE.click();
     }
 
     @Then("^can see our Cohort Definition$")
@@ -260,7 +259,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^new Cohort Definition should be found$")
     public void newCohortDefinitionShouldBeFound() {
-        cohortLinkInTable.shouldHave(text(newGeneratedString));
+        COHORT_LINK_IN_TABLE.shouldHave(text(newGeneratedString));
     }
 
     @When("^enter the same name of New Cohort Definition and save it$")
@@ -304,7 +303,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^click to founded result$")
     public void clickToFoundedResult() {
-        cohortLinkInTable.click();
+        COHORT_LINK_IN_TABLE.click();
     }
 
     @When("^click to JSON tab in Cohort Definitions$")

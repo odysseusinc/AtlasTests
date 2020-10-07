@@ -3,6 +3,7 @@ package atlastests;
 import atlastests.components.ModalControl;
 import atlastests.components.TablesControl;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -18,8 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static atlastests.components.StaticElements.CONCEPT_SET_IN_TABLE;
-import static atlastests.components.StaticElements.EMPTY_TABLE;
+import static atlastests.components.StaticElements.*;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -207,8 +207,8 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
 
     @When("^click to result in CR in Cohort Window$")
     public void clickToResultInCRInCohortWindow() {
-        cohortVal = $$(By.xpath("//*[@class='linkish']")).get(1).getText();
-        $$(By.xpath("//*[@class='linkish']")).get(1).click();
+        cohortVal = COHORT_LINK_IN_TABLE.getText();
+        COHORT_LINK_IN_TABLE.click();
     }
 
     @When("^import outcome cohort: \"([^\"]*)\"$")

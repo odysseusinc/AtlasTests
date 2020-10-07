@@ -68,7 +68,7 @@ Feature: check Estimation
     Then can see choosed cohort in estimation outcome table
     When click to Open Concept window
     Then can see concept set window
-    When enter "cohort_for_estimation" in concept set window
+    When enter "test" in concept set window
     When click to search result in concept set window
     When click back button to specification tab
     When press Add Analysis Settings
@@ -76,11 +76,11 @@ Feature: check Estimation
     When Enter Study Start and end date
     When Enter include concept set in baseline covariates in the propensity score model
     Then can see concept set window
-    When enter "cohort_for_estimation" in concept set window
+    When enter "test" in concept set window
     When click to search result in concept set window
     When Enter exclude concept set in baseline covariates in the propensity score model
     Then can see concept set window
-    When enter "cohort_for_estimation" in concept set window
+    When enter "test" in concept set window
     When click to search result in concept set window
     When click to save New Estimation button
 

@@ -21,7 +21,6 @@ import static com.codeborne.selenide.Selenide.*;
 public class CohortPathwayStepDefs implements PageControl, FormControl, TablesControl, TabsControl {
     private String namePathway;
     private String newNamePathway;
-    private SelenideElement facetedTableLink = $(".linkish");
     private SelenideElement cohortOnPathwaysPage = $("[data-bind='clickToEdit: name']");
     private ElementsCollection tableLinksInTable = $$("tbody .pathways-browser__tbl-col--name a");
 
