@@ -360,7 +360,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^can see Complete in first data source status in (\\d+) seconds$")
     public void canSeeCompleteFirstDSStatusInSeconds(int arg0) {
-        $$(".statusIndicator.text-right").first().waitUntil(text("COMPLETE"), arg0 * 1000);
+        $$(".statusIndicator.text-right").first().waitUntil(text("COMPLETED"), arg0 * 1000);
     }
 
     @When("^click to Reporting tab tab$")
@@ -480,6 +480,6 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     private void checkStatus(String dataSourceName, int seconds) {
         dataSources.find(Condition.text(dataSourceName)).
-                find(".statusIndicator.text-right").waitUntil(text("COMPLETE"), seconds * 1000);
+                find(".statusIndicator.text-right").waitUntil(text("COMPLETED"), seconds * 1000);
     }
 }
