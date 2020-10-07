@@ -72,11 +72,11 @@ Feature: Check Prediction
     When click to save Prediction Button
     Then can see new buttons in Prediction field
     When click to add Target Cohort in Predictions
-    When enter "Test" in filter in cohort definition window in Predictions
+    When enter "cohort_for_prediction" in filter in cohort definition window in Predictions
     When click to result in cohort in Predictions
     Then can see selected cohort in Prediction Target table
     When click to add Outcome Cohort in Predictions
-    When enter "Test" in filter in cohort definition window in Predictions
+    When enter "cohort_for_prediction" in filter in cohort definition window in Predictions
     When click to result in cohort in Predictions
     Then can see selected cohort in Prediction Outcome table
     When click to Add Model Settings button
