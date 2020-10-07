@@ -42,6 +42,7 @@ Feature: check Estimation
     When click to Utilities page in Estimation
     Then can see Utilities page in Estimation
 
+    #required to create cohort with name "cohort_for_estimation" to avoid fluky fails
   @est @common
   Scenario: Create full list of Estimation
     When login to ATLAS as QA
@@ -55,36 +56,33 @@ Feature: check Estimation
     Then can see Comparison inputs
     When click to open target cohort button
     Then can see Select Cohort window
-    When enter "Test" in Filter in Cohort window
+    When enter "cohort_for_estimation" in Filter in Cohort window
     When click to result in CR in Cohort Window
     When click to open comparator cohort button
     Then can see Select Cohort window
-    When enter "Test" in Filter in Cohort window
+    When enter "cohort_for_estimation" in Filter in Cohort window
     When click to result in CR in Cohort Window
     When click to Add Outcome button
-    When enter "Test" in Filter in Cohort window
-    When import outcome cohort: "Test"
+    When enter "cohort_for_estimation" in Filter in Cohort window
+    When import outcome cohort: "cohort_for_estimation"
     Then can see choosed cohort in estimation outcome table
     When click to Open Concept window
     Then can see concept set window
-    When enter "Test" in concept set window
+    When enter "cohort_for_estimation" in concept set window
     When click to search result in concept set window
     When click back button to specification tab
-      #devide
     When press Add Analysis Settings
     Then can see Analysis Setting page
     When Enter Study Start and end date
     When Enter include concept set in baseline covariates in the propensity score model
     Then can see concept set window
-    When enter "Test" in concept set window
+    When enter "cohort_for_estimation" in concept set window
     When click to search result in concept set window
     When Enter exclude concept set in baseline covariates in the propensity score model
     Then can see concept set window
-    When enter "Test" in concept set window
+    When enter "cohort_for_estimation" in concept set window
     When click to search result in concept set window
     When click to save New Estimation button
-
-
 
 
   @local @common
