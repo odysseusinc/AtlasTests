@@ -91,7 +91,7 @@ Feature: Characterization check
     Then first data source generate button has to be with Cancel text
 
   @odysseus
-  Scenario: Import definitions, features and IMPALA report
+  Scenario: Import definitions, features and first data source report
     When login to ATLAS as QA
     When click to Characterizations menu as QA
     Then can see Characterization page
