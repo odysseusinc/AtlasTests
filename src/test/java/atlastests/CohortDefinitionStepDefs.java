@@ -474,12 +474,12 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     }
 
     private void generateByDataSource(String dataSourceName) {
-        dataSources.find(Condition.text(dataSourceName)).
+        dataSources.find(Condition.matchesText(dataSourceName)).
                 find(withText("Generate")).click();
     }
 
     private void checkStatus(String dataSourceName, int seconds) {
-        dataSources.find(Condition.text(dataSourceName)).
+        dataSources.find(Condition.matchesText(dataSourceName)).
                 find(".statusIndicator.text-right").waitUntil(text("COMPLETED"), seconds * 1000);
     }
 }
