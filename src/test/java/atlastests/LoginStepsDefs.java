@@ -58,9 +58,8 @@ public class LoginStepsDefs {
 
     @When("^login \"([^\"]*)\" and password \"([^\"]*)\" Entered and submitted$")
     public static void loginAndPasswordEnteredAndSubmitted(String login, String password) {
-        $("[data-bind='if: isDbLoginAtt(), submit:signinWithLoginPass']").waitUntil(visible, 5000);
-        $("#lg_username").waitUntil(appears, 5000).setValue(login).waitUntil(value(login), 5000);
-        $("#lg_password").setValue(password);
+        $("input#lg_password").setValue(password);//password firstly to optimise authorization speed
+        $("input#lg_username").setValue(login);
         loginButtonPress();
     }
 
