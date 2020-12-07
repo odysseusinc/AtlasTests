@@ -58,7 +58,7 @@ public class LoginStepsDefs {
 
     @When("^login \"([^\"]*)\" and password \"([^\"]*)\" Entered and submitted$")
     public static void loginAndPasswordEnteredAndSubmitted(String login, String password) {
-        $("input#lg_password").setValue(password);//password firstly to optimise authorization speed
+        $("input#lg_password").setValue(password);//password firstly to optimise authorization speed and stability
         $("input#lg_username").setValue(login);
         loginButtonPress();
     }
