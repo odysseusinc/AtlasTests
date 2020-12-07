@@ -61,7 +61,7 @@ public class LoginStepsDefs {
     public static void loginAndPasswordEnteredAndSubmitted(String login, String password) {
         SelenideElement loginInput = $("input#lg_username");
         loginInput.click();   //this action prevents empty login field issue during authorization
-        loginInput.setValue(login);
+        loginInput.waitUntil(focused, 5000).setValue(login);
         $("input#lg_password").setValue(password);
         loginButtonPress();
     }
