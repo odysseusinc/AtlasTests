@@ -1,7 +1,7 @@
 package atlastests;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -59,9 +59,9 @@ public class LoginStepsDefs {
 
     @When("^login \"([^\"]*)\" and password \"([^\"]*)\" Entered and submitted$")
     public static void loginAndPasswordEnteredAndSubmitted(String login, String password) {
-        $$(".github-issue-container .github-issue").
-                shouldHave(CollectionCondition.sizeGreaterThan(0), 10000);//this waiter prevents empty login field issue during authorization
-        $("input#lg_username").setValue(login);
+        SelenideElement loginInput = $("input#lg_username");
+        loginInput.click();   //this action prevents empty login field issue during authorization
+        loginInput.setValue(login);
         $("input#lg_password").setValue(password);
         loginButtonPress();
     }
@@ -74,7 +74,6 @@ public class LoginStepsDefs {
     public static void closeLoginWindow() {
         $(".modal-header .close").click();
     }
-
 
 
 }
