@@ -12,6 +12,7 @@ public final class StaticElements {
     public static final  SelenideElement CONCEPT_SET_IN_TABLE = $("#repositoryConceptSetTable .linkish");
     public static final  ElementsCollection NAV_TABS = $$(".nav-tabs a");
     public static final ElementsCollection NAV_PILLS = $$(".nav-pills.nav a");
+    public static final ElementsCollection TABS_HEADERS = $$(".tabs__header-title");
     public static final SelenideElement EMPTY_TABLE = $(".dataTables_empty");
     public static final SelenideElement COHORT_LINK_IN_TABLE = $("tbody .linkish");
 }

@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import static atlastests.components.StaticElements.NAV_PILLS;
-import static atlastests.components.StaticElements.NAV_TABS;
+import static atlastests.components.StaticElements.TABS_HEADERS;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
@@ -115,7 +115,7 @@ public class SearchDefs implements TablesControl {
 
     @Then("^page with concept fields is opened$")
     public void checkConceptPage() {
-        $(".nav-tabs .active").waitUntil(visible, 5000).shouldHave(text("Details"));
+        $(".tabs__header-title--selected").waitUntil(visible, 5000).shouldHave(text("Details"));
         $$("#wrapperConceptDetails table td:nth-child(1)").
                 shouldHave(CollectionCondition.texts("Concept Name", "Domain Id", "Concept Class Id",
                         "Vocabulary Id", "Concept Id", "Concept Code", "Invalid Reason", "Standard Concept"));
@@ -123,21 +123,21 @@ public class SearchDefs implements TablesControl {
 
     @Then("^check Related Concepts tab$")
     public void checkSecondOfFourTabs() {
-        NAV_TABS.find(matchesText("Related Concepts")).click();
+        TABS_HEADERS.find(matchesText("Related Concepts")).click();
         $(".facetName").waitUntil(visible, 35000);
     }
 
     @Then("^check Hierarchy tab$")
     public void checkThirdOfFourTabs() {
-        NAV_TABS.find(matchesText("Hierarchy")).click();
+        TABS_HEADERS.find(matchesText("Hierarchy")).click();
         NAV_PILLS.shouldHave(CollectionCondition.texts("Full Hierarchy", "Parents", "Current", "Children"),
                 30000);
     }
 
     @Then("^check Record Counts tab$")
     public void checkFourthOfFourTabs() {
-        NAV_TABS.find(matchesText("Record Counts")).click();
-        $(".panel-heading").waitUntil(visible, 180000).
+        TABS_HEADERS.find(matchesText("Record Counts")).click();
+        $(".panel-primary .panel-heading").waitUntil(visible, 180000).
                 shouldHave(text("Record Counts across Sources"));
     }
 
