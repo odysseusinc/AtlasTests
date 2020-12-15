@@ -189,7 +189,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^can see Export page$")
     public void canSeeExportPage() {
-        $("cohort-expression-viewer").shouldHave(text("Initial Event Cohort"));
+        $("#cohortTextView").shouldBe(visible);
     }
 
     @When("^click to Messages Tab$")
