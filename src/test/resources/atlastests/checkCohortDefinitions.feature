@@ -91,6 +91,8 @@ Feature: Check Cohort Definitions
     Then can see row with name of Concept Set in the table
     When click to Generation tab
     Then can see Generation page
+    When click to Samples tab
+    Then can see a select element with data sources
     When click to Reporting tab
     Then can see reporting page
     When click to Export tab in Cohort Definitions

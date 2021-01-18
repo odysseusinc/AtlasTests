@@ -132,6 +132,16 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
                 shouldHave(text("Angioedema"));
     }
 
+    @When("^click to Samples tab$")
+    public void clickToSamplesTab() {
+        NAV_TABS.find(matchesText("Samples")).click();
+    }
+
+    @Then("^can see a select element with data sources$")
+    public void canSeeSelectWithDataSources() {
+        $(".active .panel-primary .panel-heading").shouldHave(text("Sample Selections"));
+    }
+
     @When("^click to Concept Sets tab$")
     public void clickToConceptSetsTab() {
         NAV_TABS.find(matchesText("Concept Sets")).click();
