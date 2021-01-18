@@ -209,7 +209,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
 
     @Then("^can see Messages page$")
     public void canSeeMessagesPage() {
-        $(By.xpath("//*[@aria-label='Severity: activate to sort column ascending']")).waitUntil(visible, 4000).
+        $("[aria-label='Severity: activate to sort column ascending']").waitUntil(visible, 4000).
                 shouldHave(text("Severity"));
     }
 

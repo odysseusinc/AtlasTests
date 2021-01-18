@@ -97,9 +97,8 @@ Feature: Check Cohort Definitions
     Then can see reporting page
     When click to Export tab in Cohort Definitions
     Then can see Export page
-#    When click to Messages Tab
-#    When click to Run diagnostic Button
-#    Then can see Messages page
+    When click to Messages Tab
+    Then can see Messages page
 
   @common
   Scenario: inclusion criterias
