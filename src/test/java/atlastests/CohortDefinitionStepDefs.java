@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
+import static atlastests.TestDefs.getDataProperties;
 import static atlastests.components.StaticElements.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.withText;
@@ -98,9 +99,19 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
         $(withText("Add Condition Occurrence")).waitUntil(visible, 5000).click();
     }
 
+    @When("^press Add \"([^\"]*)\"$")
+    public void pressAddInitialEvent(String initialEvent) {
+        $(withText("Add " + initialEvent)).waitUntil(visible, 5000).click();
+    }
+
     @When("^click to Any Condition menu$")
     public void clickToAnyConditionMenu() {
         $("[data-bind='with: Criteria'] conceptset-selector [type='button'][data-toggle='dropdown']").click();
+    }
+
+    @When("^click to Any ... menu$")
+    public void clickToAnyMenu() {
+        $(".criteriaTable .thumb-dropdown .dropdown-toggle").click();
     }
 
     @When("^choose Import Concept Set$")
@@ -442,9 +453,19 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
         generateByDataSource(sourceName);
     }
 
+    @When("^click to Generate on \"([^\"]*)\" from properties$")
+    public void clickToGenerateFromProperties(String propertyName) throws Exception {
+        generateByDataSource(getDataProperties(propertyName));
+    }
+
     @Then("^can see Complete in \"([^\"]*)\" status in (\\d+) seconds$")
-    public void canSeeCompleteInSynPUFKCDMStatusInSeconds(String sourceName, int arg0) {
-        checkStatus(sourceName, arg0);
+    public void canSeeCompleteInSynPUFKCDMStatusInSeconds(String sourceName, int timeout) {
+        checkStatus(sourceName, timeout);
+    }
+
+    @Then("^can see Complete on \"([^\"]*)\" dataset from properties status in (\\d+) seconds$")
+    public void canSeeCompleteInSynPUFKCDMStatusInSecondsProperties(String propertyName, int timeout) throws Exception {
+        checkStatus(getDataProperties(propertyName), timeout);
     }
 
     @When("^click to Full analysis button$")
@@ -480,6 +501,16 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @When("^click to close cohort button$")
     public void closeCurrentCohort() {
         closeAction();
+    }
+
+    @When("^click to Samples tab tab$")
+    public void clickToSamplesTabTab() {
+        NAV_TABS.find(matchesText("Samples")).click();
+    }
+
+    @Then("^Samples tab is opened$")
+    public void canSeeSamplesTabOpened() {
+        $(".active.tab-pane .panel-body select").shouldBe(visible);
     }
 
     private void generateByDataSource(String dataSourceName) {

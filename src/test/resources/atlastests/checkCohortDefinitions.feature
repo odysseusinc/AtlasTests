@@ -385,3 +385,90 @@ Feature: Check Cohort Definitions
     Then can see paging
 
 
+    When click to Any Condition menu
+    When choose Import Concept Set
+    Then Import Concept Set window shown
+    When click to Id to sort
+    When enter "ACE" to Filter of Concept Set from Repository
+    Then can see only one field with text "ACE"
+    When click to chosen concept set from repository
+    Then can see name "ACE" of concept set at the button
+    When add Inclusion criteria with group: "Drug Era"
+    Then can see block with inclusion criterias
+    When click to save button in Cohort Definition
+    When click to Generation tab
+    When click to Generate SynPUF 110K Cost&Util button
+    Then can see Complete in SynPUF 110K Cost&Util status in 180 seconds
+    When click to Reporting tab tab
+    When select "SynPUF 110K Cost&Util" source
+    When click to utilisation button
+    Then configure of reports to run window opens
+    When choose reports and press Run
+    When accept an alert about time
+    Then can see a row with status Started
+
+  @ohdsi @executions
+  Scenario: Generate using first data source and Full analysis
+    When login to ATLAS as QA
+    When click to Cohort Definitions menu as QA
+    Then can see Cohort Definition page
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When press Add Initial Event
+    When press Add Condition Occurrence
+    Then condition occurrence block shown
+    When click to Any Condition menu
+    When choose Import Concept Set
+    Then Import Concept Set window shown
+    When click to Id to sort
+    When enter "Chronic sinusitis" to Filter of Concept Set from Repository
+    Then can see only one field with text "Chronic sinusitis"
+    When click to chosen concept set from repository
+    Then can see name "Chronic sinusitis" of concept set at the button
+    When add Inclusion criteria with group: "Drug Era"
+    Then can see block with inclusion criterias
+    When click to save button in Cohort Definition
+    When click to Generation tab
+    When click to Generate first data source button
+    Then can see Complete in first data source status in 360 seconds
+    When click to Reporting tab tab
+    When select first data source
+    When click to Full analysis button
+    When accept an alert about time
+    Then can see a row with status Started
+
+  @common
+  Scenario: Check samples tab
+    When login to ATLAS as QA
+    When click to Cohort Definitions menu as QA
+    Then can see Cohort Definition page
+    When click New Cohort button
+    Then can see new cohort page creation
+    When enter name of New Cohort Definition and save it
+    When press Add Initial Event
+    When press Add "Drug Era"
+    When click to Any ... menu
+    When choose Import Concept Set
+    Then Import Concept Set window shown
+    When enter "simvastatin" to Filter of Concept Set from Repository
+    Then can see only one field with text "simvastatin"
+    When click to chosen concept set from repository
+    Then can see name "simvastatin" of concept set at the button
+    When click to save button in Cohort Definition
+    When click to Generation tab
+    #property name is required to be declared in application.properties
+    When click to Generate on "source" from properties
+    Then can see Complete on "source" dataset from properties status in 360 seconds
+    When click to Samples tab
+    Then Samples tab is opened
+    When Select source for samples from properties: "source"
+    Then Samples table is shown
+    When Trying to add a sample:
+      |name       |size|age|gender|
+      |Test Sample|10  |40 |Male  |
+    Then Sample is added
+    When Click on created sample to see results
+    Then Results are shown
+    When Click to a person from results table
+    Then Profile is opened
