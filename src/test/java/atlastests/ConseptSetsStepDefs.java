@@ -297,7 +297,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @Then("^can see results of comparison$")
     public void canSeeResultsOfComparison() {
-        $$("[role='row'] td:nth-child(1)").filter(visible).filter(not(empty)).
+        $$("td:nth-child(1)").filter(visible).filter(not(empty)).
                 shouldHave(CollectionCondition.textsInAnyOrder("Both", "1 Only", "2 Only"));
     }
 

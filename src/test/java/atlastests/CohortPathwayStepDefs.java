@@ -76,7 +76,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
     @Then("^can see table with our cohort pathway$")
     public void canSeeTableWithOurCohortPathway() {
         $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']")).
-                waitUntil(visible, 4000);
+                waitUntil(visible, 10000);
     }
 
     @When("^enter name of our pathway in filter$")

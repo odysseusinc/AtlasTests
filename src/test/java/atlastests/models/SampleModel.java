@@ -9,5 +9,4 @@ public class SampleModel {
     private Integer age;
     private String gender;
 
-
 }

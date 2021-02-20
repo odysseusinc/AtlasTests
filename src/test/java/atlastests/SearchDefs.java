@@ -21,7 +21,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class SearchDefs implements TablesControl {
     private static final ElementsCollection TABLE_HEADERS = $$("th");
-    private static final ElementsCollection CONCEPT_IDS = $$("tbody [role='row'] td:nth-child(2)");
+    private static final ElementsCollection CONCEPT_IDS = $$("tbody td:nth-child(2)");
     private File search;
 
     @When("^enter in search panel \"([^\"]*)\"$")
@@ -124,7 +124,7 @@ public class SearchDefs implements TablesControl {
     @Then("^check Related Concepts tab$")
     public void checkSecondOfFourTabs() {
         TABS_HEADERS.find(matchesText("Related Concepts")).click();
-        $(".facetName").waitUntil(visible, 35000);
+        $(".facetName").waitUntil(visible, 55000);
     }
 
     @Then("^check Hierarchy tab$")
