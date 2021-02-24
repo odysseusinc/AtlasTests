@@ -13,5 +13,13 @@ Feature: Check login page
   Scenario:  Homepage check correct credentials
     When login to ATLAS as QA
 
+  @common
+  Scenario: Log out
+    When login to ATLAS as QA
+    When logout
+    When click to "Cohort Definitions" menu item
+    Then The warning message is shown "This feature is protected. Please, "
+
+
 
 

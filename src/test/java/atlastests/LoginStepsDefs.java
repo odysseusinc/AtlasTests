@@ -7,6 +7,7 @@ import cucumber.api.java.en.When;
 
 import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -20,6 +21,14 @@ public class LoginStepsDefs {
     @When("^login to ATLAS as admin$")
     public void loginToATLASAsAdmin() throws Throwable {
         logIn("adminlogin", "adminpassword");
+    }
+
+    @When("^logout")
+    public void logout()
+    {
+        $("[data-bind='text: fullName']").click();
+        $(withText("Sign Out")).click();
+        $$(".close").filter(visible).first().click();
     }
 
     public void logIn(String loginPropertyPath, String passPropertyPath) throws Exception {
