@@ -9,7 +9,7 @@ Feature: Check Jobs
     Then can see job table with all fields
     When click to Column visibility button
     Then can see window with column names
-    When click to "ExecutionId" button
+    When click to "Execution Id" button
     When click to free space
     Then cant see ExecutionId in table
     When click to CSV button in Jobs

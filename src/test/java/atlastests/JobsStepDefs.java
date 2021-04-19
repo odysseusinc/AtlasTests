@@ -30,7 +30,7 @@ public class JobsStepDefs implements TablesControl, PageControl {
     @Then("^can see job table with all fields$")
     public void canSeeJobTableWithAllFields() {
         COLUMN_HEADERS.shouldHave(CollectionCondition.size(6),
-                CollectionCondition.exactTexts("ExecutionId", "Job Name", "Status",
+                CollectionCondition.exactTexts("Execution Id", "Job Name", "Status",
                         "Author", "Start Date", "End Date"));
     }
 
@@ -51,7 +51,7 @@ public class JobsStepDefs implements TablesControl, PageControl {
 
     @Then("^cant see ExecutionId in table$")
     public void cantSeeExecutionIdInTable() {
-        $(byText("ExecutionId")).shouldNotBe(visible);
+        $(byText("Execution Id")).shouldNotBe(visible);
     }
 
     @When("^click to CSV button in Jobs$")
