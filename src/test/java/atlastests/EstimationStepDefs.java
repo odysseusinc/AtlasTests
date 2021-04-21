@@ -51,7 +51,7 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
     @Then("^can see creation page of Estimation$")
     public void canSeeCreationPageOfEstimation() {
         $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 3000).
-                shouldHave(text("New Population Level Effect Estimation - Comparative Cohort Analysis"));
+                shouldHave(text("New Population Level Estimation Analysis - Comparative Cohort Analysis"));
     }
 
     @When("^enter new name of Estimation$")
