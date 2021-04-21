@@ -165,7 +165,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     @When("^remove all concepts$")
     public void removeAllConcepts() {
         $$(".conceptset-expression__checkmark").first().click();//to select all
-        $(withText("Remove selected concept")).waitUntil(enabled, 5000).click();
+        $(withText("Remove Selected")).waitUntil(enabled, 5000).click();
     }
 
     @Then("^can see message in Concept Set table \"([^\"]*)\"$")
