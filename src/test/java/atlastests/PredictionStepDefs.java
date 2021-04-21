@@ -56,7 +56,7 @@ public class PredictionStepDefs implements TabsControl, PageControl, TablesContr
     @Then("^can see new buttons in Prediction field$")
     public void canSeeNewButtonsInPredictionField() {
         $(By.xpath("//*[@title='Close']")).waitUntil(visible, 15000);
-        $(By.xpath("//*[@title='Copy']")).waitUntil(visible, 1000);
+        $(By.xpath("//*[@title='Create a copy']")).waitUntil(visible, 1000);
         $(By.xpath("//*[@title='Delete']")).waitUntil(visible, 1000);
     }
 
