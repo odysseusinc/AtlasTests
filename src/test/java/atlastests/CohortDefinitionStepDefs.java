@@ -233,13 +233,13 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     public void addInclusionCriteriaWithGroup(String criteriaGroup) {
         addInclusionCriteria();
         $(withText("Add criteria to group...")).click();
-        $$("[data-bind='html:$component.formatOption($data), click:action']").
+        $$(".criteriaHeading [data-bind='foreach:$component.addActions'] .optionText").
                 find(Condition.matchesText(criteriaGroup)).click();
     }
 
     @When("^add Inclusion criteria$")
     public void addInclusionCriteria() {
-        $(".inclusion-criteria__block .btn[data-bind='click: addInclusionRule']").
+        $(".inclusion-criteria__block .btn-success").
                 waitUntil(visible, 5000).click();
         $(".inclusion-rule-header input").setValue("TEST INCLUSION");
         $("inclusion-rule-editor [placeholder='enter an inclusion rule description']").
