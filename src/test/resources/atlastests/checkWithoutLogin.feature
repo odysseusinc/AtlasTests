@@ -13,7 +13,7 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Data Sources" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 
     @common
@@ -21,7 +21,7 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Search" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 
     @common
@@ -29,7 +29,7 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Concept Sets" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 
     @common
@@ -37,7 +37,7 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Cohort Pathways" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 
     @common
@@ -45,7 +45,7 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Characterizations" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 
     @common
@@ -53,7 +53,7 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Cohort Definitions" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 
     @common
@@ -61,7 +61,7 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Incidence Rates" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 
     @common
@@ -69,7 +69,7 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Profiles" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 
     @common
@@ -77,7 +77,7 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Estimation" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 
     @common
@@ -85,7 +85,7 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Prediction" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 
     @common
@@ -93,7 +93,7 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Jobs" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 
     @common
@@ -101,6 +101,6 @@ Feature: Check permissions without login
         When open project page
         Then check unauthorized user
         When click to "Configuration" menu item
-        Then The warning message is shown "This feature is protected. Please, "
+        Then The warning message is shown "This feature is protected. Please log in "
        
 

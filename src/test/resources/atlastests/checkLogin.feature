@@ -18,7 +18,7 @@ Feature: Check login page
     When login to ATLAS as QA
     When logout
     When click to "Cohort Definitions" menu item
-    Then The warning message is shown "This feature is protected. Please, "
+    Then The warning message is shown "This feature is protected. Please log in "
 
 
 
