@@ -15,6 +15,7 @@ import org.openqa.selenium.By;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.Duration;
 
 import static atlastests.components.StaticElements.CONCEPT_SET_IN_TABLE;
 import static atlastests.components.StaticElements.EMPTY_TABLE;
@@ -87,8 +88,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @When("^select first concept$")
     public void selectFirstConcept() {
-        $(".fa-check").waitUntil(visible,
-                120000).click();
+        $("tbody .fa-check").shouldBe(visible, Duration.ofMinutes(2)).click();
         idValue = $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr[1]/td[2]")).
                 getText();
     }

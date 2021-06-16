@@ -33,6 +33,7 @@ public class TestDefs {
                 savePageSource(false));
         Configuration.headless = Boolean.parseBoolean(getDataProperties("headless"));
         Configuration.fileDownload = FOLDER;//settings for files downloading process
+        System.setProperty("chromeoptions.prefs","intl.accept_languages=EN");
 
         try {
             Configuration.timeout = 30000;
