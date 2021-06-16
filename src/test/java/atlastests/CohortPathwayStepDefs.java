@@ -1,21 +1,20 @@
 package atlastests;
 
-import atlastests.components.TablesControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
+import atlastests.components.TablesControl;
 import atlastests.components.TabsControl;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CohortPathwayStepDefs implements PageControl, FormControl, TablesControl, TabsControl {
@@ -218,7 +217,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
 
     @When("^past json to pathway textarea$")
     public void pastJsonToPathwayTextarea() {
-        $("textarea.import__json-box").sendKeys(Keys.SHIFT, Keys.INSERT);
+        $("textarea.import__json-box").setValue(Selenide.clipboard().getText());
     }
 
     @When("^click Import button in Pathways$")

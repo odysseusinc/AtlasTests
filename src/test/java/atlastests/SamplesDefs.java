@@ -7,6 +7,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import static atlastests.TestDefs.getDataProperties;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -35,7 +36,7 @@ public class SamplesDefs {
     public void addSample(DataTable dataTable) {
         sampleModel = dataTable.asList(SampleModel.class).get(0);
 
-        $("[data-bind='click:addNewSample']").click();
+        $(withText("Add new sample")).click();
 
         SelenideElement sampleCreatingForm = $(".sampleCreatingForm");
         sampleCreatingForm.find("#sampleCreatingName").setValue(sampleModel.getName());
