@@ -2,8 +2,9 @@ package atlastests;
 
 import atlastests.components.ModalControl;
 import atlastests.components.TablesControl;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.Selenide;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -119,13 +120,13 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
 
     @When("^accept delete Estimation$")
     public void acceptDeleteEstimation() {
-        switchTo().alert().accept();
+        Selenide.confirm();
+        Selenide.switchTo().defaultContent();
     }
 
     @Then("^cant see our Estimation in table$")
     public void cantSeeOurEstimationInTable() {
-        search(newGeneratedString);
-        EMPTY_TABLE.shouldHave(text("No matching records found"));
+        $(By.xpath("//tbody/tr/td[2]")).shouldNotHave(text(generatedString));
     }
 
     @When("^click to Comparisons tab$")

@@ -87,11 +87,11 @@ public class MyStepdefs implements ModalControl {
 
     @When("^click to Configuration menu as QA$")
     public void clickToConfigurationMenuAsQA() {
-        $(xpath("//*[@class='app__menu']/a[13]")).shouldHave(text("Configuration")).click();
+        $$(xpath("//*[@class='app__menu']/a")).find(text("Configuration")).click();
     }
 
     @When("^click to Configuration menu as admin$")
     public void clickToConfigurationMenuAsAdmin() {
-        $(xpath("//*[@class='app__menu']/a[13]")).shouldHave(text("Configuration")).click();
+        $$(xpath("//*[@class='app__menu']/a")).find(text("Configuration")).click();
     }
 }

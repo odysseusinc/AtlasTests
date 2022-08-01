@@ -9,6 +9,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -34,13 +35,14 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     private String newGeneratedString;
     private File conceptSetsZip;
 
-
+    @Step ("Consept Sets page is open")
     @Then("^Concept Sets page opens$")
     public void conceptSetsPageOpens() {
         $(By.xpath("//*[@id='currentComponent']/heading-title/div/span")).waitUntil(visible, 5000).
                 shouldHave(text("Concept Sets"));
     }
 
+    @Step ("click to New Consept Set")
     @When("^click to New Concept Set$")
     public void clickToNewConceptSet() {
         $(By.xpath("//*[@class='btn btn-sm btn-primary new-concept-set']")).click();
@@ -75,7 +77,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @When("^click to delete concept set$")
     public void clickToDeleteConceptSet() {
-        $(By.xpath("//*[@class='fa fa-trash-o']")).click();
+        $(By.xpath("//*[@class='fa fa-trash-alt']")).click();
         switchTo().alert().accept();
 
     }
@@ -134,9 +136,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @Then("^can see table of Included Concepts$")
     public void canSeeTableOfIncludedConcepts() {
-        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).waitUntil(visible, 5000);
-
-        conceptIdIC = $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/./tbody/tr/td[2]")).getText();
+        conceptIdIC =$$(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/./tbody/tr/td")).get(3).getText();
         Assert.assertEquals(idValueCP, conceptIdIC);
     }
 
@@ -147,8 +147,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @Then("^can see table of Included Source codes$")
     public void canSeeTableOfIncludedSourceCodes() {
-        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).
-                waitUntil(visible, 5000);
+        $$(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']/tbody/tr/td")).get(3).shouldBe(visible);
     }
 
     @When("^click to Explore Evidence$")
@@ -198,7 +197,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     public void pressSAVEButton() {
         SelenideElement saveButton = $(".input-group-btn .btn-success");
         saveButton.waitUntil(enabled, 5000).click();
-        $(".fa-trash-o").waitUntil(enabled, 5000);
+        $(".fa-trash-alt").waitUntil(enabled, 5000);
     }
 
     @When("^click to Compare tab in Concept Set$")
@@ -303,7 +302,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @When("^click to Optimize button$")
     public void clickToOptimizeButton() {
-        $$(By.xpath("//*[@class='btn btn-primary']")).get(2).click();
+        $$(By.xpath("//*[@class='btn btn-primary']")).filter(text("Optimize")).get(0).click();
     }
 
     @Then("^can see Concept Set Optimization window$")

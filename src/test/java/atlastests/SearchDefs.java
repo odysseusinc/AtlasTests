@@ -43,8 +43,8 @@ public class SearchDefs implements TablesControl {
         $("[aria-label='Code: activate to sort column ascending']").shouldHave(text("Code"));
         $("[aria-label='Name: activate to sort column ascending']").shouldHave(text("Name"));
         $("[aria-label='Class: activate to sort column ascending']").shouldHave(text("Class"));
-        $("[aria-label='RC: activate to sort column ascending']").shouldHave(text("RC"));
-        $("[aria-label='DRC: activate to sort column ascending']").shouldHave(text("DRC"));
+        $("[aria-label=' RC: activate to sort column ascending']").shouldHave(text(" RC"));
+        $("[aria-label=' DRC: activate to sort column ascending']").shouldHave(text(" DRC"));
         $("[aria-label='Domain: activate to sort column ascending']").shouldHave(text("Domain"));
         $("[aria-label='Vocabulary: activate to sort column ascending']").shouldHave(text("Vocabulary"));
         //check paganation
