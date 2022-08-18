@@ -1,50 +1,50 @@
 package atlastests;
 
-import com.codeborne.selenide.Selectors;
-import cucumber.api.PendingException;
+import atlastests.components.PageControl;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.text;
+import static atlastests.TestDefs.getDataProperties;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class ProfileStepDefs {
+public class ProfileStepDefs implements PageControl {
+
     @Then("^can see Profiles page$")
     public void canSeeProfilesPage() {
-        $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@data-bind='text: title']")).shouldHave(text("Profiles"));
-
+        checkPageHeader("Profiles");
     }
 
     @When("^click to Select a Data Source$")
-    public void clickToSelectADataSource() throws InterruptedException {
-        Thread.sleep(2000);
-        $$(By.xpath("//*[@class='input-group-btn']/button")).get(0).click();
+    public void clickToSelectADataSource() {
+        $("[title='choose a data source']").waitUntil(visible, 5000).click();
+    }
 
+    @When("^choose \"([^\"]*)\" in Profile Source from property$")
+    public void chooseInProfileSourceFromProperty(String arg0) throws Exception {
+        chooseInProfileSource(getDataProperties(arg0));
     }
 
     @When("^choose \"([^\"]*)\" in Profile Source$")
-    public void chooseInProfileSource(String arg0) throws Throwable {
-        $(byText(arg0)).click();
+    public void chooseInProfileSource(String arg0) {
+        $(withText(arg0)).click();
     }
 
     @When("^enter (\\d+) in Profile Id and press Enter$")
     public void enterInProfileIdAndPressEnter(int arg0) {
-        $(By.xpath("//*[@class='form-control']")).setValue(String.valueOf(arg0));
-        $(By.xpath("//*[@class='form-control']")).pressEnter();
+        $("[placeholder='Person Id']").setValue(String.valueOf(arg0)).pressEnter();
     }
 
     @Then("^can see overlay$")
     public void canSeeOverlay() {
-        $(By.xpath("//*[@class='overlay']")).waitUntil(visible,60000);
+        $(".overlay").waitUntil(visible, 50000);
     }
 
     @Then("^can see table$")
     public void canSeeTable() {
-        $(By.xpath("//*[@class='sorting'][3]")).waitUntil(visible,10000);
+        $$(".conceptTable").filter(visible).first().shouldBe(enabled);
     }
 }

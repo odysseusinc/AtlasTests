@@ -1,384 +1,408 @@
 package atlastests;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selectors;
-import cucumber.api.PendingException;
+import atlastests.components.ModalControl;
+import atlastests.components.TablesControl;
+import atlastests.components.FormControl;
+import atlastests.components.PageControl;
+import com.codeborne.selenide.*;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static atlastests.components.StaticElements.*;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CharacterizationStepDefs {
+public class CharacterizationStepDefs implements FormControl, TablesControl, PageControl, ModalControl {
 
-    private String generatedString;
+    private final SelenideElement cohortTableName = $("tbody .characterizations-list__tbl-col--name a");
+    private final SelenideElement featureAnalysisTableName = $("tbody .feature-analyses-list__tbl-col--name");
+    private final ElementsCollection featureAnalysisTableRows = $$("tbody .characterization-design__col-feature-name");
     private String characterizationName;
-    private String generatedStringFeature;
     private String featureName;
 
 
+    @Step ("Then can see Characterization page")
     @Then("^can see Characterization page$")
     public void canSeeCharaterizationPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Cohort Characterizations"));
+        checkPageHeader("Cohort Characterizations");
     }
 
+    @Step ("When click to New characterization button")
     @When("^click to New characterization button$")
     public void clickToNewCharacterizationButton() {
-//        $(By.xpath("//*[@class='characterizations-tabbed-grid__new-entity-btn btn btn-primary btn-sm']")).click();
         $(byText("New Characterization")).click();
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("New Characterization"));
-
+        checkPageHeader("New Characterization");
     }
 
+    @Step ("enter Characterization name save it")
     @When("^enter Characterization name and save it$")
     public void enterCharacterizationNameAndSaveIt() {
-        generatedString = RandomStringUtils.randomAlphanumeric(10);
-        characterizationName = "Test_" + generatedString;
-        $(By.xpath("//*[@class='input-group']/input")).clear();
-        $(By.xpath("//*[@class='input-group']/input")).setValue(characterizationName);
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        characterizationName = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(characterizationName);
+        saveAction();
     }
 
+    @Step ("return to Characterization table")
     @When("^return to Characterization table$")
     public void returnToCharacterizationTable() {
-        $$(By.xpath("//*[@class='btn btn-primary']")).get(0).click();
+        closeAction();
     }
 
+    @Step ("enter created characterization name in filter")
     @When("^enter created characterization name in filter$")
     public void enterCreatedCharacterizationNameInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@type='search']")).setValue(characterizationName);
-
+        search(characterizationName);
     }
 
+    @Step ("can see new characterization in table")
     @Then("^can see new characterization in table$")
     public void canSeeNewCharacterizationInTable() {
-        $(By.xpath("//*[@class=' characterizations-list__tbl-col characterizations-list__tbl-col--name ']/a")).shouldHave(text(characterizationName));
+        cohortTableName.shouldHave(text(characterizationName));
     }
 
+    @Step ("click to our characterization")
     @When("^click to our characterization$")
     public void clickToOurCharacterization() {
-        $(By.xpath("//*[@class=' characterizations-list__tbl-col characterizations-list__tbl-col--name ']/a")).click();
-
+        cohortTableName.click();
     }
 
+    @Step ("click to delete characterization button")
     @When("^click to delete characterization button$")
     public void clickToDeleteCharacterizationButton() {
-        $(By.xpath("//*[@class='btn btn-danger']")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@class='btn btn-danger']")).click();
-
-
+        deleteAction();
     }
 
+    @Step ("accept delete characterization")
     @When("^accept delete characterization$")
     public void acceptDeleteCharacterization() {
-        switchTo().alert().accept();
+        Selenide.confirm();
     }
 
+    @Step ("cant find characterization in the table ")
     @Then("^cant find characterization in the table$")
     public void cantFindCharacterizationInTheTable() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@type='search']")).setValue(characterizationName);
-        $(By.xpath("//*[@class=' characterizations-list__tbl-col characterizations-list__tbl-col--name ']/a")).shouldNotHave(text(characterizationName));
-
+        search(characterizationName);
+        EMPTY_TABLE.shouldHave(text("No matching records found"));
     }
 
+    @Step ("click to Import Cohort Definition")
     @When("^click to Import Cohort Definition$")
     public void clickToImportCohortDefinition() {
-        $$(byText("Import")).get(0).click();
-
+        $$(byText("Import")).get(0).waitUntil(visible, 5000).click();
     }
 
-    @When("^choose cohort definition from the table in characterization$")
-    public void chooseCohortDefinitionFromTheTableInCharacterization() {
-        $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue("test");
-        $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text("test"));
-        $(By.xpath("//table/tbody/tr/td[2]/span")).click();
-
-    }
-
-
+    @Step ("click to Feature Analyses tab")
     @When("^click to Feature Analyses tab$")
-    public void clickToFeatureAnalysesTab() throws InterruptedException {
-        $(By.xpath("//*[@class='characterizations-tabbed-grid__toolbar-nav nav nav-tabs']/li[2]/a")).click();
-        Thread.sleep(1500);
-        $(By.xpath("//*[@class='characterizations-tabbed-grid__new-entity-btn btn btn-primary btn-sm']")).waitUntil(visible, 4000);
+    public void clickToFeatureAnalysesTab() {
+        $$("[role='presentation']").find(Condition.matchesText("Feature analyses")).click();
+        $(".btn-primary").waitUntil(Condition.matchesText("New Feature analysis"), 5000);
     }
 
+    @Step ("can see Feature Analyses table")
     @Then("^can see Feature Analyses table$")
     public void canSeeFeatureAnalysesTable() {
-        $(By.xpath("//table/tbody/tr")).waitUntil(visible, 5000);
+        $(".facetedDataTable tbody").waitUntil(visible, 10000);
     }
 
+    @Step ("click to New Feature analyses")
     @When("^click to New Feature analyses$")
     public void clickToNewFeatureAnalyses() {
-        $(By.xpath("//*[@class='characterizations-tabbed-grid__new-entity-btn btn btn-primary btn-sm']")).click();
+        $(byText("New Feature analysis")).click();
     }
 
+    @Step ("can see page of cretion New Feature Analyses")
     @Then("^can see page of creation New Feature Analyse$")
     public void canSeePageOfCreationNewFeatureAnalyse() {
-        $(By.xpath("//*[@class='panel-heading']")).waitUntil(visible, 4000);
+        checkPageHeader("New Feature Analysis");
     }
 
+    @Step ("enter description to Analyse")
     @When("^enter description$")
     public void enterDescription() {
-        $(By.xpath("//*[@class='feature-analysis-view-edit__descr form-control']")).setValue("TEST DESCRIPTION");
+        $(".feature-analysis-design__descr").setValue("TEST DESCRIPTION");
     }
 
+    @Step ("choose Criteria design ")
     @When("^choose Criteria design$")
     public void chooseCriteriaDesign() {
-        $(By.xpath("//*[@class='feature-analysis-view-edit__type-selector']/ul/li[1]")).click();
-        $(By.xpath("//*[@class='feature-analysis-view-edit__criteria-name form-control']")).waitUntil(visible, 3000);
+        $$(".feature-analysis-design__type-selector li").find(text("Criteria")).click();
     }
 
+    @Step ("enter name of New Feature Analyse")
     @When("^enter name of New Feature Analyse$")
     public void enterNameOfNewFeatureAnalyse() {
-        generatedStringFeature = RandomStringUtils.randomAlphanumeric(10);
-        featureName = "Test_" + generatedStringFeature;
-        $(By.xpath("//*[@class='input-group']/input")).setValue(featureName);
+        featureName = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(featureName);
     }
 
+    @Step ("click to save feature analyse button")
     @When("^click to save feature analyse button$")
     public void clickToSaveFeatureAnalyseButton() {
-        $(By.xpath("//*[@class='btn btn-success']")).click();
+        saveAction();
     }
 
+    @Step ("go to feature analyses table by pressing close button")
     @Then("^go to feature analyses table by pressing close button$")
-    public void goToFeatureAnalysesTableByPressingCloseButton() throws InterruptedException {
-        Thread.sleep(1500);
-        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@class='fa fa-times']")).click();
-
+    public void goToFeatureAnalysesTableByPressingCloseButton() {
+        closeAction();
     }
 
+    @Step ("enter name of our feature to filter")
     @When("^enter name of our feature to filter$")
     public void enterNameOfOurFeatureToFilter() {
-        $(By.xpath("//*[@type='search']")).setValue(featureName);
+        search(featureName);
     }
 
+    @Step ("can see our feature in table of feature analyses")
     @Then("^can see our feature in table of feature analyses$")
     public void canSeeOurFeatureInTableOfFeatureAnalyses() {
-        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']")).shouldHave(text(featureName));
-
+        featureAnalysisTableName.shouldHave(text(featureName));
     }
 
+    @Step ("click to our feature analyse")
     @When("^click to our feature analyse$")
     public void clickToOurFeatureAnalyse() {
-        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']/a")).click();
+        featureAnalysisTableName.waitUntil(visible, 5000).click();
     }
 
+    @Step ("can see page of our Feature Analyse")
     @Then("^can see page of our Feature Analyse$")
     public void canSeePageOfOurFeatureAnalyse() {
-//         $(byText("Feature Analysis #")).waitUntil(visible,4000);
-        $(By.xpath("//*[@data-bind='text: title'][1]")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@data-bind='text: title'][1]")).shouldHave(text("Feature Analysis #"));
+        checkPageHeader("Feature Analysis #");
     }
 
 
+    @Step ("click to delete feature analyse")
     @When("^click to delete feature analyse$")
     public void clickToDeleteFeatureAnalyse() {
-        $(By.xpath("//*[@class='btn btn-danger']")).click();
+        deleteAction();
     }
 
+    @Step ("accept delete feature analyse")
     @When("^accept delete feature analyse$")
-    public void acceptDeleteFeatureAnalyse() {
+    public void acceptDeleteFeatureAnalyse() throws InterruptedException {
         switchTo().alert().accept();
     }
 
+    @Step ("cant find feature analyse in the table")
     @Then("^cant find feature analyse in the table$")
     public void cantFindFeatureAnalyseInTheTable() {
-        $(By.xpath("//*[@type='search']")).setValue(featureName);
-        $(By.xpath("//*[@class=' feature-analyses-list__tbl-col feature-analyses-list__tbl-col--name ']")).shouldNotHave(text(featureName));
+        search(featureName);
+        EMPTY_TABLE.shouldHave(text("No matching records found"));
     }
 
+    @Step ("click to Import Feature analyses")
     @When("^click to Import Feature analyses$")
     public void clickToImportFeatureAnalyses() {
         $$(byText("Import")).get(1).click();
     }
 
+    @Step ("can see Feature analyses window")
     @Then("^can see Feature analyses window$")
     public void canSeeFeatureAnalysesWindow() {
-        $(By.xpath("//*[@class='atlas-modal__modal-dialog modal-dialog characterization-design__feature-analyses-modal']/div/div[1]/div")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@class='atlas-modal__modal-dialog modal-dialog characterization-design__feature-analyses-modal']/div/div[1]/div")).shouldHave(text("Choose a Feature analyses"));
+       checkModalTitle("Choose a Feature analyses");
     }
 
+    @Step ("Feature analyse table is visible ")
     @Then("^Feature analyse table is visible$")
     public void featureAnalyseTableIsVisible() {
-        $(By.xpath("//*[@class='characterization-design__col-feature-id sorting_asc']")).waitUntil(visible, 3000);
-
-
+        featureAnalysisTableRows.first().waitUntil(visible, 5000);
     }
 
-
+    @Step ("click to Import Feature analyse")
     @When("^click to Import Feature analyse$")
     public void clickToImportFeatureAnalyse() {
-        $(By.xpath("//*[@class='characterization-design__button-panel']/button[1]")).click();
-
+        importButtonClick();
     }
 
+    @Step ("enter the same Characterization name and save it")
     @When("^enter the same Characterization name and save it$")
     public void enterTheSameCharacterizationNameAndSaveIt() {
-        $(By.xpath("//*[@class='input-group']/input")).clear();
-        $(By.xpath("//*[@class='input-group']/input")).setValue(characterizationName);
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        setTitle(characterizationName);
+        saveAction();
     }
 
+    @Step ("can see alert message about uniqueness")
     @Then("^can see alert message about uniqueness$")
     public void canSeeAlertMessageAboutUniqueness() {
         switchTo().alert().accept();
     }
 
+    @Step ("choose cohort definition")
     @When("^choose cohort definition \"([^\"]*)\" from the table in characterization$")
-    public void chooseCohortDefinitionFromTheTableInCharacterization(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='col-xs-6 search']/div/label/input")).setValue(arg0);
-        $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text(arg0));
-        $(By.xpath("//table/tbody/tr/td[2]/span")).click();
+    public void chooseCohortDefinitionFromTheTableInCharacterization(String arg0) {
+        facetedTableSearch(arg0);
+        selectInTableResults(arg0);
+        importButtonClick();
     }
 
+    @Step ("Can see cohort definition in characterization list")
     @Then("^can see cohort definition in characterization list with text \"([^\"]*)\"$")
-    public void canSeeCohortDefinitionInCharacterizationListWithText(String arg0) throws Throwable {
-        $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible, 2000);
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text(arg0));
+    public void canSeeCohortDefinitionInCharacterizationListWithText(String arg0) {
+        $("tbody .linked-cohort-list__col-cohort-name").waitUntil(visible, 5000).
+                shouldHave(matchesText(arg0));
     }
 
+    @Step ("click to feature checkbox with text")
     @When("^click to feature checkbox with text \"([^\"]*)\" from Feature analyses$")
-    public void clickToFeatureCheckboxWithTextFromFeatureAnalyses(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='facetedDataTable']/div/div[2]/label/input")).setValue(arg0);
-        $(By.xpath("//*[@class='fa fa-check'][1]")).click();
-        Thread.sleep(1000);
+    public void clickToFeatureCheckboxWithTextFromFeatureAnalyses(String arg0) {
+        facetedTableSearch(arg0);
+        selectInTableResults(arg0);
     }
 
+    @Step ("can see result of our search")
     @Then("^can see result of our search \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void canSeeResultOfOurSearchAnd(String arg0, String arg1) throws Throwable {
-        $$(By.xpath("//*[@class=' characterization-design__col-feature-name ']")).get(0).shouldHave(text(arg0));
-        $$(By.xpath("//*[@class=' characterization-design__col-feature-name ']")).get(1).shouldHave(text(arg1));
+    public void canSeeResultOfOurSearchAnd(String arg0, String arg1) {
+        featureAnalysisTableRows.shouldHave(CollectionCondition.textsInAnyOrder(arg0, arg1));
     }
 
+    @Step ("click to save Characterization")
     @When("^click to save Chacterization$")
     public void clickToSaveChacterization() {
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        saveAction();
     }
 
+    @Step ("click Remove first analyse from table")
     @When("^click Remove first Feature Analyse from the table$")
     public void clickRemoveFirstFeatureAnalyseFromTheTable() {
         $(By.xpath("//*[@class=' characterization-design__col-feature-remove ']/a")).click();
     }
 
+    @Step ("Click to Execution tab")
     @When("^click to Executions tab in Characterizations$")
     public void clickToExecutionsTabInCharacterizations() {
-        $(By.xpath("//*[@class='tabs__header']/span[2]")).click();
+        $$(".tabs__header-title").find(text("Executions")).click();
     }
 
-    @When("^click to IMPALA Generate report button$")
-    public void clickToIMPALAGenerateReportButton() {
-        $$(By.xpath("//*[@class='characterization-view-edit-executions__action-text']")).get(0).click();
+    @Step ("click Generate report on first data source")
+    @When("^click Generate report button on first data source$")
+    public void clickToGenerateReportButtonOnFirstDataSource() {
+        EXECUTION_ACTION_BUTTONS.get(0).click();
     }
 
-    @Then("^Impala generate button has to be with Cancel text$")
-    public void impalaGenerateButtonHasToBeWithCancelText() {
-        $$(By.xpath("//*[@class='btn btn-sm btn-danger']")).get(0).waitUntil(text("Cancel"), 4000);
+    @Step ("first data source generate button has to have Cancel text")
+    @Then("^first data source generate button has to be with Cancel text$")
+    public void firstGenerateButtonHasToBeWithCancelText() {
+        EXECUTION_ACTION_BUTTONS.get(0).waitUntil(matchesText("Cancel"), 5000);
     }
 
+    @Step ("cilck to Netezza Generate report button")
     @When("^click to Netezza Generate report button$")
     public void clickToNetezzaGenerateReportButton() {
-        $$(By.xpath("//*[@class='characterization-view-edit-executions__action-text']")).get(1).click();
+        generateByDataSource("Netezza");
     }
 
+    @Step ("NEtezza generate button has to have Cancel text")
     @Then("^Netezza generate button has to be with Cancel text$")
     public void netezzaGenerateButtonHasToBeWithCancelText() {
-        $$(By.xpath("//*[@class='btn btn-sm btn-danger']")).get(0).waitUntil(text("Cancel"), 4000);
+        checkRunning("Netezza");
     }
 
-    @When("^click to SynPUF(\\d+)k Generate report button$")
-    public void clickToSynPUFKGenerateReportButton(int arg0) {
-        $$(By.xpath("//*[@class='characterization-view-edit-executions__action-text']")).get(5).click();
+    @Step ("Click to Generate report button")
+    @When("^click to \"([^\"]*)\" Generate report button$")
+    public void clickToSynPUFKGenerateReportButton(String arg0) {
+        generateByDataSource(arg0);
     }
 
-    @Then("^SynPUF(\\d+)k generate button has to be with Cancel text$")
-    public void synpufKGenerateButtonHasToBeWithCancelText(int arg0) {
-        $$(By.xpath("//*[@class='btn btn-sm btn-danger']")).get(0).waitUntil(text("Cancel"), 15000);
+    @Step ("generate button text should change to Cancel")
+    @Then("\"([^\"]*)\" generate button has to be with Cancel text$")
+    public void synpufKGenerateButtonHasToBeWithCancelText(String arg0) {
+        checkRunning(arg0);
     }
 
+    @Step ("click to oracle Gene")
     @When("^click to oracle Generate report button$")
     public void clickToOracleGenerateReportButton() {
-        $$(By.xpath("//*[@class='characterization-view-edit-executions__action-text']")).get(9).click();
+        generateByDataSource("oracle");
     }
 
+    @Step ("oracle generate button has to be with Cancel text")
     @Then("^oracle generate button has to be with Cancel text$")
     public void oracleGenerateButtonHasToBeWithCancelText() {
-        $$(By.xpath("//*[@class='btn btn-sm btn-danger']")).get(0).waitUntil(text("Cancel"), 15000);
+        checkRunning("oracle");
     }
 
+    @Step ("click to copy characterization")
     @When("^click to copy characterization$")
     public void clickToCopyCharacterization() {
-        $(By.xpath("//*[@class='btn btn-primary'][2]")).click();
+        copyAction();
     }
 
+    @Step ("enter name of our characterization ")
     @When("^enter \"([^\"]*)\" and name of our characterization$")
-    public void enterAndNameOfOurCharacterization(String arg0) throws Throwable {
-        $(By.xpath("//*[@type='search']")).setValue(arg0 + characterizationName);
+    public void enterAndNameOfOurCharacterization(String arg0) {
+        search(arg0 + characterizationName);
     }
 
+    @Step ("can see copy of our characterization")
     @Then("^can see copy of our characterization$")
     public void canSeeCopyOfOurCharacterization() {
-        $(By.xpath("//*[@class=' characterizations-list__tbl-col characterizations-list__tbl-col--name ']/a")).shouldHave(text("COPY OF: " + characterizationName));
-
+        cohortTableName.shouldHave(text("COPY OF " + characterizationName));
     }
 
+    @Step ("click to add subgroup analyses")
     @When("^click to Add Subgroup analyses$")
     public void clickToAddSubgroupAnalyses() {
-        $(By.xpath("//*[@class='characterization-design btn btn-sm btn-primary']")).click();
+        $(withText("New subgroup")).click();
     }
 
-    @Then("^can see Stratified input and subgroup table$")
-    public void canSeeStratifiedInputAndSubgroupTable() {
-        $(By.xpath("//*[@class='characterization-design__stratified-by form-control']")).shouldBe(visible);
-    }
-
+    @Step ("enter Stratified by text")
     @When("^enter Stratified by text \"([^\"]*)\"$")
-    public void enterStratifiedByText(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='characterization-design__stratified-by form-control']")).setValue(arg0);
+    public void enterStratifiedByText(String arg0) {
+        $("input.characterization-design__stratified-by").setValue(arg0);
     }
 
+    @Step ("click to add criteria to group button")
     @When("^click to add criteria to group button$")
     public void clickToAddCriteriaToGroupButton() {
-        $(By.xpath("//*[@class='drop-down-menu btn btn-primary btn-sm dropdown-toggle']/span[2]")).click();
-
+        $(".criteriaGroup button").click();
     }
 
+    @Step ("click to Add Demographic point")
     @When("^click to Add Demographic point$")
     public void clickToAddDemographicPoint() {
-        $(By.xpath("//*[@class='drop-down-menu dropdown-menu']/li/a/div[1]")).click();
+        $(withText("Add Demographic")).click();
     }
 
+    @Step ("can see Add attribute button")
     @Then("^can see Add attribute button$")
     public void canSeeAddAttributeButton() {
-        $(By.xpath("//*[@class='btn btn-primary btn-sm dropdown-toggle']")).shouldBe(visible);
+        $(".criteriaTable .btn-primary").shouldBe(visible);
     }
 
+    @Step ("click to New parameter button")
     @When("^click to New parameter button$")
     public void clickToNewParameterButton() {
-        $$(By.xpath("//*[@class='linked-entity-list__btn btn btn-primary btn-sm']")).get(2).click();
+        $$(".linked-entity-list__actions button").find(Condition.text("New parameter")).click();
     }
 
+    @Step ("enter name of parameter")
     @When("^enter name of parameter \"([^\"]*)\" and value \"([^\"]*)\" and click Submit button$")
-    public void enterNameOfParameterAndValueAndClickSubmitButton(String arg0, String arg1) throws Throwable {
-        $$(By.xpath("//*[@class='form-control']")).get(1).setValue(arg0);
-        $$(By.xpath("//*[@class='form-control']")).get(2).setValue(arg1);
-        $(By.xpath("//*[@class='btn btn-default']")).click();
+    public void enterNameOfParameterAndValueAndClickSubmitButton(String arg0, String arg1) {
+        $(".characterization-params-create-modal__modal-body input[placeholder='Name']").setValue(arg0);
+        $(".characterization-params-create-modal__modal-body input[placeholder='Value']").setValue(arg1);
+        $(".characterization-params-create-modal__modal-body button").click();
     }
 
+    @Step ("can see our parameter and value in table")
     @Then("^can see our parameter \"([^\"]*)\" and value \"([^\"]*)\" in the table$")
-    public void canSeeOurParameterAndValueInTheTable(String arg0, String arg1) throws Throwable {
-        $(By.xpath("//*[@class='characterization-design__col-param-name sorting_1']")).shouldHave(text(arg0));
-        $(By.xpath("//*[@class=' characterization-design__col-param-value ']")).shouldHave(text(arg1));
+    public void canSeeOurParameterAndValueInTheTable(String arg0, String arg1) {
+        $("tbody .characterization-design__col-param-name").shouldHave(text(arg0));
+        $("tbody .characterization-design__col-param-value").shouldHave(text(arg1));
+    }
 
+    private void generateByDataSource(String dataSourceName) {
+        ANALYSIS_EXECUTION_LIST.find(Condition.matchesText(dataSourceName)).
+                find(withText("Generate")).click();
+    }
+
+    private void checkRunning(String dataSourceName) {
+        ANALYSIS_EXECUTION_LIST.find(Condition.text(dataSourceName)).
+                find(withText("Cancel")).waitUntil(visible, 10000);
     }
 }

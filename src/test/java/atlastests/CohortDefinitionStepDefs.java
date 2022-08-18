@@ -1,435 +1,520 @@
 package atlastests;
 
-import cucumber.api.PendingException;
+import atlastests.components.ModalControl;
+import atlastests.components.TablesControl;
+import atlastests.components.FormControl;
+import atlastests.components.PageControl;
+import com.codeborne.selenide.*;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
+import static atlastests.TestDefs.getDataProperties;
+import static atlastests.components.StaticElements.*;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CohortDefinitionStepDefs {
+public class CohortDefinitionStepDefs implements PageControl, FormControl, TablesControl, ModalControl {
 
-    String nameCohort;
+    private final ElementsCollection conceptSetsInTableForChoosing = $$("#repositoryConceptSetTable_wrapper .linkish");
+    private final ElementsCollection conceptSetsInDataTable = $$(".conceptSetTable span");
+    private final ElementsCollection dataSources = $$(".cohort-generate-sources tr");
+    private final SelenideElement closeConceptSetButton = $(withText("Close Concept Set"));
+    private final SelenideElement jsonInputField = $("#cohortExpressionJSON");
+    private String nameCohort;
     private String newGeneratedString;
 
+    @Step ("can see Cohort Definition page")
     @Then("^can see Cohort Definition page$")
     public void canSeeCohortDefinitionPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Cohort definitions"));
+        checkPageHeader("Cohort definitions");
     }
 
+    @Step ("click New Cohort button")
     @When("^click New Cohort button$")
     public void clickNewCohortButton() {
-        $(By.xpath("//*[@class='btn btn-sm btn-primary']")).click();
-
-
+        $(".btn-primary").waitUntil(enabled, 5000).click();
     }
 
+    @Step ("can see new cohort page creation")
     @Then("^can see new cohort page creation$")
     public void canSeeNewCohortPageCreation() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).shouldHave(text("New Cohort Definition"));
-
+        checkPageHeader("New Cohort Definition");
     }
 
+    @Step ("enter name of New Cohort Definition and save it")
     @When("^enter name of New Cohort Definition and save it$")
-    public void enterNameOfNewCohortDefinitionAndSaveIt() throws InterruptedException {
-        String generatedString = RandomStringUtils.randomAlphanumeric(10);
-        nameCohort = "Test_" + generatedString;
-        $(By.xpath("//*[@class='form-control']")).clear();
-        $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
-        Thread.sleep(300);
-        $(By.xpath("//*[@class='fa fa-save']")).click();
-
+    public void enterNameOfNewCohortDefinitionAndSaveIt() {
+        nameCohort = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(nameCohort);
+        saveAction();
+        $(".fa-trash-alt").waitUntil(enabled, 5000); //cz need to wait saving of cohort
     }
 
+    @Step ("filtere Cohort Definition")
     @Then("^filtered Cohort Definition$")
-    public void filteredCohortDefinition() throws InterruptedException {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@type='search']")).setValue(nameCohort);
-        Thread.sleep(1500);
-
+    public void filteredCohortDefinition() {
+        search(nameCohort);
     }
 
+    @Step ("cohort Definition should be found")
     @Then("^Cohort Definition should be found$")
     public void cohortDefinitionShouldBeFound() {
-        $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text(nameCohort));
-
+        COHORT_LINK_IN_TABLE.shouldHave(text(nameCohort));
     }
 
+    @Step ("click to our Cohort Definitions")
     @When("^click to our Cohort Definition$")
     public void clickToOurCohortDefinition() {
-        $(By.xpath("//table/tbody/tr/td[2]/span")).click();
+        COHORT_LINK_IN_TABLE.click();
     }
 
+    @Step ("can see our Cohort Definition")
     @Then("^can see our Cohort Definition$")
     public void canSeeOurCohortDefinition() {
-//        $(By.xpath("//*[@id='cohortTextView']/div")).shouldHave(value(nameCohort));
-        $(By.xpath("//*[@class='panel panel-primary cohort-definition-panel']")).waitUntil(visible, 2000);
-
+        $$(".cohort-definition-panel").forEach(e -> e.shouldBe(visible));
     }
 
+    @Step ("click to delete our Cohort Definition")
     @When("^click to delete our Cohort Definition$")
     public void clickToDeleteOurCohortDefinition() {
-        $(By.xpath("//*[@class='fa fa-trash-o']")).click();
-
+        deleteAction();
     }
 
+    @Step ("accept delete Cohort Definition alert")
     @When("^accept delete Cohort Definition alert$")
     public void acceptDeleteCohortDefinitionAlert() {
-        switchTo().alert().accept();
-
+        Selenide.confirm();
     }
 
+    @Step ("Cohort Definition should be not found")
     @Then("^Cohort Definition should be not found$")
     public void cohortDefinitionShouldBeNotFound() {
-        $(By.xpath("//table/tbody/tr/td")).shouldHave(text("No matching records found"));
+        EMPTY_TABLE.shouldHave(text("No matching records found"));
 
     }
 
+    @Step ("press Add Initial Event")
     @When("^press Add Initial Event$")
-    public void pressAddInitialEvent() throws InterruptedException {
-        Thread.sleep(1000);
-        $$(By.xpath("//*[@class='btn btn-primary btn-sm dropdown-toggle']")).get(0).click();
+    public void pressAddInitialEvent() {
+        $(withText("Add Initial Event")).waitUntil(visible, 5000).click();
+        $$("[data-bind='foreach:$component.primaryCriteriaOptions'] .optionText").
+                forEach(e -> e.hover().shouldHave(visible));
     }
 
+    @Step ("press Add Condition Occurrence")
     @When("^press Add Condition Occurrence$")
-    public void pressAddConditionOcurrence() throws InterruptedException {
-        Thread.sleep(1000);
-        $$(By.xpath("//*[@class='dropdown-menu']/li/a")).get(1).click();
+    public void pressAddConditionOcurrence() {
+        $(withText("Add Condition Occurrence")).waitUntil(visible, 5000).click();
     }
 
-    @Then("^a condition era block shown$")
-    public void aConditionEraBlockShown() throws InterruptedException {
-        Thread.sleep(1000);
-        $(By.xpath("//*[@class='criteriaTable'][1]/tbody/tr/td")).shouldHave(text("a condition occurrence of"));
+    @Step ("press Add")
+    @When("^press Add \"([^\"]*)\"$")
+    public void pressAddInitialEvent(String initialEvent) {
+        $(withText("Add " + initialEvent)).waitUntil(visible, 5000).click();
     }
 
+    @Step ("click to Any Contion menu")
     @When("^click to Any Condition menu$")
     public void clickToAnyConditionMenu() {
-        $(By.xpath("//*[@class='btn btn-primary dropdown-toggle']")).click();
+        $("[data-bind='with: Criteria'] conceptset-selector [type='button'][data-toggle='dropdown']").click();
     }
 
+    @Step ("Click to Any menu")
+    @When("^click to Any ... menu$")
+    public void clickToAnyMenu() {
+        $(".criteriaTable .thumb-dropdown .dropdown-toggle").click();
+    }
+
+    @Step ("choose Import Concept Set")
     @When("^choose Import Concept Set$")
     public void chooseImportConceptSet() {
-        $(By.xpath("//*[@class='dropdown-menu dropdown-menu-right']/li[2]")).click();
+        $(withText("Import Concept Set")).click();
     }
 
+    @Step ("Import Concept Set window shown")
     @Then("^Import Concept Set window shown$")
     public void importConceptSetWindowShown() {
-        $(By.xpath("//*[@class='modal fade in']/div/div/div")).shouldHave(text("Import Concept Set From Repository..."));
+        $(".modal.fade.in .modal-header").shouldHave(text("Import Concept Set From Repository..."));
     }
 
-
+    @Step ("enter to Filter of concept set from repository")
     @When("^enter \"([^\"]*)\" to Filter of Concept Set from Repository$")
-    public void enterToFilterOfConceptSetFromRepository(String arg0) throws Throwable {
-        Thread.sleep(500);
-        $(By.xpath("//*[@type='search']")).setValue(arg0);
+    public void enterToFilterOfConceptSetFromRepository(String arg0) {
+        search(arg0);
     }
 
-
+    @Step ("click to chosen concept set from repository")
     @When("^click to chosen concept set from repository$")
-    public void clickToChosenConceptSetFromRepository() throws InterruptedException {
-        Thread.sleep(3500);
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).click();
+    public void clickToChosenConceptSetFromRepository() {
+        conceptSetsInTableForChoosing.first().click();
+        $("#repositoryConceptSetTable .circle").waitUntil(hidden, 10000);
     }
 
-    @Then("^can see name of concept set at the button$")
-    public void canSeeNameOfConceptSetAtTheButton() throws InterruptedException {
-        Thread.sleep(3500);
-        $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).shouldHave(text("Angioedema"));
+    @Step ("can see name of consept set at the button")
+    @Then("^can see name of concept set at the button ")
+    public void canSeeNameOfConceptSetAtTheButton() {
+        $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).waitUntil(visible, 5000).
+                shouldHave(text("Angioedema"));
     }
 
+    @Step ("click to Samples tab")
+    @When("^click to Samples tab$")
+    public void clickToSamplesTab() {
+        NAV_TABS.find(matchesText("Samples")).click();
+    }
+
+    @Step ("can see a select element with data sources")
+    @Then("^can see a select element with data sources$")
+    public void canSeeSelectWithDataSources() {
+        $(".active .panel-primary .panel-heading").shouldHave(text("Sample Selections"));
+    }
+
+    @Step ("click to Concept Sets tab")
     @When("^click to Concept Sets tab$")
     public void clickToConceptSetsTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[2]")).click();
+        NAV_TABS.find(matchesText("Concept Sets")).click();
     }
 
+    @Step ("can see row with name of Concept Set in the table")
     @Then("^can see row with name of Concept Set in the table$")
     public void canSeeRowWithNameOfConceptSetInTheTable() {
-        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/tbody/tr/td")).shouldHave(text("0"));
-        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).shouldHave(text("Angioedema"));
-
+        conceptSetsInDataTable.first().shouldHave(matchesText("Angioedema"));
     }
 
+    @Step ("click on the row in table concept set in cohort definitions")
     @When("^click on the row in table concept set in cohort definitions$")
     public void clickOnTheRowInTableConceptSetInCohortDefinitions() {
-        $$(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).get(0).click();
+        conceptSetsInDataTable.first().hover().click();
     }
 
-    @Then("^can see table of concept set with concepts$")
-    public void canSeeTableOfConceptSetWithConcepts() {
-//        $(By.xpath("//*[@class='standard']")).shouldHave(text("Aspirin"));
-        $$(By.xpath("//table/tbody/tr/td[2]")).get(6).shouldHave(text("Angioedema"));
+    @Step ("can see table of concept set with concept")
+    @Then("^can see table of concept set with concept: \"([^\"]*)\"$")
+    public void canSeeTableOfConceptSetWithConcepts(String conceptName) {
+        $(".active.tab-pane .divtext").shouldHave(text(conceptName));
     }
 
+    @Step ("click to Close concept set")
     @When("^click to Close concept set$")
     public void clickToCloseConceptSet() {
-        $(By.xpath("//*[@class='btn btn-sm btn-primary']")).click();
+        closeConceptSetButton.click();
     }
 
+    @Step ("table of concept sets close")
     @Then("^table of concept sets close$")
     public void tableOfConceptSetsClose() {
-        $(By.xpath("//*[@class='standard']")).shouldNotBe(visible);
+        closeConceptSetButton.shouldNotBe(visible);
     }
 
+    @Step ("click to Generation tab")
     @When("^click to Generation tab$")
     public void clickToGenerationTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[3]")).click();
+        NAV_TABS.find(matchesText("Generation")).click();
     }
 
+    @Step ("can see Generation page")
     @Then("^can see Generation page$")
     public void canSeeGenerationSourcesPage() {
-        $(By.xpath("//*[@class='cohort-generate-sources']/../div")).shouldHave(text("Available CDM Sources"));
+        $(".cohort-generate-sources").shouldBe(visible);
     }
 
+    @Step ("click to Reporting tab")
     @When("^click to Reporting tab$")
     public void clickToReportingTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[4]")).click();
+        NAV_TABS.find(matchesText("Reporting")).click();
     }
 
+    @Step ("can see reporting page")
     @Then("^can see reporting page$")
     public void canSeeReportingPage() {
-        $(By.xpath("//*[@class='form-control invalid']")).shouldBe(visible);
+        $("select.form-control.invalid").shouldBe(visible);
     }
 
+    @Step ("click to Export tab in Cohort Definitions")
     @When("^click to Export tab in Cohort Definitions$")
     public void clickToExportTabInCohortDefinitions() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[5]")).click();
+        NAV_TABS.find(matchesText("Export")).click();
     }
 
+    @Step ("can see Export page")
     @Then("^can see Export page$")
     public void canSeeExportPage() {
-        $(By.xpath("//cohort-expression-viewer/div")).shouldHave(text("Initial Event Cohort"));
+        $("#cohortTextView").shouldBe(visible);
     }
 
+    @Step ("click to Messages tab")
     @When("^click to Messages Tab$")
     public void clickToMessagesTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[6]")).click();
+        NAV_TABS.find(matchesText("Messages")).click();
     }
 
+    @Step ("can see Messages page")
     @Then("^can see Messages page$")
-    public void canSeeMessagesPage() throws InterruptedException {
-        Thread.sleep(500);
-        $(By.xpath("//*[@aria-label='Severity: activate to sort column ascending']")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@aria-label='Severity: activate to sort column ascending']")).shouldHave(text("Severity"));
-
+    public void canSeeMessagesPage() {
+        $("[aria-label='Severity: activate to sort column ascending']").waitUntil(visible, 4000).
+                shouldHave(text("Severity"));
     }
 
+    @Step ("click to Run diagnistic Button")
     @When("^click to Run diagnostic Button$")
     public void clickToRunDiagnosticButton() {
         $(By.xpath("//*[@class='warnings-button-pane pull-right']/button")).click();
     }
 
-    @When("^add Inclusion criteria$")
-    public void addInclusionCriteria() throws InterruptedException {
-        Thread.sleep(3000);
-        $$(By.xpath("//*[@class='btn btn-sm btn-success']")).get(1).click();
-        $(By.xpath("//*[@class='inclusion-rule-header']/div/input")).setValue("TEST INCLUSION");
-        $(By.xpath("//*[@class='divtext']")).setValue("TEST INCLUSION DESCRIPTION");
+    @Step ("add Inclusion criteria with group")
+    @When("^add Inclusion criteria with group: \"([^\"]*)\"$")
+    public void addInclusionCriteriaWithGroup(String criteriaGroup) {
+        addInclusionCriteria();
+        $(withText("Add criteria to group...")).click();
+        $$(".criteriaHeading [data-bind='foreach:$component.addActions'] .optionText").
+                find(Condition.matchesText(criteriaGroup)).click();
     }
 
+    @Step ("add Inclusion criteria")
+    @When("^add Inclusion criteria$")
+    public void addInclusionCriteria() {
+        $(".inclusion-criteria__block .btn-success").
+                waitUntil(visible, 5000).click();
+        $(".inclusion-rule-header input").setValue("TEST INCLUSION");
+        $("inclusion-rule-editor [placeholder='enter an inclusion rule description']").
+                setValue("TEST INCLUSION DESCRIPTION");
+    }
+
+    @Step ("can see block with inclusion criterias")
     @Then("^can see block with inclusion criterias$")
     public void canSeeBlockWithInclusionCriterias() {
-        $(By.xpath("//*[@class='inclusionRules']/tbody/tr/td[2]/div[1]")).shouldHave(text("TEST INCLUSION"));
-        $(By.xpath("//*[@class='inclusionRules']/tbody/tr/td[2]/div[2]")).shouldHave(text("TEST INCLUSION DESCRIPTION"));
-
+        $$(".inclusionRuleItem div").shouldHave(CollectionCondition.texts("TEST INCLUSION",
+                "TEST INCLUSION DESCRIPTION"));
     }
 
+    @Step ("can see window with cohort definition")
     @Then("^can see window with cohort definition$")
     public void canSeeWindowWithCohortDefinition() {
-        $(byText("Choose a Cohort definition")).shouldBe(visible);
+        checkModalTitle("Choose a Cohort definition");
     }
 
+    @Step ("click to Id to sort")
     @When("^click to Id to sort$")
     public void clickToIdToSort() {
-        $(By.xpath("//*[@aria-label='Id: activate to sort column ascending']")).click();
+        $("[aria-label='Id: activate to sort column ascending']").click();
     }
 
+    @Step ("enter new name of cohort definition")
     @When("^enter new name of cohort definition$")
-    public void enterNewNameOfCohortDefinition() throws InterruptedException {
-        String generatedString = RandomStringUtils.randomAlphanumeric(10);
-        newGeneratedString = "Test_" + generatedString;
-        $(By.xpath("//*[@class='form-control']")).clear();
-        $(By.xpath("//*[@class='input-group']/input")).setValue(newGeneratedString);
-        Thread.sleep(300);
-
-
+    public void enterNewNameOfCohortDefinition() {
+        newGeneratedString = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(newGeneratedString);
     }
 
+    @Step ("save new name of cohort definition")
     @When("^save new name of cohort definition$")
     public void saveNewNameOfCohortDefinition() {
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        saveAction();
     }
 
+    @Step ("filtered new Cohort Definition")
     @Then("^filtered new Cohort Definition$")
-    public void filteredNewCohortDefinition() throws InterruptedException {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@type='search']")).setValue(newGeneratedString);
-        Thread.sleep(1500);
+    public void filteredNewCohortDefinition() {
+        search(newGeneratedString);
     }
 
+    @Step ("new Cohort Definition should be found")
     @Then("^new Cohort Definition should be found$")
     public void newCohortDefinitionShouldBeFound() {
-        $(By.xpath("//table/tbody/tr/td[2]/span")).shouldHave(text(newGeneratedString));
+        COHORT_LINK_IN_TABLE.shouldHave(text(newGeneratedString));
     }
 
+    @Step ("enter the same name of New Cohort Definition and save")
     @When("^enter the same name of New Cohort Definition and save it$")
-    public void enterTheSameNameOfNewCohortDefinitionAndSaveIt() throws InterruptedException {
-        Thread.sleep(1500);
-        $(By.xpath("//*[@class='form-control']")).clear();
-        $(By.xpath("//*[@class='input-group']/input")).setValue(nameCohort);
-        Thread.sleep(300);
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+    public void enterTheSameNameOfNewCohortDefinitionAndSaveIt() {
+        setTitle(nameCohort);
+        saveAction();
     }
 
+    @Step ("condition occurrence block shown")
     @Then("^condition occurrence block shown$")
     public void conditionOccurrenceBlockShown() {
-        $(By.xpath("//*[@class = 'criteriaTable']/tbody/tr/td")).shouldHave(text("a condition occurrence of"));
+        $$(".criteria-content .criteriaTable").find(matchesText("a condition occurrence of")).
+                shouldBe(visible);
     }
 
+    @Step ("click to save button in Cohort definition")
     @When("^click to save button in Cohort Definition$")
     public void clickToSaveButtonInCohortDefinition() {
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        saveAction();
     }
 
+    @Step ("click to Id column")
     @When("^click to Id column$")
     public void clickToIdColumn() {
-        $(By.xpath("//*[@class='id-column sorting']")).waitUntil(visible, 3000);
-        $(By.xpath("//*[@class='id-column sorting']")).click();
+        $(".id-column.sorting").waitUntil(visible, 5000).click();
     }
 
+    @Step ("can see that first value less then second")
     @Then("^can see that first value less then second$")
     public void canSeeThatFirstValueLessThenSecond() {
-        String a, b;
-        a = $(By.xpath("//table/tbody/tr/td[1]")).getText();
-        b = $(By.xpath("//table/tbody/tr[2]/td[1]")).getText();
+        String a = $(By.xpath("//table/tbody/tr/td[1]")).getText();
+        String b = $(By.xpath("//table/tbody/tr[2]/td[1]")).getText();
         Assert.assertTrue(Integer.parseInt(a) < Integer.parseInt(b));
     }
 
+    @Step("can see paging")
     @Then("^can see paging$")
     public void canSeePaging() {
-        $(By.xpath("//*[@class= 'paginate_button ']")).shouldBe(visible);
+        $$(".next.paginate_button").forEach(e -> e.shouldBe(visible));
     }
 
+    @Step ("enter value in filter in cohort definition")
     @When("^enter \"([^\"]*)\" in filter in cohort definition$")
-    public void enterInFilterInCohortDefinition(String arg0) throws Throwable {
-        $(By.xpath("//*[@type='search']")).setValue(arg0);
+    public void enterInFilterInCohortDefinition(String arg0) {
+        search(arg0);
     }
 
+    @Step ("click to founded result")
     @Then("^click to founded result$")
     public void clickToFoundedResult() {
-        $(By.xpath("//table/tbody/tr/td[2]")).click();
+        COHORT_LINK_IN_TABLE.click();
     }
 
+    @Step ("click to JSON tab in Cohord Definition")
     @When("^click to JSON tab in Cohort Definitions$")
     public void clickToJSONTabInCohortDefinitions() {
-        $(By.xpath("//*[@class='nav nav-pills']/li[3]")).click();
+        NAV_PILLS.filter(visible).find(matchesText("JSON")).click();
     }
 
+    @Step ("click to Copy to clipboard button")
     @When("^click to Copy to clipboard button$")
     public void clickToCopyToClipboardButton() {
-        $(By.xpath("//*[@id='btnCopyExpressionJSONClipboard']")).click();
+        $("#btnCopyExpressionJSONClipboard").click();
     }
 
+    @Step ("clear json input")
     @When("^clear json input$")
     public void clearJsonInput() {
-        $(By.xpath("//*[@id='cohortExpressionJSON']")).clear();
+        jsonInputField.clear();
     }
 
+    @Step ("past json from clipboard")
     @When("^past json from clipboard$")
-    public void pastJsonFromClipboard() throws InterruptedException {
-        $(By.xpath("//*[@id='cohortExpressionJSON']")).sendKeys(Keys.CONTROL, "v");
-        Thread.sleep(1000);
+    public void pastJsonFromClipboard() {
+        jsonInputField.sendKeys(Keys.SHIFT, Keys.INSERT);
     }
 
+    @Step ("click to Reload button")
     @When("^click to Reload button$")
     public void clickToReloadButton() {
-        $(By.xpath("//*[@class='col-md-6'][2]/button")).click();
+        $(withText("Reload")).click();
     }
 
+    @Step ("click to Definition tab")
     @When("^click to Definition tab$")
     public void clickToDefinitionTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li")).click();
+        NAV_TABS.find(matchesText("Definition")).click();
     }
 
+    @Step ("can see name of concept set at button")
     @Then("^can see name \"([^\"]*)\" of concept set at the button$")
-    public void canSeeNameOfConceptSetAtTheButton(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).shouldHave(text(arg0));
+    public void canSeeNameOfConceptSetAtTheButton(String arg0) {
+        $(".btn-group-sm .btn-primary").shouldHave(text(arg0));
     }
 
+    @Step ("click to Generate Impala button")
     @When("^click to Generate Impala button$")
     public void clickToGenerateImpalaButton() {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td/span/span/button")).click();
+        generateByDataSource("IMPALA");
     }
 
+    @Step ("click to Generate first data source button")
+    @When("^click to Generate first data source button$")
+    public void clickToGenerateFirstDataSourceButton() {
+        $$(".cohort-generate-sources button").first().click();
+    }
+
+    @Step ("can see Complete in IMPALA status in seconds")
     @Then("^can see Complete in IMPALA status in (\\d+) seconds$")
     public void canSeeCompleteStatusInSeconds(int arg0) {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
+        checkStatus("IMPALA", arg0);
     }
 
+    @Step ("can see Complete in first data source status")
+    @Then("^can see Complete in first data source status in (\\d+) seconds$")
+    public void canSeeCompleteFirstDSStatusInSeconds(int arg0) {
+        $$(".statusIndicator.text-right").first().waitUntil(text("COMPLETED"), arg0 * 1000);
+    }
+    @Step ("click to Reporting tab")
     @When("^click to Reporting tab tab$")
     public void clickToReportingTabTab() {
-        $(By.xpath("//*[@class='nav nav-tabs']/li[4]")).click();
+        NAV_TABS.find(matchesText("Reporting")).click();
     }
 
-
+    @Step ("select source")
     @When("^select \"([^\"]*)\" source$")
-    public void selectSource(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='form-control invalid']")).click();
-        $(By.xpath("//*[@class='form-control invalid']")).selectOptionByValue(arg0);
+    public void selectSource(String arg0) {
+        $$("select.form-control").filter(visible).first().selectOptionContainingText(arg0);
     }
 
+    @Step ("select first data source")
+    @When("^select first data source$")
+    public void selectFirstDataSource() {
+        $(By.xpath("//*[@class='form-control invalid']")).selectOption(1);
+    }
+
+    @Step ("click to quick analysis button")
     @When("^click to quick analysis button$")
     public void clickToQuickAnalysisButton() {
-        $(By.xpath("//*[@class='btn btn-success btn-sm']")).click();
+        $(".btn-group .btn-success").click();
     }
 
+    @Step ("accept an alert about time")
     @When("^accept an alert about time$")
-    public void acceptAnAlertAboutTime() throws InterruptedException {
-        Thread.sleep(3000);
+    public void acceptAnAlertAboutTime() {
         switchTo().alert().accept();
     }
 
+    @Step ("can see a row with status Started")
     @Then("^can see a row with status Started$")
     public void canSeeARowWithStatusStarted() {
-        $(By.xpath("//*[@class='panel panel-info']/div/table/tbody/tr/td[3]")).waitUntil(text("STARTED"), 10000);
+        $("[data-bind='html: status']").waitUntil(text("STARTED"), 10000);
     }
 
+    @Step ("can see only one field with text")
     @Then("^can see only one field with text \"([^\"]*)\"$")
-    public void canSeeOnlyOneFieldWithText(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='stripe compact hover dataTable no-footer']/tbody/tr/td[2]")).shouldHave(text(arg0));
+    public void canSeeOnlyOneFieldWithText(String arg0) {
+        conceptSetsInTableForChoosing.filter(visible).forEach(e -> e.shouldHave(text(arg0)));
     }
 
+    @Step ("click to Generate SynPUF Cost&Util button")
     @When("^click to Generate SynPUF (\\d+)K Cost&Util button$")
     public void clickToGenerateSynPUFKCostUtilButton(int arg0) {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[4]/td/span/span/button")).click();
+        generateByDataSource("SynPUF 110K Cost&Util");
     }
 
+    @Step ("can see Complet in SynPUF cost&Util status")
     @Then("^can see Complete in SynPUF (\\d+)K Cost&Util status in (\\d+) seconds$")
-    public void canSeeCompleteInSynPUFKCostUtilStatusInSeconds(int arg0, int arg1) throws InterruptedException {
-        Thread.sleep(500);
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[4]/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
-
+    public void canSeeCompleteInSynPUFKCostUtilStatusInSeconds(int arg0, int arg1) {
+        checkStatus("SynPUF 110K Cost&Util", arg0);
     }
 
+    @Step ("click to utilisation button")
     @When("^click to utilisation button$")
-    public void clickToUtilisationButton() throws InterruptedException {
-        Thread.sleep(500);
-        $(By.xpath("//*[@class='btn btn-info btn-sm']")).click();
+    public void clickToUtilisationButton() {
+        $(".btn-group .btn-info.btn-sm").waitUntil(enabled, 5000).click();
 
     }
 
+    @Step ("configure of reports to run window opens")
     @Then("^configure of reports to run window opens$")
     public void configureOfReportsToRunWindowOpens() {
-        $(By.xpath("//*[@class='modal-pick-options__header']")).waitUntil(text("Reports"), 3000);
+        $$(".modal-pick-options__header").shouldHave(CollectionCondition.texts("Reports", "Periods",
+                "Rollups"));
     }
 
+    @Step ("choose reports and press Run")
     @When("^choose reports and press Run$")
     public void chooseReportsAndPressRun() {
         $(By.xpath("//*[@value='rollupUtilizationVisit']")).click();
@@ -437,47 +522,91 @@ public class CohortDefinitionStepDefs {
         $$(By.xpath("//*[@class='btn btn-info btn-sm']")).get(1).click();
     }
 
-
-
-    @When("^click to Generate SynPUF (\\d+)k CDM(\\d+)$")
-    public void clickToGenerateSynPUFKCDM(int arg0, int arg1) {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[6]/td/span/span/button")).click();
+    @Step ("click to Generate")
+    @When("^click to Generate: \"([^\"]*)\"$")
+    public void clickToGenerateSynPUFKCDM(String sourceName) {
+        generateByDataSource(sourceName);
     }
 
-    @Then("^can see Complete in SynPUF (\\d+)k CDM(\\d+) status in (\\d+) seconds$")
-    public void canSeeCompleteInSynPUFKCDMStatusInSeconds(int arg0, int arg1, int arg2) {
-        $(By.xpath("//*[@class='cohort-generate-sources']/tbody/tr[6]/td[3]")).waitUntil(text("COMPLETE"), arg0 * 1000);
-
+    @Step ("click to Generate from properties")
+    @When("^click to Generate on \"([^\"]*)\" from properties$")
+    public void clickToGenerateFromProperties(String propertyName) throws Exception {
+        generateByDataSource(getDataProperties(propertyName));
     }
 
+    @Step ("can see Complete in status")
+    @Then("^can see Complete in \"([^\"]*)\" status in (\\d+) seconds$")
+    public void canSeeCompleteInSynPUFKCDMStatusInSeconds(String sourceName, int timeout) {
+        checkStatus(sourceName, timeout);
+    }
+
+    @Step ("can see complete dataset from properties status")
+    @Then("^can see Complete on \"([^\"]*)\" dataset from properties status in (\\d+) seconds$")
+    public void canSeeCompleteInSynPUFKCDMStatusInSecondsProperties(String propertyName, int timeout) throws Exception {
+        checkStatus(getDataProperties(propertyName), timeout);
+    }
+
+    @Step ("click to Full analysis button")
     @When("^click to Full analysis button$")
     public void clickToFullAnalysisButton() {
-        $(By.xpath("//*[@class='btn btn-primary btn-sm']")).click();
+        $(withText("Full Analysis")).click();
     }
 
+    @Step ("can see in Initial Event Cohort")
     @Then("^can see \"([^\"]*)\" in Initial Event Cohort$")
-    public void canSeeInInitialEventCohort(String arg0){
-        $(By.xpath("//*[@id='cohortTextView']/cohort-expression-viewer/ul/li/div/conceptset-reference/span")).shouldHave(text(arg0));
+    public void canSeeInInitialEventCohort(String arg0) {
+        $("[data-bind='text: codesetName']").shouldHave(text(arg0));
     }
 
+    @Step ("click to Graphical View")
     @When("^click to Graphical View$")
     public void clickToGraphicalView() {
-        $(By.xpath("//*[@class='nav nav-pills']/li[2]")).click();
-
+        NAV_PILLS.filter(visible).find(matchesText("Graphical View")).click();
     }
 
+    @Step ("can see in Primary Criteria")
     @Then("^can see \"([^\"]*)\" in Primary Criteria$")
-    public void canSeeInPrimaryCriteria(String arg0) throws Throwable {
-        $(By.xpath("//*[@class='name col-xs-2']")).shouldHave(text(arg0));
+    public void canSeeInPrimaryCriteria(String arg0) {
+        $(".name").shouldHave(text(arg0));
     }
 
+    @Step ("click to SQL tab")
     @When("^click to SQL tab$")
     public void clickToSQLTab() {
-        $(By.xpath("//*[@class='nav nav-pills']/li[4]")).click();
+        NAV_PILLS.filter(visible).find(matchesText("SQL")).click();
     }
 
+    @Step ("can see sql query")
     @Then("^can see sql query$")
     public void canSeeSqlQuery() {
-        $(By.xpath("//*[@id='cohortSQL']/div/pre")).shouldHave(text("CREATE TABLE"));
+        $("#sqlText").shouldHave(text("CREATE TABLE"));
+    }
+
+    @Step ("click to close cohort button")
+    @When("^click to close cohort button$")
+    public void closeCurrentCohort() {
+        closeAction();
+    }
+
+    @Step ("click to Samples tab")
+    @When("^click to Samples tab tab$")
+    public void clickToSamplesTabTab() {
+        NAV_TABS.find(matchesText("Samples")).click();
+    }
+
+    @Step ("Samples tab is open")
+    @Then("^Samples tab is opened$")
+    public void canSeeSamplesTabOpened() {
+        $(".active.tab-pane .panel-body select").shouldBe(visible);
+    }
+
+    private void generateByDataSource(String dataSourceName) {
+        dataSources.find(Condition.matchesText(dataSourceName)).
+                find(withText("Generate")).click();
+    }
+
+    private void checkStatus(String dataSourceName, int seconds) {
+        dataSources.find(Condition.matchesText(dataSourceName)).
+                find(".statusIndicator.text-right").waitUntil(text("COMPLETED"), seconds * 1000);
     }
 }

@@ -1,240 +1,277 @@
 package atlastests;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selectors;
-import cucumber.api.PendingException;
+import atlastests.components.FormControl;
+import atlastests.components.PageControl;
+import atlastests.components.TablesControl;
+import atlastests.components.TabsControl;
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class CohortPathwayStepDefs {
-    String namePathway, newNamePathway;
+public class CohortPathwayStepDefs implements PageControl, FormControl, TablesControl, TabsControl {
+    private String namePathway;
+    private String newNamePathway;
+    private SelenideElement cohortOnPathwaysPage = $("[data-bind='clickToEdit: name']");
+    private ElementsCollection tableLinksInTable = $$("tbody .pathways-browser__tbl-col--name a");
 
-
+    @Step ("can see Cohort Pathway page")
     @Then("^can see Cohort Pathway page$")
     public void canSeeCohortPathwayPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible,4000);
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).shouldHave(text("Cohort Pathways"));
-
-
+        checkPageHeader("Cohort Pathways");
     }
 
+    @Step ("click to button new Pathway Analysis")
     @When("^click to button New Pathway Analysis$")
     public void clickToButtonNewPathwayAnalysis() {
-        $(By.xpath("//*[@class='pathways-browser__toolbar']/button")).waitUntil(visible,3000);
-        $(By.xpath("//*[@class='pathways-browser__toolbar']/button")).click();
+        $(".pathways-browser__create-btn").waitUntil(visible, 5000).click();
     }
 
+    @Step ("can see creation page for New Cohort PAthway")
     @Then("^can see creation page of New Cohort Pathway$")
     public void canSeeCreationPageOfNewCohortPathway() {
-        $(By.xpath("//*[@class='linked-entity-list__title']")).waitUntil(visible,4000);
-        $(By.xpath("//*[@class='linked-entity-list__title']")).shouldHave(text("Target Cohorts"));
+        checkPageHeader("New Cohort Pathway");
     }
 
+    @Step ("enter new name of cohort pathway")
     @When("^enter new name of cohort pathway$")
     public void enterNewNameOfCohortPathway() {
-        String generatedString = RandomStringUtils.randomAlphanumeric(10);
-        namePathway = "Test_" + generatedString ;
-        $(By.xpath("//*[@type='text']")).clear();
-        $(By.xpath("//*[@type='text']")).setValue(namePathway);
+        namePathway = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(namePathway);
     }
 
+    @Step ("click to save New Cohort PAthway button")
     @When("^click to save New Cohort Pathway button$")
-    public void clickToSaveNewCohortPathwayButton() throws InterruptedException {
-        $(By.xpath("//*[@class='btn btn-success']")).click();
-        Thread.sleep(2000);
+    public void clickToSaveNewCohortPathwayButton() {
+        saveAction();
+        $(".fa-trash-alt").waitUntil(enabled, 5000);
     }
 
+    @Step ("click to save New Cohort PAtway button special case")
+    @When("^click to save New Cohort Pathway button special case$")
+    public void clickToSaveNewCohortPathwaySpecialCaseButton() {
+        saveAction();
+    }
+
+    @Step ("can see button to cohort pathway")
     @Then("^can see buttons to cohort pathway$")
     public void canSeeButtonsToCohortPathway() {
-        $(By.xpath("//*[@class='btn btn-primary']")).waitUntil(visible, 2000);
+        $(".fa-times.fa").waitUntil(visible, 5000);
     }
 
+    @Step ("click to cancel button")
     @When("^click to cancel button$")
-    public void clickToCancelButton() throws InterruptedException {
-        Thread.sleep(1500);
-        $(By.xpath("//*[@class='btn btn-primary']")).click();
+    public void clickToCancelButton() {
+        closeAction();
     }
 
+    @Step ("click to cancel button Cohort definition")
+    @When("^click to cancel button Cohort definition$")
+    public void clickToCancelButtonCohortDefinition() {
+        $$(".asset-heading .input-group-btn .btn").shouldHave(CollectionCondition.size(5)).
+                forEach(SelenideElement::hover);
+        $("[title='Close cohort definition']").waitUntil(enabled, 5000).click();
+    }
+
+    @Step ("can see table with our cohort pathway")
     @Then("^can see table with our cohort pathway$")
     public void canSeeTableWithOurCohortPathway() {
-        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']")).waitUntil(visible,4000);
+        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']")).
+                waitUntil(visible, 10000);
     }
 
+    @Step ("enter name of our pathway in filter")
     @When("^enter name of our pathway in filter$")
     public void enterNameOfOurPathwayInFilter() {
         $(By.xpath("//*[@type='search']")).setValue(namePathway);
     }
 
+    @Step ("can see name of new cohort pathway in table")
     @Then("^can see name of new cohort pathway in table$")
     public void canSeeNameOfNewCohortPathwayInTable() {
-        $(By.xpath("//table/tbody/tr/td/a")).shouldHave(text(namePathway));
+        tableLinksInTable.first().shouldHave(text(namePathway));
     }
 
+    @Step ("click to cohort pathway in table")
     @When("^click to cohort pathway in table$")
     public void clickToCohortPathwayInTable() {
-        $(By.xpath("//table/tbody/tr/td/a")).click();
+        tableLinksInTable.first().click();
     }
 
+    @Step ("can see our cohort pathway")
     @Then("^can see our cohort pathway$")
     public void canSeeOurCohortPathway() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Cohort Pathway #"));
+        checkPageHeader("Cohort Pathway #");
     }
 
+    @Step ("change name and press save")
     @When("^change name and press save$")
     public void changeNameAndPressSave() {
-        String generatedString = RandomStringUtils.randomAlphanumeric(10);
-        newNamePathway = "Test_" + generatedString ;
-        $(By.xpath("//*[@type='text']")).clear();
-        $(By.xpath("//*[@type='text']")).setValue(newNamePathway);
-        $(By.xpath("//*[@class='btn btn-success']")).click();
+        newNamePathway = "Test_" + RandomStringUtils.randomAlphanumeric(10);
+        setTitle(newNamePathway);
+        saveAction();
     }
 
+    @Step ("can see new name of new cohort pathway in table")
     @Then("^can see new name of new cohort pathway in table$")
     public void canSeeNewNameOfNewCohortPathwayInTable() {
-        $(By.xpath("//*[@class='btn btn-primary']")).click();
-        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']")).waitUntil(visible,4000);
-        $(By.xpath("//*[@type='search']")).setValue(newNamePathway);
-        $(By.xpath("//table/tbody/tr/td/a")).shouldHave(text(newNamePathway));
-        
-        
+        closeAction();
+        search(newNamePathway);
+        tableLinksInTable.first().shouldHave(text(newNamePathway));
     }
 
+    @Step ("click to delete our cohort pathway")
     @When("^click to delete our cohort pathway$")
     public void clickToDeleteOurCohortPathway() {
-        $(By.xpath("//*[@class='btn btn-danger']")).click();
+        deleteAction();
     }
 
+    @Step ("accept delete cohort pathway")
     @When("^accept delete cohort pathway$")
     public void acceptDeleteCohortPathway() {
         switchTo().alert().accept();
     }
 
+    @Step ("can NOT see our cohort pathway in table")
     @Then("^cant see our cohort pathway in table$")
     public void cantSeeOurCohortPathwayInTable() {
-        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']")).waitUntil(visible,4000);
-        $(By.xpath("//*[@type='search']")).setValue(String.valueOf(text(newNamePathway)));
-        $(By.xpath("//table/tbody/tr/td/a")).shouldNotHave(text(newNamePathway));
+        search(newNamePathway);
+        tableLinksInTable.first().shouldNotHave(text("COPY OF: " + newNamePathway));
     }
 
+    @Step ("click to Import Target Cohorts")
     @When("^click to Import Target Cohorts$")
-    public void clickToImportTargetCohorts() {
+    public void
+    clickToImportTargetCohorts() {
         $$(byText("Import")).get(0).click();
     }
 
-    @When("^choose cohort definition from the table in target cohort list$")
-    public void chooseCohortDefinitionFromTheTableInTargetCohortList() {
-        $(By.xpath("//*[@class='linkish']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@class='linkish']")).click();
-
+    @Step ("choose cohort definition from table")
+    @When("^choose cohort definition \"([^\"]*)\" from the table$")
+    public void chooseCohortDefinitionFromTheTableInTargetCohortList(String arg0) {
+        facetedTableSearch(arg0);
+        selectInTableResults(arg0);
+        importButtonClick();
     }
 
+    @Step ("can see cohort definition in target cohort list")
     @Then("^can see cohort definition in target cohort list list$")
     public void canSeeCohortDefinitionInTargetCohortListList() {
-        $(By.xpath("//*[@class='linked-cohort-list__col-cohort-id sorting_1']")).waitUntil(visible,3000);
+        cohortOnPathwaysPage.waitUntil(visible, 5000);
     }
 
+    @Step ("click to Import Event Cohorts")
     @When("^click to Import Event Cohorts$")
     public void clickToImportEventCohorts() {
         $$(byText("Import")).get(1).click();
     }
 
-    @When("^choose cohort definition from the table in event cohort list$")
-    public void chooseCohortDefinitionFromTheTableInEventCohortList() {
-        $(By.xpath("//*[@class='linkish']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@class='linkish']")).click();
-    }
-
+    @Step ("can see cohort definition in event list")
     @Then("^can see cohort definition in event cohort list list$")
     public void canSeeCohortDefinitionInEventCohortListList() {
-        $$("table.linked-entity-list__table").get(1).$(".linked-cohort-list__col-cohort-id").waitUntil(visible,2000);
-
+        $$("table.linked-entity-list__table").first().find(".linked-cohort-list__col-cohort-id").
+                waitUntil(visible, 5000);
     }
 
+    @Step ("click to Executions tab")
     @When("^click to Executions tab$")
     public void clickToExecutionsTab() {
-        $(byText("Executions")).click();
+        chooseTab("Executions");
     }
 
+    @Step ("can see Execution page")
     @Then("^can see Execution page$")
     public void canSeeExecutionPage() {
-        $(By.xpath("//*[@class = 'pathway-executions__title']")).waitUntil(visible,4000);
-        $(By.xpath("//*[@class = 'pathway-executions__title']")).shouldHave(text("Executions"));
+        checkExecutionTitle();
     }
 
+    @Step ("click to Utilities tab")
     @When("^click to Utilities tab$")
     public void clickToUtilitiesTab() {
-        $(byText("Utilities")).click();
+        chooseTab("Utilities");
     }
 
+    @Step("can see Utilities page")
     @Then("^can see Utilities page$")
     public void canSeeUtilitiesPage() {
-        $(By.xpath("//*[@class = 'pathway-utils__title']")).waitUntil(visible,3000);
-        $(By.xpath("//*[@class = 'pathway-utils__title']")).shouldHave(text("Utilities"));
-
+        $(".pathway-utils__title").waitUntil(visible, 5000).shouldHave(text("Utilities"));
     }
 
+    @Step ("enter the same name of cohort pathway")
     @When("^enter the same name of cohort pathway$")
-    public void enterTheSameNameOfCohortPathway() throws InterruptedException {
-        Thread.sleep(1500);
-        $(By.xpath("//*[@type='text']")).clear();
-        $(By.xpath("//*[@type='text']")).setValue(namePathway);
+    public void enterTheSameNameOfCohortPathway() {
+        setTitle(namePathway);
     }
 
+    @Step ("click to save our cohort pathway")
     @When("^click to save our cohort pathway$")
     public void clickToSaveOurCohortPathway() {
-        $(By.xpath("//*[@class='fa fa-save']")).click();
+        saveAction();
+        $(By.xpath("//*[@class='btn btn-success disabled']")).waitUntil(visible, 4000);
     }
 
+    @Step ("click to copy button for our cohort pathway")
     @When("^click to copy button for our cohort pathway$")
     public void clickToCopyButtonForOurCohortPathway() {
-        $$(By.xpath("//*[@class='btn btn-primary']")).get(1).click();
+        copyAction();
     }
 
+    @Step ("enter name for  of cohort pathway")
     @When("^enter \"([^\"]*)\" and name of our cohort pathway$")
-    public void enterAndNameOfOurCohortPathway(String arg0) throws Throwable {
+    public void enterAndNameOfOurCohortPathway(String arg0) {
         $(By.xpath("//*[@type='search']")).setValue(arg0 + newNamePathway);
     }
 
+    @Step ("can see copy of our pathway")
     @Then("^can see copy of our pathway$")
     public void canSeeCopyOfOurPathway() {
-        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']/a")).shouldHave(text("COPY OF: " + newNamePathway));
+        $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']/a")).
+                shouldHave(text("COPY OF " + newNamePathway));
     }
 
+    @Step ("copy text from export textarea")
     @When("^copy text from export textarea$")
     public void copyTextFromExportTextarea() {
-        $(By.xpath("//*[@class='export__json-box']")).click();
-        $(By.xpath("//*[@class='export__json-box']")).sendKeys(Keys.CONTROL, "a");
-        $(By.xpath("//*[@class='export__json-box']")).sendKeys(Keys.CONTROL, "c");
+        copyToClipboard();
     }
 
+    @Step ("click to Import cohort pathway")
     @When("^click to Import cohort pathway$")
-    public void clickToImportCohortPathway() throws InterruptedException {
-        Thread.sleep(1000);
-        $(By.xpath("//*[@class='pathway-utils__nav-pill']")).click();
+    public void clickToImportCohortPathway() {
+        $$(".pathway-utils__nav-pill a").find(text("Import")).click();
     }
 
+    @Step("past json to pathway textarea")
     @When("^past json to pathway textarea$")
     public void pastJsonToPathwayTextarea() {
-        $(By.xpath("//*[@class='import__json-box']")).sendKeys(Keys.CONTROL, "v");
+        $("textarea.import__json-box").setValue(Selenide.clipboard().getText());
     }
 
+    @Step ("click IMport button in pathway")
     @When("^click Import button in Pathways$")
-    public void clickImportButtonInPathways() throws InterruptedException {
-        $(By.xpath("//*[@class='import__import-btn btn btn-default btn-sm']")).click();
-        Thread.sleep(2500);
+    public void clickImportButtonInPathways() {
+        $(".import__import-btn").click();
     }
 
+    @Step ("can see target cohort in table")
     @Then("^can see target cohorts in table like as \"([^\"]*)\"$")
-    public void canSeeTargetCohortsInTableLikeAs(String arg0) throws Throwable {
-        $$(By.xpath("//*[@class=' linked-cohort-list__col-cohort-name linked-cohort-list__col-cohort-name--editable ']/span/span")).get(0).shouldHave(text(arg0));
+    public void canSeeTargetCohortsInTableLikeAs(String arg0) {
+        cohortOnPathwaysPage.shouldHave(text(arg0));
+    }
+
+    @Step ("click to Design tab")
+    @When("^click to Design tab$")
+    public void clickToDesignTab() {
+        chooseTab("Design");
     }
 }
 
