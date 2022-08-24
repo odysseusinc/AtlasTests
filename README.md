@@ -12,6 +12,7 @@ Create file **application.properties** in _src_ directory with parameters:
 - test.mode  
 - test.browser 
 - link
+- headless
 - e.g.
 
 
@@ -24,6 +25,8 @@ _test.mode_ local or remote
 _test.browser_
 
 _link_ is link to test environment
+
+_headless_ false by default, you can configure it
 
 You can run tests in a local browser or remote Selenium Server
 
@@ -88,3 +91,26 @@ or
 
 for running tests with tag _@unauthorized_
 
+### Test data from properties
+You can use your own test data from application.properties, just add fields(example):
+```
+profile = IMPALA
+source = Netezza CDM5.3
+report = Procedure
+```
+
+and run command:
+`mvn clean test -Dcucumber.options="src/test/resources/odysseusAT --tags @owndatatestsfromproperty"`
+but it's not possible to set the list of sources for example, because cucumber doesn't support iterations 
+
+### Allure report
+For generating allure report after test's running you should execute the command:
+
+`mvn site` 
+
+After that just open:
+target\site\allure-maven-plugin\index.html
+
+ 
+  Allure report
+ ![alt text](allure/allure.PNG "Allure report example")

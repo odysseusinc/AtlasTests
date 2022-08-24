@@ -1,6 +1,7 @@
 @estimations
 Feature: check Estimation
 
+  @common
   Scenario: Create, Edit, Delete estimate
     When login to ATLAS as QA
     When click to Estimation menu as QA
@@ -24,7 +25,7 @@ Feature: check Estimation
     When accept delete Estimation
     Then cant see our Estimation in table
 
-  @2406
+  @2406 @common
   Scenario: Check tabs in Estimation
     When login to ATLAS as QA
     When click to Estimation menu as QA
@@ -36,12 +37,13 @@ Feature: check Estimation
     Then can see Analysis Setting page
     When click to Evaluation Setting tab
     Then can see Evaluation Setting page
-#    When click to Executions tab in Estimation
-#    Then can see Execution page in Estimation
+    When click to Executions tab in Estimation
+    Then can see Execution page in Estimation
     When click to Utilities page in Estimation
     Then can see Utilities page in Estimation
 
-  @est
+    #required to create cohort with name "cohort_for_estimation" to avoid fluky fails
+  @est @common
   Scenario: Create full list of Estimation
     When login to ATLAS as QA
     When click to Estimation menu as QA
@@ -54,23 +56,21 @@ Feature: check Estimation
     Then can see Comparison inputs
     When click to open target cohort button
     Then can see Select Cohort window
-    When enter "test" in Filter in Cohort window
+    When enter "cohort_for_estimation" in Filter in Cohort window
     When click to result in CR in Cohort Window
     When click to open comparator cohort button
     Then can see Select Cohort window
-    When enter "test" in Filter in Cohort window
+    When enter "cohort_for_estimation" in Filter in Cohort window
     When click to result in CR in Cohort Window
     When click to Add Outcome button
-    Then can see Select Cohort window
-    When enter "test" in Filter in Cohort window
-    When click to result in CR in Cohort Window
+    When enter "cohort_for_estimation" in Filter in Cohort window
+    When import outcome cohort: "cohort_for_estimation"
     Then can see choosed cohort in estimation outcome table
     When click to Open Concept window
     Then can see concept set window
     When enter "test" in concept set window
     When click to search result in concept set window
     When click back button to specification tab
-      #devide
     When press Add Analysis Settings
     Then can see Analysis Setting page
     When Enter Study Start and end date
@@ -85,9 +85,7 @@ Feature: check Estimation
     When click to save New Estimation button
 
 
-
-
-  @estimp
+  @local @common
   Scenario: Import Levetriacetam vs phenytoin in angioedema
     When login to ATLAS as QA
     When click to Estimation menu as QA

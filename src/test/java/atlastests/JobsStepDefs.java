@@ -1,97 +1,95 @@
 package atlastests;
 
+import atlastests.components.PageControl;
+import atlastests.components.TablesControl;
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.ElementsCollection;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static atlastests.SearchDefs.isFileDownloaded;
 
-public class JobsStepDefs {
+public class JobsStepDefs implements TablesControl, PageControl {
+    private static final ElementsCollection COLUMN_HEADERS = $$("thead th");
+    private File jobs;
+
     @Then("^can see Jobs page$")
     public void canSeeJobsPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 4000);
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldHave(text("Jobs"));
+        checkPageHeader("Jobs");
     }
 
     @Then("^can see job table with all fields$")
     public void canSeeJobTableWithAllFields() {
-        $(By.xpath("//table/tbody/tr/td[1]")).shouldNotBe(empty);
-        $(By.xpath("//table/tbody/tr/td[1]")).shouldNotBe(text("-"));
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldNotBe(empty);
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldNotBe(text("-"));
-        $(By.xpath("//table/tbody/tr/td[3]")).shouldNotBe(empty);
-        $(By.xpath("//table/tbody/tr/td[3]")).shouldNotBe(text("-"));
-        $(By.xpath("//table/tbody/tr/td[4]")).shouldNotBe(empty);
-        $(By.xpath("//table/tbody/tr/td[4]")).shouldNotBe(text("-"));
-        $(By.xpath("//table/tbody/tr/td[5]")).shouldNotBe(empty);
-        $(By.xpath("//table/tbody/tr/td[6]")).shouldNotBe(empty);
-
+        COLUMN_HEADERS.shouldHave(CollectionCondition.size(6),
+                CollectionCondition.exactTexts("Execution Id", "Job Name", "Status",
+                        "Author", "Start Date", "End Date"));
     }
 
     @When("^click to Column visibility button$")
     public void clickToColumnVisibilityButton() {
-        $(By.xpath("//*[@class='dt-button buttons-collection buttons-colvis']/span")).click();
+        $(".buttons-collection").click();
     }
 
     @Then("^can see window with column names$")
     public void canSeeWindowWithColumnNames() {
-        $$(By.xpath("//*[@class='dt-button buttons-columnVisibility active']/span")).get(0).waitUntil(visible, 4000);
-
+        $(".dt-button-collection").waitUntil(visible, 4000);
     }
 
     @When("^click to \"([^\"]*)\" button$")
-    public void clickToButton(String arg0) throws Throwable {
-        $$(By.xpath("//*[@class='dt-button buttons-columnVisibility active']/span")).get(0).click();
+    public void clickToButton(String arg0) {
+        $$(".buttons-columnVisibility").find(matchesText(arg0)).click();
     }
 
     @Then("^cant see ExecutionId in table$")
-    public void cantSeeExecutionIdInTable() throws InterruptedException {
-        Thread.sleep(3000);
-        $(byText("ExecutionId")).shouldNotBe(visible);
+    public void cantSeeExecutionIdInTable() {
+        $(byText("Execution Id")).shouldNotBe(visible);
     }
 
     @When("^click to CSV button in Jobs$")
-    public void clickToCSVButtonInJobs() {
-        $(By.xpath("//*[@class='dt-button buttons-csv buttons-html5']")).click();
+    public void clickToCSVButtonInJobs() throws FileNotFoundException {
+        jobs = $(".buttons-csv").download();
     }
 
     @Then("^can see downloaded file$")
-    public void canSeeDownloadedFile() throws Exception {
-        Assert.assertTrue(isFileDownloaded(LoginStepsDefs.getDataProperties("downloadpath"), "ATLAS Jobs.csv"));
+    public void canSeeDownloadedFile() {
+        Assert.assertEquals("ATLAS Jobs.csv", jobs.getName());
     }
 
     @When("^click to name of column$")
     public void clickToNameOfColumn() {
-        $(By.xpath("//table/thead/tr/th[1]")).click();
+        $(withText("No data available in table")).waitUntil(hidden, 5000);
+        COLUMN_HEADERS.first().click();
     }
 
     @Then("^can see that Id order was changed$")
-    public void canSeeThatIdOrderWasChanged() throws InterruptedException {
-        Thread.sleep(1500);
-        String fValue  = $(By.xpath("//table/tbody/tr/td[1]")).getText();
-        String sValue  = $(By.xpath("//table/tbody/tr[2]/td[1]")).getText();
+    public void canSeeThatIdOrderWasChanged() {
+        String fValue = $(By.xpath("//table/tbody/tr/td[1]")).waitUntil(visible, 5000).getText();
+        String sValue = $(By.xpath("//table/tbody/tr[2]/td[1]")).getText();
         Assert.assertTrue(Integer.parseInt(fValue) < Integer.parseInt(sValue));
     }
 
     @When("^enter \"([^\"]*)\" in search filter$")
-    public void enterInSearchFilter(String arg0) throws Throwable {
-        $(By.xpath("//*[@type='search']")).setValue(arg0);
+    public void enterInSearchFilter(String arg0) {
+        search(arg0);
     }
 
     @Then("^can see our result in table$")
     public void canSeeOurResultInTable() {
-        $(By.xpath("//table/tbody/tr/td[2]")).shouldHave(text("Generating "));
+        $(".odd").shouldHave(text("warming"));
     }
 
     @When("^click to free space$")
-    public void clickToFreeSpace() throws InterruptedException {
-        Thread.sleep(1000);
-        $(By.xpath("//*[@class='dt-button buttons-columnVisibility active']")).pressEscape();
-
+    public void clickToFreeSpace() {
+        $(By.xpath("//*[@class='dt-button buttons-columnVisibility active']")).waitUntil(enabled, 5000).
+                pressEscape();
     }
 }
