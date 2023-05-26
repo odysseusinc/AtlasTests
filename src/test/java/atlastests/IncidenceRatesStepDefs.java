@@ -4,11 +4,13 @@ import atlastests.components.TablesControl;
 import atlastests.components.TabsControl;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+
+import java.time.Duration;
 
 import static atlastests.components.StaticElements.CONCEPT_SET_IN_TABLE;
 import static atlastests.components.StaticElements.EMPTY_TABLE;
@@ -25,7 +27,7 @@ public class IncidenceRatesStepDefs implements TabsControl, TablesControl {
 
     @Then("^can see Incidence Rates page$")
     public void canSeeIncidenceRatesPage() {
-        $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 4000).
+        $(By.xpath("//*[@data-bind='text: title']")).shouldBe(visible, Duration.ofMillis(4000)).
                 shouldHave(text("Incidence Rate Analysis"));
     }
 
@@ -70,7 +72,7 @@ public class IncidenceRatesStepDefs implements TabsControl, TablesControl {
 
     @When("^enter name of our IR in filter$")
     public void enterNameOfOurIRInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(enabled, 5000).setValue(generatedString);
+        $(By.xpath("//*[@type='search']")).shouldBe(enabled, Duration.ofMillis(5000)).setValue(generatedString);
     }
 
     @Then("^can see our incidence rate in table$")
@@ -80,18 +82,18 @@ public class IncidenceRatesStepDefs implements TabsControl, TablesControl {
 
     @When("^click to our incidence rate$")
     public void clickToOurIncidenceRate() {
-        $(By.xpath("//tbody/tr/td[2]/span")).waitUntil(visible, 4000).click();
+        $(By.xpath("//tbody/tr/td[2]/span")).shouldBe(visible, Duration.ofMillis(4000)).click();
     }
 
     @Then("^can see our incidence rate$")
     public void canSeeOurIncidenceRate() {
-        $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 5000).
+        $(By.xpath("//*[@data-bind='text: title']")).shouldBe(visible, Duration.ofMillis(5000)).
                 shouldHave(text("Incidence Rate Analysis #"));
     }
 
     @When("^enter name of new IR in filter$")
     public void enterNameOfNewIRInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000).setValue(newGeneratedString);
+        $(By.xpath("//*[@type='search']")).shouldBe(visible, Duration.ofMillis(5000)).setValue(newGeneratedString);
     }
 
     @When("^enter new name of incidence rate$")
@@ -108,12 +110,12 @@ public class IncidenceRatesStepDefs implements TabsControl, TablesControl {
 
     @When("^click to new incidence rate$")
     public void clickToNewIncidenceRate() {
-        $(By.xpath("//tbody/tr/td[2]/span")).waitUntil(enabled, 5000).click();
+        $(By.xpath("//tbody/tr/td[2]/span")).shouldBe(enabled, Duration.ofMillis(5000)).click();
     }
 
     @When("^click to delete IR button$")
     public void clickToDeleteIRButton() {
-        $(By.xpath("//*[@title='Delete']")).waitUntil(visible, 4000);
+        $(By.xpath("//*[@title='Delete']")).shouldBe(visible, Duration.ofMillis(4000));
         $(By.xpath("//*[@title='Delete']")).click();
     }
 
@@ -134,12 +136,12 @@ public class IncidenceRatesStepDefs implements TabsControl, TablesControl {
 
     @When("^click to \"([^\"]*)\" tab in IR$")
     public void chooseTab(String tabName) {
-        IR_TABS.find(matchesText(tabName)).click();
+        IR_TABS.find(matchText(tabName)).click();
     }
 
     @Then("^can see Generation page in IR$")
     public void canSeeGenerationPageInIR() {
-        $(By.xpath("//*[@class='select-sources-btn__label']")).waitUntil(visible, 3000);
+        $(By.xpath("//*[@class='select-sources-btn__label']")).shouldBe(visible, Duration.ofMillis(3000));
         $(By.xpath("//*[@class='ir-analysis-results__tbl-th ir-analysis-results__tbl-th--source']")).
                 shouldHave(text("Source Name"));
     }
@@ -152,7 +154,7 @@ public class IncidenceRatesStepDefs implements TabsControl, TablesControl {
 
     @When("^click to add Target Cohort$")
     public void clickToAddTargetCohort() {
-        $(byText("Add Target Cohort")).waitUntil(visible, 3000).click();
+        $(byText("Add Target Cohort")).shouldBe(visible, Duration.ofMillis(3000)).click();
     }
 
     @When("^enter \"([^\"]*)\" in filter of cohort$")
@@ -184,7 +186,7 @@ public class IncidenceRatesStepDefs implements TabsControl, TablesControl {
 
     @When("^click to Add Outcome Cohort$")
     public void clickToAddOutcomeCohort() {
-        $(byText("Add Outcome Cohort")).waitUntil(visible, 3000).click();
+        $(byText("Add Outcome Cohort")).shouldBe(visible, Duration.ofMillis(3000)).click();
     }
 
     @Then("^can see new rows under Outcome Cohort$")
@@ -226,7 +228,7 @@ public class IncidenceRatesStepDefs implements TabsControl, TablesControl {
 
     @When("^click to \"([^\"]*)\" in CS in IR$")
     public void clickToResultInCSInIR(String conceptName) {
-        CONCEPT_SET_IN_TABLE.waitUntil(text(conceptName), 5000).click();
+        CONCEPT_SET_IN_TABLE.shouldHave(text(conceptName), Duration.ofMillis(5000)).click();
     }
 
     @Then("^can see chosen concept set in table: \"([^\"]*)\"$")
@@ -251,7 +253,7 @@ public class IncidenceRatesStepDefs implements TabsControl, TablesControl {
 
     @When("^click to Export tab in IR$")
     public void clickToExportTabInIR() {
-        $$(".tab-content [role='presentation']").find(matchesText("Export")).click();
+        $$(".tab-content [role='presentation']").find(matchText("Export")).click();
     }
 
     @When("^past json to IR textarea$")

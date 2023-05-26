@@ -2,8 +2,10 @@ package atlastests;
 
 import atlastests.components.ModalControl;
 import com.codeborne.selenide.Condition;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import java.time.Duration;
 
 import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.*;
@@ -20,10 +22,10 @@ public class MyStepdefs implements ModalControl {
     }
 
     public void closeLicenseAgreement() {
-        $("#wrapperLogo").waitUntil(visible, 10000);
+        $("#wrapperLogo").shouldBe(visible, Duration.ofMillis(10000));
         checkModalTitle("License Agreement");
         $(".atlas-modal__modal-dialog .btn-success").hover().click();
-        $("heading-title .fa-home").waitUntil(visible, 5000);
+        $("heading-title .fa-home").shouldBe(visible, Duration.ofMillis(5000));
     }
 
     @Then("^check unauthorized user$")
@@ -33,7 +35,7 @@ public class MyStepdefs implements ModalControl {
 
     @Then("^The warning message is shown \"([^\"]*)\"$")
     public void checkUnauthorizedMessage(String warningAboutUnauthorized) {
-        $("unauthenticated").waitUntil(visible, 15000).
+        $("unauthenticated").shouldBe(visible, Duration.ofMillis(15000)).
                 shouldHave(text(warningAboutUnauthorized));
     }
 
@@ -49,9 +51,9 @@ public class MyStepdefs implements ModalControl {
 
     @When("^click to Cohort Definitions menu as QA$")
     public void clickToCohortDefinitionsMenuAsQA() {
-        $("[href='#/cohortdefinitions']").waitUntil(Condition.enabled, 5000).
+        $("[href='#/cohortdefinitions']").shouldBe(Condition.enabled, Duration.ofMillis(5000)).
                 shouldHave(text("Cohort Definitions")).click();
-        $(".buttons-collection").waitUntil(visible, 5000);
+        $(".buttons-collection").shouldBe(visible, Duration.ofMillis(5000));
     }
 
     @When("^click to Characterizations menu as QA$")
@@ -81,7 +83,7 @@ public class MyStepdefs implements ModalControl {
 
     @When("^click to \"([^\"]*)\" menu item")
     public void clickToMenuItem(String menuItemName) {
-        $$(".app__menu-title").find(matchesText(menuItemName)).click();
+        $$(".app__menu-title").find(matchText(menuItemName)).click();
         //TODO remove other methods(menu navigation) and replace to this one
     }
 

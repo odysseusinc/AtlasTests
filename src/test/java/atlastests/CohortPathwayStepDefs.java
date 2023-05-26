@@ -8,11 +8,13 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -21,8 +23,8 @@ import static com.codeborne.selenide.Selenide.*;
 public class CohortPathwayStepDefs implements PageControl, FormControl, TablesControl, TabsControl {
     private String namePathway;
     private String newNamePathway;
-    private SelenideElement cohortOnPathwaysPage = $("[data-bind='clickToEdit: name']");
-    private ElementsCollection tableLinksInTable = $$("tbody .pathways-browser__tbl-col--name a");
+    private final SelenideElement cohortOnPathwaysPage = $("[data-bind='clickToEdit: name']");
+    private final ElementsCollection tableLinksInTable = $$("tbody .pathways-browser__tbl-col--name a");
 
     @Step ("can see Cohort Pathway page")
     @Then("^can see Cohort Pathway page$")
@@ -33,7 +35,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
     @Step ("click to button new Pathway Analysis")
     @When("^click to button New Pathway Analysis$")
     public void clickToButtonNewPathwayAnalysis() {
-        $(".pathways-browser__create-btn").waitUntil(visible, 5000).click();
+        $(".pathways-browser__create-btn").shouldBe(visible, Duration.ofMillis(5000)).click();
     }
 
     @Step ("can see creation page for New Cohort PAthway")
@@ -53,7 +55,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
     @When("^click to save New Cohort Pathway button$")
     public void clickToSaveNewCohortPathwayButton() {
         saveAction();
-        $(".fa-trash-alt").waitUntil(enabled, 5000);
+        $(".fa-trash-alt").shouldBe(enabled, Duration.ofMillis(5000));
     }
 
     @Step ("click to save New Cohort PAtway button special case")
@@ -65,7 +67,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
     @Step ("can see button to cohort pathway")
     @Then("^can see buttons to cohort pathway$")
     public void canSeeButtonsToCohortPathway() {
-        $(".fa-times.fa").waitUntil(visible, 5000);
+        $(".fa-times.fa").shouldBe(visible, Duration.ofMillis(5000));
     }
 
     @Step ("click to cancel button")
@@ -79,14 +81,14 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
     public void clickToCancelButtonCohortDefinition() {
         $$(".asset-heading .input-group-btn .btn").shouldHave(CollectionCondition.size(5)).
                 forEach(SelenideElement::hover);
-        $("[title='Close cohort definition']").waitUntil(enabled, 5000).click();
+        $("[title='Close cohort definition']").shouldBe(enabled, Duration.ofMillis(5000)).click();
     }
 
     @Step ("can see table with our cohort pathway")
     @Then("^can see table with our cohort pathway$")
     public void canSeeTableWithOurCohortPathway() {
         $(By.xpath("//*[@class=' pathways-browser__tbl-col pathways-browser__tbl-col--name ']")).
-                waitUntil(visible, 10000);
+                shouldBe(visible, Duration.ofMillis(10000));
     }
 
     @Step ("enter name of our pathway in filter")
@@ -166,7 +168,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
     @Step ("can see cohort definition in target cohort list")
     @Then("^can see cohort definition in target cohort list list$")
     public void canSeeCohortDefinitionInTargetCohortListList() {
-        cohortOnPathwaysPage.waitUntil(visible, 5000);
+        cohortOnPathwaysPage.shouldBe(visible, Duration.ofMillis(5000));
     }
 
     @Step ("click to Import Event Cohorts")
@@ -179,7 +181,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
     @Then("^can see cohort definition in event cohort list list$")
     public void canSeeCohortDefinitionInEventCohortListList() {
         $$("table.linked-entity-list__table").first().find(".linked-cohort-list__col-cohort-id").
-                waitUntil(visible, 5000);
+                shouldBe(visible, Duration.ofMillis(5000));
     }
 
     @Step ("click to Executions tab")
@@ -203,7 +205,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
     @Step("can see Utilities page")
     @Then("^can see Utilities page$")
     public void canSeeUtilitiesPage() {
-        $(".pathway-utils__title").waitUntil(visible, 5000).shouldHave(text("Utilities"));
+        $(".pathway-utils__title").shouldBe(visible, Duration.ofMillis(5000)).shouldHave(text("Utilities"));
     }
 
     @Step ("enter the same name of cohort pathway")
@@ -216,7 +218,7 @@ public class CohortPathwayStepDefs implements PageControl, FormControl, TablesCo
     @When("^click to save our cohort pathway$")
     public void clickToSaveOurCohortPathway() {
         saveAction();
-        $(By.xpath("//*[@class='btn btn-success disabled']")).waitUntil(visible, 4000);
+        $(By.xpath("//*[@class='btn btn-success disabled']")).shouldBe(visible, Duration.ofMillis(4000));
     }
 
     @Step ("click to copy button for our cohort pathway")

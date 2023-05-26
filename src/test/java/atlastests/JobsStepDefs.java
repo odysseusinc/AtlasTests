@@ -4,13 +4,14 @@ import atlastests.components.PageControl;
 import atlastests.components.TablesControl;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -41,12 +42,12 @@ public class JobsStepDefs implements TablesControl, PageControl {
 
     @Then("^can see window with column names$")
     public void canSeeWindowWithColumnNames() {
-        $(".dt-button-collection").waitUntil(visible, 4000);
+        $(".dt-button-collection").shouldBe(visible, Duration.ofMillis(4000));
     }
 
     @When("^click to \"([^\"]*)\" button$")
     public void clickToButton(String arg0) {
-        $$(".buttons-columnVisibility").find(matchesText(arg0)).click();
+        $$(".buttons-columnVisibility").find(matchText(arg0)).click();
     }
 
     @Then("^cant see ExecutionId in table$")
@@ -66,13 +67,13 @@ public class JobsStepDefs implements TablesControl, PageControl {
 
     @When("^click to name of column$")
     public void clickToNameOfColumn() {
-        $(withText("No data available in table")).waitUntil(hidden, 5000);
+        $(withText("No data available in table")).shouldBe(hidden, Duration.ofMillis(5000));
         COLUMN_HEADERS.first().click();
     }
 
     @Then("^can see that Id order was changed$")
     public void canSeeThatIdOrderWasChanged() {
-        String fValue = $(By.xpath("//table/tbody/tr/td[1]")).waitUntil(visible, 5000).getText();
+        String fValue = $(By.xpath("//table/tbody/tr/td[1]")).shouldBe(visible, Duration.ofMillis(5000)).getText();
         String sValue = $(By.xpath("//table/tbody/tr[2]/td[1]")).getText();
         Assert.assertTrue(Integer.parseInt(fValue) < Integer.parseInt(sValue));
     }
@@ -89,7 +90,7 @@ public class JobsStepDefs implements TablesControl, PageControl {
 
     @When("^click to free space$")
     public void clickToFreeSpace() {
-        $(By.xpath("//*[@class='dt-button buttons-columnVisibility active']")).waitUntil(enabled, 5000).
+        $(By.xpath("//*[@class='dt-button buttons-columnVisibility active']")).shouldBe(enabled, Duration.ofMillis(5000)).
                 pressEscape();
     }
 }

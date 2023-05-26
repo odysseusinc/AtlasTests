@@ -6,11 +6,13 @@ import atlastests.components.TablesControl;
 import atlastests.components.TabsControl;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+
+import java.time.Duration;
 
 import static atlastests.components.StaticElements.EMPTY_TABLE;
 import static com.codeborne.selenide.Condition.*;
@@ -18,14 +20,14 @@ import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PredictionStepDefs implements TabsControl, PageControl, TablesControl, FormControl {
-    private ElementsCollection panelPrimary = $$(By.xpath("//*[@class='panel panel-primary']"));
+    private final ElementsCollection panelPrimary = $$(By.xpath("//*[@class='panel panel-primary']"));
     private String generatedString;
     private String newGeneratedString;
     private String targetCohort;
 
     @Then("^can see Prediction page$")
     public void canSeePredictionPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 4000).
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldBe(visible, Duration.ofMillis(4000)).
                 shouldHave(text("Patient Level Prediction"));
     }
 
@@ -36,7 +38,7 @@ public class PredictionStepDefs implements TabsControl, PageControl, TablesContr
 
     @Then("^can see creation page of Prediction$")
     public void canSeeCreationPageOfPrediction() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible, 4000).
+        $(By.xpath("//*[@class='heading-title heading-title--dark']")).shouldBe(visible, Duration.ofMillis(4000)).
                 shouldHave(text("New Patient Level Prediction"));
         $$(By.xpath("//*[@class='panel-heading']")).get(0).shouldHave(text("Prediction Problem Settings"));
     }
@@ -55,14 +57,14 @@ public class PredictionStepDefs implements TabsControl, PageControl, TablesContr
 
     @Then("^can see new buttons in Prediction field$")
     public void canSeeNewButtonsInPredictionField() {
-        $(By.xpath("//*[@title='Close']")).waitUntil(visible, 15000);
-        $(By.xpath("//*[@title='Create a copy']")).waitUntil(visible, 1000);
-        $(By.xpath("//*[@title='Delete']")).waitUntil(visible, 1000);
+        $(By.xpath("//*[@title='Close']")).shouldBe(visible, Duration.ofMillis(15000));
+        $(By.xpath("//*[@title='Create a copy']")).shouldBe(visible, Duration.ofMillis(1000));
+        $(By.xpath("//*[@title='Delete']")).shouldBe(visible, Duration.ofMillis(1000));
     }
 
     @When("^click to cancel button in Prediction$")
     public void clickToCancelButtonInPrediction() {
-        $(By.xpath("//*[@title='Close']")).waitUntil(visible, 5500).click();
+        $(By.xpath("//*[@title='Close']")).shouldBe(visible, Duration.ofMillis(5500)).click();
     }
 
     @When("^enter name of our Prediction in filter$")
@@ -82,7 +84,7 @@ public class PredictionStepDefs implements TabsControl, PageControl, TablesContr
 
     @Then("^can see our Prediction$")
     public void canSeeOurPrediction() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 4000).
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldBe(visible, Duration.ofMillis(4000)).
                 shouldHave(text("Patient Level Prediction #"));
     }
 
@@ -136,7 +138,7 @@ public class PredictionStepDefs implements TabsControl, PageControl, TablesContr
 
     @Then("^can see Prediction Problem Settings page$")
     public void canSeePredictionProblemSettingsPage() {
-        panelPrimary.get(1).waitUntil(Condition.enabled, 5000).shouldNotBe(visible);
+        panelPrimary.get(1).shouldBe(Condition.enabled, Duration.ofMillis(5000)).shouldNotBe(visible);
     }
 
     @When("^click to Analysis Setting tab in Prediction$")
@@ -156,7 +158,7 @@ public class PredictionStepDefs implements TabsControl, PageControl, TablesContr
 
     @When("^click to Execution Setting tab in Prediction without ee$")
     public void clickToExecutionSettingTabInPredictionWithoutEE() {
-        $$("#filters li").find(Condition.matchesText("Execution Settings")).click();
+        $$("#filters li").find(Condition.matchText("Execution Settings")).click();
     }
 
     @Then("^can see Execution Setting page in Prediction$")
@@ -207,7 +209,7 @@ public class PredictionStepDefs implements TabsControl, PageControl, TablesContr
         facetedTableSearch(arg0);
         selectInTableResults(arg0);
         targetCohort = $$(".atlas-modal__modal-body cohort-definition-browser tr a").
-                find(matchesText(arg0)).getText();
+                find(matchText(arg0)).getText();
     }
 
     @When("^click to result in cohort in Predictions$")
@@ -237,12 +239,12 @@ public class PredictionStepDefs implements TabsControl, PageControl, TablesContr
 
     @When("^choose model: \"([^\"]*)\"$")
     public void chooseModel(String modelName) {
-        $$(".dropdown-menu [href='#']").find(matchesText(modelName)).click();
+        $$(".dropdown-menu [href='#']").find(matchText(modelName)).click();
     }
 
     @Then("^can see header for: \"([^\"]*)\"$")
     public void checkEditorHeading(String modelName) {
-        $(".editor-heading").shouldHave(matchesText(modelName));
+        $(".editor-heading").shouldHave(matchText(modelName));
     }
 
     @When("^click to return back button$")
@@ -277,7 +279,7 @@ public class PredictionStepDefs implements TabsControl, PageControl, TablesContr
 
     @Then("^can see Review and Download table with selected model: \"([^\"]*)\"$")
     public void canSeeReviewAndDownloadTableWithSelectedTargetCohort(String modelName) {
-        $$(By.xpath("//table/tbody/tr/td[3]")).get(2).shouldHave(matchesText(modelName.
+        $$(By.xpath("//table/tbody/tr/td[3]")).get(2).shouldHave(matchText(modelName.
                 replaceAll( "\\s+","")));
     }
 }

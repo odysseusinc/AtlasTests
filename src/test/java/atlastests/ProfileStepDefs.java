@@ -1,8 +1,10 @@
 package atlastests;
 
 import atlastests.components.PageControl;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import java.time.Duration;
 
 import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.enabled;
@@ -20,7 +22,7 @@ public class ProfileStepDefs implements PageControl {
 
     @When("^click to Select a Data Source$")
     public void clickToSelectADataSource() {
-        $("[title='choose a data source']").waitUntil(visible, 5000).click();
+        $("[title='choose a data source']").shouldBe(visible, Duration.ofMillis(5000)).click();
     }
 
     @When("^choose \"([^\"]*)\" in Profile Source from property$")
@@ -40,7 +42,7 @@ public class ProfileStepDefs implements PageControl {
 
     @Then("^can see overlay$")
     public void canSeeOverlay() {
-        $(".overlay").waitUntil(visible, 50000);
+        $(".overlay").shouldBe(visible, Duration.ofMillis(50000));
     }
 
     @Then("^can see table$")

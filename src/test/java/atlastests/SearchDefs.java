@@ -4,13 +4,14 @@ import atlastests.components.TablesControl;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.Duration;
 
 import static atlastests.components.StaticElements.NAV_PILLS;
 import static atlastests.components.StaticElements.TABS_HEADERS;
@@ -26,7 +27,7 @@ public class SearchDefs implements TablesControl {
 
     @When("^enter in search panel \"([^\"]*)\"$")
     public void enterInSearchPanel(String arg0) {
-        $("[placeholder='Type your search here']").waitUntil(visible, 10000).setValue(arg0);
+        $("[placeholder='Type your search here']").shouldBe(visible, Duration.ofMillis(10000)).setValue(arg0);
     }
 
     @When("^search activated$")
@@ -37,7 +38,7 @@ public class SearchDefs implements TablesControl {
 
     @Then("^can see search result table$")
     public void canSeeSearchResultTable() {
-        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']")).waitUntil(visible, 120000);
+        $(By.xpath("//*[@class='conceptTable stripe compact hover dataTable no-footer']")).shouldBe(visible, Duration.ofMillis(120000));
         $(".fa-check").shouldBe(visible);
         $("[aria-label='Id: activate to sort column ascending']").shouldHave(text("Id"));
         $("[aria-label='Code: activate to sort column ascending']").shouldHave(text("Code"));
@@ -58,7 +59,7 @@ public class SearchDefs implements TablesControl {
 
     @When("^click to button Standard Concept Caption$")
     public void clickToButtonStandardConceptCation() {
-        $(withText("Standard Concept Caption")).waitUntil(visible, 3000).click();
+        $(withText("Standard Concept Caption")).shouldBe(visible, Duration.ofMillis(3000)).click();
     }
 
     @Then("^Standard Concept Caption should be shown$")
@@ -90,7 +91,7 @@ public class SearchDefs implements TablesControl {
 
     @Then("^can see search result only with \"([^\"]*)\"$")
     public void canSeeSearchResultOnlyWith(String arg0) {
-        $(By.xpath("//*[@class='invalid non-standard']")).waitUntil(visible, 5000).shouldHave(text(arg0));
+        $(By.xpath("//*[@class='invalid non-standard']")).shouldBe(visible, Duration.ofMillis(5000)).shouldHave(text(arg0));
     }
 
     @When("^click to CSV button$")
@@ -115,7 +116,7 @@ public class SearchDefs implements TablesControl {
 
     @Then("^page with concept fields is opened$")
     public void checkConceptPage() {
-        $(".tabs__header-title--selected").waitUntil(visible, 5000).shouldHave(text("Details"));
+        $(".tabs__header-title--selected").shouldBe(visible, Duration.ofMillis(5000)).shouldHave(text("Details"));
         $$("#wrapperConceptDetails table td:nth-child(1)").
                 shouldHave(CollectionCondition.texts("Concept Name", "Domain Id", "Concept Class Id",
                         "Vocabulary Id", "Concept Id", "Concept Code", "Invalid Reason", "Standard Concept"));
@@ -123,21 +124,21 @@ public class SearchDefs implements TablesControl {
 
     @Then("^check Related Concepts tab$")
     public void checkSecondOfFourTabs() {
-        TABS_HEADERS.find(matchesText("Related Concepts")).click();
-        $(".facetName").waitUntil(visible, 55000);
+        TABS_HEADERS.find(matchText("Related Concepts")).click();
+        $(".facetName").shouldBe(visible, Duration.ofMillis(55000));
     }
 
     @Then("^check Hierarchy tab$")
     public void checkThirdOfFourTabs() {
-        TABS_HEADERS.find(matchesText("Hierarchy")).click();
+        TABS_HEADERS.find(matchText("Hierarchy")).click();
         NAV_PILLS.shouldHave(CollectionCondition.texts("Full Hierarchy", "Parents", "Current", "Children"),
-                30000);
+                Duration.ofMillis(30000));
     }
 
     @Then("^check Record Counts tab$")
     public void checkFourthOfFourTabs() {
-        TABS_HEADERS.find(matchesText("Record Counts")).click();
-        $(".panel-primary .panel-heading").waitUntil(visible, 180000).
+        TABS_HEADERS.find(matchText("Record Counts")).click();
+        $(".panel-primary .panel-heading").shouldBe(visible, Duration.ofMillis(180000)).
                 shouldHave(text("Record Counts across Sources"));
     }
 
@@ -152,7 +153,7 @@ public class SearchDefs implements TablesControl {
 
     @When("^double click RC column$")
     public void doubleClickRCColumn() {
-        $(".numeric.sorting").waitUntil(Condition.enabled, 5000).click();
-        $(".numeric.sorting_asc").waitUntil(Condition.enabled, 5000).click();
+        $(".numeric.sorting").shouldBe(Condition.enabled, Duration.ofMillis(5000)).click();
+        $(".numeric.sorting_asc").shouldBe(Condition.enabled, Duration.ofMillis(5000)).click();
     }
 }

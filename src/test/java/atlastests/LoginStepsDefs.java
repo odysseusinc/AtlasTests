@@ -2,9 +2,11 @@ package atlastests;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
+
+import java.time.Duration;
 
 import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.*;
@@ -46,28 +48,28 @@ public class LoginStepsDefs {
     @Step("Click to LogIn link")
     @When("^click to LogIn link$")
     public static void clickToLogInLink() {
-        $("[title='Sign In'] a").waitUntil(visible, 5000).shouldHave(text("Sign In")).click();
+        $("[title='Sign In'] a").shouldBe(visible, Duration.ofMillis(5000)).shouldHave(text("Sign In")).click();
     }
     @Step("Click to Environment")
     @When("^click Environment$")
     public static void clickToEnvironment() throws Exception {
         $$("[data-bind='text:name']").
-                find(matchesText((getDataProperties("environmentname")))).click();
+                find(matchText((getDataProperties("environmentname")))).click();
     }
 
     @Step("See message {errorLogin}")
     @Then("^see message \"([^\"]*)\"$")
     public void seeMessage(String errorLogin) {
-        $("[data-bind='text: errorMsg']").waitUntil(visible, 5000).
+        $("[data-bind='text: errorMsg']").shouldBe(visible, Duration.ofMillis(5000)).
                 shouldHave(text(errorLogin));
     }
 
     @Step("See success message")
     @Then("^see success message$")
     public static void seeSuccessMessage(String login) {
-        $("[data-bind='text: fullName']").waitUntil(text(login), 10000);
-        $("welcome .paddedWrapper [data-bind='text: $component.status']").waitUntil(visible, 10000).
-                shouldHave(Condition.matchesText("Logged in as '" + login + "'"));
+        $("[data-bind='text: fullName']").shouldHave(text(login), Duration.ofMillis(10000));
+        $("welcome .paddedWrapper [data-bind='text: $component.status']").shouldBe(visible, Duration.ofMillis(10000)).
+                shouldHave(Condition.matchText("Logged in as '" + login + "'"));
     }
     @Step("Entered {login} and {password}")
     @When("^login \"([^\"]*)\" and password \"([^\"]*)\" Entered and submitted$")

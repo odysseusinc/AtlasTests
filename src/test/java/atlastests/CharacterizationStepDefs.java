@@ -5,11 +5,13 @@ import atlastests.components.TablesControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
 import com.codeborne.selenide.*;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+
+import java.time.Duration;
 
 import static atlastests.components.StaticElements.*;
 import static com.codeborne.selenide.Condition.*;
@@ -93,20 +95,20 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     @Step ("click to Import Cohort Definition")
     @When("^click to Import Cohort Definition$")
     public void clickToImportCohortDefinition() {
-        $$(byText("Import")).get(0).waitUntil(visible, 5000).click();
+        $$(byText("Import")).get(0).shouldBe(visible, Duration.ofMillis(5000)).click();
     }
 
     @Step ("click to Feature Analyses tab")
     @When("^click to Feature Analyses tab$")
     public void clickToFeatureAnalysesTab() {
-        $$("[role='presentation']").find(Condition.matchesText("Feature analyses")).click();
-        $(".btn-primary").waitUntil(Condition.matchesText("New Feature analysis"), 5000);
+        $$("[role='presentation']").find(Condition.matchText("Feature analyses")).click();
+        $(".btn-primary").shouldHave(text("New Feature analysis"), Duration.ofMillis(5000));
     }
 
     @Step ("can see Feature Analyses table")
     @Then("^can see Feature Analyses table$")
     public void canSeeFeatureAnalysesTable() {
-        $(".facetedDataTable tbody").waitUntil(visible, 10000);
+        $(".facetedDataTable tbody").shouldBe(visible, Duration.ofMillis(10000));
     }
 
     @Step ("click to New Feature analyses")
@@ -167,7 +169,7 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     @Step ("click to our feature analyse")
     @When("^click to our feature analyse$")
     public void clickToOurFeatureAnalyse() {
-        featureAnalysisTableName.waitUntil(visible, 5000).click();
+        featureAnalysisTableName.shouldBe(visible, Duration.ofMillis(5000)).click();
     }
 
     @Step ("can see page of our Feature Analyse")
@@ -211,7 +213,7 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     @Step ("Feature analyse table is visible ")
     @Then("^Feature analyse table is visible$")
     public void featureAnalyseTableIsVisible() {
-        featureAnalysisTableRows.first().waitUntil(visible, 5000);
+        featureAnalysisTableRows.first().shouldBe(visible, Duration.ofMillis(5000));
     }
 
     @Step ("click to Import Feature analyse")
@@ -244,8 +246,8 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     @Step ("Can see cohort definition in characterization list")
     @Then("^can see cohort definition in characterization list with text \"([^\"]*)\"$")
     public void canSeeCohortDefinitionInCharacterizationListWithText(String arg0) {
-        $("tbody .linked-cohort-list__col-cohort-name").waitUntil(visible, 5000).
-                shouldHave(matchesText(arg0));
+        $("tbody .linked-cohort-list__col-cohort-name").shouldBe(visible, Duration.ofMillis(5000)).
+                shouldHave(matchText(arg0));
     }
 
     @Step ("click to feature checkbox with text")
@@ -288,7 +290,7 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     @Step ("first data source generate button has to have Cancel text")
     @Then("^first data source generate button has to be with Cancel text$")
     public void firstGenerateButtonHasToBeWithCancelText() {
-        EXECUTION_ACTION_BUTTONS.get(0).waitUntil(matchesText("Cancel"), 5000);
+        EXECUTION_ACTION_BUTTONS.get(0).shouldHave(text("Cancel"), Duration.ofMillis(5000));
     }
 
     @Step ("cilck to Netezza Generate report button")
@@ -397,12 +399,12 @@ public class CharacterizationStepDefs implements FormControl, TablesControl, Pag
     }
 
     private void generateByDataSource(String dataSourceName) {
-        ANALYSIS_EXECUTION_LIST.find(Condition.matchesText(dataSourceName)).
+        ANALYSIS_EXECUTION_LIST.find(Condition.matchText(dataSourceName)).
                 find(withText("Generate")).click();
     }
 
     private void checkRunning(String dataSourceName) {
         ANALYSIS_EXECUTION_LIST.find(Condition.text(dataSourceName)).
-                find(withText("Cancel")).waitUntil(visible, 10000);
+                find(withText("Cancel")).shouldBe(visible, Duration.ofMillis(10000));
     }
 }

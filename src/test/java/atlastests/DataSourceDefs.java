@@ -3,9 +3,11 @@ package atlastests;
 import atlastests.components.PageControl;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+
+import java.time.Duration;
 
 import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.text;
@@ -135,7 +137,7 @@ public class DataSourceDefs implements PageControl {
     }
 
     private void titleCheck(String expectedTitleText) {
-        $(By.xpath("//*[@params='name: title']/div/span")).waitUntil(visible, 60000).
+        $(By.xpath("//*[@params='name: title']/div/span")).shouldBe(visible, Duration.ofMillis(60000)).
                 shouldHave(text(expectedTitleText));
     }
 
@@ -147,27 +149,27 @@ public class DataSourceDefs implements PageControl {
     @When("^click to element in prevalence in Visit$")
     public void clickToElementInPrevalence() {
         $(By.xpath("//*[@class='cell']")).click();
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).waitUntil(visible, 2000);
+        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldBe(visible, Duration.ofMillis(2000));
     }
 
     @When("^click to element in prevalence in condition table$")
     public void clickToElementInPrevalenceInConditionTable() {
         $(By.xpath("//*[@class='cell']")).click();
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).waitUntil(visible, 120000);
+        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldBe(visible, Duration.ofMillis(120000));
 
     }
 
     @When("^click to element in prevalence in condition era table$")
     public void clickToElementInPrevalenceInConditionEraTable() {
         $(By.xpath("//*[@class='cell']")).click();
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).waitUntil(visible, 120000);
+        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldBe(visible, Duration.ofMillis(120000));
 
     }
 
     @When("^click to element in prevalence in table$")
     public void clickToElementInPrevalenceInTable() {
         $(By.xpath("//*[@class='cell']")).click();
-        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).waitUntil(visible, 120000);
+        $(By.xpath("//*[@id='report']/div/report-treemap-drilldown/div/heading-title/div/span")).shouldBe(visible, Duration.ofMillis(120000));
     }
 
     @Then("^can see tables in Visit for cell$")
@@ -231,6 +233,6 @@ public class DataSourceDefs implements PageControl {
 
     @Then("^can see preloader in Data Source$")
     public void canSeePreloaderInDataSource() {
-        $(By.xpath("//*[@id='currentComponent']/div/loading")).waitUntil(visible, 3000);
+        $(By.xpath("//*[@id='currentComponent']/div/loading")).shouldBe(visible, Duration.ofMillis(3000));
     }
 }

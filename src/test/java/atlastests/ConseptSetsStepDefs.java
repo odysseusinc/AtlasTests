@@ -7,8 +7,8 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
@@ -38,7 +38,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     @Step ("Consept Sets page is open")
     @Then("^Concept Sets page opens$")
     public void conceptSetsPageOpens() {
-        $(By.xpath("//*[@id='currentComponent']/heading-title/div/span")).waitUntil(visible, 5000).
+        $(By.xpath("//*[@id='currentComponent']/heading-title/div/span")).shouldBe(visible, Duration.ofMillis(5000)).
                 shouldHave(text("Concept Sets"));
     }
 
@@ -62,7 +62,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @Then("^show new buttons in Concept Set$")
     public void showNewButtonsInConceptSet() {
-        $(withText("Optimize")).waitUntil(visible, 5000);
+        $(withText("Optimize")).shouldBe(visible, Duration.ofMillis(5000));
     }
 
     @Then("^new concept set shown in table$")
@@ -107,7 +107,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @Then("^can see item in the concept set table$")
     public void canSeeItemInTheConceptSetTable() {
-        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/./tbody/tr/td[2]")).waitUntil(visible, 4000);
+        $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/./tbody/tr/td[2]")).shouldBe(visible, Duration.ofMillis(4000));
         idValueCP = $(By.xpath("//*[@class='conceptSetTable stripe compact hover dataTable no-footer']/./tbody/tr/td[2]")).getText();
         Assert.assertEquals(idValue, idValueCP);
     }
@@ -125,7 +125,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     @Then("^can see other value of Included Concepts$")
     public void canSeeOtherValueOfIncludedConcepts() {
         includedConceptsAfter = $("[data-bind='text:inclusionCount()']").
-                waitUntil(not(Condition.exactText("1")), 5000).getText();
+                shouldNotHave(Condition.exactText("1"), Duration.ofMillis(5000)).getText();
         Assert.assertNotEquals(includedConceptsAfter, includedConceptsBefore);
     }
 
@@ -164,7 +164,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     @When("^remove all concepts$")
     public void removeAllConcepts() {
         $$(".conceptset-expression__checkmark").first().click();//to select all
-        $(withText("Remove Selected")).waitUntil(enabled, 5000).click();
+        $(withText("Remove Selected")).shouldBe(enabled, Duration.ofMillis(5000)).click();
     }
 
     @Then("^can see message in Concept Set table \"([^\"]*)\"$")
@@ -174,12 +174,12 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @When("^click to Export tab in Concept set$")
     public void clickToExportTabInConceptSet() {
-        $$(".tabs__header-title").find(matchesText("Export")).click();
+        $$(".tabs__header-title").find(matchText("Export")).click();
     }
 
     @Then("^can see Concept Set JSON$")
     public void canSeeConceptSetJSON() {
-        $(By.xpath("//*[@class='heading']")).waitUntil(visible, 3000).
+        $(By.xpath("//*[@class='heading']")).shouldBe(visible, Duration.ofMillis(3000)).
                 shouldHave(text("Concept Set Expression JSON"));
     }
 
@@ -196,8 +196,8 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
     @When("^press SAVE button$")
     public void pressSAVEButton() {
         SelenideElement saveButton = $(".input-group-btn .btn-success");
-        saveButton.waitUntil(enabled, 5000).click();
-        $(".fa-trash-alt").waitUntil(enabled, 5000);
+        saveButton.shouldBe(enabled, Duration.ofMillis(5000)).click();
+        $(".fa-trash-alt").shouldBe(enabled, Duration.ofMillis(5000));
     }
 
     @When("^click to Compare tab in Concept Set$")
@@ -207,7 +207,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @Then("^can see text \"([^\"]*)\"$")
     public void canSeeText(String arg0) {
-        $(By.xpath("//*[@class='heading']")).waitUntil(visible, 3000).shouldHave(text(arg0));
+        $(By.xpath("//*[@class='heading']")).shouldBe(visible, Duration.ofMillis(3000)).shouldHave(text(arg0));
     }
 
     @When("^enter new name of Concept Set$")
@@ -218,13 +218,13 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @Then("^click to save button in Concept Set$")
     public void clickToSaveButtonInConceptSet() {
-        $(".input-group-btn .btn-success").waitUntil(enabled, 5000).click();
+        $(".input-group-btn .btn-success").shouldBe(enabled, Duration.ofMillis(5000)).click();
         Selenide.sleep(2000);//only one way to wait frontend scenarios
     }
 
     @Then("^click to cancel button in Concept Set$")
     public void clickToCancelButtonInConceptSet() {
-        $(By.xpath("//*[@class='fa fa-times']")).waitUntil(visible, 5000).click();
+        $(By.xpath("//*[@class='fa fa-times']")).shouldBe(visible, Duration.ofMillis(5000)).click();
     }
 
     @When("^enter new concept set name in filter$")
@@ -234,7 +234,7 @@ public class ConseptSetsStepDefs implements TabsControl, TablesControl, ModalCon
 
     @Then("^can see row with new name of concept set$")
     public void canSeeRowWithNewNameOfConceptSet() {
-        $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible, 3000).shouldHave(text(newGeneratedString));
+        $(By.xpath("//table/tbody/tr/td[2]")).shouldBe(visible, Duration.ofMillis(3000)).shouldHave(text(newGeneratedString));
     }
 
     @When("^click to row with new name of concept set$")

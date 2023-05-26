@@ -2,6 +2,8 @@ package atlastests.components;
 
 import com.codeborne.selenide.Condition;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -18,6 +20,6 @@ public interface PageControl {
 
     default void checkExecutionTitle()
     {
-        $(".analysis-execution-list__title").waitUntil(visible, 5000).shouldHave(text("Executions"));
+        $(".analysis-execution-list__title").shouldBe(visible, Duration.ofMillis(5000)).shouldHave(text("Executions"));
     }
 }

@@ -2,9 +2,11 @@ package atlastests;
 
 import atlastests.models.SampleModel;
 import com.codeborne.selenide.*;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import java.time.Duration;
 
 import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Selectors.withText;
@@ -74,7 +76,7 @@ public class SamplesDefs {
 
     @Then("^Profile is opened$")
     public void checkProfileIsOpened() {
-        $(".profile-manager__profile-control").waitUntil(Condition.visible, 15000);
+        $(".profile-manager__profile-control").shouldBe(Condition.visible, Duration.ofMillis(15000));
     }
 
 }

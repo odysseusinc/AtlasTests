@@ -4,11 +4,13 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -22,7 +24,7 @@ public class ConfigurationStepDefs {
     @Step ("Configuration page opens")
     @Then("^Configuration page opens$")
     public void configurationPageOpens() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 3000).
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldBe(visible, Duration.ofMillis(3000)).
                 shouldHave(text("Configuration"));
     }
 
@@ -30,7 +32,7 @@ public class ConfigurationStepDefs {
     @When("^Click to every datasource connection button$")
     public void checkEveryDataSourceConnection() {
         ElementsCollection dataSources = $$("[data-bind='if: $component.canCheckConnection($data)'] .btn");
-        dataSources.shouldHave(CollectionCondition.sizeGreaterThan(0), 5000);
+        dataSources.shouldHave(CollectionCondition.sizeGreaterThan(0), Duration.ofMillis(5000));
         dataSourceQuantity = dataSources.size();
         dataSources.forEach(SelenideElement::click);
     }
@@ -50,7 +52,7 @@ public class ConfigurationStepDefs {
     @Step ("Can see Roles creation page")
     @Then("^can see Roles creation page$")
     public void canSeeRolesCreationPage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 3000).
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldBe(visible, Duration.ofMillis(3000)).
                 shouldHave(text("Roles"));
     }
 
@@ -70,7 +72,7 @@ public class ConfigurationStepDefs {
     @When("^enter new name of role$")
     public void enterNewNameOfRole() {
         generatedString = RandomStringUtils.randomAlphanumeric(10);
-        $(By.xpath("//*[@class='form-control']")).waitUntil(visible, 4000).clear();
+        $(By.xpath("//*[@class='form-control']")).shouldBe(visible, Duration.ofMillis(4000)).clear();
         $(By.xpath("//*[@class='form-control emptyInput']")).setValue("Test_" + generatedString);
     }
 
@@ -85,7 +87,7 @@ public class ConfigurationStepDefs {
     @When("^click to save button of new role$")
     public void clickToSaveButtonOfNewRole() {
         $("[title='Save']").click();
-        $(".disabled[title='Save']").waitUntil(visible, 5000);
+        $(".disabled[title='Save']").shouldBe(visible, Duration.ofMillis(5000));
     }
 
     @Step ("click to cancel button in role")
@@ -97,8 +99,8 @@ public class ConfigurationStepDefs {
     @Step ("enter name of our role in filter")
     @When("^enter name of our role in filter$")
     public void enterNameOfOurRoleInFilter() {
-        $("[data-bind='text: title']").waitUntil(Condition.text("Roles"), 10000);
-        $(".dataTables_filter input[type='search']").waitUntil(enabled, 5000).setValue(generatedString);
+        $("[data-bind='text: title']").shouldHave(Condition.text("Roles"), Duration.ofMillis(10000));
+        $(".dataTables_filter input[type='search']").shouldBe(enabled, Duration.ofMillis(5000)).setValue(generatedString);
     }
 
     @Step ("can see our role in table")
@@ -116,7 +118,7 @@ public class ConfigurationStepDefs {
     @Step ("can see our role page")
     @Then("^can see our role page$")
     public void canSeeOurRolePage() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']")).waitUntil(visible, 3000).
+        $(By.xpath("//*[@class='heading-title heading-title--dark']")).shouldBe(visible, Duration.ofMillis(3000)).
                 shouldHave(text("Role #"));
     }
     @Step ("enter new name of our role")
@@ -130,7 +132,7 @@ public class ConfigurationStepDefs {
     @Step ("can see our new name role in table")
     @Then("^can see our new name role in table$")
     public void canSeeOurNewNameRoleInTable() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 5000).setValue(newGeneratedString);
+        $(By.xpath("//*[@type='search']")).shouldBe(visible, Duration.ofMillis(5000)).setValue(newGeneratedString);
         $(By.xpath("//table/tbody/tr/td")).shouldHave(text(newGeneratedString));
     }
 

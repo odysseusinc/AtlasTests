@@ -5,13 +5,15 @@ import atlastests.components.TablesControl;
 import atlastests.components.FormControl;
 import atlastests.components.PageControl;
 import com.codeborne.selenide.*;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+
+import java.time.Duration;
 
 import static atlastests.TestDefs.getDataProperties;
 import static atlastests.components.StaticElements.*;
@@ -38,7 +40,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click New Cohort button")
     @When("^click New Cohort button$")
     public void clickNewCohortButton() {
-        $(".btn-primary").waitUntil(enabled, 5000).click();
+        $(".btn-primary").shouldBe(enabled, Duration.ofMillis(5000)).click();
     }
 
     @Step ("can see new cohort page creation")
@@ -53,7 +55,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
         nameCohort = "Test_" + RandomStringUtils.randomAlphanumeric(10);
         setTitle(nameCohort);
         saveAction();
-        $(".fa-trash-alt").waitUntil(enabled, 5000); //cz need to wait saving of cohort
+        $(".fa-trash-alt").shouldBe(enabled, Duration.ofMillis(5000)); //cz need to wait saving of cohort
     }
 
     @Step ("filtere Cohort Definition")
@@ -102,7 +104,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("press Add Initial Event")
     @When("^press Add Initial Event$")
     public void pressAddInitialEvent() {
-        $(withText("Add Initial Event")).waitUntil(visible, 5000).click();
+        $(withText("Add Initial Event")).shouldBe(visible, Duration.ofMillis(5000)).click();
         $$("[data-bind='foreach:$component.primaryCriteriaOptions'] .optionText").
                 forEach(e -> e.hover().shouldHave(visible));
     }
@@ -110,13 +112,13 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("press Add Condition Occurrence")
     @When("^press Add Condition Occurrence$")
     public void pressAddConditionOcurrence() {
-        $(withText("Add Condition Occurrence")).waitUntil(visible, 5000).click();
+        $(withText("Add Condition Occurrence")).shouldBe(visible, Duration.ofMillis(5000)).click();
     }
 
     @Step ("press Add")
     @When("^press Add \"([^\"]*)\"$")
     public void pressAddInitialEvent(String initialEvent) {
-        $(withText("Add " + initialEvent)).waitUntil(visible, 5000).click();
+        $(withText("Add " + initialEvent)).shouldBe(visible, Duration.ofMillis(5000)).click();
     }
 
     @Step ("click to Any Contion menu")
@@ -153,20 +155,20 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @When("^click to chosen concept set from repository$")
     public void clickToChosenConceptSetFromRepository() {
         conceptSetsInTableForChoosing.first().click();
-        $("#repositoryConceptSetTable .circle").waitUntil(hidden, 10000);
+        $("#repositoryConceptSetTable .circle").shouldBe(hidden, Duration.ofMillis(10000));
     }
 
     @Step ("can see name of consept set at the button")
     @Then("^can see name of concept set at the button ")
     public void canSeeNameOfConceptSetAtTheButton() {
-        $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).waitUntil(visible, 5000).
+        $(By.xpath("//*[@class='btn btn-primary conceptset_edit']")).shouldBe(visible, Duration.ofMillis(5000)).
                 shouldHave(text("Angioedema"));
     }
 
     @Step ("click to Samples tab")
     @When("^click to Samples tab$")
     public void clickToSamplesTab() {
-        NAV_TABS.find(matchesText("Samples")).click();
+        NAV_TABS.find(matchText("Samples")).click();
     }
 
     @Step ("can see a select element with data sources")
@@ -178,13 +180,13 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to Concept Sets tab")
     @When("^click to Concept Sets tab$")
     public void clickToConceptSetsTab() {
-        NAV_TABS.find(matchesText("Concept Sets")).click();
+        NAV_TABS.find(matchText("Concept Sets")).click();
     }
 
     @Step ("can see row with name of Concept Set in the table")
     @Then("^can see row with name of Concept Set in the table$")
     public void canSeeRowWithNameOfConceptSetInTheTable() {
-        conceptSetsInDataTable.first().shouldHave(matchesText("Angioedema"));
+        conceptSetsInDataTable.first().shouldHave(matchText("Angioedema"));
     }
 
     @Step ("click on the row in table concept set in cohort definitions")
@@ -214,7 +216,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to Generation tab")
     @When("^click to Generation tab$")
     public void clickToGenerationTab() {
-        NAV_TABS.find(matchesText("Generation")).click();
+        NAV_TABS.find(matchText("Generation")).click();
     }
 
     @Step ("can see Generation page")
@@ -226,7 +228,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to Reporting tab")
     @When("^click to Reporting tab$")
     public void clickToReportingTab() {
-        NAV_TABS.find(matchesText("Reporting")).click();
+        NAV_TABS.find(matchText("Reporting")).click();
     }
 
     @Step ("can see reporting page")
@@ -238,7 +240,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to Export tab in Cohort Definitions")
     @When("^click to Export tab in Cohort Definitions$")
     public void clickToExportTabInCohortDefinitions() {
-        NAV_TABS.find(matchesText("Export")).click();
+        NAV_TABS.find(matchText("Export")).click();
     }
 
     @Step ("can see Export page")
@@ -250,13 +252,13 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to Messages tab")
     @When("^click to Messages Tab$")
     public void clickToMessagesTab() {
-        NAV_TABS.find(matchesText("Messages")).click();
+        NAV_TABS.find(matchText("Messages")).click();
     }
 
     @Step ("can see Messages page")
     @Then("^can see Messages page$")
     public void canSeeMessagesPage() {
-        $("[aria-label='Severity: activate to sort column ascending']").waitUntil(visible, 4000).
+        $("[aria-label='Severity: activate to sort column ascending']").shouldBe(visible, Duration.ofMillis(4000)).
                 shouldHave(text("Severity"));
     }
 
@@ -272,14 +274,14 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
         addInclusionCriteria();
         $(withText("Add criteria to group...")).click();
         $$(".criteriaHeading [data-bind='foreach:$component.addActions'] .optionText").
-                find(Condition.matchesText(criteriaGroup)).click();
+                find(Condition.matchText(criteriaGroup)).click();
     }
 
     @Step ("add Inclusion criteria")
     @When("^add Inclusion criteria$")
     public void addInclusionCriteria() {
         $(".inclusion-criteria__block .btn-success").
-                waitUntil(visible, 5000).click();
+                shouldBe(visible, Duration.ofMillis(5000)).click();
         $(".inclusion-rule-header input").setValue("TEST INCLUSION");
         $("inclusion-rule-editor [placeholder='enter an inclusion rule description']").
                 setValue("TEST INCLUSION DESCRIPTION");
@@ -339,7 +341,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("condition occurrence block shown")
     @Then("^condition occurrence block shown$")
     public void conditionOccurrenceBlockShown() {
-        $$(".criteria-content .criteriaTable").find(matchesText("a condition occurrence of")).
+        $$(".criteria-content .criteriaTable").find(matchText("a condition occurrence of")).
                 shouldBe(visible);
     }
 
@@ -352,7 +354,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to Id column")
     @When("^click to Id column$")
     public void clickToIdColumn() {
-        $(".id-column.sorting").waitUntil(visible, 5000).click();
+        $(".id-column.sorting").shouldBe(visible, Duration.ofMillis(5000)).click();
     }
 
     @Step ("can see that first value less then second")
@@ -384,7 +386,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to JSON tab in Cohord Definition")
     @When("^click to JSON tab in Cohort Definitions$")
     public void clickToJSONTabInCohortDefinitions() {
-        NAV_PILLS.filter(visible).find(matchesText("JSON")).click();
+        NAV_PILLS.filter(visible).find(matchText("JSON")).click();
     }
 
     @Step ("click to Copy to clipboard button")
@@ -414,7 +416,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to Definition tab")
     @When("^click to Definition tab$")
     public void clickToDefinitionTab() {
-        NAV_TABS.find(matchesText("Definition")).click();
+        NAV_TABS.find(matchText("Definition")).click();
     }
 
     @Step ("can see name of concept set at button")
@@ -444,12 +446,12 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("can see Complete in first data source status")
     @Then("^can see Complete in first data source status in (\\d+) seconds$")
     public void canSeeCompleteFirstDSStatusInSeconds(int arg0) {
-        $$(".statusIndicator.text-right").first().waitUntil(text("COMPLETED"), arg0 * 1000);
+        $$(".statusIndicator.text-right").first().shouldHave(text("COMPLETED"), Duration.ofMillis(arg0 * 1000L));
     }
     @Step ("click to Reporting tab")
     @When("^click to Reporting tab tab$")
     public void clickToReportingTabTab() {
-        NAV_TABS.find(matchesText("Reporting")).click();
+        NAV_TABS.find(matchText("Reporting")).click();
     }
 
     @Step ("select source")
@@ -479,7 +481,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("can see a row with status Started")
     @Then("^can see a row with status Started$")
     public void canSeeARowWithStatusStarted() {
-        $("[data-bind='html: status']").waitUntil(text("STARTED"), 10000);
+        $("[data-bind='html: status']").shouldHave(text("STARTED"), Duration.ofMillis(10000));
     }
 
     @Step ("can see only one field with text")
@@ -503,7 +505,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to utilisation button")
     @When("^click to utilisation button$")
     public void clickToUtilisationButton() {
-        $(".btn-group .btn-info.btn-sm").waitUntil(enabled, 5000).click();
+        $(".btn-group .btn-info.btn-sm").shouldBe(enabled, Duration.ofMillis(5000)).click();
 
     }
 
@@ -561,7 +563,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to Graphical View")
     @When("^click to Graphical View$")
     public void clickToGraphicalView() {
-        NAV_PILLS.filter(visible).find(matchesText("Graphical View")).click();
+        NAV_PILLS.filter(visible).find(matchText("Graphical View")).click();
     }
 
     @Step ("can see in Primary Criteria")
@@ -573,7 +575,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to SQL tab")
     @When("^click to SQL tab$")
     public void clickToSQLTab() {
-        NAV_PILLS.filter(visible).find(matchesText("SQL")).click();
+        NAV_PILLS.filter(visible).find(matchText("SQL")).click();
     }
 
     @Step ("can see sql query")
@@ -591,7 +593,7 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     @Step ("click to Samples tab")
     @When("^click to Samples tab tab$")
     public void clickToSamplesTabTab() {
-        NAV_TABS.find(matchesText("Samples")).click();
+        NAV_TABS.find(matchText("Samples")).click();
     }
 
     @Step ("Samples tab is open")
@@ -601,12 +603,12 @@ public class CohortDefinitionStepDefs implements PageControl, FormControl, Table
     }
 
     private void generateByDataSource(String dataSourceName) {
-        dataSources.find(Condition.matchesText(dataSourceName)).
+        dataSources.find(Condition.matchText(dataSourceName)).
                 find(withText("Generate")).click();
     }
 
     private void checkStatus(String dataSourceName, int seconds) {
-        dataSources.find(Condition.matchesText(dataSourceName)).
-                find(".statusIndicator.text-right").waitUntil(text("COMPLETED"), seconds * 1000);
+        dataSources.find(Condition.matchText(dataSourceName)).
+                find(".statusIndicator.text-right").shouldHave(text("COMPLETED"), Duration.ofMillis(seconds * 1000L));
     }
 }

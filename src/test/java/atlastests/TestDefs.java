@@ -2,8 +2,8 @@ package atlastests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.chrome.ChromeOptions;

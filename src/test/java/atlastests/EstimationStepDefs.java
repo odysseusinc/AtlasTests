@@ -2,11 +2,10 @@ package atlastests;
 
 import atlastests.components.ModalControl;
 import atlastests.components.TablesControl;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -19,6 +18,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
 
 import static atlastests.components.StaticElements.*;
 import static com.codeborne.selenide.Condition.text;
@@ -41,7 +41,7 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
 
     @Then("^can see Estimation page$")
     public void canSeeEstimationPage() {
-        $(By.xpath("//table/tbody/tr/td[1]")).waitUntil(visible, 4000);
+        $(By.xpath("//table/tbody/tr/td[1]")).shouldBe(visible, Duration.ofMillis(4000));
     }
 
     @When("^click to New Population Level Effect Estimation$")
@@ -51,7 +51,7 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
 
     @Then("^can see creation page of Estimation$")
     public void canSeeCreationPageOfEstimation() {
-        $(By.xpath("//*[@data-bind='text: title']")).waitUntil(visible, 3000).
+        $(By.xpath("//*[@data-bind='text: title']")).shouldBe(visible, Duration.ofMillis(3000)).
                 shouldHave(text("New Population Level Estimation Analysis - Comparative Cohort Analysis"));
     }
 
@@ -64,24 +64,24 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
 
     @When("^click to save New Estimation button$")
     public void clickToSaveNewEstimationButton() {
-        $(By.xpath("//*[@title='Save']")).waitUntil(visible, 3500).click();
+        $(By.xpath("//*[@title='Save']")).shouldBe(visible, Duration.ofMillis(3500)).click();
     }
 
     @Then("^can see buttons to Estimation$")
     public void canSeeButtonsToEstimation() {
-        $(By.xpath("//*[@title='Close']")).waitUntil(visible, 3500);
-        $(By.xpath("//*[@title='Create a copy']")).waitUntil(visible, 3500);
+        $(By.xpath("//*[@title='Close']")).shouldBe(visible, Duration.ofMillis(3500));
+        $(By.xpath("//*[@title='Create a copy']")).shouldBe(visible, Duration.ofMillis(3500));
 
     }
 
     @Then("^can see table with our Estimation$")
     public void canSeeTableWithOurEstimation() {
-        $(By.xpath("//table/tbody/tr/td")).waitUntil(visible, 4000);
+        $(By.xpath("//table/tbody/tr/td")).shouldBe(visible, Duration.ofMillis(4000));
     }
 
     @When("^enter name of our estimation in filter$")
     public void enterNameOfOurEstimationInFilter() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 3000).setValue(generatedString);
+        $(By.xpath("//*[@type='search']")).shouldBe(visible, Duration.ofMillis(3000)).setValue(generatedString);
     }
 
     @Then("^can see name of new Estimation in table$")
@@ -96,13 +96,13 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
 
     @Then("^can see our Estimation$")
     public void canSeeOurEstimation() {
-        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).waitUntil(visible, 5000).
+        $(By.xpath("//*[@class='heading-title heading-title--dark']/span")).shouldBe(visible, Duration.ofMillis(5000)).
                 shouldHave(text("Population Level Effect Estimation - Comparative Cohort Analysis #"));
     }
 
     @Then("^can see new name of new Estimation in table$")
     public void canSeeNewNameOfNewEstimationInTable() {
-        $(By.xpath("//*[@type='search']")).waitUntil(visible, 3000).setValue(newGeneratedString);
+        $(By.xpath("//*[@type='search']")).shouldBe(visible, Duration.ofMillis(3000)).setValue(newGeneratedString);
     }
 
     @When("^change name of Estimation and press save$")
@@ -188,7 +188,7 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
 
     @Then("^can see Comparison inputs$")
     public void canSeeComparisonInputs() {
-        $(By.xpath("//*[@class='editor-heading']")).waitUntil(visible, 3000).shouldHave(text("Comparison"));
+        $(By.xpath("//*[@class='editor-heading']")).shouldBe(visible, Duration.ofMillis(3000)).shouldHave(text("Comparison"));
     }
 
     @When("^click to open target cohort button$")
@@ -262,7 +262,7 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
 
     @When("^press Add Analysis Settings$")
     public void pressAddAnalysisSettings() {
-        $(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).waitUntil(visible, 4000);
+        $(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).shouldBe(visible, Duration.ofMillis(4000));
         $$(By.xpath("//*[@class='btn btn-primary btn-sm pull-right']")).get(1).click();
     }
 
@@ -309,6 +309,6 @@ public class EstimationStepDefs implements ModalControl, TablesControl {
 
     @Then("^can see \"([^\"]*)\" in Comparisons table$")
     public void canSeeInComparisonsTable(String arg0) {
-        $(By.xpath("//table/tbody/tr/td[2]")).waitUntil(visible, 30000).shouldHave(text(arg0));
+        $(By.xpath("//table/tbody/tr/td[2]")).shouldBe(visible, Duration.ofMillis(30000)).shouldHave(text(arg0));
     }
 }

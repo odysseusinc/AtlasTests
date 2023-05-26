@@ -1,6 +1,7 @@
 package atlastests;
 
-import cucumber.api.java.en.Then;
+
+import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
