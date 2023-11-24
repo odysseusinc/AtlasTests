@@ -7,9 +7,8 @@ import org.junit.runner.RunWith;
 //        (plugin = {"json:target/cucumber.json"},
         (plugin = {"pretty"},
                  glue = {"atlastests"}
-//                 , tags = {"@estimp"}
                 , tags ="not @qds and not @local and not @profiles and not @eunomia and not @synPUF23m and not @ds and not @1107 and not @ohdsi and not @costutil"//"not @ds and not @qds"}
-//                    , tags = {"@exp"}
+                , features = {"src/test/resources/atlastests"}
                 )
 
 public class RunCucumberTest {
