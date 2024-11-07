@@ -3,8 +3,8 @@ package atlastests;
 import atlastests.components.PageControl;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
 
 import static atlastests.TestDefs.getDataProperties;

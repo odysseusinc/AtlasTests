@@ -2,9 +2,9 @@ package atlastests;
 
 import atlastests.models.SampleModel;
 import com.codeborne.selenide.*;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 
 import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Selectors.withText;

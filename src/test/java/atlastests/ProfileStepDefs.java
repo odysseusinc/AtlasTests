@@ -1,8 +1,8 @@
 package atlastests;
 
 import atlastests.components.PageControl;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import static atlastests.TestDefs.getDataProperties;
 import static com.codeborne.selenide.Condition.enabled;

@@ -2,8 +2,8 @@ package atlastests;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 import io.qameta.allure.Step;
 
 import static atlastests.TestDefs.getDataProperties;
